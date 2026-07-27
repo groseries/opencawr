@@ -1,22 +1,22 @@
-# CAWR — Blueprint for the web app
+# OpenCAWR — Blueprint for the web app
 
-**CAWR = "Car Analysis — What's it Really cost."** This document is the handoff spec for rebuilding the
-spreadsheet prototype (`CAWR.xlsx`, built by `build_v7.py`) as a full web application. The seed data is in
-`cawr_data.json`. Read this before writing code — it captures the model math, the design decisions, the hard-won
+**OpenCAWR = "Car Analysis — What's it Really cost."** This document is the handoff spec for rebuilding the
+spreadsheet prototype (`OpenCAWR.xlsx`, built by `build_v7.py`) as a full web application. The seed data is in
+`opencawr_data.json`. Read this before writing code — it captures the model math, the design decisions, the hard-won
 gotchas, and the things the web app should do *better* than the spreadsheet could.
 
 ---
 
-## 1. What CAWR is, and why it's different
+## 1. What OpenCAWR is, and why it's different
 
 Every mainstream tool (Edmunds True Cost to Own, KBB 5-Year Cost to Own, AAA Your Driving Costs) answers **one**
-question: what does a **new** car cost over a **fixed 5-year** window? CAWR answers a different, under-served
+question: what does a **new** car cost over a **fixed 5-year** window? OpenCAWR answers a different, under-served
 question:
 
 > **What does it truly cost, per mile, to own THIS specific used car — bought at a given odometer and kept for a
 > holding period I choose — and how confident can we even be in that number?**
 
-The three things that make CAWR different, and which must survive the rewrite:
+The three things that make OpenCAWR different, and which must survive the rewrite:
 
 1. **Lifetime / any-horizon cost per mile**, not a fixed 5-year window. The user chooses how long to keep the car.
 2. **Uncertainty is a first-class output.** Every number is a distribution (Monte Carlo), not a point estimate.
@@ -150,7 +150,7 @@ validation):
 | **maintenance curve** | scheduled + wear cost by age | RepairPal / YourMechanic aggregates; OEM maintenance schedules |
 | **specs** | mpg/kWh, seats, cargo, CO₂, insurance | EPA fueleconomy.gov API, manufacturer specs, insurance quote API |
 
-`cawr_data.json` gives the schema and 71 worked examples. A brand-new model (like the 2025 Kia K4 in the seed set)
+`opencawr_data.json` gives the schema and 71 worked examples. A brand-new model (like the 2025 Kia K4 in the seed set)
 has no used history — the app should detect this, fall back to **segment-peer proxies**, and **label the result as
 an estimate** (the seed data has a `provenance` field for exactly this).
 
@@ -162,7 +162,7 @@ an estimate** (the seed data has a `provenance` field for exactly this).
   by ~1–2¢; unify to a single pure function `costPerMile(vehicle, inputs) → {p50,p75,p90,p05,p95,breakdown}`. Run it
   in a Web Worker or server function; it's cheap (N≈1,000 draws × ~70 cars is milliseconds).
 - **Pure model core, separate from data and UI.** `core/` (the math, fully unit-tested against the values in
-  `cawr_data.json.model_output`), `data/` (the pipeline + cache), `ui/`.
+  `opencawr_data.json.model_output`), `data/` (the pipeline + cache), `ui/`.
 - **Live everything.** Every input in Section 4 re-runs the engine — no precomputed lookup tables (that was a
   spreadsheet limitation, faked with a discount-rate grid; throw it away).
 - **Deterministic seed for tests.** Fix the RNG seed; assert the engine reproduces `model_output` for the seed
@@ -208,12 +208,12 @@ counsellor first (DoD 5500.07-R; don't use rank/position/government resources to
 
 ## 11. Files in this handoff
 
-- `CAWR.xlsx` — the working prototype (11 user tabs + 2 data-helper tabs). Reference for behavior & copy.
-- `cawr_data.json` — 71 seed vehicles, full schema + computed `model_output` (use as the engine's golden test set).
+- `OpenCAWR.xlsx` — the working prototype (11 user tabs + 2 data-helper tabs). Reference for behavior & copy.
+- `opencawr_data.json` — 71 seed vehicles, full schema + computed `model_output` (use as the engine's golden test set).
 - `build_v7.py` — the prototype source. The model math lives in `sim()`, `det()`, `_fixedcpm()`, `_optbuy()`,
   `opp_growth()`, `beat_prob()` / tie-tier logic, and the constants at the top. Port the math, discard the openpyxl
   charting and the Google-Sheets workarounds.
-- `CAWR_SPEC.md` — this document.
+- `OpenCAWR_SPEC.md` — this document.
 
 **Build order suggestion:** (1) port the cost engine as pure TS, validated against `model_output`; (2) wire the
 Section-4 inputs live incl. the holding horizon; (3) rankings + uncertainty ladder; (4) Deal Analyzer; (5) the data

@@ -1,6 +1,6 @@
 {
  "meta": {
-  "name": "CAWR \u2014 Car Analysis / What's it Really cost",
+  "name": "OpenCAWR \u2014 Car Analysis / What's it Really cost",
   "generated": "2026-07",
   "seed_vehicles": 71,
   "basis": "drive-to-death lifetime cost per mile; user profile: 13k mi/yr, USAA active-duty, Florida reg, Fresno CA garaging",
