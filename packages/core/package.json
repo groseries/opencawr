@@ -1,0 +1,17 @@
+{
+  "name": "@opencawr/core",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "OpenCAWR cost engine — pure, framework-agnostic. One engine, no UI, no I/O.",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "gen-manifest": "tsx scripts/gen-fidelity-manifest.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.2",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}

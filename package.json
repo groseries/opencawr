@@ -1,0 +1,13 @@
+{
+  "name": "opencawr",
+  "private": true,
+  "version": "0.1.0",
+  "description": "OpenCAWR — the true lifetime cost per mile of any used car, with honest error bars",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "test": "npm run test --workspaces --if-present"
+  }
+}
