@@ -1,0 +1,5146 @@
+{
+ "meta": {
+  "name": "CAWR \u2014 Car Analysis / What's it Really cost",
+  "generated": "2026-07",
+  "seed_vehicles": 71,
+  "basis": "drive-to-death lifetime cost per mile; user profile: 13k mi/yr, USAA active-duty, Florida reg, Fresno CA garaging",
+  "provenance_note": "Established vehicles use hand-curated curves anchored to real cars.com/iSeeCars pulls + owner-reported longevity. Reliability multipliers were LIGHTLY stripped of Consumer Reports citations, NOT fully re-derived \u2014 a public launch requires re-deriving reliability from NHTSA/CarComplaints/RepairPal. Vehicles in 'proxied' were estimated from segment peers (no used history)."
+ },
+ "constants": {
+  "annual_miles": 13000,
+  "discount_rate_real": 0.07,
+  "discount_basis": "S&P 500 long-run real return ~7% (NYU Stern)",
+  "gas_usd_per_gal": 5.455,
+  "elec_usd_per_kwh": 0.32,
+  "liability_only_usd_yr": 1176,
+  "full_cov_threshold_usd": 6000,
+  "collision_deductible_usd": 750,
+  "insurance_multiplier_USAA": 0.8,
+  "registration_usd_yr_FL": 55,
+  "monte_carlo_draws": 1100,
+  "eol_maintained_multiplier": 1.3,
+  "hassle_per_major_repair_usd": 600,
+  "now_year": 2026,
+  "year_reliability_multipliers": {
+   "landmine": 1.4,
+   "caution": 1.15,
+   "sweet_spot": 0.95,
+   "normal": 1.0
+  },
+  "tires_usd_per_mi_by_body": {
+   "Car": 0.018,
+   "SUV": 0.022,
+   "SUV AWD": 0.024,
+   "Truck": 0.03,
+   "EV": 0.03,
+   "EV SUV": 0.03,
+   "PHEV": 0.024,
+   "PHEV SUV AWD": 0.026,
+   "Van": 0.02,
+   "Sport": 0.05
+  },
+  "scrap_usd_by_body": {
+   "Car": 400,
+   "SUV": 450,
+   "SUV AWD": 500,
+   "Truck": 800,
+   "EV": 600,
+   "EV SUV": 700,
+   "PHEV": 600,
+   "PHEV SUV AWD": 800,
+   "Van": 500,
+   "Sport": 3000
+  },
+  "reliability_tiers": {
+   "low": {
+    "annual_prob_past_120k": 0.05,
+    "median_usd_per_event": 3200
+   },
+   "mid": {
+    "annual_prob_past_120k": 0.1,
+    "median_usd_per_event": 3600
+   },
+   "high": {
+    "annual_prob_past_120k": 0.14,
+    "median_usd_per_event": 3900
+   },
+   "sport": {
+    "annual_prob_past_120k": 0.2,
+    "median_usd_per_event": 6000
+   }
+  }
+ },
+ "vehicles": [
+  {
+   "name": "Chevy Bolt EV",
+   "make": "chevrolet",
+   "body": "EV",
+   "etype": "ev",
+   "first_year": 2017,
+   "last_year": 2023,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": null,
+    "kwh_per_100mi": 28,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 57,
+    "co2_g_per_mi": 76,
+    "full_coverage_ins_usd_yr": 2075
+   },
+   "eol_maintained_miles": 200200,
+   "pinned_buy_odo": 45000,
+   "pinned_buy_year_est": 2023,
+   "price_vs_odometer_usd": {
+    "10000": 23000,
+    "30000": 16500.0,
+    "65000": 14500.0,
+    "110000": 13000,
+    "160000": 11000,
+    "200000": 9000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 150,
+    "3": 250,
+    "5": 350,
+    "6": 420,
+    "8": 500,
+    "10": 560
+   },
+   "repair_cost_multiplier_by_make": 1.05,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2017,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022
+    ],
+    "good": [
+     2023
+    ]
+   },
+   "openpilot": {
+    "status": "Yes",
+    "note": "supported 2022\u201323  (buy ~2023 \u2713)"
+   },
+   "verify_slug_carscom": "chevrolet-bolt_ev",
+   "model_output": {
+    "cost_per_mile_p50": 0.3153,
+    "p75": 0.3424,
+    "p90_badluck": 0.3715,
+    "band_p05": 0.2891,
+    "band_p95": 0.3895,
+    "stat_tier": 1,
+    "beats_next_prob": 0.688,
+    "opp_cost_lifetime_usd": 19441,
+    "opp_cost_per_mi": 0.1253
+   }
+  },
+  {
+   "name": "Chevy Volt",
+   "make": "chevrolet",
+   "body": "PHEV",
+   "etype": "phev",
+   "first_year": 2016,
+   "last_year": 2019,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": null,
+    "kwh_per_100mi": 31,
+    "phev_gas_mpg": 42,
+    "phev_utility_factor": 0.8,
+    "seats": 5,
+    "cargo_cu_ft": 30,
+    "co2_g_per_mi": 107,
+    "full_coverage_ins_usd_yr": 1800
+   },
+   "eol_maintained_miles": 200200,
+   "pinned_buy_odo": 55000,
+   "pinned_buy_year_est": 2019,
+   "price_vs_odometer_usd": {
+    "18000": 20000,
+    "40000": 16000,
+    "75000": 14000,
+    "100000": 12500.0,
+    "130000": 11000,
+    "160000": 9500.0,
+    "200000": 8000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 280,
+    "3": 400,
+    "5": 560,
+    "6": 740,
+    "8": 880,
+    "10": 950
+   },
+   "repair_cost_multiplier_by_make": 1.05,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2011,
+     2012
+    ],
+    "good": [
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on current list"
+   },
+   "verify_slug_carscom": "chevrolet-volt",
+   "model_output": {
+    "cost_per_mile_p50": 0.3354,
+    "p75": 0.3533,
+    "p90_badluck": 0.3704,
+    "band_p05": 0.3074,
+    "band_p95": 0.3853,
+    "stat_tier": 1,
+    "beats_next_prob": 0.697,
+    "opp_cost_lifetime_usd": 17098,
+    "opp_cost_per_mi": 0.1178
+   }
+  },
+  {
+   "name": "Toyota Prius (hybrid)",
+   "make": "toyota",
+   "body": "Car",
+   "etype": "hybrid",
+   "first_year": 2010,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 50,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 50,
+    "co2_g_per_mi": 178,
+    "full_coverage_ins_usd_yr": 2250
+   },
+   "eol_maintained_miles": 249600,
+   "pinned_buy_odo": 40000,
+   "pinned_buy_year_est": 2023,
+   "price_vs_odometer_usd": {
+    "15000": 28000,
+    "40000": 26000,
+    "55000": 25000,
+    "70000": 24000,
+    "100000": 20000,
+    "130000": 16000,
+    "170000": 13000,
+    "195000": 11000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 320,
+    "3": 440,
+    "5": 620,
+    "6": 820,
+    "8": 960,
+    "10": 1050
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2010,
+     2011,
+     2016
+    ],
+    "good": [
+     2013,
+     2014,
+     2015,
+     2018,
+     2019
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "supported 2016\u201322  (buy ~2023 OUTSIDE range \u2014 pick a 2016-2022 example instead)"
+   },
+   "verify_slug_carscom": "toyota-prius",
+   "model_output": {
+    "cost_per_mile_p50": 0.353,
+    "p75": 0.3659,
+    "p90_badluck": 0.3784,
+    "band_p05": 0.3213,
+    "band_p95": 0.3872,
+    "stat_tier": 1,
+    "beats_next_prob": 0.65,
+    "opp_cost_lifetime_usd": 51398,
+    "opp_cost_per_mi": 0.2452
+   }
+  },
+  {
+   "name": "Toyota Prius Prime",
+   "make": "toyota",
+   "body": "PHEV",
+   "etype": "phev",
+   "first_year": 2017,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": null,
+    "kwh_per_100mi": 25,
+    "phev_gas_mpg": 54,
+    "phev_utility_factor": 0.55,
+    "seats": 5,
+    "cargo_cu_ft": 20,
+    "co2_g_per_mi": 110,
+    "full_coverage_ins_usd_yr": 2400
+   },
+   "eol_maintained_miles": 235300,
+   "pinned_buy_odo": 90000,
+   "pinned_buy_year_est": 2019,
+   "price_vs_odometer_usd": {
+    "15000": 30000,
+    "30000": 24000,
+    "60000": 19000,
+    "90000": 15000,
+    "120000": 13000,
+    "150000": 11000,
+    "180000": 9000,
+    "220000": 7000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 300,
+    "3": 420,
+    "5": 600,
+    "6": 800,
+    "8": 940,
+    "10": 1030
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2017
+    ],
+    "good": [
+     2018,
+     2019,
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Yes",
+    "note": "supported 2017\u201322  (buy ~2019 \u2713)"
+   },
+   "verify_slug_carscom": "toyota-prius_prime",
+   "model_output": {
+    "cost_per_mile_p50": 0.3642,
+    "p75": 0.3823,
+    "p90_badluck": 0.4018,
+    "band_p05": 0.33,
+    "band_p95": 0.4146,
+    "stat_tier": 2,
+    "beats_next_prob": 0.549,
+    "opp_cost_lifetime_usd": 16953,
+    "opp_cost_per_mi": 0.1167
+   }
+  },
+  {
+   "name": "Toyota Corolla",
+   "make": "toyota",
+   "body": "Car",
+   "etype": "gas",
+   "first_year": 2009,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 31,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 13,
+    "co2_g_per_mi": 287,
+    "full_coverage_ins_usd_yr": 2400
+   },
+   "eol_maintained_miles": 249600,
+   "pinned_buy_odo": 55000,
+   "pinned_buy_year_est": 2022,
+   "price_vs_odometer_usd": {
+    "12000": 24000,
+    "25000": 20000,
+    "50000": 18000,
+    "72000": 16500.0,
+    "100000": 15500.0,
+    "130000": 13000,
+    "170000": 10000,
+    "220000": 6500.0
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 250,
+    "3": 360,
+    "5": 550,
+    "6": 720,
+    "8": 870,
+    "10": 950
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2009,
+     2010,
+     2014,
+     2020,
+     2023
+    ],
+    "good": [
+     2016,
+     2017,
+     2018,
+     2019,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Yes",
+    "note": "supported 2017\u201322  (buy ~2022 \u2713)"
+   },
+   "verify_slug_carscom": "toyota-corolla",
+   "model_output": {
+    "cost_per_mile_p50": 0.3683,
+    "p75": 0.3812,
+    "p90_badluck": 0.3929,
+    "band_p05": 0.3393,
+    "band_p95": 0.4021,
+    "stat_tier": 2,
+    "beats_next_prob": 0.502,
+    "opp_cost_lifetime_usd": 30962,
+    "opp_cost_per_mi": 0.1591
+   }
+  },
+  {
+   "name": "Toyota Camry Hybrid",
+   "make": "toyota",
+   "body": "Car",
+   "etype": "hybrid",
+   "first_year": 2009,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 42,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 15,
+    "co2_g_per_mi": 212,
+    "full_coverage_ins_usd_yr": 2400
+   },
+   "eol_maintained_miles": 249600,
+   "pinned_buy_odo": 80000,
+   "pinned_buy_year_est": 2020,
+   "price_vs_odometer_usd": {
+    "15000": 31000,
+    "35000": 23000,
+    "70000": 17000,
+    "110000": 15000,
+    "140000": 13000,
+    "180000": 10000,
+    "220000": 7500.0
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 300,
+    "3": 420,
+    "5": 600,
+    "6": 800,
+    "8": 960,
+    "10": 1050
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [
+     2007,
+     2008,
+     2009
+    ],
+    "caution": [
+     2018
+    ],
+    "good": [
+     2013,
+     2014,
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Yes",
+    "note": "supported 2018\u201324  (buy ~2020 \u2713)"
+   },
+   "verify_slug_carscom": "toyota-camry_hybrid",
+   "model_output": {
+    "cost_per_mile_p50": 0.3684,
+    "p75": 0.3836,
+    "p90_badluck": 0.4001,
+    "band_p05": 0.3355,
+    "band_p95": 0.4113,
+    "stat_tier": 2,
+    "beats_next_prob": 0.711,
+    "opp_cost_lifetime_usd": 23387,
+    "opp_cost_per_mi": 0.1379
+   }
+  },
+  {
+   "name": "Honda Civic",
+   "make": "honda",
+   "body": "Car",
+   "etype": "gas",
+   "first_year": 2009,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 32,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 15,
+    "co2_g_per_mi": 278,
+    "full_coverage_ins_usd_yr": 2300
+   },
+   "eol_maintained_miles": 235300,
+   "pinned_buy_odo": 35000,
+   "pinned_buy_year_est": 2023,
+   "price_vs_odometer_usd": {
+    "12000": 25000,
+    "50000": 23000,
+    "66000": 22000,
+    "90000": 19000,
+    "130000": 15000,
+    "170000": 11000,
+    "210000": 7000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 280,
+    "3": 400,
+    "5": 600,
+    "6": 790,
+    "8": 950,
+    "10": 1000
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [
+     2001,
+     2002,
+     2006,
+     2007,
+     2008
+    ],
+    "caution": [
+     2016
+    ],
+    "good": [
+     2013,
+     2014,
+     2015,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Yes",
+    "note": "supported 2016\u201324  (buy ~2023 \u2713)"
+   },
+   "verify_slug_carscom": "honda-civic",
+   "model_output": {
+    "cost_per_mile_p50": 0.3851,
+    "p75": 0.3965,
+    "p90_badluck": 0.4087,
+    "band_p05": 0.357,
+    "band_p95": 0.4172,
+    "stat_tier": 2,
+    "beats_next_prob": 0.506,
+    "opp_cost_lifetime_usd": 43682,
+    "opp_cost_per_mi": 0.2181
+   }
+  },
+  {
+   "name": "Nissan Leaf",
+   "make": "nissan",
+   "body": "EV",
+   "etype": "ev",
+   "first_year": 2018,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": null,
+    "kwh_per_100mi": 30,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 30,
+    "co2_g_per_mi": 81,
+    "full_coverage_ins_usd_yr": 2200
+   },
+   "eol_maintained_miles": 140400,
+   "pinned_buy_odo": 45000,
+   "pinned_buy_year_est": 2023,
+   "price_vs_odometer_usd": {
+    "12000": 19000,
+    "35000": 12000,
+    "65000": 11000,
+    "100000": 9000,
+    "130000": 7000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 180,
+    "3": 280,
+    "5": 380,
+    "6": 450,
+    "8": 520,
+    "10": 600
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016
+    ],
+    "caution": [
+     2017,
+     2018
+    ],
+    "good": [
+     2019,
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Yes",
+    "note": "supported 2018\u201323  (buy ~2023 \u2713)"
+   },
+   "verify_slug_carscom": "nissan-leaf",
+   "model_output": {
+    "cost_per_mile_p50": 0.3857,
+    "p75": 0.4223,
+    "p90_badluck": 0.453,
+    "band_p05": 0.3395,
+    "band_p95": 0.4729,
+    "stat_tier": 2,
+    "beats_next_prob": 0.537,
+    "opp_cost_lifetime_usd": 7501,
+    "opp_cost_per_mi": 0.0786
+   }
+  },
+  {
+   "name": "Hyundai Elantra",
+   "make": "hyundai",
+   "body": "Car",
+   "etype": "gas",
+   "first_year": 2011,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 35,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 14,
+    "co2_g_per_mi": 254,
+    "full_coverage_ins_usd_yr": 2050
+   },
+   "eol_maintained_miles": 200200,
+   "pinned_buy_odo": 45000,
+   "pinned_buy_year_est": 2023,
+   "price_vs_odometer_usd": {
+    "12000": 20000,
+    "35000": 17000,
+    "65000": 14000,
+    "95000": 11000,
+    "130000": 8000,
+    "165000": 5500.0
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 360,
+    "3": 520,
+    "5": 790,
+    "6": 1030,
+    "8": 1200,
+    "10": 1300
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2011,
+     2012,
+     2013,
+     2017
+    ],
+    "good": [
+     2018,
+     2019,
+     2020,
+     2021
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "Hyundai/Kia SCC, select yrs"
+   },
+   "verify_slug_carscom": "hyundai-elantra",
+   "model_output": {
+    "cost_per_mile_p50": 0.3898,
+    "p75": 0.4061,
+    "p90_badluck": 0.4225,
+    "band_p05": 0.3569,
+    "band_p95": 0.432,
+    "stat_tier": 2,
+    "beats_next_prob": 0.477,
+    "opp_cost_lifetime_usd": 19885,
+    "opp_cost_per_mi": 0.1281
+   }
+  },
+  {
+   "name": "Honda Accord",
+   "make": "honda",
+   "body": "Car",
+   "etype": "gas",
+   "first_year": 2009,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 31,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 17,
+    "co2_g_per_mi": 287,
+    "full_coverage_ins_usd_yr": 2300
+   },
+   "eol_maintained_miles": 240500,
+   "pinned_buy_odo": 70000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "12000": 28000,
+    "40000": 19000,
+    "65000": 16500.0,
+    "100000": 14000,
+    "140000": 12000,
+    "180000": 9000,
+    "210000": 7000,
+    "250000": 5000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 300,
+    "3": 430,
+    "5": 640,
+    "6": 850,
+    "8": 1010,
+    "10": 1100
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [
+     2003,
+     2008,
+     2009,
+     2010
+    ],
+    "caution": [
+     2018
+    ],
+    "good": [
+     2011,
+     2012,
+     2016,
+     2017,
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Yes",
+    "note": "supported 2018\u201325  (buy ~2021 \u2713)"
+   },
+   "verify_slug_carscom": "honda-accord",
+   "model_output": {
+    "cost_per_mile_p50": 0.3899,
+    "p75": 0.4037,
+    "p90_badluck": 0.4167,
+    "band_p05": 0.355,
+    "band_p95": 0.425,
+    "stat_tier": 2,
+    "beats_next_prob": 0.613,
+    "opp_cost_lifetime_usd": 23064,
+    "opp_cost_per_mi": 0.1353
+   }
+  },
+  {
+   "name": "Kia K4",
+   "make": "kia",
+   "body": "Car",
+   "etype": "gas",
+   "first_year": 2025,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "proxied",
+   "specs": {
+    "mpg_combined": 34,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 15,
+    "co2_g_per_mi": 261,
+    "full_coverage_ins_usd_yr": 2050
+   },
+   "eol_maintained_miles": 189800,
+   "pinned_buy_odo": 18000,
+   "pinned_buy_year_est": 2025,
+   "price_vs_odometer_usd": {
+    "15000": 20500.0,
+    "35000": 18000,
+    "65000": 15000,
+    "95000": 12000,
+    "125000": 9000,
+    "160000": 6000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 360,
+    "3": 520,
+    "5": 790,
+    "6": 1030,
+    "8": 1200,
+    "10": 1300
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2025
+    ],
+    "good": [
+     2026
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "too new \u2014 not yet on the comma/openpilot list"
+   },
+   "verify_slug_carscom": "kia-k4",
+   "model_output": {
+    "cost_per_mile_p50": 0.3958,
+    "p75": 0.4102,
+    "p90_badluck": 0.425,
+    "band_p05": 0.3686,
+    "band_p95": 0.4362,
+    "stat_tier": 2,
+    "beats_next_prob": 0.501,
+    "opp_cost_lifetime_usd": 29085,
+    "opp_cost_per_mi": 0.1693
+   }
+  },
+  {
+   "name": "Mazda3 (SkyActiv)",
+   "make": "mazda",
+   "body": "Car",
+   "etype": "gas",
+   "first_year": 2010,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 30,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 20,
+    "co2_g_per_mi": 296,
+    "full_coverage_ins_usd_yr": 2150
+   },
+   "eol_maintained_miles": 210600,
+   "pinned_buy_odo": 65000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "12000": 24000,
+    "40000": 16500.0,
+    "65000": 15000,
+    "90000": 12000,
+    "110000": 9500.0,
+    "130000": 8000,
+    "160000": 6500.0,
+    "200000": 4500.0
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 300,
+    "3": 430,
+    "5": 660,
+    "6": 860,
+    "8": 1000,
+    "10": 1080
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2004,
+     2005,
+     2006,
+     2010,
+     2014,
+     2015,
+     2019
+    ],
+    "good": [
+     2013,
+     2016,
+     2017,
+     2018,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on list (only CX-5/CX-9)"
+   },
+   "verify_slug_carscom": "mazda-mazda3",
+   "model_output": {
+    "cost_per_mile_p50": 0.3962,
+    "p75": 0.4143,
+    "p90_badluck": 0.4316,
+    "band_p05": 0.3641,
+    "band_p95": 0.4406,
+    "stat_tier": 2,
+    "beats_next_prob": 0.494,
+    "opp_cost_lifetime_usd": 17003,
+    "opp_cost_per_mi": 0.1168
+   }
+  },
+  {
+   "name": "Toyota Camry",
+   "make": "toyota",
+   "body": "Car",
+   "etype": "gas",
+   "first_year": 2009,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 30,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 15,
+    "co2_g_per_mi": 296,
+    "full_coverage_ins_usd_yr": 2300
+   },
+   "eol_maintained_miles": 254800,
+   "pinned_buy_odo": 55000,
+   "pinned_buy_year_est": 2022,
+   "price_vs_odometer_usd": {
+    "12000": 28000,
+    "50000": 23000,
+    "75000": 20000,
+    "100000": 17000,
+    "130000": 14000,
+    "170000": 11000,
+    "210000": 7000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 280,
+    "3": 400,
+    "5": 600,
+    "6": 800,
+    "8": 960,
+    "10": 1050
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [
+     2007,
+     2008,
+     2009
+    ],
+    "caution": [
+     2018
+    ],
+    "good": [
+     2015,
+     2016,
+     2017,
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Yes",
+    "note": "supported 2018\u201324  (buy ~2022 \u2713)"
+   },
+   "verify_slug_carscom": "toyota-camry",
+   "model_output": {
+    "cost_per_mile_p50": 0.3971,
+    "p75": 0.4105,
+    "p90_badluck": 0.4244,
+    "band_p05": 0.3633,
+    "band_p95": 0.4362,
+    "stat_tier": 2,
+    "beats_next_prob": 0.514,
+    "opp_cost_lifetime_usd": 40966,
+    "opp_cost_per_mi": 0.205
+   }
+  },
+  {
+   "name": "Toyota RAV4 Hybrid",
+   "make": "toyota",
+   "body": "SUV AWD",
+   "etype": "hybrid",
+   "first_year": 2016,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 40,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 69,
+    "co2_g_per_mi": 222,
+    "full_coverage_ins_usd_yr": 2250
+   },
+   "eol_maintained_miles": 244400,
+   "pinned_buy_odo": 40000,
+   "pinned_buy_year_est": 2023,
+   "price_vs_odometer_usd": {
+    "15000": 34000,
+    "30000": 31000,
+    "66000": 29000,
+    "90000": 25000,
+    "110000": 23000,
+    "130000": 20000,
+    "160000": 16000,
+    "200000": 12000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 280,
+    "3": 400,
+    "5": 580,
+    "6": 770,
+    "8": 920,
+    "10": 1000
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2019
+    ],
+    "good": [
+     2017,
+     2018,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Yes",
+    "note": "supported 2016\u201325  (buy ~2023 \u2713)"
+   },
+   "verify_slug_carscom": "toyota-rav4_hybrid",
+   "model_output": {
+    "cost_per_mile_p50": 0.3982,
+    "p75": 0.4145,
+    "p90_badluck": 0.4277,
+    "band_p05": 0.3594,
+    "band_p95": 0.437,
+    "stat_tier": 2,
+    "beats_next_prob": 0.562,
+    "opp_cost_lifetime_usd": 57764,
+    "opp_cost_per_mi": 0.2826
+   }
+  },
+  {
+   "name": "Kia Niro (hybrid)",
+   "make": "kia",
+   "body": "SUV",
+   "etype": "hybrid",
+   "first_year": 2017,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 49,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 54,
+    "co2_g_per_mi": 181,
+    "full_coverage_ins_usd_yr": 2100
+   },
+   "eol_maintained_miles": 205400,
+   "pinned_buy_odo": 65000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "15000": 26000,
+    "40000": 21000,
+    "65000": 17000,
+    "95000": 14000,
+    "125000": 10000,
+    "160000": 7000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 360,
+    "3": 520,
+    "5": 790,
+    "6": 1030,
+    "8": 1200,
+    "10": 1300
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2017
+    ],
+    "good": [
+     2018,
+     2019,
+     2020,
+     2021
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "Hyundai/Kia SCC, select yrs"
+   },
+   "verify_slug_carscom": "kia-niro",
+   "model_output": {
+    "cost_per_mile_p50": 0.4019,
+    "p75": 0.4221,
+    "p90_badluck": 0.4426,
+    "band_p05": 0.3667,
+    "band_p95": 0.4602,
+    "stat_tier": 3,
+    "beats_next_prob": 0.594,
+    "opp_cost_lifetime_usd": 18302,
+    "opp_cost_per_mi": 0.1304
+   }
+  },
+  {
+   "name": "Tesla Model 3",
+   "make": "tesla",
+   "body": "EV",
+   "etype": "ev",
+   "first_year": 2018,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": null,
+    "kwh_per_100mi": 24,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 23,
+    "co2_g_per_mi": 65,
+    "full_coverage_ins_usd_yr": 3100
+   },
+   "eol_maintained_miles": 230100,
+   "pinned_buy_odo": 60000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "15000": 34000,
+    "50000": 22000,
+    "70000": 21000,
+    "100000": 18000,
+    "130000": 15000,
+    "180000": 12000,
+    "220000": 9000,
+    "250000": 7000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 200,
+    "3": 300,
+    "5": 450,
+    "6": 600,
+    "8": 720,
+    "10": 820
+   },
+   "repair_cost_multiplier_by_make": 1.25,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2018
+    ],
+    "good": [
+     2019,
+     2020,
+     2021,
+     2022,
+     2023
+    ]
+   },
+   "openpilot": {
+    "status": "Yes",
+    "note": "supported 2019\u201325  (buy ~2021 \u2713)"
+   },
+   "verify_slug_carscom": "tesla-model_3",
+   "model_output": {
+    "cost_per_mile_p50": 0.4131,
+    "p75": 0.4427,
+    "p90_badluck": 0.4769,
+    "band_p05": 0.3674,
+    "band_p95": 0.5027,
+    "stat_tier": 3,
+    "beats_next_prob": 0.575,
+    "opp_cost_lifetime_usd": 30609,
+    "opp_cost_per_mi": 0.1799
+   }
+  },
+  {
+   "name": "Hyundai Sonata",
+   "make": "hyundai",
+   "body": "Car",
+   "etype": "gas",
+   "first_year": 2011,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 32,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 16,
+    "co2_g_per_mi": 278,
+    "full_coverage_ins_usd_yr": 2150
+   },
+   "eol_maintained_miles": 195000,
+   "pinned_buy_odo": 60000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "15000": 22000,
+    "40000": 18000,
+    "70000": 14000,
+    "100000": 11000,
+    "135000": 8000,
+    "170000": 5500.0
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 360,
+    "3": 520,
+    "5": 790,
+    "6": 1030,
+    "8": 1200,
+    "10": 1300
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [
+     2011,
+     2012,
+     2013,
+     2014,
+     2015
+    ],
+    "caution": [],
+    "good": [
+     2018,
+     2019,
+     2020,
+     2021
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "Hyundai/Kia SCC, select yrs"
+   },
+   "verify_slug_carscom": "hyundai-sonata",
+   "model_output": {
+    "cost_per_mile_p50": 0.4223,
+    "p75": 0.4414,
+    "p90_badluck": 0.4605,
+    "band_p05": 0.3869,
+    "band_p95": 0.4785,
+    "stat_tier": 3,
+    "beats_next_prob": 0.604,
+    "opp_cost_lifetime_usd": 15625,
+    "opp_cost_per_mi": 0.1157
+   }
+  },
+  {
+   "name": "Toyota RAV4",
+   "make": "toyota",
+   "body": "SUV",
+   "etype": "gas",
+   "first_year": 2013,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 28,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 69,
+    "co2_g_per_mi": 317,
+    "full_coverage_ins_usd_yr": 2150
+   },
+   "eol_maintained_miles": 240500,
+   "pinned_buy_odo": 80000,
+   "pinned_buy_year_est": 2020,
+   "price_vs_odometer_usd": {
+    "10000": 33000,
+    "20000": 31000,
+    "45000": 28000,
+    "65000": 23000,
+    "90000": 19000,
+    "120000": 16000,
+    "145000": 15000,
+    "190000": 11000,
+    "230000": 7000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 261,
+    "3": 368,
+    "5": 551,
+    "6": 714,
+    "8": 823,
+    "10": 887
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [
+     2013,
+     2014,
+     2015
+    ],
+    "caution": [
+     2019
+    ],
+    "good": [
+     2016,
+     2017,
+     2018,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Yes",
+    "note": "supported 2016\u201325  (buy ~2020 \u2713)"
+   },
+   "verify_slug_carscom": "toyota-rav4",
+   "model_output": {
+    "cost_per_mile_p50": 0.4312,
+    "p75": 0.4472,
+    "p90_badluck": 0.4638,
+    "band_p05": 0.3958,
+    "band_p95": 0.4768,
+    "stat_tier": 3,
+    "beats_next_prob": 0.564,
+    "opp_cost_lifetime_usd": 26895,
+    "opp_cost_per_mi": 0.1676
+   }
+  },
+  {
+   "name": "Fiat 500",
+   "make": "fiat",
+   "body": "Car",
+   "etype": "gas",
+   "first_year": 2012,
+   "last_year": 2019,
+   "reliability_tier": "high",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 33,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 4,
+    "cargo_cu_ft": 30,
+    "co2_g_per_mi": 269,
+    "full_coverage_ins_usd_yr": 2000
+   },
+   "eol_maintained_miles": 159900,
+   "pinned_buy_odo": 40000,
+   "pinned_buy_year_est": 2019,
+   "price_vs_odometer_usd": {
+    "12000": 14000,
+    "30000": 11000,
+    "55000": 9000,
+    "80000": 7000,
+    "110000": 5000,
+    "140000": 3500.0
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 480,
+    "3": 720,
+    "5": 1120,
+    "6": 1450,
+    "8": 1680,
+    "10": 1820
+   },
+   "repair_cost_multiplier_by_make": 1.15,
+   "model_year_reliability": {
+    "bad": [
+     2012,
+     2013
+    ],
+    "caution": [
+     2014,
+     2015
+    ],
+    "good": [
+     2017,
+     2018,
+     2019
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on comma list"
+   },
+   "verify_slug_carscom": "fiat-500",
+   "model_output": {
+    "cost_per_mile_p50": 0.4345,
+    "p75": 0.4543,
+    "p90_badluck": 0.4827,
+    "band_p05": 0.4093,
+    "band_p95": 0.4963,
+    "stat_tier": 3,
+    "beats_next_prob": 0.499,
+    "opp_cost_lifetime_usd": 8837,
+    "opp_cost_per_mi": 0.0737
+   }
+  },
+  {
+   "name": "Honda CR-V",
+   "make": "honda",
+   "body": "SUV",
+   "etype": "gas",
+   "first_year": 2012,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 28,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 76,
+    "co2_g_per_mi": 317,
+    "full_coverage_ins_usd_yr": 2100
+   },
+   "eol_maintained_miles": 240500,
+   "pinned_buy_odo": 75000,
+   "pinned_buy_year_est": 2020,
+   "price_vs_odometer_usd": {
+    "15000": 31000,
+    "50000": 23000,
+    "80000": 20000,
+    "110000": 17000,
+    "140000": 14000,
+    "175000": 11000,
+    "220000": 6500.0
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 319,
+    "3": 459,
+    "5": 699,
+    "6": 912,
+    "8": 1055,
+    "10": 1138
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [
+     2015,
+     2017,
+     2018
+    ],
+    "caution": [
+     2011
+    ],
+    "good": [
+     2016,
+     2019,
+     2020,
+     2021
+    ]
+   },
+   "openpilot": {
+    "status": "Yes",
+    "note": "supported 2015\u201326  (buy ~2020 \u2713)"
+   },
+   "verify_slug_carscom": "honda-cr_v",
+   "model_output": {
+    "cost_per_mile_p50": 0.4375,
+    "p75": 0.4535,
+    "p90_badluck": 0.4694,
+    "band_p05": 0.4001,
+    "band_p95": 0.4799,
+    "stat_tier": 3,
+    "beats_next_prob": 0.514,
+    "opp_cost_lifetime_usd": 28010,
+    "opp_cost_per_mi": 0.1692
+   }
+  },
+  {
+   "name": "VW ID.4 (AWD avail)",
+   "make": "volkswagen",
+   "body": "EV SUV",
+   "etype": "ev",
+   "first_year": 2021,
+   "last_year": 2026,
+   "reliability_tier": "high",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": null,
+    "kwh_per_100mi": 34,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 64,
+    "co2_g_per_mi": 92,
+    "full_coverage_ins_usd_yr": 2400
+   },
+   "eol_maintained_miles": 195000,
+   "pinned_buy_odo": 45000,
+   "pinned_buy_year_est": 2023,
+   "price_vs_odometer_usd": {
+    "15000": 30000,
+    "30000": 24000,
+    "60000": 21000,
+    "90000": 18000,
+    "130000": 14000,
+    "180000": 11000,
+    "200000": 10000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 250,
+    "3": 380,
+    "5": 520,
+    "6": 700,
+    "8": 850,
+    "10": 950
+   },
+   "repair_cost_multiplier_by_make": 1.25,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2021,
+     2022
+    ],
+    "good": [
+     2023,
+     2024
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on list (no ID.4)"
+   },
+   "verify_slug_carscom": "volkswagen-id4",
+   "model_output": {
+    "cost_per_mile_p50": 0.4375,
+    "p75": 0.4699,
+    "p90_badluck": 0.5035,
+    "band_p05": 0.3894,
+    "band_p95": 0.5292,
+    "stat_tier": 3,
+    "beats_next_prob": 0.513,
+    "opp_cost_lifetime_usd": 26616,
+    "opp_cost_per_mi": 0.1774
+   }
+  },
+  {
+   "name": "Toyota RAV4 Prime",
+   "make": "toyota",
+   "body": "PHEV SUV AWD",
+   "etype": "phev",
+   "first_year": 2021,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": null,
+    "kwh_per_100mi": 36,
+    "phev_gas_mpg": 38,
+    "phev_utility_factor": 0.75,
+    "seats": 5,
+    "cargo_cu_ft": 63,
+    "co2_g_per_mi": 129,
+    "full_coverage_ins_usd_yr": 2200
+   },
+   "eol_maintained_miles": 235300,
+   "pinned_buy_odo": 55000,
+   "pinned_buy_year_est": 2022,
+   "price_vs_odometer_usd": {
+    "15000": 42000,
+    "40000": 37000,
+    "70000": 33000,
+    "100000": 30000,
+    "124000": 28000,
+    "160000": 23000,
+    "200000": 18000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 280,
+    "3": 400,
+    "5": 580,
+    "6": 770,
+    "8": 920,
+    "10": 1000
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2021
+    ],
+    "good": [
+     2022,
+     2023
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not listed (RAV4 Prime absent)"
+   },
+   "verify_slug_carscom": "toyota-rav4_prime",
+   "model_output": {
+    "cost_per_mile_p50": 0.4406,
+    "p75": 0.4573,
+    "p90_badluck": 0.4762,
+    "band_p05": 0.4016,
+    "band_p95": 0.4838,
+    "stat_tier": 3,
+    "beats_next_prob": 0.499,
+    "opp_cost_lifetime_usd": 54454,
+    "opp_cost_per_mi": 0.302
+   }
+  },
+  {
+   "name": "Kia Soul",
+   "make": "kia",
+   "body": "SUV",
+   "etype": "gas",
+   "first_year": 2010,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 29,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 62,
+    "co2_g_per_mi": 306,
+    "full_coverage_ins_usd_yr": 2050
+   },
+   "eol_maintained_miles": 184600,
+   "pinned_buy_odo": 60000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "12000": 22000,
+    "35000": 17000,
+    "65000": 14000,
+    "95000": 11000,
+    "125000": 8000,
+    "160000": 5500.0
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 360,
+    "3": 520,
+    "5": 790,
+    "6": 1030,
+    "8": 1200,
+    "10": 1300
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [
+     2012,
+     2013,
+     2014
+    ],
+    "caution": [
+     2020
+    ],
+    "good": [
+     2017,
+     2018,
+     2019,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "Hyundai/Kia SCC, select yrs"
+   },
+   "verify_slug_carscom": "kia-soul",
+   "model_output": {
+    "cost_per_mile_p50": 0.4407,
+    "p75": 0.4579,
+    "p90_badluck": 0.4783,
+    "band_p05": 0.4064,
+    "band_p95": 0.4938,
+    "stat_tier": 3,
+    "beats_next_prob": 0.589,
+    "opp_cost_lifetime_usd": 13233,
+    "opp_cost_per_mi": 0.1062
+   }
+  },
+  {
+   "name": "VW Passat",
+   "make": "volkswagen",
+   "body": "Car",
+   "etype": "gas",
+   "first_year": 2012,
+   "last_year": 2022,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 28,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 16,
+    "co2_g_per_mi": 317,
+    "full_coverage_ins_usd_yr": 2150
+   },
+   "eol_maintained_miles": 189800,
+   "pinned_buy_odo": 55000,
+   "pinned_buy_year_est": 2022,
+   "price_vs_odometer_usd": {
+    "15000": 21000,
+    "40000": 16000,
+    "65000": 13000,
+    "95000": 10000,
+    "130000": 7500.0,
+    "165000": 5000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 440,
+    "3": 640,
+    "5": 980,
+    "6": 1270,
+    "8": 1470,
+    "10": 1590
+   },
+   "repair_cost_multiplier_by_make": 1.25,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2012
+    ],
+    "good": [
+     2016,
+     2017,
+     2018,
+     2019
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "VW community port, select yrs"
+   },
+   "verify_slug_carscom": "volkswagen-passat",
+   "model_output": {
+    "cost_per_mile_p50": 0.4468,
+    "p75": 0.4676,
+    "p90_badluck": 0.4885,
+    "band_p05": 0.4122,
+    "band_p95": 0.5068,
+    "stat_tier": 4,
+    "beats_next_prob": 0.533,
+    "opp_cost_lifetime_usd": 14440,
+    "opp_cost_per_mi": 0.1071
+   }
+  },
+  {
+   "name": "Buick Encore",
+   "make": "buick",
+   "body": "SUV",
+   "etype": "gas",
+   "first_year": 2013,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 28,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 48,
+    "co2_g_per_mi": 317,
+    "full_coverage_ins_usd_yr": 2100
+   },
+   "eol_maintained_miles": 175500,
+   "pinned_buy_odo": 50000,
+   "pinned_buy_year_est": 2022,
+   "price_vs_odometer_usd": {
+    "15000": 20000,
+    "40000": 16000,
+    "65000": 13000,
+    "95000": 10000,
+    "125000": 7500.0,
+    "155000": 5000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 380,
+    "3": 560,
+    "5": 850,
+    "6": 1110,
+    "8": 1290,
+    "10": 1400
+   },
+   "repair_cost_multiplier_by_make": 1.05,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2013,
+     2014
+    ],
+    "good": [
+     2017,
+     2018,
+     2019,
+     2020
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on comma list"
+   },
+   "verify_slug_carscom": "buick-encore",
+   "model_output": {
+    "cost_per_mile_p50": 0.4503,
+    "p75": 0.4658,
+    "p90_badluck": 0.4848,
+    "band_p05": 0.4187,
+    "band_p95": 0.4989,
+    "stat_tier": 4,
+    "beats_next_prob": 0.559,
+    "opp_cost_lifetime_usd": 13640,
+    "opp_cost_per_mi": 0.1087
+   }
+  },
+  {
+   "name": "Hyundai Kona",
+   "make": "hyundai",
+   "body": "SUV",
+   "etype": "gas",
+   "first_year": 2018,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 30,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 45,
+    "co2_g_per_mi": 296,
+    "full_coverage_ins_usd_yr": 2050
+   },
+   "eol_maintained_miles": 184600,
+   "pinned_buy_odo": 65000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "15000": 24000,
+    "40000": 19000,
+    "65000": 15000,
+    "95000": 12000,
+    "125000": 9000,
+    "155000": 6500.0
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 360,
+    "3": 520,
+    "5": 790,
+    "6": 1030,
+    "8": 1200,
+    "10": 1300
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2018
+    ],
+    "good": [
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "Hyundai/Kia SCC, select yrs"
+   },
+   "verify_slug_carscom": "hyundai-kona",
+   "model_output": {
+    "cost_per_mile_p50": 0.4558,
+    "p75": 0.4718,
+    "p90_badluck": 0.4925,
+    "band_p05": 0.4227,
+    "band_p95": 0.5039,
+    "stat_tier": 4,
+    "beats_next_prob": 0.565,
+    "opp_cost_lifetime_usd": 12953,
+    "opp_cost_per_mi": 0.1083
+   }
+  },
+  {
+   "name": "Mazda CX-5",
+   "make": "mazda",
+   "body": "SUV",
+   "etype": "gas",
+   "first_year": 2013,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 26,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 59,
+    "co2_g_per_mi": 342,
+    "full_coverage_ins_usd_yr": 2100
+   },
+   "eol_maintained_miles": 214500,
+   "pinned_buy_odo": 65000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "15000": 29000,
+    "45000": 23000,
+    "70000": 20000,
+    "90000": 17000,
+    "120000": 13000,
+    "160000": 10000,
+    "200000": 8000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 327,
+    "3": 473,
+    "5": 724,
+    "6": 945,
+    "8": 1094,
+    "10": 1181,
+    "12": 1375
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2014,
+     2016
+    ],
+    "good": [
+     2013,
+     2017,
+     2020,
+     2021
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "supported 2022\u201325  (buy ~2021 OUTSIDE range \u2014 pick a 2022-2025 example instead)"
+   },
+   "verify_slug_carscom": "mazda-cx_5",
+   "model_output": {
+    "cost_per_mile_p50": 0.4606,
+    "p75": 0.4773,
+    "p90_badluck": 0.4923,
+    "band_p05": 0.4274,
+    "band_p95": 0.5047,
+    "stat_tier": 4,
+    "beats_next_prob": 0.588,
+    "opp_cost_lifetime_usd": 24252,
+    "opp_cost_per_mi": 0.1622
+   }
+  },
+  {
+   "name": "Toyota Highlander Hybrid",
+   "make": "toyota",
+   "body": "SUV AWD",
+   "etype": "hybrid",
+   "first_year": 2008,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 35,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 7,
+    "cargo_cu_ft": 84,
+    "co2_g_per_mi": 254,
+    "full_coverage_ins_usd_yr": 2300
+   },
+   "eol_maintained_miles": 244400,
+   "pinned_buy_odo": 65000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "15000": 43000,
+    "40000": 37000,
+    "65000": 32000,
+    "90000": 27000,
+    "120000": 22000,
+    "150000": 17000,
+    "190000": 12000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 320,
+    "3": 460,
+    "5": 690,
+    "6": 900,
+    "8": 1050,
+    "10": 1150
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2015,
+     2020
+    ],
+    "good": [
+     2013,
+     2014,
+     2017,
+     2018,
+     2019,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "select Toyota TSS years"
+   },
+   "verify_slug_carscom": "toyota-highlander_hybrid",
+   "model_output": {
+    "cost_per_mile_p50": 0.4699,
+    "p75": 0.4904,
+    "p90_badluck": 0.5122,
+    "band_p05": 0.4252,
+    "band_p95": 0.5237,
+    "stat_tier": 4,
+    "beats_next_prob": 0.523,
+    "opp_cost_lifetime_usd": 49404,
+    "opp_cost_per_mi": 0.2754
+   }
+  },
+  {
+   "name": "Subaru Outback",
+   "make": "subaru",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2010,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 29,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 76,
+    "co2_g_per_mi": 306,
+    "full_coverage_ins_usd_yr": 2050
+   },
+   "eol_maintained_miles": 210600,
+   "pinned_buy_odo": 75000,
+   "pinned_buy_year_est": 2020,
+   "price_vs_odometer_usd": {
+    "15000": 32000,
+    "40000": 24500.0,
+    "65000": 20000,
+    "90000": 17000,
+    "110000": 15000,
+    "135000": 12000,
+    "160000": 10000,
+    "210000": 6500.0
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 357,
+    "3": 516,
+    "5": 790,
+    "6": 1032,
+    "8": 1195,
+    "10": 1290
+   },
+   "repair_cost_multiplier_by_make": 1.05,
+   "model_year_reliability": {
+    "bad": [
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015
+    ],
+    "caution": [],
+    "good": [
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Yes",
+    "note": "supported 2020\u201322  (buy ~2020 \u2713)"
+   },
+   "verify_slug_carscom": "subaru-outback",
+   "model_output": {
+    "cost_per_mile_p50": 0.4706,
+    "p75": 0.4923,
+    "p90_badluck": 0.5168,
+    "band_p05": 0.4323,
+    "band_p95": 0.5384,
+    "stat_tier": 4,
+    "beats_next_prob": 0.504,
+    "opp_cost_lifetime_usd": 19276,
+    "opp_cost_per_mi": 0.1422
+   }
+  },
+  {
+   "name": "Subaru Forester",
+   "make": "subaru",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2011,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 29,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 76,
+    "co2_g_per_mi": 306,
+    "full_coverage_ins_usd_yr": 2100
+   },
+   "eol_maintained_miles": 200200,
+   "pinned_buy_odo": 55000,
+   "pinned_buy_year_est": 2022,
+   "price_vs_odometer_usd": {
+    "15000": 29000,
+    "40000": 24000,
+    "65000": 21000,
+    "95000": 19000,
+    "135000": 13000,
+    "160000": 10500.0,
+    "205000": 7000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 354,
+    "3": 514,
+    "5": 788,
+    "6": 1030,
+    "8": 1193,
+    "10": 1288,
+    "12": 1500
+   },
+   "repair_cost_multiplier_by_make": 1.05,
+   "model_year_reliability": {
+    "bad": [
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016
+    ],
+    "caution": [],
+    "good": [
+     2019,
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "supported 2019\u201321  (buy ~2022 OUTSIDE range \u2014 pick a 2019-2021 example instead)"
+   },
+   "verify_slug_carscom": "subaru-forester",
+   "model_output": {
+    "cost_per_mile_p50": 0.4713,
+    "p75": 0.4884,
+    "p90_badluck": 0.508,
+    "band_p05": 0.4391,
+    "band_p95": 0.5231,
+    "stat_tier": 4,
+    "beats_next_prob": 0.486,
+    "opp_cost_lifetime_usd": 25066,
+    "opp_cost_per_mi": 0.1726
+   }
+  },
+  {
+   "name": "Toyota Sienna Hybrid",
+   "make": "toyota",
+   "body": "Van",
+   "etype": "hybrid",
+   "first_year": 2021,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 36,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 8,
+    "cargo_cu_ft": 101,
+    "co2_g_per_mi": 247,
+    "full_coverage_ins_usd_yr": 2300
+   },
+   "eol_maintained_miles": 244400,
+   "pinned_buy_odo": 55000,
+   "pinned_buy_year_est": 2022,
+   "price_vs_odometer_usd": {
+    "15000": 44000,
+    "35000": 39000,
+    "60000": 34000,
+    "90000": 29000,
+    "120000": 23000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 300,
+    "3": 440,
+    "5": 660,
+    "6": 860,
+    "8": 1010,
+    "10": 1100
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [],
+    "good": [
+     2021,
+     2022,
+     2023,
+     2024,
+     2025
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "select Toyota TSS years"
+   },
+   "verify_slug_carscom": "toyota-sienna",
+   "model_output": {
+    "cost_per_mile_p50": 0.4729,
+    "p75": 0.4947,
+    "p90_badluck": 0.5138,
+    "band_p05": 0.4155,
+    "band_p95": 0.525,
+    "stat_tier": 4,
+    "beats_next_prob": 0.594,
+    "opp_cost_lifetime_usd": 58792,
+    "opp_cost_per_mi": 0.3104
+   }
+  },
+  {
+   "name": "Toyota Tacoma",
+   "make": "toyota",
+   "body": "Truck",
+   "etype": "gas",
+   "first_year": 2005,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 20,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 40,
+    "co2_g_per_mi": 444,
+    "full_coverage_ins_usd_yr": 2250
+   },
+   "eol_maintained_miles": 289900,
+   "pinned_buy_odo": 75000,
+   "pinned_buy_year_est": 2020,
+   "price_vs_odometer_usd": {
+    "10000": 41000,
+    "40000": 34000,
+    "70000": 30000,
+    "100000": 26000,
+    "130000": 22000,
+    "160000": 18000,
+    "190000": 15000,
+    "230000": 12000,
+    "280000": 9500.0
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 302,
+    "3": 425,
+    "5": 637,
+    "6": 823,
+    "8": 949,
+    "10": 1023
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2016
+    ],
+    "good": [
+     2012,
+     2013,
+     2014,
+     2015,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not supported (no Tacoma on list)"
+   },
+   "verify_slug_carscom": "toyota-tacoma",
+   "model_output": {
+    "cost_per_mile_p50": 0.4811,
+    "p75": 0.5001,
+    "p90_badluck": 0.5189,
+    "band_p05": 0.4403,
+    "band_p95": 0.5309,
+    "stat_tier": 4,
+    "beats_next_prob": 0.57,
+    "opp_cost_lifetime_usd": 60430,
+    "opp_cost_per_mi": 0.2812
+   }
+  },
+  {
+   "name": "Nissan Rogue",
+   "make": "nissan",
+   "body": "SUV",
+   "etype": "gas",
+   "first_year": 2011,
+   "last_year": 2026,
+   "reliability_tier": "high",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 29,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 74,
+    "co2_g_per_mi": 306,
+    "full_coverage_ins_usd_yr": 2080
+   },
+   "eol_maintained_miles": 170300,
+   "pinned_buy_odo": 55000,
+   "pinned_buy_year_est": 2022,
+   "price_vs_odometer_usd": {
+    "15000": 27000,
+    "40000": 20000,
+    "65000": 18000,
+    "90000": 14000,
+    "110000": 11000,
+    "135000": 9000,
+    "160000": 6500.0
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 329,
+    "3": 477,
+    "5": 731,
+    "6": 955,
+    "8": 1106,
+    "10": 1194
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019
+    ],
+    "caution": [
+     2011,
+     2012,
+     2020
+    ],
+    "good": [
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "supported 2018\u201320  (buy ~2022 OUTSIDE range \u2014 pick a 2018-2020 example instead)"
+   },
+   "verify_slug_carscom": "nissan-rogue",
+   "model_output": {
+    "cost_per_mile_p50": 0.4858,
+    "p75": 0.5062,
+    "p90_badluck": 0.5287,
+    "band_p05": 0.4511,
+    "band_p95": 0.5412,
+    "stat_tier": 4,
+    "beats_next_prob": 0.527,
+    "opp_cost_lifetime_usd": 15459,
+    "opp_cost_per_mi": 0.1341
+   }
+  },
+  {
+   "name": "Chevy Equinox",
+   "make": "chevrolet",
+   "body": "SUV",
+   "etype": "gas",
+   "first_year": 2010,
+   "last_year": 2026,
+   "reliability_tier": "high",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 27,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 64,
+    "co2_g_per_mi": 329,
+    "full_coverage_ins_usd_yr": 2150
+   },
+   "eol_maintained_miles": 175500,
+   "pinned_buy_odo": 55000,
+   "pinned_buy_year_est": 2022,
+   "price_vs_odometer_usd": {
+    "15000": 25000,
+    "40000": 19000,
+    "65000": 16000,
+    "100000": 14000,
+    "120000": 11000,
+    "135000": 9000,
+    "165000": 6500.0
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 369,
+    "3": 543,
+    "5": 840,
+    "6": 1103,
+    "8": 1280,
+    "10": 1384
+   },
+   "repair_cost_multiplier_by_make": 1.05,
+   "model_year_reliability": {
+    "bad": [
+     2010,
+     2011,
+     2012,
+     2013
+    ],
+    "caution": [
+     2018,
+     2019,
+     2020
+    ],
+    "good": [
+     2016,
+     2017,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Yes",
+    "note": "supported 2019\u201322  (buy ~2022 \u2713)"
+   },
+   "verify_slug_carscom": "chevrolet-equinox",
+   "model_output": {
+    "cost_per_mile_p50": 0.488,
+    "p75": 0.5071,
+    "p90_badluck": 0.5308,
+    "band_p05": 0.455,
+    "band_p95": 0.5459,
+    "stat_tier": 5,
+    "beats_next_prob": 0.534,
+    "opp_cost_lifetime_usd": 15003,
+    "opp_cost_per_mi": 0.1245
+   }
+  },
+  {
+   "name": "Toyota Sienna (V6)",
+   "make": "toyota",
+   "body": "Van",
+   "etype": "gas",
+   "first_year": 2011,
+   "last_year": 2020,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 19,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 8,
+    "cargo_cu_ft": 101,
+    "co2_g_per_mi": 468,
+    "full_coverage_ins_usd_yr": 2150
+   },
+   "eol_maintained_miles": 244400,
+   "pinned_buy_odo": 65000,
+   "pinned_buy_year_est": 2020,
+   "price_vs_odometer_usd": {
+    "30000": 28000,
+    "60000": 23000,
+    "90000": 19000,
+    "120000": 15000,
+    "150000": 12000,
+    "190000": 8000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 300,
+    "3": 440,
+    "5": 660,
+    "6": 860,
+    "8": 1010,
+    "10": 1100
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2011,
+     2017
+    ],
+    "good": [
+     2015,
+     2016
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on list"
+   },
+   "verify_slug_carscom": "toyota-sienna",
+   "model_output": {
+    "cost_per_mile_p50": 0.4931,
+    "p75": 0.5082,
+    "p90_badluck": 0.5226,
+    "band_p05": 0.4568,
+    "band_p95": 0.5335,
+    "stat_tier": 5,
+    "beats_next_prob": 0.519,
+    "opp_cost_lifetime_usd": 34480,
+    "opp_cost_per_mi": 0.1922
+   }
+  },
+  {
+   "name": "Mini Cooper",
+   "make": "mini",
+   "body": "Car",
+   "etype": "gas",
+   "first_year": 2014,
+   "last_year": 2026,
+   "reliability_tier": "high",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 30,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 4,
+    "cargo_cu_ft": 34,
+    "co2_g_per_mi": 296,
+    "full_coverage_ins_usd_yr": 2150
+   },
+   "eol_maintained_miles": 175500,
+   "pinned_buy_odo": 45000,
+   "pinned_buy_year_est": 2023,
+   "price_vs_odometer_usd": {
+    "15000": 24000,
+    "40000": 19000,
+    "65000": 15000,
+    "95000": 11000,
+    "125000": 8000,
+    "160000": 5500.0
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 520,
+    "3": 760,
+    "5": 1150,
+    "6": 1480,
+    "8": 1720,
+    "10": 1880
+   },
+   "repair_cost_multiplier_by_make": 1.35,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2014
+    ],
+    "good": [
+     2016,
+     2017,
+     2018,
+     2019
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on comma list"
+   },
+   "verify_slug_carscom": "mini-hardtop",
+   "model_output": {
+    "cost_per_mile_p50": 0.4935,
+    "p75": 0.5167,
+    "p90_badluck": 0.545,
+    "band_p05": 0.4506,
+    "band_p95": 0.5657,
+    "stat_tier": 5,
+    "beats_next_prob": 0.528,
+    "opp_cost_lifetime_usd": 17695,
+    "opp_cost_per_mi": 0.1356
+   }
+  },
+  {
+   "name": "Ford Ranger (old compact)",
+   "make": "ford",
+   "body": "Truck",
+   "etype": "gas",
+   "first_year": 2001,
+   "last_year": 2011,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 21,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 35,
+    "co2_g_per_mi": 423,
+    "full_coverage_ins_usd_yr": 2290
+   },
+   "eol_maintained_miles": 214500,
+   "pinned_buy_odo": 55000,
+   "pinned_buy_year_est": 2011,
+   "price_vs_odometer_usd": {
+    "45000": 12000,
+    "75000": 10500.0,
+    "100000": 10000,
+    "130000": 9500.0,
+    "160000": 8500.0,
+    "200000": 7500.0,
+    "250000": 5000,
+    "280000": 4000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 420,
+    "3": 620,
+    "5": 900,
+    "6": 1150,
+    "8": 1300,
+    "10": 1450
+   },
+   "repair_cost_multiplier_by_make": 1.05,
+   "model_year_reliability": {
+    "bad": [
+     1999,
+     2001,
+     2011
+    ],
+    "caution": [
+     2002,
+     2004,
+     2005,
+     2006
+    ],
+    "good": [
+     2008,
+     2009,
+     2010
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not supported"
+   },
+   "verify_slug_carscom": "ford-ranger",
+   "model_output": {
+    "cost_per_mile_p50": 0.4943,
+    "p75": 0.5146,
+    "p90_badluck": 0.5345,
+    "band_p05": 0.4671,
+    "band_p95": 0.5468,
+    "stat_tier": 5,
+    "beats_next_prob": 0.569,
+    "opp_cost_lifetime_usd": 14876,
+    "opp_cost_per_mi": 0.0933
+   }
+  },
+  {
+   "name": "Fiat 500X",
+   "make": "fiat",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2016,
+   "last_year": 2023,
+   "reliability_tier": "high",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 26,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 50,
+    "co2_g_per_mi": 342,
+    "full_coverage_ins_usd_yr": 2050
+   },
+   "eol_maintained_miles": 149500,
+   "pinned_buy_odo": 40000,
+   "pinned_buy_year_est": 2023,
+   "price_vs_odometer_usd": {
+    "20000": 18000,
+    "45000": 14000,
+    "70000": 11000,
+    "95000": 8500.0,
+    "120000": 6500.0
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 480,
+    "3": 720,
+    "5": 1120,
+    "6": 1450,
+    "8": 1680,
+    "10": 1820
+   },
+   "repair_cost_multiplier_by_make": 1.15,
+   "model_year_reliability": {
+    "bad": [
+     2016
+    ],
+    "caution": [
+     2017,
+     2018
+    ],
+    "good": [
+     2019,
+     2020
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on comma list"
+   },
+   "verify_slug_carscom": "fiat-500x",
+   "model_output": {
+    "cost_per_mile_p50": 0.5002,
+    "p75": 0.5136,
+    "p90_badluck": 0.5333,
+    "band_p05": 0.475,
+    "band_p95": 0.5486,
+    "stat_tier": 5,
+    "beats_next_prob": 0.534,
+    "opp_cost_lifetime_usd": 11368,
+    "opp_cost_per_mi": 0.1038
+   }
+  },
+  {
+   "name": "VW GTI",
+   "make": "volkswagen",
+   "body": "Car",
+   "etype": "gas",
+   "first_year": 2015,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 27,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 53,
+    "co2_g_per_mi": 329,
+    "full_coverage_ins_usd_yr": 2150
+   },
+   "eol_maintained_miles": 195000,
+   "pinned_buy_odo": 60000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "15000": 29000,
+    "40000": 23000,
+    "65000": 18000,
+    "95000": 14000,
+    "125000": 10000,
+    "160000": 7000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 440,
+    "3": 640,
+    "5": 980,
+    "6": 1270,
+    "8": 1470,
+    "10": 1590
+   },
+   "repair_cost_multiplier_by_make": 1.25,
+   "model_year_reliability": {
+    "bad": [
+     2010,
+     2011,
+     2012
+    ],
+    "caution": [
+     2015
+    ],
+    "good": [
+     2016,
+     2017,
+     2018,
+     2019
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "VW MQB community port, select yrs"
+   },
+   "verify_slug_carscom": "volkswagen-golf_gti",
+   "model_output": {
+    "cost_per_mile_p50": 0.5038,
+    "p75": 0.5258,
+    "p90_badluck": 0.5504,
+    "band_p05": 0.464,
+    "band_p95": 0.5737,
+    "stat_tier": 5,
+    "beats_next_prob": 0.512,
+    "opp_cost_lifetime_usd": 19361,
+    "opp_cost_per_mi": 0.1434
+   }
+  },
+  {
+   "name": "Kia Sportage",
+   "make": "kia",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2011,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 26,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 60,
+    "co2_g_per_mi": 342,
+    "full_coverage_ins_usd_yr": 2100
+   },
+   "eol_maintained_miles": 184600,
+   "pinned_buy_odo": 75000,
+   "pinned_buy_year_est": 2020,
+   "price_vs_odometer_usd": {
+    "15000": 27000,
+    "40000": 22000,
+    "65000": 17000,
+    "95000": 13000,
+    "125000": 10000,
+    "160000": 7000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 360,
+    "3": 520,
+    "5": 790,
+    "6": 1030,
+    "8": 1200,
+    "10": 1300
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [
+     2011,
+     2012,
+     2013
+    ],
+    "caution": [
+     2017
+    ],
+    "good": [
+     2019,
+     2020,
+     2021,
+     2023
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "Hyundai/Kia SCC, select yrs"
+   },
+   "verify_slug_carscom": "kia-sportage",
+   "model_output": {
+    "cost_per_mile_p50": 0.5049,
+    "p75": 0.5256,
+    "p90_badluck": 0.5506,
+    "band_p05": 0.4677,
+    "band_p95": 0.5705,
+    "stat_tier": 5,
+    "beats_next_prob": 0.496,
+    "opp_cost_lifetime_usd": 12048,
+    "opp_cost_per_mi": 0.1099
+   }
+  },
+  {
+   "name": "Ford Escape",
+   "make": "ford",
+   "body": "SUV",
+   "etype": "gas",
+   "first_year": 2009,
+   "last_year": 2026,
+   "reliability_tier": "high",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 26,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 65,
+    "co2_g_per_mi": 342,
+    "full_coverage_ins_usd_yr": 2150
+   },
+   "eol_maintained_miles": 170300,
+   "pinned_buy_odo": 65000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "15000": 26000,
+    "40000": 18500.0,
+    "65000": 15000,
+    "90000": 12000,
+    "110000": 9500.0,
+    "130000": 7500.0,
+    "150000": 6500.0,
+    "165000": 5500.0
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 379,
+    "3": 557,
+    "5": 861,
+    "6": 1129,
+    "8": 1310,
+    "10": 1415
+   },
+   "repair_cost_multiplier_by_make": 1.05,
+   "model_year_reliability": {
+    "bad": [
+     2013,
+     2014
+    ],
+    "caution": [
+     2020
+    ],
+    "good": [
+     2017,
+     2018,
+     2019,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Yes",
+    "note": "supported 2020\u201324  (buy ~2021 \u2713)"
+   },
+   "verify_slug_carscom": "ford-escape",
+   "model_output": {
+    "cost_per_mile_p50": 0.5061,
+    "p75": 0.5279,
+    "p90_badluck": 0.5521,
+    "band_p05": 0.4622,
+    "band_p95": 0.5744,
+    "stat_tier": 5,
+    "beats_next_prob": 0.557,
+    "opp_cost_lifetime_usd": 10948,
+    "opp_cost_per_mi": 0.104
+   }
+  },
+  {
+   "name": "Toyota Highlander",
+   "make": "toyota",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2008,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 23,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 7,
+    "cargo_cu_ft": 84,
+    "co2_g_per_mi": 386,
+    "full_coverage_ins_usd_yr": 2200
+   },
+   "eol_maintained_miles": 244400,
+   "pinned_buy_odo": 85000,
+   "pinned_buy_year_est": 2019,
+   "price_vs_odometer_usd": {
+    "15000": 40000,
+    "40000": 34000,
+    "65000": 29000,
+    "90000": 24000,
+    "120000": 19000,
+    "150000": 15000,
+    "190000": 11000,
+    "230000": 7000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 320,
+    "3": 460,
+    "5": 690,
+    "6": 900,
+    "8": 1050,
+    "10": 1150
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2015,
+     2020
+    ],
+    "good": [
+     2013,
+     2014,
+     2017,
+     2018,
+     2019,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "select Toyota TSS years"
+   },
+   "verify_slug_carscom": "toyota-highlander",
+   "model_output": {
+    "cost_per_mile_p50": 0.512,
+    "p75": 0.5334,
+    "p90_badluck": 0.5551,
+    "band_p05": 0.4665,
+    "band_p95": 0.5706,
+    "stat_tier": 5,
+    "beats_next_prob": 0.593,
+    "opp_cost_lifetime_usd": 32310,
+    "opp_cost_per_mi": 0.2027
+   }
+  },
+  {
+   "name": "Hyundai Tucson",
+   "make": "hyundai",
+   "body": "SUV",
+   "etype": "gas",
+   "first_year": 2010,
+   "last_year": 2026,
+   "reliability_tier": "high",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 25,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 74,
+    "co2_g_per_mi": 355,
+    "full_coverage_ins_usd_yr": 2100
+   },
+   "eol_maintained_miles": 170300,
+   "pinned_buy_odo": 55000,
+   "pinned_buy_year_est": 2022,
+   "price_vs_odometer_usd": {
+    "15000": 28000,
+    "40000": 21000,
+    "77000": 17400.0,
+    "95000": 16000,
+    "118000": 14000,
+    "135000": 11000,
+    "155000": 8000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 349,
+    "3": 509,
+    "5": 783,
+    "6": 1025,
+    "8": 1188,
+    "10": 1283
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [
+     2011,
+     2012,
+     2013
+    ],
+    "caution": [
+     2016
+    ],
+    "good": [
+     2019,
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Yes",
+    "note": "supported 2021\u201324  (buy ~2022 \u2713)"
+   },
+   "verify_slug_carscom": "hyundai-tucson",
+   "model_output": {
+    "cost_per_mile_p50": 0.5194,
+    "p75": 0.5342,
+    "p90_badluck": 0.5589,
+    "band_p05": 0.491,
+    "band_p95": 0.5788,
+    "stat_tier": 5,
+    "beats_next_prob": 0.502,
+    "opp_cost_lifetime_usd": 16068,
+    "opp_cost_per_mi": 0.1394
+   }
+  },
+  {
+   "name": "Toyota 4Runner",
+   "make": "toyota",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2010,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 17,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 7,
+    "cargo_cu_ft": 89,
+    "co2_g_per_mi": 523,
+    "full_coverage_ins_usd_yr": 2250
+   },
+   "eol_maintained_miles": 289900,
+   "pinned_buy_odo": 60000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "20000": 44000,
+    "50000": 38000,
+    "80000": 33000,
+    "120000": 27000,
+    "160000": 21000,
+    "200000": 16000,
+    "250000": 11000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 320,
+    "3": 460,
+    "5": 690,
+    "6": 900,
+    "8": 1050,
+    "10": 1150
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [],
+    "good": [
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022,
+     2023,
+     2024
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on list"
+   },
+   "verify_slug_carscom": "toyota-4runner",
+   "model_output": {
+    "cost_per_mile_p50": 0.5214,
+    "p75": 0.5412,
+    "p90_badluck": 0.5583,
+    "band_p05": 0.4729,
+    "band_p95": 0.5701,
+    "stat_tier": 5,
+    "beats_next_prob": 0.508,
+    "opp_cost_lifetime_usd": 83878,
+    "opp_cost_per_mi": 0.3648
+   }
+  },
+  {
+   "name": "Honda Odyssey",
+   "make": "honda",
+   "body": "Van",
+   "etype": "gas",
+   "first_year": 2011,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 22,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 8,
+    "cargo_cu_ft": 144,
+    "co2_g_per_mi": 404,
+    "full_coverage_ins_usd_yr": 2100
+   },
+   "eol_maintained_miles": 224900,
+   "pinned_buy_odo": 80000,
+   "pinned_buy_year_est": 2020,
+   "price_vs_odometer_usd": {
+    "20000": 36000,
+    "45000": 28000,
+    "70000": 22000,
+    "100000": 17000,
+    "130000": 13000,
+    "165000": 9000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 340,
+    "3": 495,
+    "5": 750,
+    "6": 975,
+    "8": 1135,
+    "10": 1225
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [
+     1999,
+     2000,
+     2001,
+     2002,
+     2003,
+     2004
+    ],
+    "caution": [
+     2011,
+     2014,
+     2018
+    ],
+    "good": [
+     2013,
+     2015,
+     2016,
+     2017,
+     2020
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "Honda Sensing years"
+   },
+   "verify_slug_carscom": "honda-odyssey",
+   "model_output": {
+    "cost_per_mile_p50": 0.5221,
+    "p75": 0.5445,
+    "p90_badluck": 0.5676,
+    "band_p05": 0.4723,
+    "band_p95": 0.5803,
+    "stat_tier": 5,
+    "beats_next_prob": 0.517,
+    "opp_cost_lifetime_usd": 22891,
+    "opp_cost_per_mi": 0.158
+   }
+  },
+  {
+   "name": "Kia Sorento",
+   "make": "kia",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2011,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 24,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 7,
+    "cargo_cu_ft": 75,
+    "co2_g_per_mi": 370,
+    "full_coverage_ins_usd_yr": 2150
+   },
+   "eol_maintained_miles": 200200,
+   "pinned_buy_odo": 75000,
+   "pinned_buy_year_est": 2020,
+   "price_vs_odometer_usd": {
+    "20000": 30000,
+    "45000": 24000,
+    "70000": 19000,
+    "100000": 15000,
+    "130000": 11000,
+    "165000": 7500.0
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 360,
+    "3": 520,
+    "5": 790,
+    "6": 1030,
+    "8": 1200,
+    "10": 1300
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [
+     2012,
+     2013,
+     2014
+    ],
+    "caution": [
+     2016
+    ],
+    "good": [
+     2019,
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "Hyundai/Kia SCC, select yrs"
+   },
+   "verify_slug_carscom": "kia-sorento",
+   "model_output": {
+    "cost_per_mile_p50": 0.5225,
+    "p75": 0.5424,
+    "p90_badluck": 0.5687,
+    "band_p05": 0.4822,
+    "band_p95": 0.5856,
+    "stat_tier": 5,
+    "beats_next_prob": 0.52,
+    "opp_cost_lifetime_usd": 16841,
+    "opp_cost_per_mi": 0.1345
+   }
+  },
+  {
+   "name": "Hyundai Santa Fe",
+   "make": "hyundai",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2013,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 25,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 72,
+    "co2_g_per_mi": 355,
+    "full_coverage_ins_usd_yr": 2150
+   },
+   "eol_maintained_miles": 189800,
+   "pinned_buy_odo": 80000,
+   "pinned_buy_year_est": 2020,
+   "price_vs_odometer_usd": {
+    "20000": 29000,
+    "45000": 23000,
+    "70000": 18000,
+    "100000": 14000,
+    "130000": 10000,
+    "165000": 7000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 360,
+    "3": 520,
+    "5": 790,
+    "6": 1030,
+    "8": 1200,
+    "10": 1300
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [
+     2013,
+     2014
+    ],
+    "caution": [
+     2019
+    ],
+    "good": [
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "Hyundai/Kia SCC, select yrs"
+   },
+   "verify_slug_carscom": "hyundai-santa_fe",
+   "model_output": {
+    "cost_per_mile_p50": 0.5235,
+    "p75": 0.5459,
+    "p90_badluck": 0.5752,
+    "band_p05": 0.4867,
+    "band_p95": 0.5938,
+    "stat_tier": 5,
+    "beats_next_prob": 0.502,
+    "opp_cost_lifetime_usd": 12847,
+    "opp_cost_per_mi": 0.117
+   }
+  },
+  {
+   "name": "VW Tiguan",
+   "make": "volkswagen",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2018,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 24,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 74,
+    "co2_g_per_mi": 370,
+    "full_coverage_ins_usd_yr": 2100
+   },
+   "eol_maintained_miles": 184600,
+   "pinned_buy_odo": 60000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "15000": 26000,
+    "40000": 20000,
+    "65000": 16000,
+    "95000": 12000,
+    "120000": 9000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 440,
+    "3": 640,
+    "5": 980,
+    "6": 1270,
+    "8": 1470,
+    "10": 1590
+   },
+   "repair_cost_multiplier_by_make": 1.25,
+   "model_year_reliability": {
+    "bad": [
+     2009,
+     2010,
+     2011
+    ],
+    "caution": [
+     2018
+    ],
+    "good": [
+     2019,
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "VW MQB community port, select yrs"
+   },
+   "verify_slug_carscom": "volkswagen-tiguan",
+   "model_output": {
+    "cost_per_mile_p50": 0.5249,
+    "p75": 0.545,
+    "p90_badluck": 0.5718,
+    "band_p05": 0.4822,
+    "band_p95": 0.5896,
+    "stat_tier": 5,
+    "beats_next_prob": 0.628,
+    "opp_cost_lifetime_usd": 15332,
+    "opp_cost_per_mi": 0.1231
+   }
+  },
+  {
+   "name": "Chrysler Pacifica PHEV",
+   "make": "chrysler",
+   "body": "Van",
+   "etype": "phev",
+   "first_year": 2017,
+   "last_year": 2026,
+   "reliability_tier": "high",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": null,
+    "kwh_per_100mi": 40,
+    "phev_gas_mpg": 30,
+    "phev_utility_factor": 0.45,
+    "seats": 7,
+    "cargo_cu_ft": 141,
+    "co2_g_per_mi": 210,
+    "full_coverage_ins_usd_yr": 2200
+   },
+   "eol_maintained_miles": 175500,
+   "pinned_buy_odo": 65000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "20000": 34000,
+    "45000": 26000,
+    "70000": 21000,
+    "100000": 16000,
+    "130000": 12000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 390,
+    "3": 570,
+    "5": 880,
+    "6": 1150,
+    "8": 1340,
+    "10": 1450
+   },
+   "repair_cost_multiplier_by_make": 1.05,
+   "model_year_reliability": {
+    "bad": [
+     2017,
+     2018
+    ],
+    "caution": [],
+    "good": [
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on list"
+   },
+   "verify_slug_carscom": "chrysler-pacifica_hybrid",
+   "model_output": {
+    "cost_per_mile_p50": 0.5394,
+    "p75": 0.5652,
+    "p90_badluck": 0.5975,
+    "band_p05": 0.4944,
+    "band_p95": 0.6192,
+    "stat_tier": 6,
+    "beats_next_prob": 0.539,
+    "opp_cost_lifetime_usd": 17101,
+    "opp_cost_per_mi": 0.1548
+   }
+  },
+  {
+   "name": "Subaru Ascent",
+   "make": "subaru",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2019,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 22,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 7,
+    "cargo_cu_ft": 75,
+    "co2_g_per_mi": 404,
+    "full_coverage_ins_usd_yr": 2100
+   },
+   "eol_maintained_miles": 184600,
+   "pinned_buy_odo": 55000,
+   "pinned_buy_year_est": 2022,
+   "price_vs_odometer_usd": {
+    "20000": 30000,
+    "45000": 25000,
+    "70000": 21000,
+    "100000": 17000,
+    "130000": 13000,
+    "160000": 10000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 360,
+    "3": 520,
+    "5": 800,
+    "6": 1040,
+    "8": 1210,
+    "10": 1310
+   },
+   "repair_cost_multiplier_by_make": 1.05,
+   "model_year_reliability": {
+    "bad": [
+     2019
+    ],
+    "caution": [
+     2020
+    ],
+    "good": [
+     2022,
+     2023,
+     2024
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on list"
+   },
+   "verify_slug_carscom": "subaru-ascent",
+   "model_output": {
+    "cost_per_mile_p50": 0.5438,
+    "p75": 0.5628,
+    "p90_badluck": 0.5819,
+    "band_p05": 0.5062,
+    "band_p95": 0.5944,
+    "stat_tier": 6,
+    "beats_next_prob": 0.545,
+    "opp_cost_lifetime_usd": 22536,
+    "opp_cost_per_mi": 0.1739
+   }
+  },
+  {
+   "name": "Ford Ranger (2019+ midsize)",
+   "make": "ford",
+   "body": "Truck",
+   "etype": "gas",
+   "first_year": 2019,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 21,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 40,
+    "co2_g_per_mi": 423,
+    "full_coverage_ins_usd_yr": 2290
+   },
+   "eol_maintained_miles": 200200,
+   "pinned_buy_odo": 55000,
+   "pinned_buy_year_est": 2022,
+   "price_vs_odometer_usd": {
+    "15000": 36000,
+    "30000": 31000,
+    "45000": 24000,
+    "75000": 21000,
+    "105000": 18000,
+    "135000": 15000,
+    "165000": 12500.0,
+    "200000": 10000,
+    "210000": 9500.0
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 447,
+    "3": 651,
+    "5": 1000,
+    "6": 1309,
+    "8": 1518,
+    "10": 1639
+   },
+   "repair_cost_multiplier_by_make": 1.05,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2019
+    ],
+    "good": [
+     2021,
+     2022,
+     2023
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "supported 2024 only; our buy 2022 = not"
+   },
+   "verify_slug_carscom": "ford-ranger",
+   "model_output": {
+    "cost_per_mile_p50": 0.5489,
+    "p75": 0.5658,
+    "p90_badluck": 0.5849,
+    "band_p05": 0.5126,
+    "band_p95": 0.5972,
+    "stat_tier": 6,
+    "beats_next_prob": 0.512,
+    "opp_cost_lifetime_usd": 25969,
+    "opp_cost_per_mi": 0.1789
+   }
+  },
+  {
+   "name": "Honda Pilot",
+   "make": "honda",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2009,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 20,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 8,
+    "cargo_cu_ft": 87,
+    "co2_g_per_mi": 444,
+    "full_coverage_ins_usd_yr": 2100
+   },
+   "eol_maintained_miles": 224900,
+   "pinned_buy_odo": 85000,
+   "pinned_buy_year_est": 2019,
+   "price_vs_odometer_usd": {
+    "15000": 38000,
+    "40000": 31000,
+    "70000": 25000,
+    "100000": 20000,
+    "130000": 16000,
+    "160000": 12000,
+    "200000": 8000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 340,
+    "3": 495,
+    "5": 750,
+    "6": 975,
+    "8": 1135,
+    "10": 1225
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [
+     2016
+    ],
+    "caution": [
+     2003,
+     2005
+    ],
+    "good": [
+     2012,
+     2013,
+     2014,
+     2015,
+     2018,
+     2019
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "Honda Sensing years"
+   },
+   "verify_slug_carscom": "honda-pilot",
+   "model_output": {
+    "cost_per_mile_p50": 0.5495,
+    "p75": 0.5697,
+    "p90_badluck": 0.5911,
+    "band_p05": 0.5073,
+    "band_p95": 0.6048,
+    "stat_tier": 6,
+    "beats_next_prob": 0.522,
+    "opp_cost_lifetime_usd": 24101,
+    "opp_cost_per_mi": 0.1723
+   }
+  },
+  {
+   "name": "Mini Countryman",
+   "make": "mini",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2011,
+   "last_year": 2026,
+   "reliability_tier": "high",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 26,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 48,
+    "co2_g_per_mi": 342,
+    "full_coverage_ins_usd_yr": 2200
+   },
+   "eol_maintained_miles": 175500,
+   "pinned_buy_odo": 55000,
+   "pinned_buy_year_est": 2022,
+   "price_vs_odometer_usd": {
+    "15000": 28000,
+    "40000": 22000,
+    "65000": 17000,
+    "95000": 13000,
+    "125000": 9000,
+    "160000": 6500.0
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 520,
+    "3": 760,
+    "5": 1150,
+    "6": 1480,
+    "8": 1720,
+    "10": 1880
+   },
+   "repair_cost_multiplier_by_make": 1.35,
+   "model_year_reliability": {
+    "bad": [
+     2011,
+     2012,
+     2013
+    ],
+    "caution": [
+     2017
+    ],
+    "good": [
+     2018,
+     2019,
+     2020
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on comma list"
+   },
+   "verify_slug_carscom": "mini-countryman",
+   "model_output": {
+    "cost_per_mile_p50": 0.5506,
+    "p75": 0.5752,
+    "p90_badluck": 0.6062,
+    "band_p05": 0.5088,
+    "band_p95": 0.6285,
+    "stat_tier": 6,
+    "beats_next_prob": 0.528,
+    "opp_cost_lifetime_usd": 16573,
+    "opp_cost_per_mi": 0.1375
+   }
+  },
+  {
+   "name": "Toyota Sequoia",
+   "make": "toyota",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2008,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 15,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 8,
+    "cargo_cu_ft": 120,
+    "co2_g_per_mi": 592,
+    "full_coverage_ins_usd_yr": 2450
+   },
+   "eol_maintained_miles": 300300,
+   "pinned_buy_odo": 80000,
+   "pinned_buy_year_est": 2020,
+   "price_vs_odometer_usd": {
+    "30000": 42000,
+    "70000": 34000,
+    "110000": 27000,
+    "150000": 21000,
+    "190000": 16000,
+    "240000": 11000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 320,
+    "3": 460,
+    "5": 690,
+    "6": 900,
+    "8": 1050,
+    "10": 1150
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2008
+    ],
+    "good": [
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on list"
+   },
+   "verify_slug_carscom": "toyota-sequoia",
+   "model_output": {
+    "cost_per_mile_p50": 0.5566,
+    "p75": 0.5787,
+    "p90_badluck": 0.5979,
+    "band_p05": 0.508,
+    "band_p95": 0.6135,
+    "stat_tier": 6,
+    "beats_next_prob": 0.579,
+    "opp_cost_lifetime_usd": 69251,
+    "opp_cost_per_mi": 0.3144
+   }
+  },
+  {
+   "name": "Hyundai Palisade",
+   "make": "hyundai",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2020,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 21,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 7,
+    "cargo_cu_ft": 86,
+    "co2_g_per_mi": 423,
+    "full_coverage_ins_usd_yr": 2150
+   },
+   "eol_maintained_miles": 200200,
+   "pinned_buy_odo": 45000,
+   "pinned_buy_year_est": 2023,
+   "price_vs_odometer_usd": {
+    "20000": 36000,
+    "40000": 32000,
+    "60000": 28000,
+    "90000": 23000,
+    "120000": 18000,
+    "150000": 14000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 360,
+    "3": 520,
+    "5": 800,
+    "6": 1040,
+    "8": 1210,
+    "10": 1310
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2020
+    ],
+    "good": [
+     2022,
+     2023,
+     2024
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on list"
+   },
+   "verify_slug_carscom": "hyundai-palisade",
+   "model_output": {
+    "cost_per_mile_p50": 0.5644,
+    "p75": 0.5834,
+    "p90_badluck": 0.6029,
+    "band_p05": 0.5228,
+    "band_p95": 0.6167,
+    "stat_tier": 6,
+    "beats_next_prob": 0.536,
+    "opp_cost_lifetime_usd": 38528,
+    "opp_cost_per_mi": 0.2482
+   }
+  },
+  {
+   "name": "Chrysler Pacifica",
+   "make": "chrysler",
+   "body": "Van",
+   "etype": "gas",
+   "first_year": 2017,
+   "last_year": 2026,
+   "reliability_tier": "high",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 22,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 7,
+    "cargo_cu_ft": 141,
+    "co2_g_per_mi": 404,
+    "full_coverage_ins_usd_yr": 2100
+   },
+   "eol_maintained_miles": 175500,
+   "pinned_buy_odo": 75000,
+   "pinned_buy_year_est": 2020,
+   "price_vs_odometer_usd": {
+    "20000": 30000,
+    "45000": 22000,
+    "70000": 17000,
+    "100000": 13000,
+    "130000": 10000,
+    "160000": 7000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 390,
+    "3": 570,
+    "5": 880,
+    "6": 1150,
+    "8": 1340,
+    "10": 1450
+   },
+   "repair_cost_multiplier_by_make": 1.05,
+   "model_year_reliability": {
+    "bad": [
+     2017,
+     2018
+    ],
+    "caution": [],
+    "good": [
+     2019,
+     2020,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on list"
+   },
+   "verify_slug_carscom": "chrysler-pacifica",
+   "model_output": {
+    "cost_per_mile_p50": 0.5655,
+    "p75": 0.5926,
+    "p90_badluck": 0.6254,
+    "band_p05": 0.5271,
+    "band_p95": 0.6517,
+    "stat_tier": 6,
+    "beats_next_prob": 0.531,
+    "opp_cost_lifetime_usd": 11224,
+    "opp_cost_per_mi": 0.1117
+   }
+  },
+  {
+   "name": "Chevy Colorado",
+   "make": "chevrolet",
+   "body": "Truck",
+   "etype": "gas",
+   "first_year": 2015,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 19,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 40,
+    "co2_g_per_mi": 468,
+    "full_coverage_ins_usd_yr": 2150
+   },
+   "eol_maintained_miles": 205400,
+   "pinned_buy_odo": 60000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "10000": 38000,
+    "30000": 29000,
+    "45000": 25000,
+    "75000": 22000,
+    "105000": 18000,
+    "135000": 14000,
+    "165000": 12000,
+    "200000": 9500.0,
+    "220000": 8000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 433,
+    "3": 632,
+    "5": 975,
+    "6": 1277,
+    "8": 1481,
+    "10": 1601
+   },
+   "repair_cost_multiplier_by_make": 1.05,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2015,
+     2016
+    ],
+    "good": [
+     2019,
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not supported"
+   },
+   "verify_slug_carscom": "chevrolet-colorado",
+   "model_output": {
+    "cost_per_mile_p50": 0.5696,
+    "p75": 0.5889,
+    "p90_badluck": 0.6097,
+    "band_p05": 0.5346,
+    "band_p95": 0.6266,
+    "stat_tier": 6,
+    "beats_next_prob": 0.519,
+    "opp_cost_lifetime_usd": 26586,
+    "opp_cost_per_mi": 0.1828
+   }
+  },
+  {
+   "name": "Kia Telluride",
+   "make": "kia",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2020,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 21,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 7,
+    "cargo_cu_ft": 87,
+    "co2_g_per_mi": 423,
+    "full_coverage_ins_usd_yr": 2150
+   },
+   "eol_maintained_miles": 200200,
+   "pinned_buy_odo": 45000,
+   "pinned_buy_year_est": 2023,
+   "price_vs_odometer_usd": {
+    "20000": 38000,
+    "40000": 34000,
+    "60000": 30000,
+    "90000": 25000,
+    "120000": 20000,
+    "150000": 16000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 360,
+    "3": 520,
+    "5": 800,
+    "6": 1040,
+    "8": 1210,
+    "10": 1310
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [
+     2020,
+     2021
+    ],
+    "caution": [],
+    "good": [
+     2022,
+     2023,
+     2024
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on list"
+   },
+   "verify_slug_carscom": "kia-telluride",
+   "model_output": {
+    "cost_per_mile_p50": 0.5738,
+    "p75": 0.5914,
+    "p90_badluck": 0.61,
+    "band_p05": 0.5297,
+    "band_p95": 0.6236,
+    "stat_tier": 6,
+    "beats_next_prob": 0.575,
+    "opp_cost_lifetime_usd": 41014,
+    "opp_cost_per_mi": 0.2643
+   }
+  },
+  {
+   "name": "Mazda CX-90",
+   "make": "mazda",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2024,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 24,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 7,
+    "cargo_cu_ft": 75,
+    "co2_g_per_mi": 370,
+    "full_coverage_ins_usd_yr": 2150
+   },
+   "eol_maintained_miles": 200200,
+   "pinned_buy_odo": 30000,
+   "pinned_buy_year_est": 2024,
+   "price_vs_odometer_usd": {
+    "10000": 45000,
+    "25000": 40000,
+    "45000": 35000,
+    "70000": 30000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 360,
+    "3": 520,
+    "5": 800,
+    "6": 1040,
+    "8": 1210,
+    "10": 1310
+   },
+   "repair_cost_multiplier_by_make": 1.0,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2024
+    ],
+    "good": [
+     2025
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on list"
+   },
+   "verify_slug_carscom": "mazda-cx_90",
+   "model_output": {
+    "cost_per_mile_p50": 0.5823,
+    "p75": 0.6009,
+    "p90_badluck": 0.6187,
+    "band_p05": 0.5346,
+    "band_p95": 0.6315,
+    "stat_tier": 6,
+    "beats_next_prob": 0.533,
+    "opp_cost_lifetime_usd": 55217,
+    "opp_cost_per_mi": 0.3244
+   }
+  },
+  {
+   "name": "Chevy Traverse",
+   "make": "chevrolet",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2018,
+   "last_year": 2026,
+   "reliability_tier": "high",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 21,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 7,
+    "cargo_cu_ft": 98,
+    "co2_g_per_mi": 423,
+    "full_coverage_ins_usd_yr": 2100
+   },
+   "eol_maintained_miles": 184600,
+   "pinned_buy_odo": 70000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "20000": 32000,
+    "45000": 25000,
+    "70000": 20000,
+    "100000": 16000,
+    "130000": 12000,
+    "160000": 9000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 390,
+    "3": 570,
+    "5": 880,
+    "6": 1150,
+    "8": 1340,
+    "10": 1450
+   },
+   "repair_cost_multiplier_by_make": 1.05,
+   "model_year_reliability": {
+    "bad": [
+     2009,
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015
+    ],
+    "caution": [
+     2018
+    ],
+    "good": [
+     2019,
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on list"
+   },
+   "verify_slug_carscom": "chevrolet-traverse",
+   "model_output": {
+    "cost_per_mile_p50": 0.5831,
+    "p75": 0.6084,
+    "p90_badluck": 0.638,
+    "band_p05": 0.5385,
+    "band_p95": 0.6588,
+    "stat_tier": 6,
+    "beats_next_prob": 0.547,
+    "opp_cost_lifetime_usd": 16313,
+    "opp_cost_per_mi": 0.1423
+   }
+  },
+  {
+   "name": "VW Atlas",
+   "make": "volkswagen",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2018,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 21,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 7,
+    "cargo_cu_ft": 97,
+    "co2_g_per_mi": 423,
+    "full_coverage_ins_usd_yr": 2200
+   },
+   "eol_maintained_miles": 189800,
+   "pinned_buy_odo": 65000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "20000": 32000,
+    "45000": 25000,
+    "70000": 20000,
+    "100000": 15000,
+    "130000": 11000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 440,
+    "3": 640,
+    "5": 980,
+    "6": 1270,
+    "8": 1470,
+    "10": 1590
+   },
+   "repair_cost_multiplier_by_make": 1.25,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2018,
+     2019
+    ],
+    "good": [
+     2021,
+     2022,
+     2023
+    ]
+   },
+   "openpilot": {
+    "status": "Partial",
+    "note": "VW MQB community port, select yrs"
+   },
+   "verify_slug_carscom": "volkswagen-atlas",
+   "model_output": {
+    "cost_per_mile_p50": 0.5894,
+    "p75": 0.6098,
+    "p90_badluck": 0.6368,
+    "band_p05": 0.5434,
+    "band_p95": 0.6556,
+    "stat_tier": 6,
+    "beats_next_prob": 0.516,
+    "opp_cost_lifetime_usd": 19207,
+    "opp_cost_per_mi": 0.1539
+   }
+  },
+  {
+   "name": "Ford Explorer",
+   "make": "ford",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2011,
+   "last_year": 2026,
+   "reliability_tier": "high",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 21,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 7,
+    "cargo_cu_ft": 87,
+    "co2_g_per_mi": 423,
+    "full_coverage_ins_usd_yr": 2150
+   },
+   "eol_maintained_miles": 184600,
+   "pinned_buy_odo": 70000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "20000": 33000,
+    "45000": 26000,
+    "70000": 21000,
+    "100000": 16000,
+    "130000": 12000,
+    "165000": 9000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 390,
+    "3": 570,
+    "5": 880,
+    "6": 1150,
+    "8": 1340,
+    "10": 1450
+   },
+   "repair_cost_multiplier_by_make": 1.05,
+   "model_year_reliability": {
+    "bad": [
+     2011,
+     2012,
+     2013
+    ],
+    "caution": [
+     2016,
+     2020
+    ],
+    "good": [
+     2018,
+     2019,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on list"
+   },
+   "verify_slug_carscom": "ford-explorer",
+   "model_output": {
+    "cost_per_mile_p50": 0.5917,
+    "p75": 0.6174,
+    "p90_badluck": 0.6463,
+    "band_p05": 0.5422,
+    "band_p95": 0.6672,
+    "stat_tier": 6,
+    "beats_next_prob": 0.592,
+    "opp_cost_lifetime_usd": 17128,
+    "opp_cost_per_mi": 0.1495
+   }
+  },
+  {
+   "name": "Buick Enclave",
+   "make": "buick",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2008,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 21,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 7,
+    "cargo_cu_ft": 97,
+    "co2_g_per_mi": 423,
+    "full_coverage_ins_usd_yr": 2250
+   },
+   "eol_maintained_miles": 184600,
+   "pinned_buy_odo": 90000,
+   "pinned_buy_year_est": 2019,
+   "price_vs_odometer_usd": {
+    "20000": 34000,
+    "45000": 26000,
+    "70000": 20000,
+    "100000": 15000,
+    "130000": 11000,
+    "165000": 7500.0
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 380,
+    "3": 560,
+    "5": 850,
+    "6": 1110,
+    "8": 1290,
+    "10": 1400
+   },
+   "repair_cost_multiplier_by_make": 1.05,
+   "model_year_reliability": {
+    "bad": [
+     2008,
+     2009,
+     2010,
+     2011,
+     2012,
+     2013
+    ],
+    "caution": [
+     2018
+    ],
+    "good": [
+     2019,
+     2020,
+     2021
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on comma list"
+   },
+   "verify_slug_carscom": "buick-enclave",
+   "model_output": {
+    "cost_per_mile_p50": 0.6011,
+    "p75": 0.6292,
+    "p90_badluck": 0.6594,
+    "band_p05": 0.553,
+    "band_p95": 0.6838,
+    "stat_tier": 7,
+    "beats_next_prob": 0.617,
+    "opp_cost_lifetime_usd": 10603,
+    "opp_cost_per_mi": 0.1121
+   }
+  },
+  {
+   "name": "Volvo XC60",
+   "make": "volvo",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2018,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 23,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 63,
+    "co2_g_per_mi": 386,
+    "full_coverage_ins_usd_yr": 2350
+   },
+   "eol_maintained_miles": 200200,
+   "pinned_buy_odo": 65000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "20000": 38000,
+    "45000": 30000,
+    "70000": 24000,
+    "100000": 18000,
+    "130000": 13000,
+    "160000": 9000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 600,
+    "3": 880,
+    "5": 1300,
+    "6": 1650,
+    "8": 1900,
+    "10": 2050
+   },
+   "repair_cost_multiplier_by_make": 1.4,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2018
+    ],
+    "good": [
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on comma list"
+   },
+   "verify_slug_carscom": "volvo-xc60",
+   "model_output": {
+    "cost_per_mile_p50": 0.6189,
+    "p75": 0.6423,
+    "p90_badluck": 0.6687,
+    "band_p05": 0.5661,
+    "band_p95": 0.6904,
+    "stat_tier": 7,
+    "beats_next_prob": 0.591,
+    "opp_cost_lifetime_usd": 25732,
+    "opp_cost_per_mi": 0.1903
+   }
+  },
+  {
+   "name": "Chevy Tahoe",
+   "make": "chevrolet",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2015,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 16,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 8,
+    "cargo_cu_ft": 122,
+    "co2_g_per_mi": 555,
+    "full_coverage_ins_usd_yr": 2350
+   },
+   "eol_maintained_miles": 240500,
+   "pinned_buy_odo": 55000,
+   "pinned_buy_year_est": 2022,
+   "price_vs_odometer_usd": {
+    "30000": 45000,
+    "70000": 36000,
+    "110000": 28000,
+    "150000": 21000,
+    "190000": 16000,
+    "230000": 11000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 360,
+    "3": 520,
+    "5": 800,
+    "6": 1040,
+    "8": 1210,
+    "10": 1310
+   },
+   "repair_cost_multiplier_by_make": 1.05,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2015,
+     2021
+    ],
+    "good": [
+     2017,
+     2018,
+     2019,
+     2020,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on list"
+   },
+   "verify_slug_carscom": "chevrolet-tahoe",
+   "model_output": {
+    "cost_per_mile_p50": 0.6305,
+    "p75": 0.6533,
+    "p90_badluck": 0.6741,
+    "band_p05": 0.5771,
+    "band_p95": 0.685,
+    "stat_tier": 7,
+    "beats_next_prob": 0.543,
+    "opp_cost_lifetime_usd": 64021,
+    "opp_cost_per_mi": 0.3451
+   }
+  },
+  {
+   "name": "Jeep Grand Cherokee L",
+   "make": "jeep",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2021,
+   "last_year": 2026,
+   "reliability_tier": "high",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 19,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 6,
+    "cargo_cu_ft": 84,
+    "co2_g_per_mi": 468,
+    "full_coverage_ins_usd_yr": 2200
+   },
+   "eol_maintained_miles": 184600,
+   "pinned_buy_odo": 55000,
+   "pinned_buy_year_est": 2022,
+   "price_vs_odometer_usd": {
+    "20000": 38000,
+    "45000": 31000,
+    "70000": 25000,
+    "100000": 19000,
+    "130000": 15000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 390,
+    "3": 570,
+    "5": 880,
+    "6": 1150,
+    "8": 1340,
+    "10": 1450
+   },
+   "repair_cost_multiplier_by_make": 1.05,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2021
+    ],
+    "good": [
+     2022,
+     2023
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on list"
+   },
+   "verify_slug_carscom": "jeep-grand_cherokee_l",
+   "model_output": {
+    "cost_per_mile_p50": 0.6342,
+    "p75": 0.657,
+    "p90_badluck": 0.6795,
+    "band_p05": 0.5911,
+    "band_p95": 0.6952,
+    "stat_tier": 7,
+    "beats_next_prob": 0.546,
+    "opp_cost_lifetime_usd": 27544,
+    "opp_cost_per_mi": 0.2125
+   }
+  },
+  {
+   "name": "Volvo V90 Cross Country",
+   "make": "volvo",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2017,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 25,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 69,
+    "co2_g_per_mi": 355,
+    "full_coverage_ins_usd_yr": 2350
+   },
+   "eol_maintained_miles": 200200,
+   "pinned_buy_odo": 65000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "25000": 42000,
+    "50000": 34000,
+    "75000": 27000,
+    "105000": 20000,
+    "135000": 15000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 600,
+    "3": 880,
+    "5": 1300,
+    "6": 1650,
+    "8": 1900,
+    "10": 2050
+   },
+   "repair_cost_multiplier_by_make": 1.4,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2017
+    ],
+    "good": [
+     2019,
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on comma list"
+   },
+   "verify_slug_carscom": "volvo-v90_cross_country",
+   "model_output": {
+    "cost_per_mile_p50": 0.64,
+    "p75": 0.6648,
+    "p90_badluck": 0.6924,
+    "band_p05": 0.5842,
+    "band_p95": 0.715,
+    "stat_tier": 7,
+    "beats_next_prob": 0.499,
+    "opp_cost_lifetime_usd": 30429,
+    "opp_cost_per_mi": 0.2251
+   }
+  },
+  {
+   "name": "Chevy Suburban",
+   "make": "chevrolet",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2015,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 16,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 8,
+    "cargo_cu_ft": 144,
+    "co2_g_per_mi": 555,
+    "full_coverage_ins_usd_yr": 2400
+   },
+   "eol_maintained_miles": 244400,
+   "pinned_buy_odo": 55000,
+   "pinned_buy_year_est": 2022,
+   "price_vs_odometer_usd": {
+    "30000": 48000,
+    "70000": 39000,
+    "110000": 30000,
+    "150000": 23000,
+    "190000": 17000,
+    "230000": 12000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 360,
+    "3": 520,
+    "5": 800,
+    "6": 1040,
+    "8": 1210,
+    "10": 1310
+   },
+   "repair_cost_multiplier_by_make": 1.05,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2015,
+     2021
+    ],
+    "good": [
+     2017,
+     2018,
+     2019,
+     2020,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on list"
+   },
+   "verify_slug_carscom": "chevrolet-suburban",
+   "model_output": {
+    "cost_per_mile_p50": 0.6408,
+    "p75": 0.6635,
+    "p90_badluck": 0.6856,
+    "band_p05": 0.5889,
+    "band_p95": 0.7005,
+    "stat_tier": 7,
+    "beats_next_prob": 0.871,
+    "opp_cost_lifetime_usd": 71181,
+    "opp_cost_per_mi": 0.3758
+   }
+  },
+  {
+   "name": "Volvo XC90",
+   "make": "volvo",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2016,
+   "last_year": 2026,
+   "reliability_tier": "high",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 22,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 7,
+    "cargo_cu_ft": 86,
+    "co2_g_per_mi": 404,
+    "full_coverage_ins_usd_yr": 2400
+   },
+   "eol_maintained_miles": 195000,
+   "pinned_buy_odo": 70000,
+   "pinned_buy_year_est": 2021,
+   "price_vs_odometer_usd": {
+    "20000": 48000,
+    "45000": 38000,
+    "70000": 30000,
+    "100000": 22000,
+    "130000": 16000,
+    "160000": 11000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 600,
+    "3": 880,
+    "5": 1300,
+    "6": 1650,
+    "8": 1900,
+    "10": 2050
+   },
+   "repair_cost_multiplier_by_make": 1.4,
+   "model_year_reliability": {
+    "bad": [
+     2016
+    ],
+    "caution": [
+     2017
+    ],
+    "good": [
+     2019,
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "not on comma list"
+   },
+   "verify_slug_carscom": "volvo-xc90",
+   "model_output": {
+    "cost_per_mile_p50": 0.7031,
+    "p75": 0.7379,
+    "p90_badluck": 0.782,
+    "band_p05": 0.635,
+    "band_p95": 0.8112,
+    "stat_tier": 8,
+    "beats_next_prob": 0.98,
+    "opp_cost_lifetime_usd": 27499,
+    "opp_cost_per_mi": 0.22
+   }
+  },
+  {
+   "name": "Porsche 996 Carrera",
+   "make": "porsche",
+   "body": "Sport",
+   "etype": "gas",
+   "first_year": 1999,
+   "last_year": 2004,
+   "reliability_tier": "sport",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 19,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 2,
+    "cargo_cu_ft": 5,
+    "co2_g_per_mi": 468,
+    "full_coverage_ins_usd_yr": 2200
+   },
+   "eol_maintained_miles": 208000,
+   "pinned_buy_odo": 55000,
+   "pinned_buy_year_est": 2004,
+   "price_vs_odometer_usd": {
+    "20000": 48000,
+    "50000": 40000,
+    "80000": 33000,
+    "110000": 28000,
+    "140000": 24000,
+    "170000": 21000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 1400,
+    "3": 2000,
+    "5": 2800,
+    "6": 3400,
+    "8": 4000,
+    "10": 4400
+   },
+   "repair_cost_multiplier_by_make": 1.3,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     1999,
+     2000,
+     2001
+    ],
+    "good": [
+     2002,
+     2003,
+     2004
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "it's a 2000s Porsche"
+   },
+   "verify_slug_carscom": "porsche-911",
+   "model_output": {
+    "cost_per_mile_p50": 0.8421,
+    "p75": 0.852,
+    "p90_badluck": 0.8717,
+    "band_p05": 0.8211,
+    "band_p95": 0.9103,
+    "stat_tier": 9,
+    "beats_next_prob": 0.997,
+    "opp_cost_lifetime_usd": 17068,
+    "opp_cost_per_mi": 0.1116
+   }
+  },
+  {
+   "name": "Porsche 996 Turbo",
+   "make": "porsche",
+   "body": "Sport",
+   "etype": "gas",
+   "first_year": 2001,
+   "last_year": 2005,
+   "reliability_tier": "sport",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 17,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 2,
+    "cargo_cu_ft": 5,
+    "co2_g_per_mi": 523,
+    "full_coverage_ins_usd_yr": 2400
+   },
+   "eol_maintained_miles": 221000,
+   "pinned_buy_odo": 55000,
+   "pinned_buy_year_est": 2005,
+   "price_vs_odometer_usd": {
+    "20000": 75000,
+    "50000": 62000,
+    "80000": 52000,
+    "110000": 45000,
+    "140000": 40000
+   },
+   "maintenance_usd_per_yr_by_age": {
+    "1": 1600,
+    "3": 2300,
+    "5": 3200,
+    "6": 3900,
+    "8": 4600,
+    "10": 5000
+   },
+   "repair_cost_multiplier_by_make": 1.3,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [],
+    "good": [
+     2001,
+     2002,
+     2003,
+     2004,
+     2005
+    ]
+   },
+   "openpilot": {
+    "status": "No",
+    "note": "it's a 2000s Porsche"
+   },
+   "verify_slug_carscom": "porsche-911",
+   "model_output": {
+    "cost_per_mile_p50": 1.0426,
+    "p75": 1.0563,
+    "p90_badluck": 1.0736,
+    "band_p05": 1.0138,
+    "band_p95": 1.0935,
+    "stat_tier": 10,
+    "beats_next_prob": null,
+    "opp_cost_lifetime_usd": 26518,
+    "opp_cost_per_mi": 0.1597
+   }
+  }
+ ]
+}
