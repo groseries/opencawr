@@ -4,6 +4,7 @@ import { Assumptions, DEFAULTS, RankBasisToggle, type RankBasis } from "./contro
 import { useEngine } from "./useEngine.js";
 import { Ladder } from "./charts/Ladder.js";
 import { tierColor, tierTextColor } from "./charts/tierColors.js";
+import { DealAnalyzer } from "./deal/DealAnalyzer.js";
 
 const fmt = (x: number) => `$${x.toFixed(3)}`;
 const ETYPE_LABEL: Record<string, string> = {
@@ -17,6 +18,7 @@ export function App() {
   const [inputs, setInputs] = useState<EngineInputs>(DEFAULTS);
   const [rankBasis, setRankBasis] = useState<RankBasis>("p50");
   const [view, setView] = useState<"table" | "ladder">("table");
+  const [tab, setTab] = useState<"rankings" | "deal">("rankings");
   const { byP50, byP75, ms, computing } = useEngine(inputs);
   const rows = rankBasis === "p50" ? byP50 : byP75;
 
@@ -78,6 +80,23 @@ export function App() {
         </div>
       </header>
 
+      <div className="tab-strip" role="group" aria-label="Section">
+        <button
+          type="button"
+          className={tab === "rankings" ? "seg seg-active" : "seg"}
+          onClick={() => setTab("rankings")}
+        >
+          Rankings
+        </button>
+        <button
+          type="button"
+          className={tab === "deal" ? "seg seg-active" : "seg"}
+          onClick={() => setTab("deal")}
+        >
+          Deal Analyzer
+        </button>
+      </div>
+
       <div className="layout">
         <aside className="rail">
           <Assumptions inputs={inputs} onChange={setInputs} />
@@ -88,37 +107,52 @@ export function App() {
         </aside>
 
         <main className="results">
-          <div className="results-head">
-            <h2>Ranking</h2>
-            <p className="results-note">
-              Cars in the same tie tier are statistically indistinguishable — the model can't
-              honestly order them.
-            </p>
-          </div>
-          <div className="results-controls">
-            <RankBasisToggle value={rankBasis} onChange={setRankBasis} />
-            <div className="view-switcher" role="group" aria-label="View">
-              <button
-                type="button"
-                className={view === "table" ? "seg seg-active" : "seg"}
-                onClick={() => setView("table")}
-              >
-                Table
-              </button>
-              <button
-                type="button"
-                className={view === "ladder" ? "seg seg-active" : "seg"}
-                onClick={() => setView("ladder")}
-              >
-                Ladder
-              </button>
-            </div>
-          </div>
-          {!rows ? (
-            <div className="loading">Running {DEFAULTS.draws ?? 1100} simulations per car…</div>
-          ) : view === "ladder" ? (
-            <Ladder rows={rows} basis={rankBasis} />
+          {tab === "rankings" ? (
+            <>
+              <div className="results-head">
+                <h2>Ranking</h2>
+                <p className="results-note">
+                  Cars in the same tie tier are statistically indistinguishable — the model
+                  can't honestly order them.
+                </p>
+              </div>
+              <div className="results-controls">
+                <RankBasisToggle value={rankBasis} onChange={setRankBasis} />
+                <div className="view-switcher" role="group" aria-label="View">
+                  <button
+                    type="button"
+                    className={view === "table" ? "seg seg-active" : "seg"}
+                    onClick={() => setView("table")}
+                  >
+                    Table
+                  </button>
+                  <button
+                    type="button"
+                    className={view === "ladder" ? "seg seg-active" : "seg"}
+                    onClick={() => setView("ladder")}
+                  >
+                    Ladder
+                  </button>
+                </div>
+              </div>
+            </>
           ) : (
+            <div className="results-head">
+              <h2>Deal Analyzer</h2>
+              <p className="results-note">
+                Score a specific listing against the modeled field. Estimates only — never
+                advice.
+              </p>
+            </div>
+          )}
+          {tab === "rankings" &&
+            (!rows ? (
+              <div className="loading">
+                Running {DEFAULTS.draws ?? 1100} simulations per car…
+              </div>
+            ) : view === "ladder" ? (
+              <Ladder rows={rows} basis={rankBasis} />
+            ) : (
             <table className="ranking">
               <thead>
                 <tr>
@@ -190,7 +224,16 @@ export function App() {
                 })}
               </tbody>
             </table>
-          )}
+            ))}
+          <div style={{ display: tab === "deal" ? "block" : "none" }}>
+            {rows ? (
+              <DealAnalyzer inputs={inputs} rows={rows} />
+            ) : (
+              <div className="loading">
+                Running {DEFAULTS.draws ?? 1100} simulations per car…
+              </div>
+            )}
+          </div>
           <footer className="foot">
             <span>
               OpenCAWR · reliability inputs pending public re-derivation (see ledger) ·

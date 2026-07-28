@@ -77,6 +77,8 @@ generalized, or retired. Statuses:
 | OPEN | Total-loss life truncation | a totaled car should end the holding period; currently only an annual $ charge |
 | OPEN | Reliability re-derivation (launch gate) | NHTSA/CarComplaints/RepairPal pipeline — spec §9, blocks public launch |
 | 2026-07-27 | P75 ("protects against bad luck") rank basis | Web UI adds a second ranking, sorted and tie-tiered on each car's P75 draw instead of P50, reusing the same `tieTierBeatProb` (0.85) threshold for the tier walk. JUDGMENT: no separate significance threshold was defined for the P75 ordering; the P50 threshold is assumed to transfer unchanged. |
+| 2026-07-28 | Deal Analyzer reliability caveat | Task B/D's per-vehicle `launchBlocked` provenance flag does not exist yet on `Vehicle` (assemble.ts hasn't landed). JUDGMENT: every scored deal unconditionally shows the same "reliability inputs are seed data pending public re-derivation" note (global launch gate) rather than a per-vehicle conditional; revisit once `launchBlocked` lands. |
+| 2026-07-28 | Deal Analyzer bad-model-year note | Uses the *user-entered* listing year against `model_year_reliability`, distinct from the odometer-implied year used for the feasibility note (reused verbatim from the Rankings view's `feasNote`). JUDGMENT: a real listing's actual year is a more direct reliability signal than the odometer/annualMiles-derived year. |
 
 ## F. Pipeline (`@opencawr/pipeline`, Task B) assumptions
 
