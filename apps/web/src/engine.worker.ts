@@ -3,11 +3,12 @@ import {
   costPerMile,
   curveAt,
   impliedModelYear,
+  isFeasibleBuy,
   parseCurve,
   rankWithTiers,
   type RankableCar,
 } from "@opencawr/core";
-import type { Constants, EngineInputs, Vehicle } from "@opencawr/core";
+import type { Constants, CostBreakdown, EngineInputs, Vehicle } from "@opencawr/core";
 import raw from "../../../opencawr_data.json";
 
 const data = raw as unknown as { constants: Constants; vehicles: Vehicle[] };
@@ -82,9 +83,49 @@ export interface DealResponse {
   notes: string[];
 }
 
-self.onmessage = (e: MessageEvent<EngineRequest | DealRequest>) => {
+/** Survey drawer request (Task F): one car's cost-vs-buy-point grid, its default
+ * breakdown, and two sensitivity sweeps. All grid/sweep cells run at reduced
+ * draws (see SURVEY_DRAWS) — a documented speed/precision tradeoff (ASSUMPTIONS.md §H). */
+export interface SurveyRequest {
+  kind: "survey";
+  id: number;
+  inputs: EngineInputs;
+  vehicleName: string;
+}
+
+export interface SurveyCell {
+  buyOdo: number;
+  holdMiles: number;
+  p50: number;
+  /** Two-sided odometer↔model-year rule (isFeasibleBuy) — grayed in the heatmap. */
+  feasible: boolean;
+}
+
+export interface SweepPoint {
+  x: number;
+  p50: number;
+}
+
+export interface SurveyResponse {
+  kind: "survey";
+  id: number;
+  vehicleName: string;
+  /** This car's own default-buy-point P50 (current rail assumptions) — drawer headline. */
+  p50: number;
+  breakdown: CostBreakdown;
+  buyOdoAxis: number[];
+  holdMilesAxis: number[];
+  /** Length buyOdoAxis.length * holdMilesAxis.length, holdMilesAxis outer, buyOdoAxis inner. */
+  cells: SurveyCell[];
+  sensAnnualMiles: SweepPoint[];
+  sensGasPrice: SweepPoint[];
+}
+
+self.onmessage = (e: MessageEvent<EngineRequest | DealRequest | SurveyRequest>) => {
   if (e.data.kind === "deal") {
     handleDeal(e.data);
+  } else if (e.data.kind === "survey") {
+    handleSurvey(e.data);
   } else {
     handleRank(e.data);
   }
@@ -216,6 +257,80 @@ function handleDeal(req: DealRequest) {
     },
     priceVsCurveUsd,
     notes,
+  };
+  self.postMessage(msg);
+}
+
+// Survey drawer (Task F, spec §6.1/§6.4): fixed axes shared by every car, so the
+// grid always shows some infeasible (grayed) cells at the odometer extremes and a
+// consistent hold-miles range, rather than a per-car window that would always be
+// entirely "feasible" by construction.
+const BUY_ODO_AXIS = [
+  10_000, 20_000, 30_000, 40_000, 50_000, 60_000, 70_000, 80_000, 90_000, 100_000, 110_000,
+  120_000,
+];
+const HOLD_MILES_AXIS = [
+  25_000, 50_000, 75_000, 100_000, 125_000, 150_000, 175_000, 200_000,
+];
+const ANNUAL_MILES_AXIS = [
+  6_000, 8_000, 10_000, 12_000, 14_000, 16_000, 18_000, 20_000, 22_000, 24_000,
+];
+const GAS_PRICE_AXIS = [2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5];
+
+/** Draws per cell for the 96-cell grid + 20 sensitivity points (reduced from the
+ * default 1,100 for speed — documented tradeoff, ASSUMPTIONS.md §H). */
+const SURVEY_DRAWS = 400;
+
+function handleSurvey(req: SurveyRequest) {
+  const { id, inputs, vehicleName } = req;
+  const vehicle = data.vehicles.find((v) => v.name === vehicleName);
+  if (!vehicle) return; // the drawer only ever opens from a row naming a real car
+
+  const am = inputs.annualMiles ?? data.constants.annual_miles;
+
+  // The car's own current default-buy result (full draws) — drawer headline + breakdown.
+  const defaultRes = costPerMile(vehicle, data.constants, inputs);
+
+  const cells: SurveyCell[] = [];
+  for (const holdMiles of HOLD_MILES_AXIS) {
+    for (const buyOdo of BUY_ODO_AXIS) {
+      const res = costPerMile(vehicle, data.constants, {
+        ...inputs,
+        buyOdo,
+        holdMiles,
+        draws: SURVEY_DRAWS,
+      });
+      cells.push({
+        buyOdo,
+        holdMiles,
+        p50: res.p50,
+        feasible: isFeasibleBuy(vehicle, buyOdo, am, data.constants.now_year),
+      });
+    }
+  }
+
+  const sensAnnualMiles: SweepPoint[] = ANNUAL_MILES_AXIS.map((annualMiles) => ({
+    x: annualMiles,
+    p50: costPerMile(vehicle, data.constants, { ...inputs, annualMiles, draws: SURVEY_DRAWS })
+      .p50,
+  }));
+  const sensGasPrice: SweepPoint[] = GAS_PRICE_AXIS.map((gasUsdPerGal) => ({
+    x: gasUsdPerGal,
+    p50: costPerMile(vehicle, data.constants, { ...inputs, gasUsdPerGal, draws: SURVEY_DRAWS })
+      .p50,
+  }));
+
+  const msg: SurveyResponse = {
+    kind: "survey",
+    id,
+    vehicleName,
+    p50: defaultRes.p50,
+    breakdown: defaultRes.breakdown,
+    buyOdoAxis: BUY_ODO_AXIS,
+    holdMilesAxis: HOLD_MILES_AXIS,
+    cells,
+    sensAnnualMiles,
+    sensGasPrice,
   };
   self.postMessage(msg);
 }

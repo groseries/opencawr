@@ -36,6 +36,7 @@ export function Ladder({
   basis,
   extraRow,
   dimmed,
+  onOpenCar,
 }: {
   rows: RankedRow[];
   basis: "p50" | "p75";
@@ -44,6 +45,9 @@ export function Ladder({
   /** Soft filter: car names that miss a filter (e.g. seats needed) — grayed
    * out (opacity .35), never removed. Applied to car rows only. */
   dimmed?: Set<string>;
+  /** Row click/Enter opens the per-car drawer (Task F). Car rows only — the
+   * Deal Analyzer's extra row isn't wired to it. */
+  onOpenCar?: (name: string) => void;
 }) {
   const emphasizedOf = (r: { p50: number; p75: number }) => (basis === "p75" ? r.p75 : r.p50);
 
@@ -216,6 +220,13 @@ export function Ladder({
                 height={ROW_H}
                 className="ladder-hit"
                 tabIndex={0}
+                onClick={() => onOpenCar?.(r.name)}
+                onKeyDown={(e) => {
+                  if (onOpenCar && (e.key === "Enter" || e.key === " ")) {
+                    e.preventDefault();
+                    onOpenCar(r.name);
+                  }
+                }}
                 aria-label={`${r.name}: ${
                   basis === "p75" ? "bad-luck cost P75" : "median"
                 } ${fmtExact(emphasized)} per mile, 90% range ${fmtExact(r.p05)}-${fmtExact(
