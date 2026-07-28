@@ -690,7 +690,7 @@ th.num {
   width: 28px;
   height: 28px;
   border: 1px solid var(--rule);
-  background: #fff;
+  background: var(--paper);
   color: var(--muted);
   font-size: 16px;
   line-height: 1;

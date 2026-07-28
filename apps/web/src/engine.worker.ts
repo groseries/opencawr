@@ -269,6 +269,10 @@ const BUY_ODO_AXIS = [
   10_000, 20_000, 30_000, 40_000, 50_000, 60_000, 70_000, 80_000, 90_000, 100_000, 110_000,
   120_000,
 ];
+// A cell's holdMiles is nominal, not guaranteed miles actually driven: costPerMile
+// clamps sell odo to each draw's own (randomly sampled) EOL, so a cell whose
+// buyOdo + holdMiles would exceed a car's EOL quietly reflects fewer miles held
+// for that draw — correct engine behavior, just non-obvious from the cell's label.
 const HOLD_MILES_AXIS = [
   25_000, 50_000, 75_000, 100_000, 125_000, 150_000, 175_000, 200_000,
 ];
