@@ -1,0 +1,469 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Mazda&model=CX-5&modelYear=2018",
+  "fetchedAt": "2026-07-28T15:13:35.687Z",
+  "body": {
+    "count": 115,
+    "results": [
+      {
+        "odiNumber": 11752039,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11750286,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11747961,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11747660,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11744932,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11744861,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11742164,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11742070,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11740394,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11738764,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11738405,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11738150,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11738202,
+        "components": "STEERING,ENGINE"
+      },
+      {
+        "odiNumber": 11737223,
+        "components": "UNKNOWN OR OTHER,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11737283,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11735940,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11735291,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11734765,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11734839,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11734878,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11733874,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11733339,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11732799,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11731395,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11730869,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11730506,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11730122,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11730227,
+        "components": "ENGINE,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11728174,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11727886,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11725144,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11722666,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11722750,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11722628,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11719213,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11718745,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11716158,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11714123,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11708847,
+        "components": "UNKNOWN OR OTHER,ENGINE,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11707998,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11705314,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11699908,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11694487,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11693210,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11691786,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11689793,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11685332,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11685038,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11685123,
+        "components": "LANE DEPARTURE,BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11680493,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11659102,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11656944,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11652887,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11652447,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11650716,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11650580,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11648668,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11646483,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11646608,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11644882,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11644513,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11644638,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11640734,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11639054,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11638286,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11638121,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11637065,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11634884,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11631637,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11631241,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11629364,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11628969,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11627423,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11626592,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11626140,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11623608,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11622639,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11622654,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11616029,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11611493,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11610324,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11605727,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11604164,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11603843,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11603894,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11601761,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11592566,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11592587,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11585175,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11585016,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11584189,
+        "components": "FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11582620,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11582662,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11582466,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11581013,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11579663,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11579338,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11578862,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11578031,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11577101,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11575365,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11575385,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11574311,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11571695,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11566164,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11560355,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11551898,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11549770,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11548906,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11544817,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11541523,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11525502,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11524541,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11519930,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11518839,
+        "components": "ENGINE"
+      }
+    ]
+  }
+}

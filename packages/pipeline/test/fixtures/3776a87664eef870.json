@@ -1,0 +1,61 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Fiat&model=500&modelYear=2017",
+  "fetchedAt": "2026-07-28T15:13:36.767Z",
+  "body": {
+    "count": 13,
+    "results": [
+      {
+        "odiNumber": 11572652,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11562997,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11562042,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11478045,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11474371,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11440073,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11375410,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11352416,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11342367,
+        "components": "VISIBILITY"
+      },
+      {
+        "odiNumber": 11283047,
+        "components": "STEERING,STRUCTURE,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11102295,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11033845,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11032227,
+        "components": "ENGINE"
+      }
+    ]
+  }
+}

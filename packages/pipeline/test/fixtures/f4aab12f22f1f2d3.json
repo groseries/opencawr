@@ -1,0 +1,377 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Fiat&model=500&modelYear=2015",
+  "fetchedAt": "2026-07-28T15:13:36.691Z",
+  "body": {
+    "count": 92,
+    "results": [
+      {
+        "odiNumber": 11709068,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11683142,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11613343,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11579913,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11569028,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11568727,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11515202,
+        "components": "ELECTRICAL SYSTEM,EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11514562,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11500370,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11492602,
+        "components": "ELECTRICAL SYSTEM,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11488690,
+        "components": "STEERING,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11477315,
+        "components": "SEATS"
+      },
+      {
+        "odiNumber": 11473798,
+        "components": "UNKNOWN OR OTHER,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11445396,
+        "components": "SEATS"
+      },
+      {
+        "odiNumber": 11443742,
+        "components": "LATCHES/LOCKS/LINKAGES"
+      },
+      {
+        "odiNumber": 11441646,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11438712,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11433432,
+        "components": "ELECTRICAL SYSTEM,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11431825,
+        "components": "ELECTRICAL SYSTEM,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11419033,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11418124,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11394973,
+        "components": "ELECTRICAL SYSTEM,VEHICLE SPEED CONTROL,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11384181,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11374373,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11363384,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11342338,
+        "components": "VISIBILITY"
+      },
+      {
+        "odiNumber": 11330188,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11327395,
+        "components": "ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11307609,
+        "components": "STRUCTURE,WHEELS"
+      },
+      {
+        "odiNumber": 11298153,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11297395,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11286827,
+        "components": "SEATS,VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11277185,
+        "components": "STEERING,ELECTRONIC STABILITY CONTROL (ESC),ENGINE"
+      },
+      {
+        "odiNumber": 11268427,
+        "components": "STEERING,SUSPENSION"
+      },
+      {
+        "odiNumber": 11267472,
+        "components": "TIRES"
+      },
+      {
+        "odiNumber": 11254911,
+        "components": "TIRES"
+      },
+      {
+        "odiNumber": 11219851,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11216938,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11207368,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11193125,
+        "components": "POWER TRAIN,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11176112,
+        "components": "ELECTRICAL SYSTEM,EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11169887,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11169998,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11161123,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11145096,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11122608,
+        "components": "ELECTRICAL SYSTEM,VEHICLE SPEED CONTROL,VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11104455,
+        "components": "ELECTRICAL SYSTEM,EXTERIOR LIGHTING,ENGINE"
+      },
+      {
+        "odiNumber": 11099144,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11096929,
+        "components": "ELECTRICAL SYSTEM,SERVICE BRAKES,ENGINE"
+      },
+      {
+        "odiNumber": 11071966,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11051593,
+        "components": "STEERING,POWER TRAIN,ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11044553,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11023341,
+        "components": "STEERING,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11000177,
+        "components": "ELECTRICAL SYSTEM,EXTERIOR LIGHTING,ENGINE"
+      },
+      {
+        "odiNumber": 10994579,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 10991412,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 10986106,
+        "components": "ELECTRICAL SYSTEM,ELECTRONIC STABILITY CONTROL (ESC),ENGINE"
+      },
+      {
+        "odiNumber": 10983644,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 10983762,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 10979585,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 10970325,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 10966451,
+        "components": "SEATS"
+      },
+      {
+        "odiNumber": 10958404,
+        "components": "ELECTRICAL SYSTEM,VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 10949653,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 10939282,
+        "components": "EQUIPMENT"
+      },
+      {
+        "odiNumber": 10935632,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 10927668,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 10917537,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 10916149,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 10913996,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 10909936,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 10908619,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 10904825,
+        "components": "ELECTRICAL SYSTEM,VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 10904537,
+        "components": "SUSPENSION"
+      },
+      {
+        "odiNumber": 10903788,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 10903294,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 10899190,
+        "components": "VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 10898685,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 10895430,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 10894163,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 10888450,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 10885542,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 10882560,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 10864621,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 10845553,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 10821308,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 10788410,
+        "components": "ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 10759232,
+        "components": "SUSPENSION,STRUCTURE,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 10745170,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 10726162,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 10725059,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER,EQUIPMENT ADAPTIVE/MOBILITY"
+      },
+      {
+        "odiNumber": 10723210,
+        "components": "ELECTRICAL SYSTEM"
+      }
+    ]
+  }
+}

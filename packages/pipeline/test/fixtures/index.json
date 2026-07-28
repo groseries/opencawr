@@ -178,5 +178,155 @@
     "hash": "497aec3fb9782c0c",
     "url": "https://www.fueleconomy.gov/ws/rest/vehicle/43244",
     "note": "EPA vehicle detail: VW GTI 2021 (peer size-tier lookup)"
+  },
+  {
+    "hash": "8a6940259fa77054",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Toyota&model=Corolla&modelYear=2018",
+    "note": "NHTSA complaintsByVehicle: Toyota Corolla 2018 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "747399f236e74b13",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Toyota&model=Corolla&modelYear=2021",
+    "note": "NHTSA complaintsByVehicle: Toyota Corolla 2021 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "0dbb35ca2fca27a0",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Toyota&model=Corolla&modelYear=2019",
+    "note": "NHTSA complaintsByVehicle: Toyota Corolla 2019 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "1b5ff20af0d30351",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Toyota&model=Corolla&modelYear=2022",
+    "note": "NHTSA complaintsByVehicle: Toyota Corolla 2022 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "3d8a5d0b89f4f244",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Toyota&model=Corolla&modelYear=2020",
+    "note": "NHTSA complaintsByVehicle: Toyota Corolla 2020 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "fe2f4aec8c70c482",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Mazda&model=CX-5&modelYear=2018",
+    "note": "NHTSA complaintsByVehicle: Mazda CX-5 2018 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "c282749f753a878d",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Mazda&model=CX-5&modelYear=2020",
+    "note": "NHTSA complaintsByVehicle: Mazda CX-5 2020 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "1c8e89462e283f55",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Mazda&model=CX-5&modelYear=2019",
+    "note": "NHTSA complaintsByVehicle: Mazda CX-5 2019 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "361ab5afd124cc77",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Mazda&model=CX-5&modelYear=2021",
+    "note": "NHTSA complaintsByVehicle: Mazda CX-5 2021 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "2d6a93ff593a64b0",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Mazda&model=CX-5&modelYear=2022",
+    "note": "NHTSA complaintsByVehicle: Mazda CX-5 2022 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "a192ce01709256f7",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Kia&model=Sorento&modelYear=2018",
+    "note": "NHTSA complaintsByVehicle: Kia Sorento 2018 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "fd27769c2f922eaf",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Kia&model=Sorento&modelYear=2020",
+    "note": "NHTSA complaintsByVehicle: Kia Sorento 2020 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "b2daaf4accb46372",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Kia&model=Sorento&modelYear=2021",
+    "note": "NHTSA complaintsByVehicle: Kia Sorento 2021 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "97cdd996f554083e",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Kia&model=Sorento&modelYear=2022",
+    "note": "NHTSA complaintsByVehicle: Kia Sorento 2022 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "923c3b1e1f5f99b6",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Kia&model=Sorento&modelYear=2019",
+    "note": "NHTSA complaintsByVehicle: Kia Sorento 2019 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "67ac92e170f3205b",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Ford&model=Escape&modelYear=2018",
+    "note": "NHTSA complaintsByVehicle: Ford Escape 2018 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "3c9576c830cb2382",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Ford&model=Escape&modelYear=2019",
+    "note": "NHTSA complaintsByVehicle: Ford Escape 2019 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "5a8c11be4f49e364",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Ford&model=Escape&modelYear=2021",
+    "note": "NHTSA complaintsByVehicle: Ford Escape 2021 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "046e6462b20b61e3",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Ford&model=Escape&modelYear=2020",
+    "note": "NHTSA complaintsByVehicle: Ford Escape 2020 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "279d019289eb5216",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Ford&model=Escape&modelYear=2022",
+    "note": "NHTSA complaintsByVehicle: Ford Escape 2022 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "8c116dd18c21c1bd",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Honda&model=Odyssey&modelYear=2018",
+    "note": "NHTSA complaintsByVehicle: Honda Odyssey 2018 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "948fb27c1cbe20d0",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Honda&model=Odyssey&modelYear=2019",
+    "note": "NHTSA complaintsByVehicle: Honda Odyssey 2019 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "ef0f7ef1b9ef6e7d",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Honda&model=Odyssey&modelYear=2020",
+    "note": "NHTSA complaintsByVehicle: Honda Odyssey 2020 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "c35aba0024c34b7d",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Honda&model=Odyssey&modelYear=2021",
+    "note": "NHTSA complaintsByVehicle: Honda Odyssey 2021 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "e4369992971903fa",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Honda&model=Odyssey&modelYear=2022",
+    "note": "NHTSA complaintsByVehicle: Honda Odyssey 2022 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "f4aab12f22f1f2d3",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Fiat&model=500&modelYear=2015",
+    "note": "NHTSA complaintsByVehicle: Fiat 500 2015 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "f237cc0f9456b796",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Fiat&model=500&modelYear=2016",
+    "note": "NHTSA complaintsByVehicle: Fiat 500 2016 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "3776a87664eef870",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Fiat&model=500&modelYear=2017",
+    "note": "NHTSA complaintsByVehicle: Fiat 500 2017 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "a6438942bf4ac9df",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Fiat&model=500&modelYear=2018",
+    "note": "NHTSA complaintsByVehicle: Fiat 500 2018 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "a232b0ca81a3ae08",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Fiat&model=500&modelYear=2019",
+    "note": "NHTSA complaintsByVehicle: Fiat 500 2019 (reliability re-derivation, trimmed to odiNumber+components)"
   }
 ]

@@ -1,134 +1,176 @@
 {
   "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Honda&model=Fit&modelYear=2017",
-  "fetchedAt": "2026-07-28T14:52:36.715Z",
+  "fetchedAt": "2026-07-28T15:13:32.666Z",
   "body": {
     "count": 42,
     "results": [
       {
-        "odiNumber": 11699810
+        "odiNumber": 11699810,
+        "components": "FUEL SYSTEM, GASOLINE,ENGINE"
       },
       {
-        "odiNumber": 11686890
+        "odiNumber": 11686890,
+        "components": "ENGINE"
       },
       {
-        "odiNumber": 11686891
+        "odiNumber": 11686891,
+        "components": "ELECTRICAL SYSTEM"
       },
       {
-        "odiNumber": 11686893
+        "odiNumber": 11686893,
+        "components": "VISIBILITY/WIPER"
       },
       {
-        "odiNumber": 11664615
+        "odiNumber": 11664615,
+        "components": "STRUCTURE,UNKNOWN OR OTHER"
       },
       {
-        "odiNumber": 11634959
+        "odiNumber": 11634959,
+        "components": "STRUCTURE"
       },
       {
-        "odiNumber": 11631079
+        "odiNumber": 11631079,
+        "components": "ELECTRICAL SYSTEM"
       },
       {
-        "odiNumber": 11629134
+        "odiNumber": 11629134,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
       },
       {
-        "odiNumber": 11620651
+        "odiNumber": 11620651,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
       },
       {
-        "odiNumber": 11619550
+        "odiNumber": 11619550,
+        "components": "FUEL/PROPULSION SYSTEM"
       },
       {
-        "odiNumber": 11602356
+        "odiNumber": 11602356,
+        "components": "WHEELS,ENGINE,FUEL/PROPULSION SYSTEM"
       },
       {
-        "odiNumber": 11557499
+        "odiNumber": 11557499,
+        "components": "ELECTRICAL SYSTEM"
       },
       {
-        "odiNumber": 11553238
+        "odiNumber": 11553238,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER,FUEL/PROPULSION SYSTEM"
       },
       {
-        "odiNumber": 11539956
+        "odiNumber": 11539956,
+        "components": "ENGINE"
       },
       {
-        "odiNumber": 11526780
+        "odiNumber": 11526780,
+        "components": "ELECTRICAL SYSTEM"
       },
       {
-        "odiNumber": 11523184
+        "odiNumber": 11523184,
+        "components": "STEERING"
       },
       {
-        "odiNumber": 11521173
+        "odiNumber": 11521173,
+        "components": "STRUCTURE"
       },
       {
-        "odiNumber": 11518951
+        "odiNumber": 11518951,
+        "components": "POWER TRAIN"
       },
       {
-        "odiNumber": 11511253
+        "odiNumber": 11511253,
+        "components": "POWER TRAIN,ENGINE,FUEL/PROPULSION SYSTEM"
       },
       {
-        "odiNumber": 11508216
+        "odiNumber": 11508216,
+        "components": "UNKNOWN OR OTHER,FUEL/PROPULSION SYSTEM"
       },
       {
-        "odiNumber": 11507525
+        "odiNumber": 11507525,
+        "components": "ENGINE"
       },
       {
-        "odiNumber": 11507024
+        "odiNumber": 11507024,
+        "components": "FUEL/PROPULSION SYSTEM"
       },
       {
-        "odiNumber": 11501905
+        "odiNumber": 11501905,
+        "components": "UNKNOWN OR OTHER"
       },
       {
-        "odiNumber": 11496652
+        "odiNumber": 11496652,
+        "components": "ELECTRICAL SYSTEM"
       },
       {
-        "odiNumber": 11461406
+        "odiNumber": 11461406,
+        "components": "FUEL/PROPULSION SYSTEM"
       },
       {
-        "odiNumber": 11455247
+        "odiNumber": 11455247,
+        "components": "FUEL/PROPULSION SYSTEM"
       },
       {
-        "odiNumber": 11454229
+        "odiNumber": 11454229,
+        "components": "ELECTRICAL SYSTEM"
       },
       {
-        "odiNumber": 11444652
+        "odiNumber": 11444652,
+        "components": "POWER TRAIN,ENGINE"
       },
       {
-        "odiNumber": 11441182
+        "odiNumber": 11441182,
+        "components": "SUSPENSION"
       },
       {
-        "odiNumber": 11431811
+        "odiNumber": 11431811,
+        "components": "ENGINE"
       },
       {
-        "odiNumber": 11414066
+        "odiNumber": 11414066,
+        "components": "ELECTRICAL SYSTEM"
       },
       {
-        "odiNumber": 11404133
+        "odiNumber": 11404133,
+        "components": "ELECTRICAL SYSTEM"
       },
       {
-        "odiNumber": 11383552
+        "odiNumber": 11383552,
+        "components": "STRUCTURE,UNKNOWN OR OTHER"
       },
       {
-        "odiNumber": 11366458
+        "odiNumber": 11366458,
+        "components": "SUSPENSION,POWER TRAIN,ENGINE"
       },
       {
-        "odiNumber": 11350236
+        "odiNumber": 11350236,
+        "components": "UNKNOWN OR OTHER"
       },
       {
-        "odiNumber": 11316428
+        "odiNumber": 11316428,
+        "components": "VEHICLE SPEED CONTROL"
       },
       {
-        "odiNumber": 11128836
+        "odiNumber": 11128836,
+        "components": "SEATS"
       },
       {
-        "odiNumber": 11100743
+        "odiNumber": 11100743,
+        "components": "WHEELS"
       },
       {
-        "odiNumber": 11097965
+        "odiNumber": 11097965,
+        "components": "STRUCTURE"
       },
       {
-        "odiNumber": 11073971
+        "odiNumber": 11073971,
+        "components": "ELECTRICAL SYSTEM,WHEELS,FUEL/PROPULSION SYSTEM"
       },
       {
-        "odiNumber": 11054370
+        "odiNumber": 11054370,
+        "components": "ELECTRICAL SYSTEM"
       },
       {
-        "odiNumber": 11048538
+        "odiNumber": 11048538,
+        "components": "STRUCTURE"
       }
     ]
   }

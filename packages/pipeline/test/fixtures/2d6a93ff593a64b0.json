@@ -1,0 +1,257 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Mazda&model=CX-5&modelYear=2022",
+  "fetchedAt": "2026-07-28T15:13:35.774Z",
+  "body": {
+    "count": 62,
+    "results": [
+      {
+        "odiNumber": 11745931,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11741454,
+        "components": "EXTERIOR LIGHTING,VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11738237,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11736447,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11734094,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11734137,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11732328,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11731048,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11730863,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11729619,
+        "components": "EXTERIOR LIGHTING,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11724163,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11722983,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11716269,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11713167,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11713034,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11712543,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11711544,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11709508,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11706338,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11703343,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11689767,
+        "components": "TIRES"
+      },
+      {
+        "odiNumber": 11686371,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11683090,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11681430,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11674703,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11670109,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11669063,
+        "components": "ELECTRICAL SYSTEM,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11665116,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11646201,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11646392,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11636916,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11634713,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11632414,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11632225,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11631940,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11630840,
+        "components": "AIR BAGS,LANE DEPARTURE,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11627600,
+        "components": "FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11625608,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11622246,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11583290,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11581390,
+        "components": "FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11570622,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11568648,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11565525,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11560007,
+        "components": "ELECTRICAL SYSTEM,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11552935,
+        "components": "ELECTRICAL SYSTEM,VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11511443,
+        "components": "STRUCTURE,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11508492,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11508447,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11507629,
+        "components": "VISIBILITY"
+      },
+      {
+        "odiNumber": 11505349,
+        "components": "STEERING,POWER TRAIN"
+      },
+      {
+        "odiNumber": 11501356,
+        "components": "VEHICLE SPEED CONTROL,ENGINE"
+      },
+      {
+        "odiNumber": 11500843,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11498637,
+        "components": "FUEL SYSTEM, GASOLINE,ENGINE"
+      },
+      {
+        "odiNumber": 11486319,
+        "components": "VEHICLE SPEED CONTROL,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11481769,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11479596,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11477049,
+        "components": "TIRES"
+      },
+      {
+        "odiNumber": 11475980,
+        "components": "ELECTRICAL SYSTEM,STRUCTURE,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11472866,
+        "components": "FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11460429,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11453165,
+        "components": "STRUCTURE"
+      }
+    ]
+  }
+}

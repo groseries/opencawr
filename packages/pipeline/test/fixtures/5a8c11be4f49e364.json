@@ -1,0 +1,1317 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Ford&model=Escape&modelYear=2021",
+  "fetchedAt": "2026-07-28T15:13:36.222Z",
+  "body": {
+    "count": 327,
+    "results": [
+      {
+        "odiNumber": 11752308,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11751782,
+        "components": "POWER TRAIN,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11750142,
+        "components": "ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11749333,
+        "components": "VISIBILITY,SEAT BELTS,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11748977,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11748809,
+        "components": "FUEL SYSTEM, GASOLINE,VISIBILITY"
+      },
+      {
+        "odiNumber": 11748373,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11747600,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11747792,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11747555,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11747564,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11745094,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11744407,
+        "components": "VISIBILITY"
+      },
+      {
+        "odiNumber": 11744419,
+        "components": "FUEL SYSTEM, GASOLINE,VISIBILITY,BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11743907,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11743812,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11743814,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11743440,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11743400,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11743518,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11743124,
+        "components": "ELECTRICAL SYSTEM,STRUCTURE,ENGINE"
+      },
+      {
+        "odiNumber": 11742537,
+        "components": "VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11742616,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11741312,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER,VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11741381,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11740898,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11740341,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11739999,
+        "components": "FUEL SYSTEM, GASOLINE,VISIBILITY,BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11740061,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11739303,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11738241,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11738184,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM,VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11737353,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11736802,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11736386,
+        "components": "ELECTRICAL SYSTEM,VISIBILITY,BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11736409,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11736055,
+        "components": "FUEL SYSTEM, GASOLINE,POWER TRAIN,STRUCTURE"
+      },
+      {
+        "odiNumber": 11736082,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11735408,
+        "components": "ELECTRICAL SYSTEM,SERVICE BRAKES,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11734480,
+        "components": "ELECTRICAL SYSTEM,EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11733340,
+        "components": "FUEL SYSTEM, GASOLINE,VISIBILITY,BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11733357,
+        "components": "ELECTRICAL SYSTEM,STRUCTURE,BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11732959,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11733131,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11731164,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11730840,
+        "components": "FUEL SYSTEM, GASOLINE,VISIBILITY,BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11730523,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11729646,
+        "components": "VISIBILITY,STRUCTURE,BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11729688,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11729764,
+        "components": "VISIBILITY,BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11729491,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11729534,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11729141,
+        "components": "UNKNOWN OR OTHER,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11729031,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11728089,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11726928,
+        "components": "FUEL SYSTEM, GASOLINE,VISIBILITY,BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11724262,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11722845,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11722403,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM,VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11722226,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11721608,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11721610,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11721622,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11721677,
+        "components": "STRUCTURE,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11721605,
+        "components": "ELECTRICAL SYSTEM,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11719860,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11719932,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11718073,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11717958,
+        "components": "POWER TRAIN,ENGINE,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11716152,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11715274,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11714953,
+        "components": "POWER TRAIN,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11713409,
+        "components": "FUEL SYSTEM, GASOLINE,STRUCTURE"
+      },
+      {
+        "odiNumber": 11712688,
+        "components": "FUEL SYSTEM, GASOLINE,STRUCTURE"
+      },
+      {
+        "odiNumber": 11712807,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11712523,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11711675,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11711557,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11709657,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11709225,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11707609,
+        "components": "FUEL SYSTEM, GASOLINE,POWER TRAIN"
+      },
+      {
+        "odiNumber": 11707093,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11707108,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11705513,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11702443,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11702261,
+        "components": "FUEL SYSTEM, GASOLINE,ENGINE,PARKING BRAKE"
+      },
+      {
+        "odiNumber": 11702295,
+        "components": "SUSPENSION"
+      },
+      {
+        "odiNumber": 11699803,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11699688,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11698706,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11698748,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11698818,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11697350,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11696274,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11695555,
+        "components": "VEHICLE SPEED CONTROL,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11694264,
+        "components": "POWER TRAIN,UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11694149,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11692351,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11691779,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11691801,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11691588,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11687894,
+        "components": "FUEL SYSTEM, GASOLINE,POWER TRAIN"
+      },
+      {
+        "odiNumber": 11688012,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11687377,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11687406,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11686860,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11686480,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11685799,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11685423,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11681444,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11679885,
+        "components": "EXTERIOR LIGHTING,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11678686,
+        "components": "VISIBILITY"
+      },
+      {
+        "odiNumber": 11678703,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11678796,
+        "components": "BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11676268,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11675451,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11674471,
+        "components": "SERVICE BRAKES, HYDRAULIC"
+      },
+      {
+        "odiNumber": 11672736,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11672258,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11671415,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11668665,
+        "components": "FUEL SYSTEM, GASOLINE,ENGINE"
+      },
+      {
+        "odiNumber": 11667255,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11666929,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11663746,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11661786,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11657518,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11657127,
+        "components": "ELECTRICAL SYSTEM,ENGINE,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11657336,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11654797,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11654063,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11653873,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11653968,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11652947,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11651237,
+        "components": "ENGINE AND ENGINE COOLING,SEAT BELTS,STRUCTURE"
+      },
+      {
+        "odiNumber": 11651219,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11650882,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11648095,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11647794,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11645889,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11643209,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11642758,
+        "components": "STRUCTURE,LATCHES/LOCKS/LINKAGES"
+      },
+      {
+        "odiNumber": 11641410,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11641126,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER,VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11640023,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11638578,
+        "components": "POWER TRAIN,VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11638579,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11637729,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11636433,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11634055,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11633664,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11633170,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11632914,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11632523,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11631796,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11631320,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11627536,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11626037,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11624727,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11623326,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11621350,
+        "components": "ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11620311,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11620073,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11618069,
+        "components": "SUSPENSION"
+      },
+      {
+        "odiNumber": 11617840,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11617172,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11615139,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11614725,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11612832,
+        "components": "EXTERIOR LIGHTING,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11612476,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11612494,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11610817,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11610301,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11606368,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11605877,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11603686,
+        "components": "VISIBILITY"
+      },
+      {
+        "odiNumber": 11597590,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11592934,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11592027,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11591851,
+        "components": "STRUCTURE,UNKNOWN OR OTHER,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11589065,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11587006,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11586493,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11586555,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11585632,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11585067,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11584241,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11583581,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11583337,
+        "components": "STEERING,STRUCTURE,ENGINE"
+      },
+      {
+        "odiNumber": 11581880,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11577252,
+        "components": "UNKNOWN OR OTHER,ENGINE,POWER TRAIN"
+      },
+      {
+        "odiNumber": 11576535,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11575539,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11574572,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11574582,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11574185,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11573545,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11573668,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11573347,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11572009,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11571090,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11570315,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11569098,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11567441,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11564983,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11564725,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11563447,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11562555,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11562201,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11560348,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11559864,
+        "components": "STRUCTURE,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11558686,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11558872,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11558474,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11557383,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11557390,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11556766,
+        "components": "POWER TRAIN,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11556616,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11556697,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11555072,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11554055,
+        "components": "UNKNOWN OR OTHER,STRUCTURE"
+      },
+      {
+        "odiNumber": 11553493,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11552970,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11552617,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11552244,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11551316,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11551360,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11550686,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11550694,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11550695,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11550303,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11550050,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11549385,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11549254,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11548460,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11548050,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11547412,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11545575,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11543584,
+        "components": "STEERING,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11542642,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11542775,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11542300,
+        "components": "STRUCTURE,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11541569,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11541467,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11541206,
+        "components": "ELECTRICAL SYSTEM,STRUCTURE"
+      },
+      {
+        "odiNumber": 11540030,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11539839,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11538671,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11537482,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11536119,
+        "components": "VISIBILITY"
+      },
+      {
+        "odiNumber": 11535369,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11533002,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11532547,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11531373,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11527147,
+        "components": "POWER TRAIN,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11526679,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11526216,
+        "components": "SUSPENSION"
+      },
+      {
+        "odiNumber": 11525510,
+        "components": "UNKNOWN OR OTHER,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11522699,
+        "components": "STRUCTURE,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11522472,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11521500,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11521526,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11521531,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11520630,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11518990,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11518630,
+        "components": "SUSPENSION"
+      },
+      {
+        "odiNumber": 11517458,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11516340,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11515688,
+        "components": "SUSPENSION,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11515435,
+        "components": "SERVICE BRAKES, HYDRAULIC,FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11514426,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11514296,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11513555,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11513590,
+        "components": "STEERING,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11511713,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11511757,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11511520,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11510939,
+        "components": "SERVICE BRAKES, HYDRAULIC"
+      },
+      {
+        "odiNumber": 11510702,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11510403,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11509526,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11507062,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11505878,
+        "components": "SERVICE BRAKES, HYDRAULIC"
+      },
+      {
+        "odiNumber": 11503117,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11501656,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11500718,
+        "components": "SERVICE BRAKES,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11499495,
+        "components": "SERVICE BRAKES,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11493627,
+        "components": "SERVICE BRAKES, HYDRAULIC,ELECTRICAL SYSTEM,AIR BAGS"
+      },
+      {
+        "odiNumber": 11490144,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11486611,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11486402,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11484564,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11484410,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11480882,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11477061,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11477062,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11474315,
+        "components": "UNKNOWN OR OTHER,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11472992,
+        "components": "ELECTRICAL SYSTEM,LANE DEPARTURE,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11472351,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11471952,
+        "components": "SERVICE BRAKES, HYDRAULIC"
+      },
+      {
+        "odiNumber": 11468586,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11468258,
+        "components": "SERVICE BRAKES, HYDRAULIC"
+      },
+      {
+        "odiNumber": 11468345,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11467865,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11463719,
+        "components": "ELECTRICAL SYSTEM,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11462556,
+        "components": "SERVICE BRAKES,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11462331,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11458183,
+        "components": "BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11454276,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11453173,
+        "components": "UNKNOWN OR OTHER,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11453130,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11452416,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11452039,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11452046,
+        "components": "SUSPENSION,WHEELS"
+      },
+      {
+        "odiNumber": 11449028,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11448644,
+        "components": "ELECTRICAL SYSTEM,SEAT BELTS"
+      },
+      {
+        "odiNumber": 11447853,
+        "components": "SERVICE BRAKES, HYDRAULIC"
+      },
+      {
+        "odiNumber": 11447432,
+        "components": "SERVICE BRAKES,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11447232,
+        "components": "UNKNOWN OR OTHER,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11446873,
+        "components": "SERVICE BRAKES, HYDRAULIC"
+      },
+      {
+        "odiNumber": 11445205,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11444169,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11442905,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11440888,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11439473,
+        "components": "VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11426742,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11425732,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11425426,
+        "components": "ENGINE"
+      }
+    ]
+  }
+}

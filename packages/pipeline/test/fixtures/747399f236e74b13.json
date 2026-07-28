@@ -1,0 +1,745 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Toyota&model=Corolla&modelYear=2021",
+  "fetchedAt": "2026-07-28T15:13:35.584Z",
+  "body": {
+    "count": 184,
+    "results": [
+      {
+        "odiNumber": 11751893,
+        "components": "ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11751945,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11748179,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11744107,
+        "components": "TIRES"
+      },
+      {
+        "odiNumber": 11742375,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11742377,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11741728,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11740462,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11740187,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11738457,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11738354,
+        "components": "ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11735354,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11734636,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11734684,
+        "components": "STRUCTURE,VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11733617,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11728738,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11726859,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11725939,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11722293,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11721094,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11720596,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11720322,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11719280,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11718784,
+        "components": "SERVICE BRAKES, HYDRAULIC"
+      },
+      {
+        "odiNumber": 11716135,
+        "components": "POWER TRAIN,UNKNOWN OR OTHER,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11714376,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11712005,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11709131,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11707212,
+        "components": "ELECTRICAL SYSTEM,AIR BAGS,SEATS"
+      },
+      {
+        "odiNumber": 11702545,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11701874,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11697834,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11697626,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11696809,
+        "components": "TIRES"
+      },
+      {
+        "odiNumber": 11695133,
+        "components": "STEERING,ELECTRICAL SYSTEM,VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11690829,
+        "components": "AIR BAGS,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11689005,
+        "components": "STEERING,ENGINE"
+      },
+      {
+        "odiNumber": 11687929,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11685922,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11685798,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11680012,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11680037,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11678966,
+        "components": "ELECTRICAL SYSTEM,AIR BAGS,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11678370,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11678372,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11677634,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11675236,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11675289,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11674675,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11674007,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11673428,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11669291,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11668774,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11667623,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11667578,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11666553,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11665823,
+        "components": "AIR BAGS,SEATS"
+      },
+      {
+        "odiNumber": 11663721,
+        "components": "TIRES"
+      },
+      {
+        "odiNumber": 11663283,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11662260,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11662141,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11661125,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11659686,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11658539,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11657048,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11656802,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11655573,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11652392,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11650099,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11647507,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11646629,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11645711,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11645186,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11643368,
+        "components": "AIR BAGS,SEAT BELTS"
+      },
+      {
+        "odiNumber": 11642825,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11641563,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11641337,
+        "components": "ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11640357,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11640064,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11639401,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11637560,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11636043,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11633675,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11633202,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11632814,
+        "components": "AIR BAGS,SEATS"
+      },
+      {
+        "odiNumber": 11631735,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11629864,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11629704,
+        "components": "EXTERIOR LIGHTING,VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11626587,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11626361,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11624945,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11624084,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11622675,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11622725,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11622013,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11620130,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11620218,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11619295,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11614341,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11614017,
+        "components": "UNKNOWN OR OTHER,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11612604,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11612183,
+        "components": "UNKNOWN OR OTHER,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11611760,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11607811,
+        "components": "SUSPENSION,STRUCTURE,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11607116,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11607147,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11606423,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11605558,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11605698,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11605370,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11604827,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11603573,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11603205,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11601294,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11597924,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11597728,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11596527,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11596615,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11594471,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11591354,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11590309,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11590475,
+        "components": "VEHICLE SPEED CONTROL,VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11589830,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11588180,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11586404,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11585068,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11581838,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11581154,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11580317,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11579889,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11579691,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11574862,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11569324,
+        "components": "UNKNOWN OR OTHER,VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11568809,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM,SEAT BELTS"
+      },
+      {
+        "odiNumber": 11564802,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11557458,
+        "components": "ELECTRICAL SYSTEM,EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11557461,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11556067,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11549992,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11549845,
+        "components": "TIRES"
+      },
+      {
+        "odiNumber": 11544433,
+        "components": "ELECTRICAL SYSTEM,EXTERIOR LIGHTING,WHEELS"
+      },
+      {
+        "odiNumber": 11540850,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11531363,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11521142,
+        "components": "AIR BAGS,SEAT BELTS"
+      },
+      {
+        "odiNumber": 11507148,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11503491,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11502288,
+        "components": "STEERING,AIR BAGS,SEATS"
+      },
+      {
+        "odiNumber": 11498697,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11498348,
+        "components": "LANE DEPARTURE,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11496560,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11491250,
+        "components": "ELECTRICAL SYSTEM,LANE DEPARTURE,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11488549,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11488383,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11483604,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11482233,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11480914,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11480884,
+        "components": "WHEELS,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11473590,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11470679,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11466934,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11462961,
+        "components": "VEHICLE SPEED CONTROL,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11461617,
+        "components": "SERVICE BRAKES,PARKING BRAKE"
+      },
+      {
+        "odiNumber": 11451068,
+        "components": "AIR BAGS,SEAT BELTS"
+      },
+      {
+        "odiNumber": 11448525,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11445594,
+        "components": "EXTERIOR LIGHTING,VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11445388,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11441723,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11439671,
+        "components": "VEHICLE SPEED CONTROL,ENGINE,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11439333,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11438081,
+        "components": "TIRES"
+      },
+      {
+        "odiNumber": 11435034,
+        "components": "ELECTRICAL SYSTEM,ENGINE,LANE DEPARTURE"
+      },
+      {
+        "odiNumber": 11434904,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11434393,
+        "components": "VEHICLE SPEED CONTROL,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11433453,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11427097,
+        "components": "STEERING,SUSPENSION,STRUCTURE"
+      },
+      {
+        "odiNumber": 11420971,
+        "components": "AIR BAGS,VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11420257,
+        "components": "PARKING BRAKE,EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11418732,
+        "components": "PARKING BRAKE"
+      },
+      {
+        "odiNumber": 11405132,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11399776,
+        "components": "ELECTRICAL SYSTEM,ENGINE,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11398566,
+        "components": "SUSPENSION"
+      },
+      {
+        "odiNumber": 11396391,
+        "components": "WHEELS,UNKNOWN OR OTHER,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11394569,
+        "components": "STEERING,VEHICLE SPEED CONTROL,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11360341,
+        "components": "EXTERIOR LIGHTING"
+      }
+    ]
+  }
+}

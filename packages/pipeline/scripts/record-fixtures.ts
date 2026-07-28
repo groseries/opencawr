@@ -50,8 +50,11 @@ function modelsForMakeUrl(make: string): string {
 }
 
 function trimComplaints(body: unknown): unknown {
-  const b = body as { count: number; results?: { odiNumber: number }[] };
-  return { count: b.count, results: (b.results ?? []).map((r) => ({ odiNumber: r.odiNumber })) };
+  const b = body as { count: number; results?: { odiNumber: number; components?: string }[] };
+  return {
+    count: b.count,
+    results: (b.results ?? []).map((r) => ({ odiNumber: r.odiNumber, components: r.components ?? "" })),
+  };
 }
 
 async function main(): Promise<void> {
@@ -115,6 +118,48 @@ async function main(): Promise<void> {
   for (const [id, label] of peerDetailIds) {
     await record(detailUrl(id), `EPA vehicle detail: ${label} (peer size-tier lookup)`);
   }
+
+  // --- Task D: reliability re-derivation, 6 seed models spanning tiers
+  // (Corolla/CX-5 = low, Odyssey/Sorento = mid, Escape/Fiat 500 = high).
+  // NHTSA's complaints API is slow (10-30s/request); fetch this batch
+  // concurrently instead of record()'s usual sequential await.
+  const reliabilityModels: Array<[string, string, number[]]> = [
+    ["Toyota", "Corolla", [2018, 2019, 2020, 2021, 2022]],
+    ["Mazda", "CX-5", [2018, 2019, 2020, 2021, 2022]],
+    ["Kia", "Sorento", [2018, 2019, 2020, 2021, 2022]],
+    ["Ford", "Escape", [2018, 2019, 2020, 2021, 2022]],
+    ["Honda", "Odyssey", [2018, 2019, 2020, 2021, 2022]],
+    ["Fiat", "500", [2015, 2016, 2017, 2018, 2019]], // discontinued after MY2019
+  ];
+  const reliabilityJobs: Array<() => Promise<void>> = [];
+  for (const [make, model, years] of reliabilityModels) {
+    for (const year of years) {
+      reliabilityJobs.push(async () => {
+        const url = complaintsUrl(make, model, year);
+        const note = `NHTSA complaintsByVehicle: ${make} ${model} ${year} (reliability re-derivation, trimmed to odiNumber+components)`;
+        for (let attempt = 1; ; attempt++) {
+          try {
+            await record(url, note, trimComplaints);
+            return;
+          } catch (err) {
+            if (attempt >= 4) throw err;
+            console.error(`retrying (${attempt}/3) after: ${err instanceof Error ? err.message : err}`);
+          }
+        }
+      });
+    }
+  }
+  // NHTSA's complaints API 504s under high concurrency; run a small pool instead of all-at-once.
+  const CONCURRENCY = 3;
+  let cursor = 0;
+  await Promise.all(
+    Array.from({ length: CONCURRENCY }, async () => {
+      while (cursor < reliabilityJobs.length) {
+        const job = reliabilityJobs[cursor++]!;
+        await job();
+      }
+    }),
+  );
 
   writeFileSync(join(FIXTURE_DIR, "index.json"), JSON.stringify(index, null, 2));
   console.log(`\nWrote ${index.length} fixtures + index.json to ${FIXTURE_DIR}`);
