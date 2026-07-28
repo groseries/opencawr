@@ -1,0 +1,8 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Kia&model=Sorento&modelYear=2021",
+  "fetchedAt": "2026-07-28T15:13:35.952Z",
+  "body": {
+    "count": 0,
+    "results": []
+  }
+}

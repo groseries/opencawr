@@ -1,0 +1,541 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Toyota&model=Corolla&modelYear=2018",
+  "fetchedAt": "2026-07-28T15:13:35.458Z",
+  "body": {
+    "count": 133,
+    "results": [
+      {
+        "odiNumber": 11741358,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11734961,
+        "components": "SEAT BELTS,SEATS"
+      },
+      {
+        "odiNumber": 11723306,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11717239,
+        "components": "SUSPENSION,POWER TRAIN,VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11709551,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11694365,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11694221,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11682844,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11669267,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11660381,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11653942,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11627042,
+        "components": "TIRES"
+      },
+      {
+        "odiNumber": 11618292,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11613928,
+        "components": "FUEL SYSTEM, GASOLINE,ENGINE"
+      },
+      {
+        "odiNumber": 11611740,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11589473,
+        "components": "STEERING,AIR BAGS"
+      },
+      {
+        "odiNumber": 11577085,
+        "components": "ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11574887,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11557369,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11556024,
+        "components": "SUSPENSION"
+      },
+      {
+        "odiNumber": 11554139,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11545054,
+        "components": "AIR BAGS,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11545056,
+        "components": "Carry Handle, Shell, Base"
+      },
+      {
+        "odiNumber": 11525302,
+        "components": "POWER TRAIN,UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11524338,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11524012,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11523472,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11520548,
+        "components": "ELECTRICAL SYSTEM,SERVICE BRAKES,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11520329,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11506630,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11496639,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11494055,
+        "components": "SUSPENSION"
+      },
+      {
+        "odiNumber": 11490000,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11488347,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11471216,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11471202,
+        "components": "SEATS"
+      },
+      {
+        "odiNumber": 11467754,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11465793,
+        "components": "STEERING,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11464670,
+        "components": "STEERING,SUSPENSION"
+      },
+      {
+        "odiNumber": 11454705,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11450905,
+        "components": "POWER TRAIN,FUEL/PROPULSION SYSTEM,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11446498,
+        "components": "ELECTRICAL SYSTEM,FUEL/PROPULSION SYSTEM,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11445768,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11443984,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11434967,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11431254,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11423130,
+        "components": "SEATS"
+      },
+      {
+        "odiNumber": 11398510,
+        "components": "AIR BAGS,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11394237,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11376278,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11375105,
+        "components": "ELECTRICAL SYSTEM,AIR BAGS,SEAT BELTS"
+      },
+      {
+        "odiNumber": 11373682,
+        "components": "POWER TRAIN,STRUCTURE,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11361815,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11365477,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11362628,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11362185,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11353698,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11351018,
+        "components": "FUEL SYSTEM, GASOLINE,AIR BAGS"
+      },
+      {
+        "odiNumber": 11350497,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11350297,
+        "components": "BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11349042,
+        "components": "AIR BAGS,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11344299,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11343995,
+        "components": "SUSPENSION,UNKNOWN OR OTHER,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11339892,
+        "components": "VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11338984,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11329816,
+        "components": "AIR BAGS,SEAT BELTS,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11329410,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11328971,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11328977,
+        "components": "AIR BAGS,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11327961,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11327125,
+        "components": "FUEL SYSTEM, GASOLINE,ENGINE"
+      },
+      {
+        "odiNumber": 11326502,
+        "components": "ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11325470,
+        "components": "UNKNOWN OR OTHER,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11325024,
+        "components": "FUEL SYSTEM, GASOLINE,AIR BAGS"
+      },
+      {
+        "odiNumber": 11323764,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11322815,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11322045,
+        "components": "AIR BAGS,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11321289,
+        "components": "AIR BAGS,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11321075,
+        "components": "AIR BAGS,SEAT BELTS"
+      },
+      {
+        "odiNumber": 11320306,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11320318,
+        "components": "AIR BAGS,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11320062,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11319171,
+        "components": "AIR BAGS,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11318224,
+        "components": "AIR BAGS,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11318082,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11317494,
+        "components": "POWER TRAIN,SEAT BELTS"
+      },
+      {
+        "odiNumber": 11316317,
+        "components": "AIR BAGS,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11315662,
+        "components": "AIR BAGS,STRUCTURE"
+      },
+      {
+        "odiNumber": 11311973,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11309297,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11301570,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11300741,
+        "components": "POWER TRAIN,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11300125,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11299994,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11291652,
+        "components": "ELECTRICAL SYSTEM,LANE DEPARTURE"
+      },
+      {
+        "odiNumber": 11289907,
+        "components": "LANE DEPARTURE"
+      },
+      {
+        "odiNumber": 11287746,
+        "components": "POWER TRAIN,VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11281247,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11271148,
+        "components": "UNKNOWN OR OTHER,ELECTRONIC STABILITY CONTROL (ESC),SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11267698,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11258823,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11257194,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11254835,
+        "components": "VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11243419,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11234706,
+        "components": "VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11229120,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11222225,
+        "components": "FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11203382,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11196619,
+        "components": "STEERING,ENGINE"
+      },
+      {
+        "odiNumber": 11190123,
+        "components": "VEHICLE SPEED CONTROL,SERVICE BRAKES,ENGINE"
+      },
+      {
+        "odiNumber": 11187384,
+        "components": "VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11185007,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11181618,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11181645,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11172963,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11166428,
+        "components": "POWER TRAIN,VEHICLE SPEED CONTROL,ENGINE"
+      },
+      {
+        "odiNumber": 11164041,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11161629,
+        "components": "SEAT BELTS,VEHICLE SPEED CONTROL,EQUIPMENT"
+      },
+      {
+        "odiNumber": 11155482,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11151184,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11144852,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11140641,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11140432,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11132872,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11130831,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11129286,
+        "components": "WHEELS,UNKNOWN OR OTHER,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11123438,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11121820,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11119695,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11113749,
+        "components": "LANE DEPARTURE"
+      },
+      {
+        "odiNumber": 11104645,
+        "components": "VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11098194,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11088789,
+        "components": "VEHICLE SPEED CONTROL"
+      }
+    ]
+  }
+}

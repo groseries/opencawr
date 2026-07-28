@@ -1,0 +1,6985 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Ford&model=Escape&modelYear=2018",
+  "fetchedAt": "2026-07-28T15:13:36.163Z",
+  "body": {
+    "count": 1744,
+    "results": [
+      {
+        "odiNumber": 11752842,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11752844,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11752503,
+        "components": "POWER TRAIN,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11752541,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11752551,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11752010,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11751700,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11751861,
+        "components": "STEERING,VEHICLE SPEED CONTROL,LANE DEPARTURE"
+      },
+      {
+        "odiNumber": 11751521,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11751376,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11750928,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11750316,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11750325,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11750331,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11750357,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11749946,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11750084,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11750105,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11750149,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11749678,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11749735,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11749476,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11749236,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11749420,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11749165,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11748888,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11748932,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11748852,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11748599,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11748293,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11748094,
+        "components": "POWER TRAIN,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11748221,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11747975,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11747737,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11747363,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11747424,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11747428,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11747493,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11747497,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11747531,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11747535,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11747543,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11747290,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11747057,
+        "components": "STEERING,WHEELS,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11746851,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11746620,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11746754,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11746763,
+        "components": "SERVICE BRAKES,ENGINE"
+      },
+      {
+        "odiNumber": 11746398,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11746407,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11746497,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11746550,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11746148,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11746178,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11745864,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11745759,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11745806,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11745245,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11745049,
+        "components": "UNKNOWN OR OTHER,LANE DEPARTURE"
+      },
+      {
+        "odiNumber": 11744738,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11744892,
+        "components": "POWER TRAIN,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11744351,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11744282,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11743713,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11743436,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11743606,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11743617,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11742954,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11742688,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11742546,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11742575,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11742424,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11742472,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11742486,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11742241,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11742381,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11741776,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11741467,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11741556,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11741611,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11741654,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11741113,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11741007,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11741011,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11740768,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11740439,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11740468,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11740053,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11740063,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11739831,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11739183,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11739270,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11739302,
+        "components": "ELECTRICAL SYSTEM,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11739345,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11738992,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11739010,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11738858,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11738143,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11737750,
+        "components": "LATCHES/LOCKS/LINKAGES"
+      },
+      {
+        "odiNumber": 11737867,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11737915,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11737602,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11737700,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11737407,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11737025,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11736458,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11736549,
+        "components": "SUSPENSION"
+      },
+      {
+        "odiNumber": 11736584,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11736601,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11736646,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11736001,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11736131,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11735754,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11735559,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11735352,
+        "components": "POWER TRAIN,UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11735363,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11735027,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11735065,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11735227,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11734536,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11734225,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11733916,
+        "components": "POWER TRAIN,UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11733945,
+        "components": "EQUIPMENT,ENGINE"
+      },
+      {
+        "odiNumber": 11734149,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11733178,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11733247,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11733273,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11733306,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11733063,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11732660,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11732664,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11732306,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11732407,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11732417,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11732276,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11732053,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11731899,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11731917,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11731964,
+        "components": "SERVICE BRAKES,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11731629,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11731700,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11731211,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11730643,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11730374,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11730094,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11730261,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11729867,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11729785,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11729562,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11729174,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11729100,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11728933,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11728420,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11728184,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11728359,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11728109,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11727527,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11727299,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11726294,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11726186,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11725830,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11725584,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11724635,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11724648,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11724307,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11724379,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11724206,
+        "components": "VISIBILITY"
+      },
+      {
+        "odiNumber": 11723495,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11723420,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11723018,
+        "components": "VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11723098,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11722850,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11722636,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11721918,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11722024,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11722120,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11721666,
+        "components": "VEHICLE SPEED CONTROL,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11721364,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11721558,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11721214,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11720593,
+        "components": "ELECTRICAL SYSTEM,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11720620,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11720444,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11720539,
+        "components": "POWER TRAIN,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11720232,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11720237,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11719662,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11719032,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11719153,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11718205,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11718089,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11717246,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11717003,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11717125,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11716686,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11716564,
+        "components": "UNKNOWN OR OTHER,SERVICE BRAKES,ENGINE"
+      },
+      {
+        "odiNumber": 11716281,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11715956,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11715445,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11715049,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11715054,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11714461,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11714250,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11713852,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11713587,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11713626,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11713415,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11713491,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11713103,
+        "components": "ELECTRICAL SYSTEM,EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11713106,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11712881,
+        "components": "VISIBILITY"
+      },
+      {
+        "odiNumber": 11712741,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11712771,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11711559,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11711239,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11711275,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11710641,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11710190,
+        "components": "POWER TRAIN,VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11709859,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11709668,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11708882,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11707733,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11707678,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11707100,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11707178,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11706980,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11706981,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11706826,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11706266,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11705899,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11705507,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11705611,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11705639,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11705306,
+        "components": "SERVICE BRAKES,ENGINE"
+      },
+      {
+        "odiNumber": 11705396,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11704832,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11704428,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11703830,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11703570,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11703477,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11703305,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11702967,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11703090,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11702000,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11701688,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11701388,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11701486,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11701159,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11701234,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11701348,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11701051,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11701070,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11700951,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11700798,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11700924,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11700303,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11699638,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11699711,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11699596,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11699597,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11699284,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11698936,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11698729,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11698773,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11698491,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11698516,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11698659,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11698129,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11698023,
+        "components": "ELECTRICAL SYSTEM,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11697755,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11697401,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11697408,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11697293,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11697000,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11696742,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11696503,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11696666,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11696439,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11696164,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11695754,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11695962,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11695463,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11694982,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11695042,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11694881,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11694467,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11694404,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11694297,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11694045,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11693633,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11693666,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11693044,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11693059,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11693069,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11693120,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11693152,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11692954,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11692677,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11692720,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11692115,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11691508,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11691280,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11690920,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11690411,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11690208,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11689969,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11689435,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11689063,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11689252,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11688817,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11688600,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11688307,
+        "components": "ENGINE AND ENGINE COOLING,POWER TRAIN"
+      },
+      {
+        "odiNumber": 11688320,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11688428,
+        "components": "POWER TRAIN,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11688265,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11687916,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11687549,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11687650,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11687721,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11687744,
+        "components": "POWER TRAIN,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11687374,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11686877,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11686945,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11686412,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11686453,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11686010,
+        "components": "POWER TRAIN,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11686023,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11685635,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11685641,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11685661,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11685731,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11685553,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11685566,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11685350,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11685404,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11684715,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11684825,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11684106,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11683364,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11683375,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11683480,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11683537,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11683097,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11683117,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11683252,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11683255,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11683310,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11682970,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11682294,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11682306,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11682207,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11681867,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11681619,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11681290,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11681179,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11680868,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11680578,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11680597,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11680765,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11680353,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11680360,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11680043,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11680107,
+        "components": "POWER TRAIN,UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11680147,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11680217,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11679750,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11679931,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11679618,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11679334,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11679341,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11679347,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11679391,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11678993,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11678841,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11678567,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11678587,
+        "components": "FUEL SYSTEM, GASOLINE,ENGINE"
+      },
+      {
+        "odiNumber": 11678071,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11677489,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11677213,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11677242,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11676871,
+        "components": "VEHICLE SPEED CONTROL,UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11676944,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11676788,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11676132,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11675827,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11676044,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11675531,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11675693,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11675702,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11675734,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11675115,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11675212,
+        "components": "SERVICE BRAKES,ENGINE,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11674906,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11674227,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11673943,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11673980,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11674024,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11674042,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11674054,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11673651,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11673667,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11673668,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11673270,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11673275,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11673356,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11673359,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11673495,
+        "components": "ELECTRICAL SYSTEM,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11672678,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11672752,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11672791,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11672388,
+        "components": "ENGINE AND ENGINE COOLING,ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11672154,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11672159,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11672245,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11672249,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11671930,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11671976,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11671718,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11671735,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11671741,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11671419,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11671113,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11671125,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11671135,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11671162,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11670675,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11670853,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11670469,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11670501,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11670545,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11670555,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11670604,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11670155,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11670188,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11670193,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11670327,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11670066,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11670075,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11670086,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11669396,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11669520,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11669547,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11669594,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11669115,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11669123,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11669165,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11669214,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11669282,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11669290,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11668924,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11668929,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11668989,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11668673,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11668399,
+        "components": "POWER TRAIN,LANE DEPARTURE"
+      },
+      {
+        "odiNumber": 11668329,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11668255,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11668030,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11667662,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11667774,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11667395,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11667458,
+        "components": "FUEL SYSTEM, GASOLINE,ENGINE"
+      },
+      {
+        "odiNumber": 11667549,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11667275,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11667316,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11666709,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11666824,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11666556,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11666237,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11666307,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11666334,
+        "components": "ENGINE AND ENGINE COOLING,POWER TRAIN"
+      },
+      {
+        "odiNumber": 11666339,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11666342,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11666404,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11665979,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11666006,
+        "components": "POWER TRAIN,UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11665835,
+        "components": "ENGINE AND ENGINE COOLING,FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11665858,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11665521,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11665295,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11665411,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11665167,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11665168,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11664771,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11664883,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11664939,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11664522,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11664558,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11664635,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11664723,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11664272,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11664411,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11664421,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11664186,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11663621,
+        "components": "ENGINE AND ENGINE COOLING,STRUCTURE"
+      },
+      {
+        "odiNumber": 11663667,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11663811,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11663373,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11663087,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11663123,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11663220,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11662930,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11662512,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11662530,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11662560,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11662288,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11662291,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11662450,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11662035,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11662084,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11662112,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11661837,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11661841,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11661894,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11661992,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11661994,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11661715,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11661516,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11660835,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11660936,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11660992,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11659929,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11660007,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11659717,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11659833,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11659414,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11659457,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11659488,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11659607,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11659173,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11659268,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11659318,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11659367,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11659373,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11659375,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11658916,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11659026,
+        "components": "POWER TRAIN,UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11659036,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11659127,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11658756,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11658656,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11658510,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11658552,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11658061,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11658069,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11657862,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11657936,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11657462,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11657472,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11657158,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11657165,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11657206,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11657243,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11657279,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11657360,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11657059,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11656782,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11656867,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11656481,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11656590,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11656339,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11656355,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11656455,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11656023,
+        "components": "VISIBILITY"
+      },
+      {
+        "odiNumber": 11656055,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11656080,
+        "components": "ENGINE AND ENGINE COOLING,POWER TRAIN"
+      },
+      {
+        "odiNumber": 11656203,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11655917,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11655922,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11655924,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11655722,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11655503,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11655561,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11655259,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11654934,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11655042,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11655081,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11655112,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11654829,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11654440,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11654476,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11654526,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11654562,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11654011,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11654114,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11654124,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11654180,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11653822,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11653827,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11653901,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11653915,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11653998,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11653498,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11653518,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11653546,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11653216,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11653025,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11652977,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11652754,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11652469,
+        "components": "UNKNOWN OR OTHER,LANE DEPARTURE,BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11652616,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11652645,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11652345,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11652355,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11652384,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11652389,
+        "components": "FUEL SYSTEM, GASOLINE,ENGINE"
+      },
+      {
+        "odiNumber": 11651752,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11651904,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11651557,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11651591,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11651436,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11651471,
+        "components": "ELECTRICAL SYSTEM,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11651272,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11651275,
+        "components": "ENGINE AND ENGINE COOLING,POWER TRAIN"
+      },
+      {
+        "odiNumber": 11650518,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11650542,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11650583,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11650601,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11650602,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11650654,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11649976,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11650019,
+        "components": "AIR BAGS,STRUCTURE"
+      },
+      {
+        "odiNumber": 11649998,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11649683,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11649777,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11649818,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11649235,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11649016,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11649047,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11649096,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11648723,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11648577,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11648476,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11648481,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11648488,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11648323,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11648142,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11647638,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11646957,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11647055,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11646654,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11646682,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11646755,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11646832,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11646045,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11646051,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11645714,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11645493,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11645646,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11645659,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11645128,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11644258,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11644147,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11644020,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11643356,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11643506,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11643510,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11643214,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11642921,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11642410,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11642462,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11642215,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11641084,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11641097,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11641103,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11641134,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11641156,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11641170,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11640916,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11640942,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11640439,
+        "components": "ENGINE,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11640155,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11639982,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11639531,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11639586,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11639528,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11639747,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11639424,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11638758,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11638846,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11638913,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11638942,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11638541,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11637931,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11638056,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11637715,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11637551,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11637235,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11637298,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11637406,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11636836,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11636587,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11636478,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11636223,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11636258,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11635541,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11635294,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11635022,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11635040,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11635064,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11635083,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11634844,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11634905,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11634909,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11634680,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11634343,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11634494,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11633818,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11633976,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11633854,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11633683,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11633558,
+        "components": "SERVICE BRAKES,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11633367,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11633412,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11633044,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11633049,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11632807,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11632821,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11632826,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11632865,
+        "components": "POWER TRAIN,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11632632,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11632443,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11632509,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11631738,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11631773,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11631775,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11631880,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11631564,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11631516,
+        "components": "ELECTRICAL SYSTEM,BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11631130,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11631286,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11630913,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11630929,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11630947,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11630959,
+        "components": "VEHICLE SPEED CONTROL,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11630995,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11631003,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11631030,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11631068,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11631080,
+        "components": "ENGINE AND ENGINE COOLING,POWER TRAIN"
+      },
+      {
+        "odiNumber": 11630523,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11629860,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11629886,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11629656,
+        "components": "SERVICE BRAKES, HYDRAULIC,PARKING BRAKE"
+      },
+      {
+        "odiNumber": 11629749,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11629229,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11629032,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11628734,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11628750,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11628565,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11628681,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11628251,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11628281,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11628444,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11627655,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11627764,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11627798,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11627451,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11627550,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11627070,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11626843,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11626667,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11626311,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11626313,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11625862,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11625753,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11625549,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11625219,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11625021,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11625025,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11624670,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11624749,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11624395,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11624227,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11623923,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11623939,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11624112,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11623791,
+        "components": "POWER TRAIN,ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11623675,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11623484,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11623510,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11623459,
+        "components": "SUSPENSION"
+      },
+      {
+        "odiNumber": 11623352,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11623162,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11622798,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11622826,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11622400,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11622454,
+        "components": "ENGINE,ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11622575,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11622614,
+        "components": "ELECTRICAL SYSTEM,EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11622623,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11622388,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11621719,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11621773,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11621515,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11621302,
+        "components": "SUSPENSION"
+      },
+      {
+        "odiNumber": 11621347,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11621345,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11620924,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11620947,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11620948,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11620986,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11621031,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11620906,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11620578,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11620627,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11620047,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11620098,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11620156,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11619812,
+        "components": "LATCHES/LOCKS/LINKAGES"
+      },
+      {
+        "odiNumber": 11619896,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11619974,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11619704,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11619714,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11619719,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11619322,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11619325,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11619125,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11618948,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11619007,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11618760,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11618796,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11618539,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11618556,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11618319,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11618198,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11617859,
+        "components": "POWER TRAIN,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11617903,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11617651,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11617657,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11617474,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11617593,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11617230,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11617280,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11617128,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11617062,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11617064,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11616830,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11616917,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11616807,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11616339,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11616392,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11616277,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11615570,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11615323,
+        "components": "POWER TRAIN,ENGINE,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11615423,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11615427,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11615523,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11615159,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11615187,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11615253,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11615163,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11615068,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11614833,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11614552,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11614413,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11614434,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11614472,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11614496,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11614183,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11613986,
+        "components": "ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11614056,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11613699,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11613784,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11613847,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11613508,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11613530,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11613543,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11613570,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11613080,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11613130,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11613153,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11612821,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11612918,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11612938,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11612939,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11612940,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11612517,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11612543,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11612402,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11612051,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11611936,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11611658,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11611342,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11611396,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11611160,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11610889,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11610952,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11611000,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11610639,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11610311,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11610006,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11609335,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11609435,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11608424,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11608458,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11608485,
+        "components": "ELECTRICAL SYSTEM,LATCHES/LOCKS/LINKAGES"
+      },
+      {
+        "odiNumber": 11608497,
+        "components": "ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11608522,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11608017,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11608114,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11608120,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11607797,
+        "components": "ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11607828,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11607633,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11607360,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11607409,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11607425,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11606968,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11607045,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11606791,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11606881,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11606612,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11606163,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11606201,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11605809,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11605956,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11605590,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11605591,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11605600,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11605658,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11605719,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11605334,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11605339,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11605463,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11605471,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11605102,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11605126,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11604928,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11604667,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11604670,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11604454,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11604492,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11604506,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11604246,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11604272,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11604284,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11603993,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11604044,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11604162,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11603708,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11603921,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11603520,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11603358,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11603076,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11602965,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11602988,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11603029,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11603039,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11602401,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11601585,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11601611,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11601155,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11601234,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11600499,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11600099,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11600225,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11600228,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11599816,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11599292,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11598622,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11598628,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11598641,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11598266,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11598371,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11598052,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11598089,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11597588,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11597163,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11596841,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11597056,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11596461,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11596543,
+        "components": "POWER TRAIN,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11596604,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11596606,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11596136,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11596143,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11596181,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11596308,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11595921,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11595772,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11595834,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11595463,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11595335,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11595370,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11595371,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11595161,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11595166,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11594783,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11594870,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11594904,
+        "components": "ENGINE,POWER TRAIN"
+      },
+      {
+        "odiNumber": 11594967,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11594613,
+        "components": "POWER TRAIN,UNKNOWN OR OTHER,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11594649,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11594521,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11594366,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11594178,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11594299,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11594307,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11593909,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11593958,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11593963,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11594000,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11594034,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11594065,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11593704,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11593709,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11593336,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11593508,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11593513,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11593213,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11593028,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11593104,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11593110,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11592859,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11592908,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11592718,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11592326,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11592337,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11592454,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11592138,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11592245,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11592268,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11591883,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11591891,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11591760,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11591825,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11591457,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11591310,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11591396,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11590965,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11591152,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11590735,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11590774,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11590776,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11590629,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11589956,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11589227,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11589311,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11589332,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11589067,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11589205,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11588851,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11588992,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11588055,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11588137,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11587811,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11587890,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11587893,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11587586,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11587606,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11587726,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11587404,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11586553,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11586291,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11585809,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11585593,
+        "components": "ENGINE,LANE DEPARTURE,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11585128,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11585186,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11585292,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11585313,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11584899,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11584710,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11584711,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11584733,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11584821,
+        "components": "ENGINE,ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11584400,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11584426,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11584464,
+        "components": "ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11584564,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11584572,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11584309,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11584023,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11584073,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11583758,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11583785,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11583877,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11583594,
+        "components": "ENGINE,ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11583603,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11582986,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11583181,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11582544,
+        "components": "ENGINE,ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11582558,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11582680,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11582428,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11582214,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11581891,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11581931,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11581944,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11581990,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11581995,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11582037,
+        "components": "ENGINE,LANE DEPARTURE,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11581636,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11581695,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11581485,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11581267,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11581370,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11581171,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11580988,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11580439,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11580028,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11579720,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11579825,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11579600,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11579630,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11579276,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11579340,
+        "components": "ENGINE,ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11579356,
+        "components": "ENGINE,ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11579043,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11578811,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11578983,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11578661,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11578498,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11578505,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11578050,
+        "components": "POWER TRAIN,ENGINE,ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11578128,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11578149,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11577869,
+        "components": "ENGINE,ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11577595,
+        "components": "ENGINE,ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11577611,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11577470,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11577445,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11577248,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11576909,
+        "components": "FUEL SYSTEM, GASOLINE,ENGINE"
+      },
+      {
+        "odiNumber": 11576923,
+        "components": "ENGINE,ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11576965,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11576986,
+        "components": "ENGINE,ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11576523,
+        "components": "ENGINE AND ENGINE COOLING,POWER TRAIN"
+      },
+      {
+        "odiNumber": 11576638,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11576678,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11576336,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11576266,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11576042,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11576019,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11575857,
+        "components": "ENGINE,ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11575900,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11575664,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11574700,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11574779,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11574181,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11573808,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11573672,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11573203,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11572979,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11572771,
+        "components": "VEHICLE SPEED CONTROL,ENGINE"
+      },
+      {
+        "odiNumber": 11572702,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11572404,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11572125,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11571976,
+        "components": "POWER TRAIN,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11571942,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11571444,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11571047,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11571130,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11570808,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11570490,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11569484,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11569516,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11569384,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11568877,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11568880,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11568523,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11567615,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11566900,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11566750,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11566693,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11565769,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11565569,
+        "components": "ENGINE,ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11564844,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11564759,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11564761,
+        "components": "POWER TRAIN,UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11564332,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11564339,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11563967,
+        "components": "ELECTRICAL SYSTEM,BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11563830,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11562823,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11562380,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11562396,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11561854,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11561451,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11561131,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11560823,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11560674,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11560724,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11560805,
+        "components": "ENGINE,ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11560435,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11560245,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11560257,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11560318,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11559770,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11559136,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11558706,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11558842,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11558648,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11557825,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11557980,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11557058,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11556751,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11556674,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11556693,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11556329,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11556070,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11555631,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11555727,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11555416,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11554985,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11555086,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11555107,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11555143,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11554960,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11554693,
+        "components": "ENGINE,ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11554604,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11554559,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11554601,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11554331,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11554413,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11553803,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11553818,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11553633,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11553635,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11553567,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11553477,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11553303,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11552868,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11552943,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11552513,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11551980,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11551774,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11551516,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11551614,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11551173,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11550887,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11550346,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11550082,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11549910,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11549756,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11549778,
+        "components": "ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11549797,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11549784,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11549830,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11549541,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11549617,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11549321,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11549512,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11549021,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11548646,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11548654,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11548345,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11548445,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11548281,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11548333,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11548046,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11547410,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11547189,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11546954,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11546821,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11546671,
+        "components": "UNKNOWN OR OTHER,ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11546577,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11546306,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11546492,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11546148,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11545856,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11545671,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11544786,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11544839,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11544633,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11544485,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11544010,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11544045,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11544126,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11544138,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11543834,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11543979,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11543727,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11543569,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11543422,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11543430,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11543441,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11542841,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11543003,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11542746,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11542782,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11542339,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11542156,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11541962,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11541604,
+        "components": "VEHICLE SPEED CONTROL,ENGINE"
+      },
+      {
+        "odiNumber": 11541683,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11541456,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11541496,
+        "components": "POWER TRAIN,EXTERIOR LIGHTING,ENGINE"
+      },
+      {
+        "odiNumber": 11541404,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11541475,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11540514,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11540516,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11539810,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11539953,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11539325,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11538633,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11538736,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11538427,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11538260,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11537745,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11537789,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11536645,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11536512,
+        "components": "ENGINE AND ENGINE COOLING,EQUIPMENT"
+      },
+      {
+        "odiNumber": 11536306,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11536180,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11535462,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11535529,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11535588,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11534994,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11534892,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11534898,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11534386,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11534294,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11534028,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11534210,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11533892,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11533866,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11533835,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11533730,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11533460,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11533493,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11532914,
+        "components": "AIR BAGS,SEAT BELTS"
+      },
+      {
+        "odiNumber": 11532701,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11532624,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11532076,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11532183,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11531894,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11531629,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11531631,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11531324,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11531440,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11530973,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11530407,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11530409,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11529585,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11529265,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11528996,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11528697,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11528496,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11528168,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11528002,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11527611,
+        "components": "AIR BAGS,STRUCTURE"
+      },
+      {
+        "odiNumber": 11527521,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11527225,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11527043,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11526732,
+        "components": "POWER TRAIN,BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11526346,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11526274,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11526072,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11525232,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11525113,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11524648,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11524675,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11524005,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11523901,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11523132,
+        "components": "POWER TRAIN,UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11522915,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11522608,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11522482,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11522202,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11521819,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11521524,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11521272,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11520561,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11519808,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11519864,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11519510,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11518828,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11518907,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11518646,
+        "components": "POWER TRAIN,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11518072,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11518132,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11517871,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11517893,
+        "components": "ENGINE AND ENGINE COOLING,POWER TRAIN"
+      },
+      {
+        "odiNumber": 11517664,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11517754,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11517473,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11517541,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11517094,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11516752,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11516614,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11516391,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11516210,
+        "components": "VEHICLE SPEED CONTROL,ENGINE"
+      },
+      {
+        "odiNumber": 11515648,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11515391,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11515289,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11514400,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11513939,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11513681,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11513267,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11512011,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11512028,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11511857,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11511536,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11511079,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11511081,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11510868,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11510882,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11509797,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11509865,
+        "components": "ELECTRICAL SYSTEM,SERVICE BRAKES,ENGINE"
+      },
+      {
+        "odiNumber": 11509597,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11507828,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11507829,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11507620,
+        "components": "ELECTRICAL SYSTEM,TRACTION CONTROL SYSTEM"
+      },
+      {
+        "odiNumber": 11507354,
+        "components": "STEERING,ELECTRICAL SYSTEM,VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11507420,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11507446,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11507466,
+        "components": "ENGINE,ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11506916,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11507078,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11506753,
+        "components": "BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11506366,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11506434,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11506167,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11504524,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11504310,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11503985,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11503469,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11503193,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11503005,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11501727,
+        "components": "STEERING,POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11501613,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11501443,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11501495,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11501302,
+        "components": "POWER TRAIN,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11501103,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11500907,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11500465,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11500284,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11499876,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11498851,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11498352,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11498105,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11497816,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11497205,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11497102,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11497097,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11496718,
+        "components": "LATCHES/LOCKS/LINKAGES"
+      },
+      {
+        "odiNumber": 11496765,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11496374,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11496444,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11495636,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11495517,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11493802,
+        "components": "EQUIPMENT"
+      },
+      {
+        "odiNumber": 11493819,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11493692,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11493422,
+        "components": "ENGINE,ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11493562,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11492847,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11492667,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11492296,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11492093,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11491715,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11491017,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11490886,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11490563,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11490370,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11490233,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11490154,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11490159,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11489226,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11488408,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11488043,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11487837,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11487911,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11487565,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11487717,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11486792,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11486450,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11486472,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11485977,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11485828,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11485847,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11485619,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11485688,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11485499,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11485220,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11485317,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11484334,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11483999,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11483827,
+        "components": "STRUCTURE,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11483193,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11483124,
+        "components": "STEERING,VEHICLE SPEED CONTROL,ENGINE"
+      },
+      {
+        "odiNumber": 11483016,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11482878,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11482800,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11482730,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11482234,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11481674,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11481452,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11481349,
+        "components": "POWER TRAIN,SERVICE BRAKES,ENGINE"
+      },
+      {
+        "odiNumber": 11480494,
+        "components": "ENGINE AND ENGINE COOLING,POWER TRAIN"
+      },
+      {
+        "odiNumber": 11479916,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11479955,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11479636,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11479643,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11479103,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11479003,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11479041,
+        "components": "ENGINE AND ENGINE COOLING,VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11478797,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11478829,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11478869,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11478707,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11478205,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11477919,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11477812,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11477208,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11477268,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11476940,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11476474,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11476476,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11476370,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11476377,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11475699,
+        "components": "POWER TRAIN,VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11475474,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11475259,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11475280,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11474868,
+        "components": "SUSPENSION"
+      },
+      {
+        "odiNumber": 11474887,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11474807,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11474506,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11474046,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11473834,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11473840,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11473977,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11473726,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11473578,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11473612,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11473616,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11473413,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11473014,
+        "components": "SUSPENSION,POWER TRAIN"
+      },
+      {
+        "odiNumber": 11472735,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11472414,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11471999,
+        "components": "VISIBILITY"
+      },
+      {
+        "odiNumber": 11471893,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11471607,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11470846,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11470852,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11470914,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11470374,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11469885,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11469660,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11469367,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11469375,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11469389,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11469105,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11469180,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11468579,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11468119,
+        "components": "POWER TRAIN,UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11468195,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11468278,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11467647,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11467311,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11465633,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11465103,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11464656,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11464226,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11463845,
+        "components": "FIRERELATED"
+      },
+      {
+        "odiNumber": 11463297,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11462694,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11462730,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11460878,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11460751,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11460175,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11459878,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11459531,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11459316,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11459180,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11458337,
+        "components": "SERVICE BRAKES, HYDRAULIC"
+      },
+      {
+        "odiNumber": 11458068,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11457164,
+        "components": "LATCHES/LOCKS/LINKAGES"
+      },
+      {
+        "odiNumber": 11456788,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11454096,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11453671,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11450649,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11448830,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11448139,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11447372,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11446564,
+        "components": "POWER TRAIN,SEATS,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11446598,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11445533,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11445398,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11443930,
+        "components": "SUSPENSION"
+      },
+      {
+        "odiNumber": 11443940,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11442373,
+        "components": "UNKNOWN OR OTHER,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11441686,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11440919,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11440534,
+        "components": "TIRES"
+      },
+      {
+        "odiNumber": 11440167,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11438966,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11436881,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11435064,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11434471,
+        "components": "ENGINE AND ENGINE COOLING,ENGINE"
+      },
+      {
+        "odiNumber": 11434514,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11433353,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11432994,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11432675,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11432580,
+        "components": "SUSPENSION"
+      },
+      {
+        "odiNumber": 11430249,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11428870,
+        "components": "BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11427729,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11427072,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11426778,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11423598,
+        "components": "STEERING,SUSPENSION,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11421408,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11419204,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11418171,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11418039,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11416306,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11415440,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11415853,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11415334,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11414950,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11414643,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11413486,
+        "components": "SUSPENSION,WHEELS"
+      },
+      {
+        "odiNumber": 11412874,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11408686,
+        "components": "STEERING,UNKNOWN OR OTHER,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11405447,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11404763,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11402853,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11400038,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11398830,
+        "components": "ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11398754,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11396651,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11396655,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11396656,
+        "components": "VISIBILITY"
+      },
+      {
+        "odiNumber": 11396142,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11395351,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11395441,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11395485,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11394647,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11389205,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11388742,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11387353,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11386571,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11385375,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11384976,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11384658,
+        "components": "POWER TRAIN,VEHICLE SPEED CONTROL,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11383998,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11378687,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11375960,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11363770,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11363427,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11362340,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11360592,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11352548,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11351494,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11350489,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11350291,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11348631,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11348689,
+        "components": "POWER TRAIN,VEHICLE SPEED CONTROL,ENGINE"
+      },
+      {
+        "odiNumber": 11343881,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11343898,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11343798,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11342977,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11343096,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11341798,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11341963,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11340150,
+        "components": "TIRES"
+      },
+      {
+        "odiNumber": 11339514,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11331489,
+        "components": "POWER TRAIN,VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11331328,
+        "components": "ELECTRICAL SYSTEM,VEHICLE SPEED CONTROL,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11330932,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11329821,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11328328,
+        "components": "POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11328237,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11326201,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11324388,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11322007,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11319764,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11318667,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11315897,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11312176,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11307471,
+        "components": "POWER TRAIN,VEHICLE SPEED CONTROL,ENGINE"
+      },
+      {
+        "odiNumber": 11299990,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11297534,
+        "components": "VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11292541,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11292425,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11291920,
+        "components": "UNKNOWN OR OTHER,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11291240,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11289254,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11288283,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11282578,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11281444,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11279548,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11278101,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11269347,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11267557,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11267174,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11266169,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11265591,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11265742,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11258989,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11257682,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11256799,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11254561,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11245851,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11244079,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11243763,
+        "components": "VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11241773,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11240823,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11240970,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11230785,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11222633,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11220494,
+        "components": "STEERING,ELECTRICAL SYSTEM,ELECTRONIC STABILITY CONTROL (ESC)"
+      },
+      {
+        "odiNumber": 11218019,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11210726,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11210424,
+        "components": "VISIBILITY"
+      },
+      {
+        "odiNumber": 11210149,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11209811,
+        "components": "SUSPENSION,WHEELS,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11208382,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11207414,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11206063,
+        "components": "STRUCTURE,ENGINE"
+      },
+      {
+        "odiNumber": 11202869,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11194120,
+        "components": "VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11191479,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11185250,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11184200,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11180975,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11170295,
+        "components": "VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11162473,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11162510,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11160428,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11161299,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11161018,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11160538,
+        "components": "STEERING,SUSPENSION,WHEELS"
+      },
+      {
+        "odiNumber": 11152488,
+        "components": "STEERING,ELECTRICAL SYSTEM,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11141528,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11128379,
+        "components": "STEERING,ELECTRICAL SYSTEM,ELECTRONIC STABILITY CONTROL (ESC)"
+      },
+      {
+        "odiNumber": 11128106,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11123635,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11119904,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11118314,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11115292,
+        "components": "UNKNOWN OR OTHER,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11114533,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11113565,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11112250,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11110885,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11104604,
+        "components": "VEHICLE SPEED CONTROL,ELECTRONIC STABILITY CONTROL (ESC),ENGINE"
+      },
+      {
+        "odiNumber": 11101854,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11096357,
+        "components": "AIR BAGS,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11093920,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11093294,
+        "components": "ELECTRICAL SYSTEM,STRUCTURE"
+      },
+      {
+        "odiNumber": 11088921,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11062210,
+        "components": "AIR BAGS"
+      }
+    ]
+  }
+}
