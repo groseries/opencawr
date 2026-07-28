@@ -1,0 +1,24 @@
+{
+  "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2021&make=Hyundai&model=Sonata",
+  "fetchedAt": "2026-07-28T14:52:37.305Z",
+  "body": {
+    "menuItem": [
+      {
+        "text": "Auto (AM-S8), 4 cyl, 2.5 L, Turbo, SIDI & PFI",
+        "value": "43456"
+      },
+      {
+        "text": "Auto (S8), 4 cyl, 1.6 L, Turbo, SIDI",
+        "value": "42790"
+      },
+      {
+        "text": "Auto (S8), 4 cyl, 2.5 L, SIDI & PFI",
+        "value": "42796"
+      },
+      {
+        "text": "Auto (S8), 4 cyl, 2.5 L, SIDI & PFI; Stop-Start",
+        "value": "42797"
+      }
+    ]
+  }
+}

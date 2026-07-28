@@ -1,0 +1,16 @@
+{
+  "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2023&make=MINI&model=Cooper+Hardtop+2+Door",
+  "fetchedAt": "2026-07-28T14:52:37.633Z",
+  "body": {
+    "menuItem": [
+      {
+        "text": "Auto (AM-S7), 3 cyl, 1.5 L, Turbo",
+        "value": "45227"
+      },
+      {
+        "text": "Man 6-spd, 3 cyl, 1.5 L, Turbo",
+        "value": "45228"
+      }
+    ]
+  }
+}

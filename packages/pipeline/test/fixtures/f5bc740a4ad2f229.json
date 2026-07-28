@@ -1,0 +1,10 @@
+{
+  "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2019&make=Chevrolet&model=Volt",
+  "fetchedAt": "2026-07-28T14:52:34.870Z",
+  "body": {
+    "menuItem": {
+      "text": "Auto (variable gear ratios), 4 cyl, 1.5 L",
+      "value": "40924"
+    }
+  }
+}

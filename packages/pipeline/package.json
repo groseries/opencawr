@@ -1,0 +1,21 @@
+{
+  "name": "@opencawr/pipeline",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "OpenCAWR data pipeline — EPA/NHTSA adapters, segment-peer proxy assembly. Consumes @opencawr/core; never re-implements cost math.",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "assemble": "tsx src/cli.ts",
+    "record-fixtures": "tsx scripts/record-fixtures.ts"
+  },
+  "dependencies": {
+    "@opencawr/core": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.2",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}

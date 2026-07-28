@@ -1,0 +1,135 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Honda&model=Fit&modelYear=2017",
+  "fetchedAt": "2026-07-28T14:52:36.715Z",
+  "body": {
+    "count": 42,
+    "results": [
+      {
+        "odiNumber": 11699810
+      },
+      {
+        "odiNumber": 11686890
+      },
+      {
+        "odiNumber": 11686891
+      },
+      {
+        "odiNumber": 11686893
+      },
+      {
+        "odiNumber": 11664615
+      },
+      {
+        "odiNumber": 11634959
+      },
+      {
+        "odiNumber": 11631079
+      },
+      {
+        "odiNumber": 11629134
+      },
+      {
+        "odiNumber": 11620651
+      },
+      {
+        "odiNumber": 11619550
+      },
+      {
+        "odiNumber": 11602356
+      },
+      {
+        "odiNumber": 11557499
+      },
+      {
+        "odiNumber": 11553238
+      },
+      {
+        "odiNumber": 11539956
+      },
+      {
+        "odiNumber": 11526780
+      },
+      {
+        "odiNumber": 11523184
+      },
+      {
+        "odiNumber": 11521173
+      },
+      {
+        "odiNumber": 11518951
+      },
+      {
+        "odiNumber": 11511253
+      },
+      {
+        "odiNumber": 11508216
+      },
+      {
+        "odiNumber": 11507525
+      },
+      {
+        "odiNumber": 11507024
+      },
+      {
+        "odiNumber": 11501905
+      },
+      {
+        "odiNumber": 11496652
+      },
+      {
+        "odiNumber": 11461406
+      },
+      {
+        "odiNumber": 11455247
+      },
+      {
+        "odiNumber": 11454229
+      },
+      {
+        "odiNumber": 11444652
+      },
+      {
+        "odiNumber": 11441182
+      },
+      {
+        "odiNumber": 11431811
+      },
+      {
+        "odiNumber": 11414066
+      },
+      {
+        "odiNumber": 11404133
+      },
+      {
+        "odiNumber": 11383552
+      },
+      {
+        "odiNumber": 11366458
+      },
+      {
+        "odiNumber": 11350236
+      },
+      {
+        "odiNumber": 11316428
+      },
+      {
+        "odiNumber": 11128836
+      },
+      {
+        "odiNumber": 11100743
+      },
+      {
+        "odiNumber": 11097965
+      },
+      {
+        "odiNumber": 11073971
+      },
+      {
+        "odiNumber": 11054370
+      },
+      {
+        "odiNumber": 11048538
+      }
+    ]
+  }
+}

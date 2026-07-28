@@ -1,0 +1,24 @@
+{
+  "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2022&make=Toyota&model=Corolla",
+  "fetchedAt": "2026-07-28T14:52:36.977Z",
+  "body": {
+    "menuItem": [
+      {
+        "text": "Auto (AV-S10), 4 cyl, 2.0 L",
+        "value": "44074"
+      },
+      {
+        "text": "Auto (variable gear ratios), 4 cyl, 1.8 L",
+        "value": "44070"
+      },
+      {
+        "text": "Man 6-spd, 4 cyl, 2.0 L",
+        "value": "44075"
+      },
+      {
+        "text": "Man 6-spd, 4 cyl, 1.8 L",
+        "value": "44071"
+      }
+    ]
+  }
+}

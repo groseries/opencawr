@@ -1,0 +1,16 @@
+{
+  "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2019&make=Fiat&model=500",
+  "fetchedAt": "2026-07-28T14:52:37.416Z",
+  "body": {
+    "menuItem": [
+      {
+        "text": "Auto 6-spd, 4 cyl, 1.4 L, Turbo",
+        "value": "41148"
+      },
+      {
+        "text": "Man 5-spd, 4 cyl, 1.4 L, Turbo",
+        "value": "41149"
+      }
+    ]
+  }
+}
