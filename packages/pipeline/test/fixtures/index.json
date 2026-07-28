@@ -1,0 +1,92 @@
+[
+  {
+    "hash": "eb2e85d5da9063c0",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2020&make=Toyota&model=Camry",
+    "note": "EPA menu options: Toyota Camry 2020"
+  },
+  {
+    "hash": "8226e69b228e74a1",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/42011",
+    "note": "EPA vehicle detail: Toyota Camry 2020 (Auto S8 3.5L V6)"
+  },
+  {
+    "hash": "bf3d92bb3a577be6",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2017&make=Honda&model=Fit",
+    "note": "EPA menu options: Honda Fit 2017"
+  },
+  {
+    "hash": "54a33256fdbd577f",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2018&make=Honda&model=Fit",
+    "note": "EPA menu options: Honda Fit 2018"
+  },
+  {
+    "hash": "b55223c47c7b425c",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2019&make=Honda&model=Fit",
+    "note": "EPA menu options: Honda Fit 2019"
+  },
+  {
+    "hash": "3fa0915b224a4368",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2020&make=Honda&model=Fit",
+    "note": "EPA menu options: Honda Fit 2020"
+  },
+  {
+    "hash": "08e9bcf7a081b4d7",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2021&make=Honda&model=Fit",
+    "note": "EPA menu options: Honda Fit 2021"
+  },
+  {
+    "hash": "0d947fdc61da2fbd",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2022&make=Honda&model=Fit",
+    "note": "EPA menu options: Honda Fit 2022"
+  },
+  {
+    "hash": "344654a8dd3c8834",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2023&make=Honda&model=Fit",
+    "note": "EPA menu options: Honda Fit 2023"
+  },
+  {
+    "hash": "57d593e041a49121",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2024&make=Honda&model=Fit",
+    "note": "EPA menu options: Honda Fit 2024"
+  },
+  {
+    "hash": "dab2d2487272d273",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2025&make=Honda&model=Fit",
+    "note": "EPA menu options: Honda Fit 2025"
+  },
+  {
+    "hash": "478fe8c0cec46f3f",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2026&make=Honda&model=Fit",
+    "note": "EPA menu options: Honda Fit 2026"
+  },
+  {
+    "hash": "cbd7c44c88861e7f",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/42395",
+    "note": "EPA vehicle detail: Honda Fit 2020 (Automatic AV-S7)"
+  },
+  {
+    "hash": "44ed62dc1424d9d5",
+    "url": "https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/Honda?format=json",
+    "note": "VPIC getmodelsformake: Honda"
+  },
+  {
+    "hash": "2fe74c18d15e1494",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Honda&model=Fit&modelYear=2017",
+    "note": "NHTSA complaintsByVehicle: Honda Fit 2017 (trimmed to odiNumber only)"
+  },
+  {
+    "hash": "6322c7a64c7ca6d4",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Honda&model=Fit&modelYear=2018",
+    "note": "NHTSA complaintsByVehicle: Honda Fit 2018 (trimmed to odiNumber only)"
+  },
+  {
+    "hash": "f6e80793030442ae",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Honda&model=Fit&modelYear=2019",
+    "note": "NHTSA complaintsByVehicle: Honda Fit 2019 (trimmed to odiNumber only)"
+  },
+  {
+    "hash": "5519e1f40afba71c",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Honda&model=Fit&modelYear=2020",
+    "note": "NHTSA complaintsByVehicle: Honda Fit 2020 (trimmed to odiNumber only)"
+  }
+]

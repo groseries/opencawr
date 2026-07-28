@@ -1,0 +1,11 @@
+export { assembleVehicle } from "./assemble.js";
+export type { AssembleQuery, ProvenanceEntry, ProvenanceReport } from "./assemble.js";
+export { epaSpecs, epaVehicleDetail, epaVehicleIdsForYear } from "./sources/epa.js";
+export type { EpaSpecs, EpaVehicleDetail } from "./sources/epa.js";
+export { complaintCounts, normalizeModel } from "./sources/nhtsa.js";
+export type { YearComplaints } from "./sources/nhtsa.js";
+export { pickProxyPeer } from "./sources/proxy.js";
+export type { ProxyQuery } from "./sources/proxy.js";
+export { fetchCached } from "./fetchCached.js";
+export { loadSeedData } from "./seedData.js";
+export { validateVehicleShape } from "./schema.js";

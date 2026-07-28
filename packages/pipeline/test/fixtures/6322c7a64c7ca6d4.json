@@ -1,0 +1,351 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Honda&model=Fit&modelYear=2018",
+  "fetchedAt": "2026-07-28T04:55:02.906Z",
+  "body": {
+    "count": 114,
+    "results": [
+      {
+        "odiNumber": 11746411
+      },
+      {
+        "odiNumber": 11746190
+      },
+      {
+        "odiNumber": 11741085
+      },
+      {
+        "odiNumber": 11736772
+      },
+      {
+        "odiNumber": 11734442
+      },
+      {
+        "odiNumber": 11723708
+      },
+      {
+        "odiNumber": 11714664
+      },
+      {
+        "odiNumber": 11711806
+      },
+      {
+        "odiNumber": 11705017
+      },
+      {
+        "odiNumber": 11702285
+      },
+      {
+        "odiNumber": 11700380
+      },
+      {
+        "odiNumber": 11690913
+      },
+      {
+        "odiNumber": 11689752
+      },
+      {
+        "odiNumber": 11688685
+      },
+      {
+        "odiNumber": 11680999
+      },
+      {
+        "odiNumber": 11670777
+      },
+      {
+        "odiNumber": 11669310
+      },
+      {
+        "odiNumber": 11666308
+      },
+      {
+        "odiNumber": 11663346
+      },
+      {
+        "odiNumber": 11650245
+      },
+      {
+        "odiNumber": 11649481
+      },
+      {
+        "odiNumber": 11646719
+      },
+      {
+        "odiNumber": 11637629
+      },
+      {
+        "odiNumber": 11637195
+      },
+      {
+        "odiNumber": 11631648
+      },
+      {
+        "odiNumber": 11630424
+      },
+      {
+        "odiNumber": 11626491
+      },
+      {
+        "odiNumber": 11625970
+      },
+      {
+        "odiNumber": 11625695
+      },
+      {
+        "odiNumber": 11622993
+      },
+      {
+        "odiNumber": 11622995
+      },
+      {
+        "odiNumber": 11622539
+      },
+      {
+        "odiNumber": 11621948
+      },
+      {
+        "odiNumber": 11621270
+      },
+      {
+        "odiNumber": 11618450
+      },
+      {
+        "odiNumber": 11617290
+      },
+      {
+        "odiNumber": 11616432
+      },
+      {
+        "odiNumber": 11615092
+      },
+      {
+        "odiNumber": 11609789
+      },
+      {
+        "odiNumber": 11606787
+      },
+      {
+        "odiNumber": 11597413
+      },
+      {
+        "odiNumber": 11597330
+      },
+      {
+        "odiNumber": 11596542
+      },
+      {
+        "odiNumber": 11594350
+      },
+      {
+        "odiNumber": 11593466
+      },
+      {
+        "odiNumber": 11592592
+      },
+      {
+        "odiNumber": 11588028
+      },
+      {
+        "odiNumber": 11587803
+      },
+      {
+        "odiNumber": 11584276
+      },
+      {
+        "odiNumber": 11576770
+      },
+      {
+        "odiNumber": 11575871
+      },
+      {
+        "odiNumber": 11569839
+      },
+      {
+        "odiNumber": 11567992
+      },
+      {
+        "odiNumber": 11567691
+      },
+      {
+        "odiNumber": 11567369
+      },
+      {
+        "odiNumber": 11566826
+      },
+      {
+        "odiNumber": 11559957
+      },
+      {
+        "odiNumber": 11557698
+      },
+      {
+        "odiNumber": 11549767
+      },
+      {
+        "odiNumber": 11545681
+      },
+      {
+        "odiNumber": 11543877
+      },
+      {
+        "odiNumber": 11537190
+      },
+      {
+        "odiNumber": 11535295
+      },
+      {
+        "odiNumber": 11532333
+      },
+      {
+        "odiNumber": 11532128
+      },
+      {
+        "odiNumber": 11530674
+      },
+      {
+        "odiNumber": 11521491
+      },
+      {
+        "odiNumber": 11519485
+      },
+      {
+        "odiNumber": 11519174
+      },
+      {
+        "odiNumber": 11517428
+      },
+      {
+        "odiNumber": 11517431
+      },
+      {
+        "odiNumber": 11515812
+      },
+      {
+        "odiNumber": 11513072
+      },
+      {
+        "odiNumber": 11508586
+      },
+      {
+        "odiNumber": 11504600
+      },
+      {
+        "odiNumber": 11504309
+      },
+      {
+        "odiNumber": 11498313
+      },
+      {
+        "odiNumber": 11492759
+      },
+      {
+        "odiNumber": 11483244
+      },
+      {
+        "odiNumber": 11479035
+      },
+      {
+        "odiNumber": 11471411
+      },
+      {
+        "odiNumber": 11464977
+      },
+      {
+        "odiNumber": 11462041
+      },
+      {
+        "odiNumber": 11446971
+      },
+      {
+        "odiNumber": 11441652
+      },
+      {
+        "odiNumber": 11430269
+      },
+      {
+        "odiNumber": 11428378
+      },
+      {
+        "odiNumber": 11428400
+      },
+      {
+        "odiNumber": 11419596
+      },
+      {
+        "odiNumber": 11415607
+      },
+      {
+        "odiNumber": 11412905
+      },
+      {
+        "odiNumber": 11407817
+      },
+      {
+        "odiNumber": 11405371
+      },
+      {
+        "odiNumber": 11400096
+      },
+      {
+        "odiNumber": 11398694
+      },
+      {
+        "odiNumber": 11390347
+      },
+      {
+        "odiNumber": 11387926
+      },
+      {
+        "odiNumber": 11373657
+      },
+      {
+        "odiNumber": 11366294
+      },
+      {
+        "odiNumber": 11365849
+      },
+      {
+        "odiNumber": 11362678
+      },
+      {
+        "odiNumber": 11328066
+      },
+      {
+        "odiNumber": 11317352
+      },
+      {
+        "odiNumber": 11310525
+      },
+      {
+        "odiNumber": 11306197
+      },
+      {
+        "odiNumber": 11271723
+      },
+      {
+        "odiNumber": 11271228
+      },
+      {
+        "odiNumber": 11270658
+      },
+      {
+        "odiNumber": 11234856
+      },
+      {
+        "odiNumber": 11203060
+      },
+      {
+        "odiNumber": 11151370
+      },
+      {
+        "odiNumber": 11139218
+      },
+      {
+        "odiNumber": 11097548
+      },
+      {
+        "odiNumber": 11081416
+      }
+    ]
+  }
+}

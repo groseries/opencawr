@@ -1,0 +1,20 @@
+{
+  "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2020&make=Honda&model=Fit",
+  "fetchedAt": "2026-07-28T04:55:01.328Z",
+  "body": {
+    "menuItem": [
+      {
+        "text": "Auto (AV-S7), 4 cyl, 1.5 L",
+        "value": "42395"
+      },
+      {
+        "text": "Auto (variable gear ratios), 4 cyl, 1.5 L",
+        "value": "42394"
+      },
+      {
+        "text": "Man 6-spd, 4 cyl, 1.5 L",
+        "value": "42396"
+      }
+    ]
+  }
+}

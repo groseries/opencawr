@@ -76,3 +76,14 @@ generalized, or retired. Statuses:
 | OPEN | Real calendar age as a state variable | age is still odometer-derived; garage-kept old cars under-aged (matters most for passion vehicles) |
 | OPEN | Total-loss life truncation | a totaled car should end the holding period; currently only an annual $ charge |
 | OPEN | Reliability re-derivation (launch gate) | NHTSA/CarComplaints/RepairPal pipeline — spec §9, blocks public launch |
+
+## F. Pipeline (`@opencawr/pipeline`, Task B) assumptions
+
+| Assumption | Value | Status | Notes |
+|---|---|---|---|
+| Caution model-year heuristic | A model year is flagged `caution` when its NHTSA `complaintsByVehicle` count > 2× the median count across the queried model years (`good` otherwise; `bad` is never derived here) | JUDGMENT | Placeholder only — `model_year_reliability` and `reliability_tier` are always emitted with `launchBlocked: true` until Task D's real reliability re-derivation lands; matches the launch gate in §D above |
+| Segment-peer "footprint" proxy | Within the same `body` + `etype` pool of seed vehicles, pick the peer whose `mpg_combined` (or `kwh_per_100mi` for EVs) is numerically closest to the queried vehicle's EPA-reported value | JUDGMENT | Real vehicle footprint (track width × wheelbase, the CAFE regulatory term) isn't exposed by the free/keyless EPA or NHTSA endpoints this pipeline uses; combined efficiency is used as a same-body-class size stand-in instead. Every field that peer supplies (price curve, maintenance curve, EOL, tiers, seats, cargo, insurance, battery) is marked `source: "proxy"` and the assembled vehicle gets `provenance: "proxied"` |
+| EPA body/etype mapping | `atvType`/`fuelType1` → etype (ev/phev/hybrid/gas); EPA `VClass` string-matched to the seed's body vocabulary (Car/SUV/SUV AWD/Van/Truck/Sport), then folded with etype for ev/phev (e.g. "EV SUV", "PHEV SUV AWD") to mirror seed convention | JUDGMENT | No canonical EPA→seed body mapping exists; string-matching VClass keywords is the simplest defensible heuristic |
+| EV/PHEV tailpipe CO2 | For `etype: "ev"`, EPA's `co2TailpipeGpm` (~0) is discarded and `co2_g_per_mi` falls back to the segment peer instead | JUDGMENT | Seed's `co2_g_per_mi` is a grid/upstream-emissions estimate for EVs, not raw tailpipe; using EPA's ~0 tailpipe value would misrepresent that convention |
+| Default query year window | `[currentYear − 9, currentYear]` when `assembleVehicle` isn't given `years` | JUDGMENT | Wide enough to catch most discontinued models (e.g. Honda Fit, last sold 2020) without an explicit range |
+| VPIC model normalization | `make`/`model` casing normalized against NHTSA VPIC `getmodelsformake/{make}` (case-insensitive match); input passed through unchanged if no match | JUDGMENT | Keyless, free; only case-normalizes, doesn't correct misspellings |
