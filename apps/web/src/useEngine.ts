@@ -28,7 +28,7 @@ export function useEngine(inputs: EngineInputs) {
   useEffect(() => {
     setComputing(true);
     const id = ++reqId.current;
-    const t = setTimeout(() => worker.postMessage({ id, inputs }), 60);
+    const t = setTimeout(() => worker.postMessage({ kind: "rank", id, inputs }), 60);
     return () => clearTimeout(t);
   }, [worker, inputs]);
 

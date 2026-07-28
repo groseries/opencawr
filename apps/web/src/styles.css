@@ -82,6 +82,19 @@ body {
   color: var(--needle);
 }
 
+/* ── section tabs: rankings vs deal analyzer ─ */
+.tab-strip {
+  display: flex;
+  width: fit-content;
+  border: 1px solid var(--ink);
+  margin-top: 16px;
+}
+
+.tab-strip .seg {
+  font-size: 13px;
+  padding: 9px 18px;
+}
+
 /* ── layout ───────────────────────────────── */
 .layout {
   display: grid;
@@ -391,6 +404,73 @@ th.num {
   color: var(--muted);
 }
 
+/* ── deal analyzer ────────────────────────────────────────── */
+.deal-form {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin: 14px 0 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule);
+}
+
+@media (max-width: 720px) {
+  .deal-form {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.deal-form .control {
+  margin: 0;
+}
+
+.deal-select {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid var(--rule);
+  background: #fff;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.deal-form input[type="number"] {
+  width: 100%;
+}
+
+.deal-summary {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  padding: 16px;
+  margin-bottom: 22px;
+}
+
+.deal-headline {
+  font-size: 17px;
+}
+
+.deal-headline .mono {
+  color: var(--needle);
+  font-weight: 600;
+}
+
+.deal-line {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13.5px;
+}
+
+.deal-notes {
+  margin-top: 10px;
+  padding-left: 1.2em;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.deal-notes li {
+  margin-top: 4px;
+}
+
 /* ── uncertainty ladder ───────────────────────────────────── */
 .ladder-wrap {
   overflow-x: auto;
@@ -424,6 +504,16 @@ th.num {
   stroke: var(--band);
   stroke-width: 2;
   stroke-linecap: round;
+}
+
+.ladder-label-deal {
+  fill: var(--needle);
+  font-weight: 700;
+}
+
+.ladder-whisker-deal {
+  stroke: var(--needle);
+  opacity: 0.55;
 }
 
 .ladder-tier-rule {
