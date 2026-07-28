@@ -1,7 +1,9 @@
 import { useMemo, useState } from "react";
 import type { EngineInputs } from "@opencawr/core";
-import { Assumptions, DEFAULTS } from "./controls.js";
+import { Assumptions, DEFAULTS, RankBasisToggle, type RankBasis } from "./controls.js";
 import { useEngine } from "./useEngine.js";
+import { Ladder } from "./charts/Ladder.js";
+import { tierColor, tierTextColor } from "./charts/tierColors.js";
 
 const fmt = (x: number) => `$${x.toFixed(3)}`;
 const ETYPE_LABEL: Record<string, string> = {
@@ -13,25 +15,49 @@ const ETYPE_LABEL: Record<string, string> = {
 
 export function App() {
   const [inputs, setInputs] = useState<EngineInputs>(DEFAULTS);
-  const { rows, ms, computing } = useEngine(inputs);
+  const [rankBasis, setRankBasis] = useState<RankBasis>("p50");
+  const [view, setView] = useState<"table" | "ladder">("table");
+  const { byP50, byP75, ms, computing } = useEngine(inputs);
+  const rows = rankBasis === "p50" ? byP50 : byP75;
+
+  // The primary (emphasized) column follows the active rank basis; the other
+  // quantile moves to the secondary column instead of going stale/hidden.
+  const primaryValue = (r: { p50: number; p75: number }) =>
+    rankBasis === "p75" ? r.p75 : r.p50;
+  const secondaryValue = (r: { p50: number; p75: number; p90: number }) =>
+    rankBasis === "p75" ? r.p50 : r.p90;
+  const primaryLabel = rankBasis === "p75" ? "bad-luck cost" : "$/mi";
+  const primarySub = rankBasis === "p75" ? "P75" : "median";
+  const secondaryLabel = rankBasis === "p75" ? "typical cost" : "bad luck";
+  const secondarySub = rankBasis === "p75" ? "P50" : "P90";
 
   const horizonLabel =
     inputs.holdMiles === "eol"
       ? "until it dies"
       : `${((inputs.holdMiles as number) / 1000).toFixed(0)}k mi hold`;
 
-  // remember previous P50s so changed values can flash
-  const prev = useMemo(() => new Map<string, number>(), []);
+  // Remember each car's previous P50 AND P75 (regardless of which is on
+  // display) so the flash means "this changed because an assumption changed" —
+  // never "the user toggled which stat is shown". Both maps are updated from
+  // every recompute, so switching rankBasis alone never flags a flash: the
+  // quantile's own history already tracks it from before the toggle.
+  const prevP50 = useMemo(() => new Map<string, number>(), []);
+  const prevP75 = useMemo(() => new Map<string, number>(), []);
   const flashKeys = useMemo(() => {
-    if (!rows) return new Map<string, boolean>();
+    if (!byP50) return new Map<string, boolean>();
     const out = new Map<string, boolean>();
-    for (const r of rows) {
-      const was = prev.get(r.name);
-      out.set(r.name, was !== undefined && Math.abs(was - r.p50) > 0.0005);
-      prev.set(r.name, r.p50);
+    for (const r of byP50) {
+      const prevMap = rankBasis === "p75" ? prevP75 : prevP50;
+      const was = prevMap.get(r.name);
+      const now = rankBasis === "p75" ? r.p75 : r.p50;
+      out.set(r.name, was !== undefined && Math.abs(was - now) > 0.0005);
+    }
+    for (const r of byP50) {
+      prevP50.set(r.name, r.p50);
+      prevP75.set(r.name, r.p75);
     }
     return out;
-  }, [rows, prev]);
+  }, [byP50, prevP50, prevP75, rankBasis]);
 
   return (
     <div className="shell">
@@ -69,8 +95,29 @@ export function App() {
               honestly order them.
             </p>
           </div>
+          <div className="results-controls">
+            <RankBasisToggle value={rankBasis} onChange={setRankBasis} />
+            <div className="view-switcher" role="group" aria-label="View">
+              <button
+                type="button"
+                className={view === "table" ? "seg seg-active" : "seg"}
+                onClick={() => setView("table")}
+              >
+                Table
+              </button>
+              <button
+                type="button"
+                className={view === "ladder" ? "seg seg-active" : "seg"}
+                onClick={() => setView("ladder")}
+              >
+                Ladder
+              </button>
+            </div>
+          </div>
           {!rows ? (
             <div className="loading">Running {DEFAULTS.draws ?? 1100} simulations per car…</div>
+          ) : view === "ladder" ? (
+            <Ladder rows={rows} basis={rankBasis} />
           ) : (
             <table className="ranking">
               <thead>
@@ -79,13 +126,13 @@ export function App() {
                   <th className="col-tier">tier</th>
                   <th>vehicle</th>
                   <th className="num">
-                    $/mi <span className="th-sub">median</span>
+                    {primaryLabel} <span className="th-sub">{primarySub}</span>
                   </th>
                   <th className="num">
                     90% band <span className="th-sub">P05–P95</span>
                   </th>
                   <th className="num">
-                    bad luck <span className="th-sub">P90</span>
+                    {secondaryLabel} <span className="th-sub">{secondarySub}</span>
                   </th>
                   <th className="num">
                     beats next <span className="th-sub">prob.</span>
@@ -97,9 +144,25 @@ export function App() {
                   const newTier = i === 0 || rows[i - 1]!.statTier !== r.statTier;
                   return (
                     <tr key={r.name} className={newTier ? "tier-start" : undefined}>
-                      <td className="col-rank mono">{r.rank}</td>
+                      <td
+                        className="col-rank mono"
+                        style={{ borderLeft: `3px solid ${tierColor(r.statTier)}` }}
+                      >
+                        {r.rank}
+                      </td>
                       <td className="col-tier">
-                        {newTier ? <span className="tier-chip">TIE {r.statTier}</span> : null}
+                        {newTier ? (
+                          <span
+                            className="tier-chip"
+                            style={{
+                              background: tierColor(r.statTier),
+                              color: tierTextColor(r.statTier),
+                              borderColor: tierColor(r.statTier),
+                            }}
+                          >
+                            TIE {r.statTier}
+                          </span>
+                        ) : null}
                       </td>
                       <td>
                         <span className="car-name">{r.name}</span>
@@ -110,15 +173,15 @@ export function App() {
                         </span>
                       </td>
                       <td
-                        key={`${r.name}-${r.p50.toFixed(4)}`}
+                        key={`${r.name}-${r.p50.toFixed(4)}-${r.p75.toFixed(4)}`}
                         className={`num p50 mono${flashKeys.get(r.name) ? " flash" : ""}`}
                       >
-                        {fmt(r.p50)}
+                        {fmt(primaryValue(r))}
                       </td>
                       <td className="num band mono">
                         {fmt(r.p05)}–{fmt(r.p95)}
                       </td>
-                      <td className="num band mono">{fmt(r.p90)}</td>
+                      <td className="num band mono">{fmt(secondaryValue(r))}</td>
                       <td className="num band mono">
                         {r.beatsNext === null ? "—" : `${Math.round(r.beatsNext * 100)}%`}
                       </td>

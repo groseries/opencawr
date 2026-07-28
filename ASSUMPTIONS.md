@@ -76,3 +76,4 @@ generalized, or retired. Statuses:
 | OPEN | Real calendar age as a state variable | age is still odometer-derived; garage-kept old cars under-aged (matters most for passion vehicles) |
 | OPEN | Total-loss life truncation | a totaled car should end the holding period; currently only an annual $ charge |
 | OPEN | Reliability re-derivation (launch gate) | NHTSA/CarComplaints/RepairPal pipeline — spec §9, blocks public launch |
+| 2026-07-27 | P75 ("protects against bad luck") rank basis | Web UI adds a second ranking, sorted and tie-tiered on each car's P75 draw instead of P50, reusing the same `tieTierBeatProb` (0.85) threshold for the tier walk. JUDGMENT: no separate significance threshold was defined for the P75 ordering; the P50 threshold is assumed to transfer unchanged. |

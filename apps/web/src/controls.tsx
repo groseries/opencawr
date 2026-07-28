@@ -142,6 +142,40 @@ export function Assumptions({ inputs, onChange }: Props) {
   );
 }
 
+export type RankBasis = "p50" | "p75";
+
+/** Owner-decision plain-English rank-basis toggle: re-sorts table + ladder by
+ * the chosen quantile (worker precomputes both orderings, no recompute here). */
+export function RankBasisToggle({
+  value,
+  onChange,
+}: {
+  value: RankBasis;
+  onChange: (v: RankBasis) => void;
+}) {
+  return (
+    <div className="rank-basis" role="group" aria-label="Rank basis">
+      <span className="rank-basis-label">Rank by</span>
+      <div className="rank-basis-strip">
+        <button
+          type="button"
+          className={value === "p50" ? "seg seg-active" : "seg"}
+          onClick={() => onChange("p50")}
+        >
+          expected cost (P50)
+        </button>
+        <button
+          type="button"
+          className={value === "p75" ? "seg seg-active" : "seg"}
+          onClick={() => onChange("p75")}
+        >
+          protects against bad luck (P75)
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function NumberControl(props: {
   label: string;
   hint?: string;
