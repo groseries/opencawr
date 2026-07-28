@@ -36,19 +36,28 @@ export function App() {
       ? "until it dies"
       : `${((inputs.holdMiles as number) / 1000).toFixed(0)}k mi hold`;
 
-  // remember previous primary values so changed values can flash
-  const prev = useMemo(() => new Map<string, number>(), []);
+  // Remember each car's previous P50 AND P75 (regardless of which is on
+  // display) so the flash means "this changed because an assumption changed" —
+  // never "the user toggled which stat is shown". Both maps are updated from
+  // every recompute, so switching rankBasis alone never flags a flash: the
+  // quantile's own history already tracks it from before the toggle.
+  const prevP50 = useMemo(() => new Map<string, number>(), []);
+  const prevP75 = useMemo(() => new Map<string, number>(), []);
   const flashKeys = useMemo(() => {
-    if (!rows) return new Map<string, boolean>();
+    if (!byP50) return new Map<string, boolean>();
     const out = new Map<string, boolean>();
-    for (const r of rows) {
-      const was = prev.get(r.name);
-      const now = primaryValue(r);
+    for (const r of byP50) {
+      const prevMap = rankBasis === "p75" ? prevP75 : prevP50;
+      const was = prevMap.get(r.name);
+      const now = rankBasis === "p75" ? r.p75 : r.p50;
       out.set(r.name, was !== undefined && Math.abs(was - now) > 0.0005);
-      prev.set(r.name, now);
+    }
+    for (const r of byP50) {
+      prevP50.set(r.name, r.p50);
+      prevP75.set(r.name, r.p75);
     }
     return out;
-  }, [rows, prev, rankBasis]);
+  }, [byP50, prevP50, prevP75, rankBasis]);
 
   return (
     <div className="shell">
@@ -164,7 +173,7 @@ export function App() {
                         </span>
                       </td>
                       <td
-                        key={`${r.name}-${primaryValue(r).toFixed(4)}`}
+                        key={`${r.name}-${r.p50.toFixed(4)}-${r.p75.toFixed(4)}`}
                         className={`num p50 mono${flashKeys.get(r.name) ? " flash" : ""}`}
                       >
                         {fmt(primaryValue(r))}
