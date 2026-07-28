@@ -28,6 +28,26 @@ function article(n: number): string {
   return n === 8 || n === 11 || n === 18 || (n >= 80 && n <= 89) ? "an" : "a";
 }
 
+const MAX_YEAR = new Date().getFullYear() + 1;
+const MIN_YEAR = 1990;
+const MAX_ODO = 500_000;
+
+/** Guards against a cleared/negative/non-numeric field ever reaching the worker —
+ * returns a plain-English note naming the first invalid field, or null if the
+ * listing is scoreable. */
+function validationError(year: number, odo: number, price: number): string | null {
+  if (!Number.isFinite(year) || year < MIN_YEAR || year > MAX_YEAR) {
+    return `Enter a model year between ${MIN_YEAR} and ${MAX_YEAR}`;
+  }
+  if (!Number.isFinite(odo) || odo < 0 || odo > MAX_ODO) {
+    return `Enter an odometer between 0 and ${MAX_ODO.toLocaleString()} mi`;
+  }
+  if (!Number.isFinite(price) || price <= 0) {
+    return "Enter a price above $0";
+  }
+  return null;
+}
+
 /** Score one real-world listing against the modeled 71-car field: percentile
  * within this car's own default-buy outcomes, rank position against the field,
  * and price vs. the modeled market curve. Estimates only — never "good/bad deal". */
@@ -52,9 +72,10 @@ export function DealAnalyzer({ inputs, rows }: { inputs: EngineInputs; rows: Ran
     }
   };
 
+  const invalidReason = validationError(year, odo, price);
   const deal = useMemo(
-    () => (vehicleName ? { vehicleName, year, odo, price } : null),
-    [vehicleName, year, odo, price],
+    () => (vehicleName && !invalidReason ? { vehicleName, year, odo, price } : null),
+    [vehicleName, year, odo, price, invalidReason],
   );
   const { result, computing } = useDealEngine(inputs, deal);
 
@@ -122,7 +143,9 @@ export function DealAnalyzer({ inputs, rows }: { inputs: EngineInputs; rows: Ran
         </label>
       </form>
 
-      {!result ? (
+      {invalidReason ? (
+        <div className="loading">{invalidReason}</div>
+      ) : !result ? (
         <div className="loading">
           {computing ? "Scoring this deal…" : "Enter a listing above to score it."}
         </div>

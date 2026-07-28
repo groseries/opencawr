@@ -1,5 +1,12 @@
 /// <reference lib="webworker" />
-import { costPerMile, curveAt, parseCurve, rankWithTiers, type RankableCar } from "@opencawr/core";
+import {
+  costPerMile,
+  curveAt,
+  impliedModelYear,
+  parseCurve,
+  rankWithTiers,
+  type RankableCar,
+} from "@opencawr/core";
 import type { Constants, EngineInputs, Vehicle } from "@opencawr/core";
 import raw from "../../../opencawr_data.json";
 
@@ -183,7 +190,7 @@ function handleDeal(req: DealRequest) {
 
   // Same odometer↔year feasibility check as the Rankings view (feasNote), applied
   // to the odometer the deal was actually bought at.
-  const rawYear = data.constants.now_year - deal.odo / am;
+  const rawYear = impliedModelYear(deal.odo, am, data.constants.now_year);
   if (Math.round(rawYear) > vehicle.last_year) {
     notes.push(`low-mileage example (last built ${vehicle.last_year})`);
   } else if (Math.round(rawYear) < vehicle.first_year) {
