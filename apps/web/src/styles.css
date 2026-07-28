@@ -327,6 +327,19 @@ body {
   border-top: 2px solid var(--ink);
 }
 
+.ranking tbody tr.row-clickable {
+  cursor: pointer;
+}
+
+.ranking tbody tr.row-clickable:hover td {
+  background: rgba(20, 25, 29, 0.04);
+}
+
+.ranking tbody tr.row-clickable:focus-visible {
+  outline: 2px solid var(--needle);
+  outline-offset: -2px;
+}
+
 .col-rank {
   width: 2.2em;
   color: var(--muted);
@@ -529,6 +542,7 @@ th.num {
 .ladder-hit {
   fill: transparent;
   outline: none;
+  cursor: pointer;
 }
 
 .ladder-hit:hover,
@@ -640,4 +654,283 @@ th.num {
 
 .intake-continue:hover {
   opacity: 0.85;
+}
+
+/* ── per-car drawer (Task F) ──────────────────────────────── */
+.drawer-scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 25, 29, 0.5);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 20;
+}
+
+.drawer-panel {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  height: 100%;
+  overflow-y: auto;
+  background: var(--panel);
+  border-left: 1px solid var(--ink);
+  padding: 22px 22px 28px;
+}
+
+@media (max-width: 720px) {
+  .drawer-panel {
+    max-width: 100%;
+  }
+}
+
+.drawer-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.drawer-close:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.drawer-title {
+  font-size: 17px;
+  letter-spacing: 0.02em;
+  padding-right: 32px;
+}
+
+.drawer-headline {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13.5px;
+}
+
+.drawer-headline .mono {
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.drawer-section {
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule);
+}
+
+.drawer-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.drawer-disclaimer {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+/* ── survey heatmap ───────────────────────────────────────── */
+.heatmap-wrap {
+  overflow-x: auto;
+}
+
+.heatmap-svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.heatmap-tick {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--muted);
+}
+
+.heatmap-cell {
+  cursor: default;
+}
+
+.heatmap-cell:hover,
+.heatmap-cell:focus-visible {
+  stroke: var(--ink);
+  stroke-width: 2;
+  outline: none;
+}
+
+.heatmap-extreme-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  fill: var(--paper);
+  pointer-events: none;
+}
+
+.heatmap-axis-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2px;
+  font-size: 10.5px;
+  color: var(--muted);
+}
+
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.heatmap-legend-swatches {
+  display: flex;
+}
+
+.heatmap-swatch {
+  display: inline-block;
+  width: 16px;
+  height: 12px;
+}
+
+.heatmap-swatch-infeasible {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--rule),
+    var(--rule) 2px,
+    var(--muted) 2px,
+    var(--muted) 4px
+  );
+}
+
+.heatmap-legend-infeasible {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+/* ── sensitivity lines ────────────────────────────────────── */
+.sens-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.sens-chart {
+  flex: 1 1 260px;
+  min-width: 220px;
+}
+
+.sens-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.sens-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.sens-grid {
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+
+.sens-tick,
+.sens-xtick {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  fill: var(--muted);
+}
+
+.sens-line {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.sens-dot {
+  fill: var(--ink);
+  stroke: var(--panel);
+  stroke-width: 2;
+}
+
+.sens-dot-current {
+  fill: var(--needle);
+}
+
+/* ── cost breakdown ───────────────────────────────────────── */
+.breakdown-bar {
+  display: flex;
+  width: 100%;
+  height: 22px;
+  gap: 2px;
+}
+
+.breakdown-seg {
+  height: 100%;
+}
+
+.breakdown-list {
+  margin-top: 12px;
+  list-style: none;
+}
+
+.breakdown-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+  font-size: 12.5px;
+}
+
+.breakdown-swatch {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 auto;
+}
+
+.breakdown-name {
+  flex: 1 1 auto;
+  color: var(--muted);
+}
+
+.breakdown-value {
+  color: var(--ink);
+}
+
+.breakdown-pct {
+  width: 3em;
+  text-align: right;
+  color: var(--band);
+}
+
+.breakdown-total {
+  margin-top: 4px;
+  padding-top: 6px;
+  border-top: 1px solid var(--rule);
+  font-weight: 600;
+}
+
+.breakdown-total .breakdown-value {
+  margin-left: auto;
 }

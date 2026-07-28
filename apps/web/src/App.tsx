@@ -6,6 +6,7 @@ import { Ladder } from "./charts/Ladder.js";
 import { tierColor, tierTextColor } from "./charts/tierColors.js";
 import { DealAnalyzer } from "./deal/DealAnalyzer.js";
 import { IntakeCard } from "./intake.js";
+import { CarDrawer } from "./drawer/CarDrawer.js";
 
 const fmt = (x: number) => `$${x.toFixed(3)}`;
 const ETYPE_LABEL: Record<string, string> = {
@@ -24,6 +25,7 @@ export function App() {
   const [tab, setTab] = useState<"rankings" | "deal">("rankings");
   const [minSeats, setMinSeats] = useState<number | null>(null);
   const [showIntake, setShowIntake] = useState(() => !localStorage.getItem(INTAKE_SEEN_KEY));
+  const [drawerCar, setDrawerCar] = useState<string | null>(null);
   const { byP50, byP75, ms, computing } = useEngine(inputs);
   const rows = rankBasis === "p50" ? byP50 : byP75;
 
@@ -187,7 +189,7 @@ export function App() {
                 Running {DEFAULTS.draws ?? 1100} simulations per car…
               </div>
             ) : view === "ladder" ? (
-              <Ladder rows={rows} basis={rankBasis} dimmed={dimmed} />
+              <Ladder rows={rows} basis={rankBasis} dimmed={dimmed} onOpenCar={setDrawerCar} />
             ) : (
             <table className="ranking">
               <thead>
@@ -214,10 +216,23 @@ export function App() {
                   const newTier = i === 0 || rows[i - 1]!.statTier !== r.statTier;
                   const isDimmed = dimmed.has(r.name);
                   const rowClass =
-                    [newTier && "tier-start", isDimmed && "row-dimmed"].filter(Boolean).join(" ") ||
-                    undefined;
+                    ["row-clickable", newTier && "tier-start", isDimmed && "row-dimmed"]
+                      .filter(Boolean)
+                      .join(" ");
+                  const openDrawer = () => setDrawerCar(r.name);
                   return (
-                    <tr key={r.name} className={rowClass}>
+                    <tr
+                      key={r.name}
+                      className={rowClass}
+                      tabIndex={0}
+                      onClick={openDrawer}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          openDrawer();
+                        }
+                      }}
+                    >
                       <td
                         className="col-rank mono"
                         style={{ borderLeft: `3px solid ${tierColor(r.statTier)}` }}
@@ -283,6 +298,7 @@ export function App() {
           </footer>
         </main>
       </div>
+      <CarDrawer vehicleName={drawerCar} inputs={inputs} onClose={() => setDrawerCar(null)} />
     </div>
   );
 }
