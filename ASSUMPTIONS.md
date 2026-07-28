@@ -1,71 +1,78 @@
 # OpenCAWR — Assumptions Ledger
 
 The single written record of every assumption in the model: explicit, implicit, inferred,
-and contested. **Owner directive (2026-07-27): the 71 seed `model_output` rows are a
-calibration REFERENCE, not absolute truth** — they were produced by a lost prototype
-(`build_v7.py`) that itself evolved past its own documentation. Update this file whenever
-an assumption is added, changed, generalized, or retired. Statuses:
+and contested. **Owner directive (2026-07-27): the 71 seed `model_output` rows from the
+lost prototype are a REFERENCE, not truth.** On 2026-07-27 the owner made the v2b model
+(as documented in the prototype's own `CAWR.xlsx` "Assumptions"/"Model & Method" tabs)
+canonical, and the reference outputs were **regenerated from our engine**; the prototype's
+originals are preserved per-vehicle as `model_output_prototype` (revision-log ethos: keep
+old numbers, never delete). Update this file whenever an assumption is added, changed,
+generalized, or retired. Statuses:
 
 - **SOURCED** — traceable to a real dataset/publication
-- **DOCUMENTED** — stated in the prototype's own docs (`CAWR.xlsx` "Assumptions" / "Model & Method" tabs)
-- **INFERRED** — reverse-engineered by fitting the 71 reference outputs; no independent source
-- **CONFLICT** — documentation and reference outputs disagree; resolution recorded
+- **DOCUMENTED** — stated in the prototype's own docs (CAWR.xlsx tabs)
+- **JUDGMENT** — a deliberate, labeled modeling choice with no external source
 - **USER-SPECIFIC** — true for the owner's situation only; must become a user input before general release
 
 ## A. User-specific assumptions to generalize (all become inputs; owner's values are the defaults)
 
 | Assumption | Value | Status | Generalization path |
 |---|---|---|---|
-| Annual mileage | 13,000 mi/yr | USER-SPECIFIC, user-confirmed not measured | intake question; biggest single lever (xlsx "STILL OPEN") |
-| Insurance multiplier | ×0.80 (USAA active-duty) | USER-SPECIFIC | replace with real quote or ZIP-based basis; applies to full coverage AND the $1,176 liability floor (→ ~$941) per v2b |
-| Registration | $55/yr flat (FL home-of-record) | USER-SPECIFIC | per-state table (CA = VLF ~0.65% + smog + $118 ZEV fee — deliberately NOT charged for the owner); omits FL one-time ~$225 initial + ~$77 title |
+| Annual mileage | 13,000 mi/yr | USER-SPECIFIC, user-confirmed not measured | intake question; biggest single lever |
+| Insurance multiplier | ×0.80 (USAA active-duty), applied to full coverage AND the $1,176 liability floor | USER-SPECIFIC | engine input; an explicit real-quote input bypasses the multiplier entirely |
+| Registration | $55/yr flat (FL home-of-record) | USER-SPECIFIC | per-state table (CA = VLF ~0.65% + smog + $118 ZEV — deliberately NOT charged for the owner); omits FL one-time ~$225 initial + ~$77 title |
 | Gas / electricity | $5.455/gal / $0.32 kWh (CA) | USER-SPECIFIC | ZIP-derived regional prices |
-| Use tax on purchase | 7% (CA rate) | USER-SPECIFIC + DOCUMENTED (v2 fix I-12) | per-state rate from ZIP |
-| EV home charging | ~85% home / 15% DCFC | USER-SPECIFIC + DOCUMENTED (I-22) | intake question; no-home-charger sharply raises EV $/mi |
-| Discount rate | 7%/yr real | DOCUMENTED-CONFLICT: xlsx narrative says 5%, JSON constants + verified opp-cost columns say 7% | already a live input; 7% is the operative default (S&P long-run real) |
+| Use tax on purchase | 7% (CA rate; `constants.use_tax_rate`, engine input `useTaxRate`) | USER-SPECIFIC + DOCUMENTED | per-state rate from ZIP |
+| EV home charging | ~85% home / 15% DCFC baked into the ×1.09/×1.06 electricity multipliers | USER-SPECIFIC + DOCUMENTED | intake question; no-home-charger raises EV $/mi sharply |
+| Discount rate | 7%/yr real (xlsx narrative says 5% in places; 7% is operative) | DOCUMENTED | already a live input; r=0 = "ignore opportunity cost" |
 
-## B. Model structure (prototype-documented; engine status)
+## B. Model structure (v2b, canonical since 2026-07-27 — all implemented in `@opencawr/core`)
 
-| Mechanism | Documented form (xlsx) | In TS engine today? |
+| Mechanism | Form | Status |
 |---|---|---|
-| Cost equation | [dep + Σ disc(ops) + tires + battery] ÷ miles + energy × avg discount factor | ✅ |
-| Depreciation | price curve at buy odo → resale (scrap at EOL; curve value at earlier sell), extrapolated never clamped, floored at scrap | ✅ |
-| Use tax | +7% × purchase price at t0 | ❌ not yet (see §E1) |
-| Total-loss charge | 1.5%/yr × $750 deductible while full-coverage; × full book value when liability-only; does NOT truncate life (open limitation) | ❌ not yet (see §E1) |
-| Insurance | per-model full-coverage premium (JSON stores pre-USAA) × 0.8, drop to liability-only < $6k book | ✅ (liability×0.8 missing — with §E1) |
-| Major-repair tail | Poisson past 120k mi; **rate ramps ×(1+(odo−120k)/100k)**; cost lognormal σ=0.5 × make-mult × year-mult + $600 hassle | ⚠ flat rate today, σ=0.33 fitted; ramp not yet in |
-| Calendar-age escalator | ×(1 + 2%/yr past age 8), age still = odo÷13k (their "PARTIAL" fix — real calendar age remains open) | ⚠ approximated by a fitted ×3.5 late-maintenance slope; replace with documented form (§E1) |
-| Year-reliability multiplier | landmine ×1.40 / caution ×1.15 / sweet-spot ×0.95, applied to REPAIR only | ⚠ engine currently also applies to maintenance (fitted); revisit with §E1 |
-| Battery | Bernoulli × lognormal cost at ~65% of life: hybrid 15%×$2.5k, PHEV 22%×$4k, EV 30%×$12k, **Tesla $14k, Leaf 55%×$8k**; σ 0.40/0.40/0.35 | ⚠ close (EV 33%×$11.5k inferred); needs per-model fields in data (§E4) |
-| Energy | outside the Monte Carlo; EV kWh ×1.08 degradation, elec ×1.09 (EV) / ×1.06 (PHEV) DCFC premium; 0%/yr price escalation | ⚠ multipliers not yet in |
-| Sport class | 70k-mile ownership (not drive-to-death), resale ≈ purchase (0.60–1.0 retention) | ❌ engine has no class-specific horizon; explains the two Porsche reference rows (§D) |
-| EOL | iSeeCars empirical × 1.30 "maintained" bonus (already baked into `eol_maintained_miles`) | ✅ |
-| Opportunity cost | ONLY via discounting; the +5%/yr capital charge was proven double-counting and removed (v2b) | ✅ |
-| Monte Carlo | N=1,100, numpy seed 42; P50 stable ±$0.004 | ✅ (own PRNG; statistical equivalence only) |
+| Cost equation | [dep + use tax + Σ disc(maint, ins, reg, total-loss, repairs) + tires + battery] ÷ miles + energy × avg discount factor | DOCUMENTED |
+| Depreciation | price curve at buy odo → resale (scrap at EOL; curve value at earlier sell), extrapolated, floored at scrap | DOCUMENTED |
+| Use tax | rate × purchase price at t0 | DOCUMENTED |
+| Total-loss exposure | 1.5%/yr × $750 deductible while full-coverage; × full book value when liability-only. Does NOT truncate life (open limitation) | DOCUMENTED |
+| Insurance | per-model premium (pre-multiplier in data) × multiplier; liability-only once book < $6k; noise Normal(1, 0.08) per year | DOCUMENTED |
+| Major-repair tail | Poisson past 120k mi, hazard ×(1+(odo−120k)/100k); cost lognormal σ=0.5 × make-mult × year-mult + $600 hassle | DOCUMENTED |
+| Calendar-age escalator | ×(1 + 2%/yr past age 8) on scheduled maintenance AND repair-event costs (doc says "repairs"; broad reading is a JUDGMENT). Age = odo ÷ annual miles — real calendar age still open (worst for garage-kept/passion cars) | DOCUMENTED + JUDGMENT |
+| Year-reliability multiplier | landmine ×1.40 / caution ×1.15 / sweet-spot ×0.95, repair costs only | DOCUMENTED |
+| Battery | per-vehicle data fields (prob, pack $, σ): EV 30%×$12k, Tesla 30%×$14k, Leaf 55%×$8k, PHEV 22%×$4k, hybrid 15%×$2.5k; Bernoulli × lognormal at 65% of life | DOCUMENTED (values are labeled judgment) |
+| Energy | outside the Monte Carlo (deterministic horizon); EV kWh ×1.08 degradation; elec ×1.09 EV / ×1.06 PHEV DCFC premium; 0%/yr price escalation | DOCUMENTED |
+| EOL | `eol_maintained_miles` = iSeeCars empirical × 1.30 "maintained" bonus (baked in); lognormal dispersion per tier (§C) | SOURCED × JUDGMENT |
+| Opportunity cost | ONLY via discounting; +5%/yr capital charge proven double-counting, removed v2b | DOCUMENTED |
+| Sport/passion vehicles | NO special-case rule (owner decision): a vehicle of passion runs through the same engine with its own inputs (low annual miles, chosen horizon, curve-based resale). The calendar-age limitation bites hardest here | OWNER DECISION |
+| Monte Carlo | N=1,100 default, seed 42, own deterministic PRNG; P50 stability ~±$0.004 across seeds | DOCUMENTED |
 
-## C. Distribution parameters
+## C. Distribution parameters (resolved 2026-07-27)
 
-| Parameter | Documented | Fitted vs reference outputs | Resolution |
-|---|---|---|---|
-| EOL dispersion σ | 0.12 lognormal, uniform across makes | 0.07–0.08 fits the published bands | **CONFLICT — unresolved** (§E2). Note xlsx itself flags "uniform σ misrepresents a Fiat vs a Corolla" |
-| Repair cost σ | 0.50 | 0.33 | CONFLICT — likely coupled to the missing ramp/escalator; re-fit after §E1 |
-| Insurance noise | Normal(1, 0.08) per year | lognormal 0.05 on total | reconcile with §E1 (per-year form is better; averages to ~2–3% of PV) |
-| Battery cost σ | 0.35–0.40 | not fitted (fixed cost) | adopt documented |
+| Parameter | Value | Status |
+|---|---|---|
+| EOL dispersion σ | per tier: low 0.10 / mid 0.12 / high 0.15 / sport 0.15 (`constants.eol_sigma_by_tier`) | OWNER DECISION (spec §10 fix; prototype's uniform 0.12 was DOCUMENTED, its published bands implied ~0.07 — superseded by regeneration) |
+| Repair cost σ | 0.50 lognormal per event | DOCUMENTED |
+| Insurance noise | Normal(1, 0.08) per year | DOCUMENTED |
+| Battery cost σ | per-vehicle field (0.35 EV / 0.40 PHEV+hybrid) | DOCUMENTED |
 
 ## D. Data-quality flags (seed set)
 
-- **Porsche 996 Carrera / Turbo**: reference rows follow the sport rule (70k-mi hold, value retention) — not comparable to drive-to-death rows. Exempted from opp-cost tests; treat all their outputs as sport-rule outputs.
-- **Fiat 500**: forced landmine ×1.40 in v2b ("no 500 model year is reliable") — the JSON's `model_year_reliability` does NOT encode this; fix belongs in data, not engine special-cases (§E5).
-- **Maintenance curves are shared** across 42 of ~70 cars (Elantra=Sorento, CX-90=Suburban, …) — per-car precision is an illusion; fine for tiers, not for head-to-head claims.
-- **Kia K4** is `proxied` (no used history). Reference outputs for it inherit every proxy assumption.
-- **Reliability tiers + per-make multipliers are judgment calls**, not sourced tables (xlsx Part 4c), and reliability data traces to Consumer Reports → **public-launch blocked** until re-derived (spec §9).
-- The Any-Car Calculator tab used a *simpler second model* (RUNBASE) — never port it; one engine only.
+- **`model_output` is generated by our engine** (meta.reference_engine records draws/seed/date); `model_output_prototype` is the lost prototype's original — historical only, never asserted.
+- **Porsche 996 Carrera / Turbo**: prototype rows used a special sport rule (70k-mi hold, resale ≈ purchase). Our reference computes them drive-to-death like everything else — their headline $/mi is not meaningful for a passion-use case; use per-car inputs instead.
+- **Fiat 500**: all model years marked `bad` (v2b audit: "no 500 model year is reliable") — encoded in data, not code.
+- **Maintenance curves shared** across 43 cars (`maintenance_curve_shared_with` field) — per-car precision is an illusion; fine for tiers, not head-to-head claims.
+- **Kia K4** is `proxied` (no used history); inherits every proxy assumption.
+- **Reliability tiers + per-make multipliers are judgment calls** (xlsx Part 4c), and reliability data traces to Consumer Reports → **public-launch blocked** until re-derived from NHTSA/CarComplaints/RepairPal (spec §9).
+- The prototype's Any-Car Calculator used a *simpler second model* — never port it; one engine only.
 
-## E. Open questions requiring owner input (2026-07-27)
+## E. Decision log / open items
 
-1. **Which model is canonical?** The reference outputs match neither the base model nor the fully-documented v2b stack — `build_v7` evolved further, and component on/off fits are degenerate (many subsets score identically). Recommended: implement the documented v2b structure faithfully (tax, total-loss, ramp, escalator, energy adders, per-model battery), then **regenerate the reference outputs from our engine** and retire the JSON numbers to historical status.
-2. **σ_EOL**: keep documented 0.12 (wider, more honest bands) or the 0.07 that reproduces the published bands? (Moot if #1 = regenerate.) Per-tier dispersion is the eventual fix (spec §10).
-3. **Real insurance quotes**: the prototype repeatedly notes premiums are estimates pending the owner's real USAA numbers. Provide if available; otherwise premiums stay per-model estimates.
-4. **Battery fields into the vehicle schema** (prob, pack cost, σ per model incl. Tesla/Leaf overrides) instead of engine constants — approve schema addition.
-5. **Fiat 500 data fix**: move all its model years to `bad` in the data (with a provenance note) — approve.
-6. **Sport-class policy**: keep a hard-coded 70k-mi/value-retention rule, or drop the special case and let the holding-horizon input express it (recommended), accepting the two Porsche reference rows are then untargetable?
+| Date | Item | Resolution |
+|---|---|---|
+| 2026-07-27 | Canonical model | v2b structure implemented; reference outputs regenerated from our engine; prototype numbers preserved as `model_output_prototype` |
+| 2026-07-27 | EOL dispersion | per-tier σ (see §C) |
+| 2026-07-27 | Battery / Fiat / shared-curve data fixes | approved and applied to `opencawr_data.json` |
+| 2026-07-27 | Sport class | no hard-coded rule; passion vehicles = same engine, per-car inputs |
+| OPEN | Real insurance quotes | premiums remain per-model estimates until the owner provides real USAA numbers (engine accepts `fullCoverageUsdYr` as-is) |
+| OPEN | Real calendar age as a state variable | age is still odometer-derived; garage-kept old cars under-aged (matters most for passion vehicles) |
+| OPEN | Total-loss life truncation | a totaled car should end the holding period; currently only an annual $ charge |
+| OPEN | Reliability re-derivation (launch gate) | NHTSA/CarComplaints/RepairPal pipeline — spec §9, blocks public launch |

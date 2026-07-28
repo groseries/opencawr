@@ -15,6 +15,12 @@ export interface VehicleSpecs {
   full_coverage_ins_usd_yr: number;
 }
 
+export interface BatterySpec {
+  failure_prob: number;
+  pack_cost_usd: number;
+  cost_sigma: number;
+}
+
 export interface Vehicle {
   name: string;
   make: string;
@@ -32,6 +38,9 @@ export interface Vehicle {
   maintenance_usd_per_yr_by_age: Record<string, number>;
   repair_cost_multiplier_by_make: number;
   model_year_reliability: { bad: number[]; caution: number[]; good: number[] };
+  /** Present on ev/phev/hybrid vehicles (data-driven battery risk). */
+  battery?: BatterySpec;
+  maintenance_curve_shared_with?: string[];
 }
 
 export interface ReliabilityTier {
@@ -60,6 +69,14 @@ export interface Constants {
   tires_usd_per_mi_by_body: Record<string, number>;
   scrap_usd_by_body: Record<string, number>;
   reliability_tiers: Record<ReliabilityTierName, ReliabilityTier>;
+  collision_deductible_usd: number;
+  eol_sigma_by_tier: Record<ReliabilityTierName, number>;
+  use_tax_rate: number;
+  total_loss_rate_per_yr: number;
+  battery_event_frac_of_life: number;
+  ev_kwh_degradation_mult: number;
+  dcfc_elec_mult_ev: number;
+  dcfc_elec_mult_phev: number;
 }
 
 /** User-settable inputs (spec §4). Everything defaults from Constants / the vehicle. */
@@ -75,10 +92,13 @@ export interface EngineInputs {
   discountRate?: number;
   gasUsdPerGal?: number;
   elecUsdPerKwh?: number;
-  /** Override full-coverage premium (real quote). Default vehicle.specs.full_coverage_ins_usd_yr. */
+  /** Real full-coverage quote in $/yr. When set, used as-is (no multiplier applied).
+   *  Default: vehicle.specs.full_coverage_ins_usd_yr × insuranceMultiplier. */
   fullCoverageUsdYr?: number;
   insuranceMultiplier?: number;
   registrationUsdYr?: number;
+  /** Sales/use tax rate on the purchase (state-specific). Default constants.use_tax_rate. */
+  useTaxRate?: number;
   draws?: number;
   seed?: number;
 }
@@ -86,9 +106,11 @@ export interface EngineInputs {
 export interface CostBreakdown {
   /** Expected (mean-across-draws) present-value $/mi by component. */
   depreciation: number;
+  useTax: number;
   maintenance: number;
   insurance: number;
   registration: number;
+  totalLoss: number;
   repairs: number;
   tires: number;
   battery: number;

@@ -6,7 +6,7 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "vitest run",
-    "gen-manifest": "tsx scripts/gen-fidelity-manifest.ts"
+    "gen-reference": "tsx scripts/gen-reference-outputs.ts"
   },
   "devDependencies": {
     "@types/node": "^26.1.2",

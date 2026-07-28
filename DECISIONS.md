@@ -38,11 +38,15 @@ truth for the model; this file records product-flow and implementation decisions
   assumption — explicit and implicit — is tracked in **ASSUMPTIONS.md**; keep it current
   as we work. Spec §10 improvements (per-tier EOL dispersion, total-loss truncation, real
   model-year aging) ship as deliberate model revisions with regenerated reference outputs.
-- **`build_v7.py` is lost** (not in handoff, not on disk). Every reverse-engineered distribution
-  or constant not present in the spec/data lives in `packages/core/src/calibration.ts` with a
-  comment stating it is inferred, not sourced.
-- **Golden tolerances**: ±$0.005/mi on P50/P75, ±$0.01/mi on P05/P95, exact-determinism of the
-  TS engine vs itself (fixed seed), slack on tie-tier flips near the 85% boundary.
+- **`build_v7.py` is lost**, but `CAWR.xlsx`'s "Assumptions"/"Model & Method" tabs document
+  the v2b model. **Owner decisions 2026-07-27**: (1) v2b is canonical — implemented in the
+  engine, reference outputs regenerated from it (prototype originals preserved as
+  `model_output_prototype`); (2) EOL dispersion is per-tier (low .10 / mid .12 / high .15 /
+  sport .15); (3) battery risk, Fiat-500 all-years-bad, and shared-curve flags moved into the
+  data schema; (4) no hard-coded sport-class rule — passion vehicles use the same engine with
+  their own inputs (low annual miles, chosen horizon).
+- **Test policy**: the engine must reproduce the stored reference outputs EXACTLY (fixed seed);
+  regenerating them is a deliberate, reviewed numbers-change event, never a CI fix.
 
 ## Launch gate (spec §9 — machine-readable)
 
