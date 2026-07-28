@@ -1,0 +1,10 @@
+{
+  "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2022&make=Volkswagen&model=Passat",
+  "fetchedAt": "2026-07-28T14:52:37.524Z",
+  "body": {
+    "menuItem": {
+      "text": "Auto (S6), 4 cyl, 2.0 L, Turbo",
+      "value": "44136"
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, it } from "vitest";
 import { costPerMile } from "@opencawr/core";
-import { assembleVehicle } from "../src/assemble.js";
+import { assembleVehicle, classifyModelYearReliability } from "../src/assemble.js";
 import { loadSeedData } from "../src/seedData.js";
 import { validateVehicleShape } from "../src/schema.js";
 
@@ -54,5 +54,45 @@ describe("assembleVehicle (Honda Fit, no seed entry -> full proxy fallback)", ()
         JSON.stringify(v.price_vs_odometer_usd) === JSON.stringify(vehicle.price_vs_odometer_usd),
     );
     expect(matchingPeer).toBeDefined();
+  });
+
+  it("does not pick Fiat 500 (a much smaller EPA size class than Fit's) as the segment peer", async () => {
+    const { vehicle } = await assembleVehicle({ make: "Honda", model: "Fit" });
+    expect(vehicle.name).not.toBe("Fiat 500");
+    expect(vehicle.price_vs_odometer_usd).not.toEqual({
+      "12000": 14000,
+      "30000": 11000,
+      "55000": 9000,
+      "80000": 7000,
+      "110000": 5000,
+      "140000": 3500,
+    });
+  });
+});
+
+describe("classifyModelYearReliability (synthetic complaint counts)", () => {
+  it("flags a year as caution when its complaint count exceeds 2x the median", () => {
+    const counts = [
+      { year: 2018, complaints: 40, odiIds: [] },
+      { year: 2019, complaints: 45, odiIds: [] },
+      { year: 2020, complaints: 200, odiIds: [] }, // > 2x median(42.5) = 85
+      { year: 2021, complaints: 38, odiIds: [] },
+    ];
+    const result = classifyModelYearReliability(counts);
+    expect(result.median).toBe(42.5);
+    expect(result.caution).toEqual([2020]);
+    expect(result.good).toEqual([2018, 2019, 2021]);
+    expect(result.bad).toEqual([]);
+  });
+
+  it("flags no years as caution when nothing crosses the threshold", () => {
+    const counts = [
+      { year: 2018, complaints: 40, odiIds: [] },
+      { year: 2019, complaints: 50, odiIds: [] },
+      { year: 2020, complaints: 60, odiIds: [] },
+    ];
+    const result = classifyModelYearReliability(counts);
+    expect(result.caution).toEqual([]);
+    expect(result.good).toEqual([2018, 2019, 2020]);
   });
 });

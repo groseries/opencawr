@@ -1,6 +1,6 @@
 {
   "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Honda&model=Fit&modelYear=2019",
-  "fetchedAt": "2026-07-28T04:55:02.973Z",
+  "fetchedAt": "2026-07-28T14:52:36.823Z",
   "body": {
     "count": 134,
     "results": [

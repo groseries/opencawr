@@ -4,7 +4,7 @@
  *  the caution-heuristic and proxy-selection JUDGMENT rows. */
 import type { Vehicle } from "@opencawr/core";
 import { epaSpecs, epaVehicleDetail, epaVehicleIdsForYear } from "./sources/epa.js";
-import { complaintCounts, normalizeModel } from "./sources/nhtsa.js";
+import { complaintCounts, normalizeModel, type YearComplaints } from "./sources/nhtsa.js";
 import { pickProxyPeer } from "./sources/proxy.js";
 import { loadSeedData } from "./seedData.js";
 
@@ -32,6 +32,23 @@ function median(nums: number[]): number {
   const mid = Math.floor(sorted.length / 2);
   if (sorted.length % 2 === 1) return sorted[mid]!;
   return (sorted[mid - 1]! + sorted[mid]!) / 2;
+}
+
+/** JUDGMENT heuristic (ASSUMPTIONS.md §F): a model year is `caution` when its
+ *  complaint count exceeds 2x the median count across the queried years;
+ *  everything else is `good` (`bad` is never derived here). Pulled out as a
+ *  pure function so it's directly unit-testable with synthetic counts. */
+export function classifyModelYearReliability(
+  counts: YearComplaints[],
+): { bad: number[]; caution: number[]; good: number[]; median: number } {
+  const med = median(counts.map((c) => c.complaints));
+  const caution: number[] = [];
+  const good: number[] = [];
+  for (const c of counts) {
+    if (med > 0 && c.complaints > 2 * med) caution.push(c.year);
+    else good.push(c.year);
+  }
+  return { bad: [], caution, good, median: med };
 }
 
 export async function assembleVehicle(
@@ -88,13 +105,7 @@ export async function assembleVehicle(
   }
 
   const counts = await complaintCounts(make, model, yearsWithData);
-  const med = median(counts.map((c) => c.complaints));
-  const caution: number[] = [];
-  const good: number[] = [];
-  for (const c of counts) {
-    if (med > 0 && c.complaints > 2 * med) caution.push(c.year);
-    else good.push(c.year);
-  }
+  const { bad, caution, good, median: med } = classifyModelYearReliability(counts);
   report.push({
     field: "model_year_reliability",
     source: "nhtsa",
@@ -105,16 +116,17 @@ export async function assembleVehicle(
   });
 
   const { vehicles: seedVehicles } = loadSeedData();
-  const peer = pickProxyPeer(seedVehicles, {
+  const peer = await pickProxyPeer(seedVehicles, {
     body: specs.body,
     etype: specs.etype,
     mpg_combined: specs.mpg_combined,
     kwh_per_100mi: specs.kwh_per_100mi,
+    sizeTier: specs.sizeTier,
   });
   report.push({
     field: "segment peer",
     source: "proxy",
-    detail: `closest peer in body="${specs.body}" etype="${specs.etype}" = "${peer.name}" (efficiency-distance footprint proxy)`,
+    detail: `closest peer in body="${specs.body}" etype="${specs.etype}" sizeTier="${specs.sizeTier}" = "${peer.name}" (size-tier pre-filter, mpg-distance tiebreak)`,
   });
 
   const proxiedFields: Array<[string, boolean?]> = [
@@ -130,10 +142,12 @@ export async function assembleVehicle(
     ["maintenance_usd_per_yr_by_age", undefined],
     ["repair_cost_multiplier_by_make", undefined],
     ["battery", undefined],
+    ["maintenance_curve_shared_with", undefined],
   ];
   for (const [field, launchBlocked] of proxiedFields) {
     if (field === "specs.co2_g_per_mi (ev only)" && specs.co2_g_per_mi !== null) continue;
     if (field === "battery" && !peer.battery) continue;
+    if (field === "maintenance_curve_shared_with" && !peer.maintenance_curve_shared_with) continue;
     report.push({
       field,
       source: "proxy",
@@ -167,7 +181,7 @@ export async function assembleVehicle(
     price_vs_odometer_usd: peer.price_vs_odometer_usd,
     maintenance_usd_per_yr_by_age: peer.maintenance_usd_per_yr_by_age,
     repair_cost_multiplier_by_make: peer.repair_cost_multiplier_by_make,
-    model_year_reliability: { bad: [], caution, good },
+    model_year_reliability: { bad, caution, good },
     ...(peer.battery ? { battery: peer.battery } : {}),
     ...(peer.maintenance_curve_shared_with
       ? { maintenance_curve_shared_with: peer.maintenance_curve_shared_with }

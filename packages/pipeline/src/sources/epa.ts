@@ -97,9 +97,48 @@ function numOrNull(s: string): number | null {
   return Number.isFinite(n) && n > 0 ? n : null;
 }
 
+/** A size sub-category finer than `body`, derived from EPA's own VClass string
+ *  (e.g. "Compact Cars" vs "Midsize Cars" vs "Minicompact Cars"). Used by
+ *  proxy.ts to pre-filter same-body+etype peers to ones of a comparable size
+ *  before falling back to mpg-distance — see ASSUMPTIONS.md §F. Subcompact
+ *  cars and small station wagons (hatchbacks) are grouped with compact cars
+ *  since they're practically the same size class of daily driver; minicompact
+ *  cars/two-seaters are kept as their own (smaller) tier. JUDGMENT. */
+export type SizeTier =
+  | "two-seater"
+  | "micro"
+  | "compact"
+  | "midsize"
+  | "large"
+  | "small-suv"
+  | "standard-suv"
+  | "small-truck"
+  | "standard-truck"
+  | "minivan"
+  | "van"
+  | "unknown";
+
+export function classifySizeTier(vClass: string): SizeTier {
+  const vc = vClass.toLowerCase();
+  if (vc.includes("two seater")) return "two-seater";
+  if (vc.includes("minicompact")) return "micro";
+  if (vc.includes("subcompact") || vc.includes("small station wagon")) return "compact";
+  if (vc.includes("compact")) return "compact";
+  if (vc.includes("midsize")) return "midsize"; // covers "Midsize Cars" and "Midsize Station Wagons"
+  if (vc.includes("large")) return "large";
+  if (vc.includes("small sport utility") || vc.includes("small suv")) return "small-suv";
+  if (vc.includes("sport utility") || vc.includes("suv")) return "standard-suv";
+  if (vc.includes("minivan")) return "minivan";
+  if (vc.includes("van")) return "van";
+  if (vc.includes("small pickup")) return "small-truck";
+  if (vc.includes("pickup")) return "standard-truck";
+  return "unknown";
+}
+
 export interface EpaSpecs {
   etype: EType;
   body: string;
+  sizeTier: SizeTier;
   mpg_combined: number | null;
   kwh_per_100mi: number | null;
   phev_gas_mpg: number | null;
@@ -112,12 +151,14 @@ export interface EpaSpecs {
 export function epaSpecs(detail: EpaVehicleDetail): EpaSpecs {
   const etype = classifyEtype(detail.atvType, detail.fuelType1);
   const body = finalizeBody(classifyBaseBody(detail.VClass, detail.drive), etype);
+  const sizeTier = classifySizeTier(detail.VClass);
   const co2 = Number(detail.co2TailpipeGpm);
 
   if (etype === "ev") {
     return {
       etype,
       body,
+      sizeTier,
       mpg_combined: null,
       kwh_per_100mi: numOrNull(detail.combE),
       phev_gas_mpg: null,
@@ -129,6 +170,7 @@ export function epaSpecs(detail: EpaVehicleDetail): EpaSpecs {
     return {
       etype,
       body,
+      sizeTier,
       mpg_combined: null,
       kwh_per_100mi: numOrNull(detail.combE),
       phev_gas_mpg: numOrNull(detail.comb08),
@@ -139,6 +181,7 @@ export function epaSpecs(detail: EpaVehicleDetail): EpaSpecs {
   return {
     etype,
     body,
+    sizeTier,
     mpg_combined: numOrNull(detail.comb08),
     kwh_per_100mi: null,
     phev_gas_mpg: null,

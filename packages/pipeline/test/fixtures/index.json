@@ -10,6 +10,16 @@
     "note": "EPA vehicle detail: Toyota Camry 2020 (Auto S8 3.5L V6)"
   },
   {
+    "hash": "f5bc740a4ad2f229",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2019&make=Chevrolet&model=Volt",
+    "note": "EPA menu options: Chevrolet Volt 2019 (PHEV)"
+  },
+  {
+    "hash": "26b0fb08be660be4",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/40924",
+    "note": "EPA vehicle detail: Chevrolet Volt 2019 (PHEV)"
+  },
+  {
     "hash": "bf3d92bb3a577be6",
     "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2017&make=Honda&model=Fit",
     "note": "EPA menu options: Honda Fit 2017"
@@ -88,5 +98,85 @@
     "hash": "5519e1f40afba71c",
     "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Honda&model=Fit&modelYear=2020",
     "note": "NHTSA complaintsByVehicle: Honda Fit 2020 (trimmed to odiNumber only)"
+  },
+  {
+    "hash": "7e1f11c328b68f91",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2022&make=Toyota&model=Corolla",
+    "note": "EPA menu options: Toyota Corolla 2022 (peer size-tier lookup)"
+  },
+  {
+    "hash": "b4f85e7e6925ba70",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2023&make=Hyundai&model=Elantra",
+    "note": "EPA menu options: Hyundai Elantra 2023 (peer size-tier lookup)"
+  },
+  {
+    "hash": "29193fc8755bb8dd",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2021&make=Honda&model=Accord",
+    "note": "EPA menu options: Honda Accord 2021 (peer size-tier lookup)"
+  },
+  {
+    "hash": "928cfc9413094de1",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2021&make=Hyundai&model=Sonata",
+    "note": "EPA menu options: Hyundai Sonata 2021 (peer size-tier lookup)"
+  },
+  {
+    "hash": "65e5074c77a3dc80",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2019&make=Fiat&model=500",
+    "note": "EPA menu options: Fiat 500 2019 (peer size-tier lookup)"
+  },
+  {
+    "hash": "37b82f797a514192",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2022&make=Volkswagen&model=Passat",
+    "note": "EPA menu options: VW Passat 2022 (peer size-tier lookup)"
+  },
+  {
+    "hash": "a481d80abc3c5e89",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2023&make=MINI&model=Cooper+Hardtop+2+Door",
+    "note": "EPA menu options: Mini Cooper 2023 (peer size-tier lookup)"
+  },
+  {
+    "hash": "7f8151e0d16a8701",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2021&make=Volkswagen&model=GTI",
+    "note": "EPA menu options: VW GTI 2021 (peer size-tier lookup)"
+  },
+  {
+    "hash": "938162d4926fc19a",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/44074",
+    "note": "EPA vehicle detail: Toyota Corolla 2022 (peer size-tier lookup)"
+  },
+  {
+    "hash": "70275d5131417ea1",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/45296",
+    "note": "EPA vehicle detail: Hyundai Elantra 2023 (peer size-tier lookup)"
+  },
+  {
+    "hash": "f51bd7a87dc9b081",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/43361",
+    "note": "EPA vehicle detail: Honda Accord 2021 (peer size-tier lookup)"
+  },
+  {
+    "hash": "0fdd4940482516d5",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/43456",
+    "note": "EPA vehicle detail: Hyundai Sonata 2021 (peer size-tier lookup)"
+  },
+  {
+    "hash": "f9f8cbe3f50e573a",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/41148",
+    "note": "EPA vehicle detail: Fiat 500 2019 (peer size-tier lookup)"
+  },
+  {
+    "hash": "6d1414f212ab35c5",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/44136",
+    "note": "EPA vehicle detail: VW Passat 2022 (peer size-tier lookup)"
+  },
+  {
+    "hash": "4198c8a1025338f4",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/45227",
+    "note": "EPA vehicle detail: Mini Cooper 2023 (peer size-tier lookup)"
+  },
+  {
+    "hash": "497aec3fb9782c0c",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/43244",
+    "note": "EPA vehicle detail: VW GTI 2021 (peer size-tier lookup)"
   }
 ]

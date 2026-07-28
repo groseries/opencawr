@@ -1,0 +1,20 @@
+{
+  "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2023&make=Hyundai&model=Elantra",
+  "fetchedAt": "2026-07-28T14:52:37.088Z",
+  "body": {
+    "menuItem": [
+      {
+        "text": "Auto (AM-S7), 4 cyl, 1.6 L, Turbo, SIDI",
+        "value": "45296"
+      },
+      {
+        "text": "Auto (AV-S1), 4 cyl, 2.0 L",
+        "value": "45294"
+      },
+      {
+        "text": "Auto (AV-S1), 4 cyl, 2.0 L, Stop-Start",
+        "value": "45295"
+      }
+    ]
+  }
+}

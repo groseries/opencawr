@@ -59,6 +59,10 @@ async function main(): Promise<void> {
   await record(menuUrl(2020, "Toyota", "Camry"), "EPA menu options: Toyota Camry 2020");
   await record(detailUrl("42011"), "EPA vehicle detail: Toyota Camry 2020 (Auto S8 3.5L V6)");
 
+  // --- PHEV adapter mapping test fixture (code review follow-up) ---
+  await record(menuUrl(2019, "Chevrolet", "Volt"), "EPA menu options: Chevrolet Volt 2019 (PHEV)");
+  await record(detailUrl("40924"), "EPA vehicle detail: Chevrolet Volt 2019 (PHEV)");
+
   // --- Honda Fit: assemble()/CLI demo, default 10-year window ---
   const currentYear = new Date().getFullYear();
   for (let year = currentYear - 9; year <= currentYear; year++) {
@@ -74,6 +78,42 @@ async function main(): Promise<void> {
       `NHTSA complaintsByVehicle: Honda Fit ${year} (trimmed to odiNumber only)`,
       trimComplaints,
     );
+  }
+
+  // --- Segment-peer size-tier lookups (proxy.ts pickProxyPeer): each seed
+  // Car+gas peer's real EPA VClass, at the peer's own pinned_buy_year_est,
+  // so offline tests reproduce the same size-tier pre-filter as production.
+  // Honda Civic / Mazda3 / Kia K4 deliberately excluded: real, live-verified
+  // EPA data gaps (bare "Civic"/"3"/"K4" model strings return no data) or
+  // (K4) not eligible anyway since it's itself provenance:"proxied" — the
+  // absent fixture + peerSizeTier's try/catch correctly resolves them to
+  // "unknown" both offline and live.
+  const peerLookups: Array<[string, string, number, string]> = [
+    ["Toyota", "Corolla", 2022, "Toyota Corolla"],
+    ["Hyundai", "Elantra", 2023, "Hyundai Elantra"],
+    ["Honda", "Accord", 2021, "Honda Accord"],
+    ["Hyundai", "Sonata", 2021, "Hyundai Sonata"],
+    ["Fiat", "500", 2019, "Fiat 500"],
+    ["Volkswagen", "Passat", 2022, "VW Passat"],
+    ["MINI", "Cooper Hardtop 2 Door", 2023, "Mini Cooper"],
+    ["Volkswagen", "GTI", 2021, "VW GTI"],
+  ];
+  for (const [make, model, year, label] of peerLookups) {
+    await record(menuUrl(year, make, model), `EPA menu options: ${label} ${year} (peer size-tier lookup)`);
+  }
+  // one representative trim id per peer, taken from the menu responses above
+  const peerDetailIds: Array<[string, string]> = [
+    ["44074", "Toyota Corolla 2022"],
+    ["45296", "Hyundai Elantra 2023"],
+    ["43361", "Honda Accord 2021"],
+    ["43456", "Hyundai Sonata 2021"],
+    ["41148", "Fiat 500 2019"],
+    ["44136", "VW Passat 2022"],
+    ["45227", "Mini Cooper 2023"],
+    ["43244", "VW GTI 2021"],
+  ];
+  for (const [id, label] of peerDetailIds) {
+    await record(detailUrl(id), `EPA vehicle detail: ${label} (peer size-tier lookup)`);
   }
 
   writeFileSync(join(FIXTURE_DIR, "index.json"), JSON.stringify(index, null, 2));

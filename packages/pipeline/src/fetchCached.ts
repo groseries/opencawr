@@ -98,7 +98,13 @@ export async function fetchCached(
     return body;
   } catch (err) {
     const fixture = readEntry(FIXTURE_DIR, hash);
-    if (fixture) return fixture.body;
+    if (fixture) {
+      console.error(
+        `[opencawr/pipeline] WARNING: live fetch failed for ${url} (${err instanceof Error ? err.message : err}); ` +
+          `serving recorded fixture test/fixtures/${hash}.json instead of a live response.`,
+      );
+      return fixture.body;
+    }
     throw err;
   }
 }
