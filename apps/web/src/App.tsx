@@ -5,6 +5,7 @@ import { useEngine } from "./useEngine.js";
 import { Ladder } from "./charts/Ladder.js";
 import { tierColor, tierTextColor } from "./charts/tierColors.js";
 import { DealAnalyzer } from "./deal/DealAnalyzer.js";
+import { IntakeCard } from "./intake.js";
 
 const fmt = (x: number) => `$${x.toFixed(3)}`;
 const ETYPE_LABEL: Record<string, string> = {
@@ -14,13 +15,32 @@ const ETYPE_LABEL: Record<string, string> = {
   phev: "PHEV",
 };
 
+const INTAKE_SEEN_KEY = "opencawr:intake-seen";
+
 export function App() {
   const [inputs, setInputs] = useState<EngineInputs>(DEFAULTS);
   const [rankBasis, setRankBasis] = useState<RankBasis>("p50");
   const [view, setView] = useState<"table" | "ladder">("table");
   const [tab, setTab] = useState<"rankings" | "deal">("rankings");
+  const [minSeats, setMinSeats] = useState<number | null>(null);
+  const [showIntake, setShowIntake] = useState(() => !localStorage.getItem(INTAKE_SEEN_KEY));
   const { byP50, byP75, ms, computing } = useEngine(inputs);
   const rows = rankBasis === "p50" ? byP50 : byP75;
+
+  const dismissIntake = () => {
+    localStorage.setItem(INTAKE_SEEN_KEY, "1");
+    setShowIntake(false);
+  };
+
+  // Soft filter: cars below the seats-needed threshold are grayed, never
+  // removed. Recomputed from `rows` + `minSeats` only — no parallel list.
+  const dimmed = useMemo(() => {
+    const s = new Set<string>();
+    if (minSeats !== null && rows) {
+      for (const r of rows) if (r.seats < minSeats) s.add(r.name);
+    }
+    return s;
+  }, [rows, minSeats]);
 
   // The primary (emphasized) column follows the active rank basis; the other
   // quantile moves to the secondary column instead of going stale/hidden.
@@ -63,6 +83,14 @@ export function App() {
 
   return (
     <div className="shell">
+      {showIntake && (
+        <IntakeCard
+          inputs={inputs}
+          onApply={(patch) => setInputs({ ...inputs, ...patch })}
+          onSetMinSeats={setMinSeats}
+          onDismiss={dismissIntake}
+        />
+      )}
       <header className="masthead">
         <div className="wordmark">
           OPEN<span className="wordmark-cawr">CAWR</span>
@@ -135,6 +163,14 @@ export function App() {
                   </button>
                 </div>
               </div>
+              {minSeats !== null && (
+                <p className="filter-status">
+                  Filtering: seats ≥ {minSeats}.{" "}
+                  <button type="button" className="filter-clear" onClick={() => setMinSeats(null)}>
+                    Clear
+                  </button>
+                </p>
+              )}
             </>
           ) : (
             <div className="results-head">
@@ -151,7 +187,7 @@ export function App() {
                 Running {DEFAULTS.draws ?? 1100} simulations per car…
               </div>
             ) : view === "ladder" ? (
-              <Ladder rows={rows} basis={rankBasis} />
+              <Ladder rows={rows} basis={rankBasis} dimmed={dimmed} />
             ) : (
             <table className="ranking">
               <thead>
@@ -176,8 +212,12 @@ export function App() {
               <tbody>
                 {rows.map((r, i) => {
                   const newTier = i === 0 || rows[i - 1]!.statTier !== r.statTier;
+                  const isDimmed = dimmed.has(r.name);
+                  const rowClass =
+                    [newTier && "tier-start", isDimmed && "row-dimmed"].filter(Boolean).join(" ") ||
+                    undefined;
                   return (
-                    <tr key={r.name} className={newTier ? "tier-start" : undefined}>
+                    <tr key={r.name} className={rowClass}>
                       <td
                         className="col-rank mono"
                         style={{ borderLeft: `3px solid ${tierColor(r.statTier)}` }}
@@ -204,6 +244,7 @@ export function App() {
                           {ETYPE_LABEL[r.etype]} · buy ~{Math.round(r.buyOdo / 1000)}k mi ·{" "}
                           {r.impliedBuyYear}
                           {r.feasNote ? ` · ${r.feasNote}` : ""}
+                          {isDimmed ? " · misses 1 filter" : ""}
                         </span>
                       </td>
                       <td

@@ -134,6 +134,15 @@ export function Assumptions({ inputs, onChange }: Props) {
         unit="%"
         onChange={(v) => set({ useTaxRate: v / 100 })}
       />
+      <NumberControl
+        label="Vehicle registration"
+        value={inputs.registrationUsdYr ?? 55}
+        step={5}
+        min={0}
+        max={400}
+        unit="$/yr"
+        onChange={(v) => set({ registrationUsdYr: v })}
+      />
 
       <button type="button" className="reset" onClick={() => onChange(DEFAULTS)}>
         Reset to defaults

@@ -546,3 +546,98 @@ th.num {
   font-size: 12.5px;
   color: var(--muted);
 }
+
+/* ── soft filters (seats needed) ─────────────────────────── */
+.row-dimmed {
+  opacity: 0.35;
+}
+
+.filter-status {
+  margin: -4px 0 14px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.filter-clear {
+  border: 0;
+  background: none;
+  padding: 0;
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  color: var(--ink);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ── intake card ──────────────────────────────────────────── */
+.intake-scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 25, 29, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 10;
+}
+
+.intake-card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  background: var(--panel);
+  border: 1px solid var(--ink);
+  padding: 22px 20px 18px;
+}
+
+.intake-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--rule);
+  background: #fff;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.intake-close:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.intake-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.intake-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.intake-actions .reset {
+  margin-top: 0;
+}
+
+.intake-continue {
+  flex: 1 1 auto;
+  padding: 8px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-ui);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.intake-continue:hover {
+  opacity: 0.85;
+}

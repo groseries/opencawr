@@ -35,11 +35,15 @@ export function Ladder({
   rows,
   basis,
   extraRow,
+  dimmed,
 }: {
   rows: RankedRow[];
   basis: "p50" | "p75";
   /** Deal Analyzer: one extra needle-red row, inserted at its rank position. */
   extraRow?: LadderExtraRow;
+  /** Soft filter: car names that miss a filter (e.g. seats needed) — grayed
+   * out (opacity .35), never removed. Applied to car rows only. */
+  dimmed?: Set<string>;
 }) {
   const emphasizedOf = (r: { p50: number; p75: number }) => (basis === "p75" ? r.p75 : r.p50);
 
@@ -172,8 +176,10 @@ export function Ladder({
           const r = entry.car!;
           const color = tierColor(r.statTier);
           const emphasized = emphasizedOf(r);
+          const isDimmed = dimmed?.has(r.name) ?? false;
+          const missesNote = isDimmed ? " — misses 1 filter" : "";
           return (
-            <g key={r.name}>
+            <g key={r.name} style={isDimmed ? { opacity: 0.35 } : undefined}>
               {entry.newTier && (
                 <line x1={0} x2={VB_W} y1={rowTop} y2={rowTop} className="ladder-tier-rule" />
               )}
@@ -216,14 +222,14 @@ export function Ladder({
                   r.p95,
                 )}, ${basis === "p75" ? "typical P50" : "P75"} ${fmtExact(
                   basis === "p75" ? r.p50 : r.p75,
-                )}, tier ${r.statTier}`}
+                )}, tier ${r.statTier}${missesNote}`}
               >
                 <title>
                   {`${r.name} — ${basis === "p75" ? "bad-luck cost P75" : "median"} ${fmtExact(
                     emphasized,
                   )}/mi · 90% range ${fmtExact(r.p05)}–${fmtExact(r.p95)} · ${
                     basis === "p75" ? "typical P50" : "P75"
-                  } ${fmtExact(basis === "p75" ? r.p50 : r.p75)} · tier ${r.statTier}`}
+                  } ${fmtExact(basis === "p75" ? r.p50 : r.p75)} · tier ${r.statTier}${missesNote}`}
                 </title>
               </rect>
             </g>
@@ -233,6 +239,7 @@ export function Ladder({
       <p className="ladder-caption">
         Overlapping bars = the model cannot tell these cars apart.
         {extraRow ? " Red = your deal." : ""}
+        {dimmed && dimmed.size > 0 ? " Faded = misses your seats filter." : ""}
       </p>
     </div>
   );
