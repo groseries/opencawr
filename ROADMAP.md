@@ -38,6 +38,29 @@ and note that `apps/web/src/region.ts` per-state values override it once a ZIP r
 the default only applies pre-intake. Add the source for 0.38 to `ASSUMPTIONS.md` §A.
 Owner-reported 2026-07-28.
 
+**R7. PHEV energy model audit** (owner question, 2026-07-28 — four real gaps found).
+`packages/core/src/engine.ts` `energyPerMile`. Current PHEV formula:
+`uf × (kwh_per_100mi/100) × elec × dcfc_phev + (1 − uf) × (gas / phev_gas_mpg)`, where `uf`
+is the per-vehicle utility factor (share of miles driven on electricity: Volt 0.80, RAV4
+Prime 0.75, Prius Prime 0.55, Pacifica PHEV 0.45). The split itself is structurally right;
+these four things are not, and each changes numbers, so treat as a deliberate model revision
+with `gen-reference` re-run:
+1. **Utility factor is fixed regardless of annual mileage.** Someone driving 30k mi/yr burns
+   far more gas per charge cycle than someone at 8k, because UF is really a function of daily
+   distance vs electric range. Today the headline annual-mileage control has no effect on the
+   gas/electric split. Consider deriving UF from daily miles + electric range (SAE J2841 gives
+   a standard UF curve) instead of a static per-car constant.
+2. **EVs get the ×1.08 pack-degradation multiplier; PHEVs get none.** Inconsistent — and for a
+   PHEV, degradation mostly shrinks electric range, which should *lower UF over the hold*
+   (more gas miles), not just raise kWh/mi.
+3. **The DC-fast-charge premium (×1.06) is applied to PHEVs**, which mostly charge at home
+   overnight and many of which cannot DC fast charge at all. Probably should be ~1.0.
+4. **`kwh_per_100mi` for PHEVs is assumed to be electric-mode consumption, not EPA's blended
+   figure** — if any row is blended, that vehicle's gas portion is double-counted. Verify each
+   of the four PHEVs against EPA and document the convention in `ASSUMPTIONS.md` §B.
+Also note energy sits outside the Monte Carlo entirely, so fuel-price and efficiency risk
+contribute zero variance to P90 — a documented v2b limitation worth revisiting here.
+
 ## P1 — Readability of what we already show
 
 **R4. Rankings car description line reads poorly.**
