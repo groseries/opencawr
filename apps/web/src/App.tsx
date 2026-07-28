@@ -18,19 +18,37 @@ const ETYPE_LABEL: Record<string, string> = {
 
 const INTAKE_SEEN_KEY = "opencawr:intake-seen";
 
+// localStorage can throw (Safari private mode, hardened settings) — never let
+// that crash top-level render. Read failure behaves as "not seen yet"; write
+// failure is a silent no-op.
+function safeLocalGet(key: string): string | null {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+function safeLocalSet(key: string, value: string): void {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    // ignore
+  }
+}
+
 export function App() {
   const [inputs, setInputs] = useState<EngineInputs>(DEFAULTS);
   const [rankBasis, setRankBasis] = useState<RankBasis>("p50");
   const [view, setView] = useState<"table" | "ladder">("table");
   const [tab, setTab] = useState<"rankings" | "deal">("rankings");
   const [minSeats, setMinSeats] = useState<number | null>(null);
-  const [showIntake, setShowIntake] = useState(() => !localStorage.getItem(INTAKE_SEEN_KEY));
+  const [showIntake, setShowIntake] = useState(() => !safeLocalGet(INTAKE_SEEN_KEY));
   const [drawerCar, setDrawerCar] = useState<string | null>(null);
   const { byP50, byP75, ms, computing } = useEngine(inputs);
   const rows = rankBasis === "p50" ? byP50 : byP75;
 
   const dismissIntake = () => {
-    localStorage.setItem(INTAKE_SEEN_KEY, "1");
+    safeLocalSet(INTAKE_SEEN_KEY, "1");
     setShowIntake(false);
   };
 

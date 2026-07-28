@@ -1,13 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { EngineInputs } from "@opencawr/core";
-import type { EngineResponse, RankedRow } from "./engine.worker.js";
+import type { EngineWorkerResponse, RankedRow } from "./engine.worker.js";
+import { getSharedWorker } from "./sharedWorker.js";
 
-/** Runs the whole 71-car field through the engine in a worker on every input change. */
+/** Runs the whole 71-car field through the engine, over the shared worker, on every
+ * input change. */
 export function useEngine(inputs: EngineInputs) {
-  const worker = useMemo(
-    () => new Worker(new URL("./engine.worker.ts", import.meta.url), { type: "module" }),
-    [],
-  );
+  const worker = useMemo(() => getSharedWorker(), []);
   const [byP50, setByP50] = useState<RankedRow[] | null>(null);
   const [byP75, setByP75] = useState<RankedRow[] | null>(null);
   const [ms, setMs] = useState(0);
@@ -15,14 +14,15 @@ export function useEngine(inputs: EngineInputs) {
   const reqId = useRef(0);
 
   useEffect(() => {
-    worker.onmessage = (e: MessageEvent<EngineResponse>) => {
-      if (e.data.id !== reqId.current) return; // stale
+    const onMessage = (e: MessageEvent<EngineWorkerResponse>) => {
+      if (e.data.kind !== "rank" || e.data.id !== reqId.current) return; // not ours, or stale
       setByP50(e.data.byP50);
       setByP75(e.data.byP75);
       setMs(e.data.ms);
       setComputing(false);
     };
-    return () => worker.terminate();
+    worker.addEventListener("message", onMessage);
+    return () => worker.removeEventListener("message", onMessage);
   }, [worker]);
 
   useEffect(() => {

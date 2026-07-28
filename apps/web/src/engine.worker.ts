@@ -40,6 +40,7 @@ export interface RankedRow {
 }
 
 export interface EngineResponse {
+  kind: "rank";
   id: number;
   ms: number;
   byP50: RankedRow[];
@@ -121,6 +122,11 @@ export interface SurveyResponse {
   sensGasPrice: SweepPoint[];
 }
 
+/** All response kinds share one worker (see sharedWorker.ts) — hooks filter their
+ * own `onmessage` listener on `kind` (and their own request id) so a rank/deal/
+ * survey response can never be consumed by a different hook. */
+export type EngineWorkerResponse = EngineResponse | DealResponse | SurveyResponse;
+
 self.onmessage = (e: MessageEvent<EngineRequest | DealRequest | SurveyRequest>) => {
   if (e.data.kind === "deal") {
     handleDeal(e.data);
@@ -155,7 +161,7 @@ function handleRank(req: EngineRequest) {
     );
     return ranked.map((rk) => {
       const { vehicle, res } = byName.get(rk.id)!;
-      const rawYear = data.constants.now_year - res.buyOdo / am;
+      const rawYear = impliedModelYear(res.buyOdo, am, data.constants.now_year);
       const feasNote =
         Math.round(rawYear) > vehicle.last_year
           ? `low-mileage example (last built ${vehicle.last_year})`
@@ -184,6 +190,7 @@ function handleRank(req: EngineRequest) {
   };
 
   const msg: EngineResponse = {
+    kind: "rank",
     id,
     ms: performance.now() - t0,
     byP50: buildRows("p50"),
