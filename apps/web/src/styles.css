@@ -771,11 +771,10 @@ th.num {
   outline: none;
 }
 
-.heatmap-extreme-label {
+.heatmap-cell-label {
   font-family: var(--font-mono);
   font-size: 9px;
   font-weight: 600;
-  fill: var(--paper);
   pointer-events: none;
 }
 
@@ -821,6 +820,12 @@ th.num {
   align-items: center;
   gap: 6px;
   margin-left: auto;
+}
+
+.heatmap-legend-caption {
+  margin-top: 4px;
+  font-size: 10.5px;
+  color: var(--muted);
 }
 
 /* ── sensitivity lines ────────────────────────────────────── */
