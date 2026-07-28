@@ -243,6 +243,39 @@ body {
   color: var(--muted);
 }
 
+/* ── results controls: rank basis + view switcher ────────── */
+.results-controls {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 14px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.rank-basis-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.rank-basis-strip,
+.view-switcher {
+  display: flex;
+  border: 1px solid var(--ink);
+}
+
+.view-switcher .seg {
+  font-size: 12.5px;
+  padding: 8px 14px;
+}
+
 .loading {
   padding: 48px 0;
   color: var(--muted);
@@ -355,5 +388,71 @@ th.num {
   padding-top: 10px;
   border-top: 1px solid var(--rule);
   font-size: 12px;
+  color: var(--muted);
+}
+
+/* ── uncertainty ladder ───────────────────────────────────── */
+.ladder-wrap {
+  overflow-x: auto;
+}
+
+.ladder-svg {
+  display: block;
+  width: 100%;
+  min-width: 560px;
+  height: auto;
+}
+
+.ladder-grid {
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+
+.ladder-tick {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--muted);
+}
+
+.ladder-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--ink);
+}
+
+.ladder-whisker {
+  stroke: var(--band);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.ladder-tier-rule {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.ladder-dot {
+  stroke: var(--paper);
+  stroke-width: 2;
+}
+
+.ladder-hit {
+  fill: transparent;
+  outline: none;
+}
+
+.ladder-hit:hover,
+.ladder-hit:focus-visible {
+  fill: rgba(20, 25, 29, 0.06);
+}
+
+.ladder-hit:focus-visible {
+  outline: 2px solid var(--needle);
+  outline-offset: -2px;
+}
+
+.ladder-caption {
+  margin-top: 10px;
+  font-size: 12.5px;
   color: var(--muted);
 }

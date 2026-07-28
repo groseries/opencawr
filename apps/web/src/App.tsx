@@ -1,7 +1,9 @@
 import { useMemo, useState } from "react";
 import type { EngineInputs } from "@opencawr/core";
-import { Assumptions, DEFAULTS } from "./controls.js";
+import { Assumptions, DEFAULTS, RankBasisToggle, type RankBasis } from "./controls.js";
 import { useEngine } from "./useEngine.js";
+import { Ladder } from "./charts/Ladder.js";
+import { tierColor, tierTextColor } from "./charts/tierColors.js";
 
 const fmt = (x: number) => `$${x.toFixed(3)}`;
 const ETYPE_LABEL: Record<string, string> = {
@@ -13,7 +15,10 @@ const ETYPE_LABEL: Record<string, string> = {
 
 export function App() {
   const [inputs, setInputs] = useState<EngineInputs>(DEFAULTS);
-  const { rows, ms, computing } = useEngine(inputs);
+  const [rankBasis, setRankBasis] = useState<RankBasis>("p50");
+  const [view, setView] = useState<"table" | "ladder">("table");
+  const { byP50, byP75, ms, computing } = useEngine(inputs);
+  const rows = rankBasis === "p50" ? byP50 : byP75;
 
   const horizonLabel =
     inputs.holdMiles === "eol"
@@ -69,8 +74,29 @@ export function App() {
               honestly order them.
             </p>
           </div>
+          <div className="results-controls">
+            <RankBasisToggle value={rankBasis} onChange={setRankBasis} />
+            <div className="view-switcher" role="group" aria-label="View">
+              <button
+                type="button"
+                className={view === "table" ? "seg seg-active" : "seg"}
+                onClick={() => setView("table")}
+              >
+                Table
+              </button>
+              <button
+                type="button"
+                className={view === "ladder" ? "seg seg-active" : "seg"}
+                onClick={() => setView("ladder")}
+              >
+                Ladder
+              </button>
+            </div>
+          </div>
           {!rows ? (
             <div className="loading">Running {DEFAULTS.draws ?? 1100} simulations per car…</div>
+          ) : view === "ladder" ? (
+            <Ladder rows={rows} />
           ) : (
             <table className="ranking">
               <thead>
@@ -97,9 +123,25 @@ export function App() {
                   const newTier = i === 0 || rows[i - 1]!.statTier !== r.statTier;
                   return (
                     <tr key={r.name} className={newTier ? "tier-start" : undefined}>
-                      <td className="col-rank mono">{r.rank}</td>
+                      <td
+                        className="col-rank mono"
+                        style={{ borderLeft: `3px solid ${tierColor(r.statTier)}` }}
+                      >
+                        {r.rank}
+                      </td>
                       <td className="col-tier">
-                        {newTier ? <span className="tier-chip">TIE {r.statTier}</span> : null}
+                        {newTier ? (
+                          <span
+                            className="tier-chip"
+                            style={{
+                              background: tierColor(r.statTier),
+                              color: tierTextColor(r.statTier),
+                              borderColor: tierColor(r.statTier),
+                            }}
+                          >
+                            TIE {r.statTier}
+                          </span>
+                        ) : null}
                       </td>
                       <td>
                         <span className="car-name">{r.name}</span>

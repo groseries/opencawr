@@ -8,7 +8,8 @@ export function useEngine(inputs: EngineInputs) {
     () => new Worker(new URL("./engine.worker.ts", import.meta.url), { type: "module" }),
     [],
   );
-  const [rows, setRows] = useState<RankedRow[] | null>(null);
+  const [byP50, setByP50] = useState<RankedRow[] | null>(null);
+  const [byP75, setByP75] = useState<RankedRow[] | null>(null);
   const [ms, setMs] = useState(0);
   const [computing, setComputing] = useState(true);
   const reqId = useRef(0);
@@ -16,7 +17,8 @@ export function useEngine(inputs: EngineInputs) {
   useEffect(() => {
     worker.onmessage = (e: MessageEvent<EngineResponse>) => {
       if (e.data.id !== reqId.current) return; // stale
-      setRows(e.data.rows);
+      setByP50(e.data.byP50);
+      setByP75(e.data.byP75);
       setMs(e.data.ms);
       setComputing(false);
     };
@@ -30,5 +32,5 @@ export function useEngine(inputs: EngineInputs) {
     return () => clearTimeout(t);
   }, [worker, inputs]);
 
-  return { rows, ms, computing };
+  return { byP50, byP75, ms, computing };
 }
