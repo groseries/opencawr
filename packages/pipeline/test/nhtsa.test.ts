@@ -1,5 +1,5 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import { complaintCounts, normalizeModel } from "../src/sources/nhtsa.js";
+import { complaintCounts, normalizeModel, splitComponents } from "../src/sources/nhtsa.js";
 
 beforeAll(() => {
   process.env.OPENCAWR_PIPELINE_OFFLINE = "1";
@@ -25,5 +25,41 @@ describe("nhtsa adapter (Honda Fit fixtures)", () => {
 
   it("falls back to the input model when no VPIC match exists", async () => {
     expect(await normalizeModel("Honda", "Nonexistent-Model-XYZ")).toBe("Nonexistent-Model-XYZ");
+  });
+});
+
+describe("splitComponents (Task D review fix: category names with embedded commas)", () => {
+  // Real `components` values from the recorded Ford Escape 2020 fixture
+  // (test/fixtures/046e6462b20b61e3.json) — NHTSA's own category names
+  // "FUEL SYSTEM, GASOLINE" and "SERVICE BRAKES, AIR" each contain a comma
+  // that a naive `.split(",")` would wrongly treat as a category separator.
+  it("keeps 'FUEL SYSTEM, GASOLINE' whole instead of splitting it into two categories", () => {
+    expect(splitComponents("ENGINE AND ENGINE COOLING,FUEL SYSTEM, GASOLINE,BACK OVER PREVENTION")).toEqual([
+      "ENGINE AND ENGINE COOLING",
+      "FUEL SYSTEM, GASOLINE",
+      "BACK OVER PREVENTION",
+    ]);
+  });
+
+  it("keeps 'SERVICE BRAKES, AIR' whole even alongside another comma-containing category", () => {
+    expect(splitComponents("SERVICE BRAKES, AIR,FUEL SYSTEM, GASOLINE,TRACTION CONTROL SYSTEM")).toEqual([
+      "SERVICE BRAKES, AIR",
+      "FUEL SYSTEM, GASOLINE",
+      "TRACTION CONTROL SYSTEM",
+    ]);
+  });
+
+  it("does not corrupt ordinary multi-word categories that merely contain spaces", () => {
+    // A naive comma-protection scheme using a plain space as its placeholder
+    // would mis-split "ENGINE AND ENGINE COOLING" on its own internal spaces;
+    // this pins that it doesn't.
+    expect(splitComponents("ENGINE AND ENGINE COOLING,POWER TRAIN")).toEqual([
+      "ENGINE AND ENGINE COOLING",
+      "POWER TRAIN",
+    ]);
+  });
+
+  it("returns an empty array for an empty components string", () => {
+    expect(splitComponents("")).toEqual([]);
   });
 });

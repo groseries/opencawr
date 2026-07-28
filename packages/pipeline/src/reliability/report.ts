@@ -44,6 +44,10 @@ async function main(): Promise<void> {
   console.log("-".repeat(70));
   console.log(`Agreement: ${agree}/${derivations.length} derived tiers match the current seed tier.\n`);
   console.log(
+    "Caveat: singleton body classes (SUV AWD, Van) pin to bodyClassIndex 1.0 and shift the shared " +
+      "quartile cuts for every model above (docs/reliability-methodology.md §3, ASSUMPTIONS.md §G).\n",
+  );
+  console.log(
     "Estimates, not advice. DO NOT rewrite opencawr_data.json from this report — " +
       "seed reliability data remains pending re-derivation (owner review gate; see ASSUMPTIONS.md §D/§E).",
   );

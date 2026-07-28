@@ -36,10 +36,47 @@ export async function complaintCounts(
 export interface YearComplaintComponents {
   year: number;
   complaints: number;
-  /** One entry per complaint: its NHTSA `components` field split on "," (never
-   *  `summary`/`vin` — see module docstring). Used by reliability/derive.ts to
-   *  find the powertrain-component share of a model year's complaints. */
+  /** One entry per complaint: its NHTSA `components` field, split into
+   *  top-level categories (never `summary`/`vin` — see module docstring).
+   *  Used by reliability/derive.ts to find the powertrain-component share of
+   *  a model year's complaints. */
   components: string[][];
+}
+
+/** A handful of NHTSA's own top-level component category *names* contain a
+ *  literal comma (confirmed live, e.g. in the recorded Ford Escape 2020
+ *  fixture: "ENGINE AND ENGINE COOLING,FUEL SYSTEM, GASOLINE,BACK OVER
+ *  PREVENTION"). The `components` field itself is a comma-joined list of
+ *  these categories, so a naive `.split(",")` fragments them (e.g. "FUEL
+ *  SYSTEM" + " GASOLINE" as two spurious tokens). These are protected before
+ *  splitting so each category survives whole. */
+const COMMA_CONTAINING_CATEGORIES = [
+  "FUEL SYSTEM, GASOLINE",
+  "FUEL SYSTEM, DIESEL",
+  "SERVICE BRAKES, HYDRAULIC",
+  "SERVICE BRAKES, AIR",
+];
+
+/** Placeholder for a protected category's internal comma: a Unicode Private
+ *  Use Area code point, never present in real NHTSA category text, so
+ *  restoring it can't collide with an ordinary space in some other,
+ *  unrelated category (a plain space would — e.g. "ENGINE AND ENGINE
+ *  COOLING" also contains spaces). Deliberately not a NUL/control byte,
+ *  which some tools mis-detect as a binary file. */
+const COMMA_PLACEHOLDER = "\uE000";
+
+/** Splits a raw `components` string into its top-level categories, keeping
+ *  any of `COMMA_CONTAINING_CATEGORIES` intact instead of fragmenting on
+ *  their internal comma. Exported for direct unit testing (see nhtsa.test.ts). */
+export function splitComponents(raw: string): string[] {
+  let protectedRaw = raw;
+  for (const category of COMMA_CONTAINING_CATEGORIES) {
+    protectedRaw = protectedRaw.split(category).join(category.replace(",", COMMA_PLACEHOLDER));
+  }
+  return protectedRaw
+    .split(",")
+    .map((s) => s.replace(COMMA_PLACEHOLDER, ",").trim())
+    .filter(Boolean);
 }
 
 /** Same endpoint as complaintCounts, but keeps each complaint's `components`
@@ -53,12 +90,7 @@ export async function complaintComponents(
   for (const year of years) {
     const res = (await fetchCached(complaintsUrl(make, model, year))) as ComplaintsResponse;
     const results = res.results ?? [];
-    const components = results.map((r) =>
-      (r.components ?? "")
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean),
-    );
+    const components = results.map((r) => splitComponents(r.components ?? ""));
     out.push({ year, complaints: res.count ?? results.length, components });
   }
   return out;

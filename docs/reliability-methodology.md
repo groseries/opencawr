@@ -98,6 +98,20 @@ not a bug; a full-corpus re-derivation (all ~90 seed vehicles, or better, the li
 would need every seed vehicle's complaint history fetched and is out of scope for this task — noted as
 an open item in `ASSUMPTIONS.md` §E.
 
+**JUDGMENT — singleton indices shift the shared quartile cut points for every other model, not just
+themselves.** `Q1`/`Q3` (Step 3, above) are computed once, across all 6 models' `index` values
+together — Sorento's and Odyssey's artificial `1.0`s are two of the six numbers that decide where
+those cut points land, exactly as much as Corolla's, CX-5's, Escape's, or Fiat 500's real indices are.
+Concretely, with this task's 6-model batch the two `1.0`s sit in the middle of the sorted index list,
+which pulls `Q1`/`Q3` toward the center and makes the `low`/`high` bands narrower (easier to fall into)
+than they would be with only the 4 models that have a real same-body comparison. This is a
+cross-contamination effect, not a bug in the quartile math itself — it's what "compute quartiles over
+the whole batch together" necessarily does when some of the batch's indices aren't independently
+informative. Disclosed here (and in `ASSUMPTIONS.md` §G and the `reliability-report` output) rather
+than "fixed", per the launch-gate review: the fix would require either a larger reference set (so no
+body class is a singleton) or excluding singleton-body models from the quartile computation entirely —
+both are methodology changes for the owner to decide on, not a code bug to patch silently.
+
 ## Step 4 — landmine model years (independent of tier)
 
 Within a model's queried years:
