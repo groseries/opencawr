@@ -32,10 +32,12 @@ truth for the model; this file records product-flow and implementation decisions
   (dedupes relistings, price-drop history), freshness decay, and a QUALITY-CONTROL layer is
   required before community data influences curves (owner requirement): provenance tracking,
   outlier/plausibility checks vs the modeled curve, VIN-decode consistency, rate limiting.
-- **Golden-test fidelity first**: the engine reproduces `opencawr_data.json` `model_output`
-  before anything else. Spec §10 improvements (per-tier EOL dispersion, total-loss truncation,
-  real model-year aging) ship as feature-flagged model options, OFF by default, so the golden
-  suite always runs against the faithful configuration.
+- **Seed outputs are a calibration REFERENCE, not truth** (owner, 2026-07-27): the 71
+  `model_output` rows were audited but are not perfect, contain owner-specific assumptions
+  to generalize, and were produced by a prototype that evolved past its own docs. Every
+  assumption — explicit and implicit — is tracked in **ASSUMPTIONS.md**; keep it current
+  as we work. Spec §10 improvements (per-tier EOL dispersion, total-loss truncation, real
+  model-year aging) ship as deliberate model revisions with regenerated reference outputs.
 - **`build_v7.py` is lost** (not in handoff, not on disk). Every reverse-engineered distribution
   or constant not present in the spec/data lives in `packages/core/src/calibration.ts` with a
   comment stating it is inferred, not sourced.
