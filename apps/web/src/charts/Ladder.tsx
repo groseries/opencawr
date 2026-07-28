@@ -2,8 +2,8 @@ import type { RankedRow } from "../engine.worker.js";
 import { tierColor } from "./tierColors.js";
 
 /** Horizontal dot-and-whisker uncertainty ladder: one row per car, sorted by the
- * current rank basis. Whisker = P05-P95, thicker inner bar = P50->P75, dot = P50,
- * colored by tie tier. */
+ * current rank basis. Whisker = P05-P95, thicker inner bar = P50->P75, dot =
+ * the active rank-basis quantile (P50 or P75), colored by tie tier. */
 
 const ROW_H = 22;
 const MARGIN = { top: 30, right: 16, bottom: 4, left: 200 };
@@ -21,7 +21,7 @@ function niceStep(range: number): number {
   return step * mag;
 }
 
-export function Ladder({ rows }: { rows: RankedRow[] }) {
+export function Ladder({ rows, basis }: { rows: RankedRow[]; basis: "p50" | "p75" }) {
   const rawMin = Math.min(...rows.map((r) => r.p05));
   const rawMax = Math.max(...rows.map((r) => r.p95));
   const pad = (rawMax - rawMin) * 0.08 || 0.02;
@@ -68,6 +68,7 @@ export function Ladder({ rows }: { rows: RankedRow[] }) {
           const cy = rowTop + ROW_H / 2;
           const newTier = i === 0 || rows[i - 1]!.statTier !== r.statTier;
           const color = tierColor(r.statTier);
+          const emphasized = basis === "p75" ? r.p75 : r.p50;
           return (
             <g key={r.name}>
               {newTier && (
@@ -98,7 +99,7 @@ export function Ladder({ rows }: { rows: RankedRow[] }) {
                 strokeWidth={6}
                 strokeLinecap="round"
               />
-              <circle cx={x(r.p50)} cy={cy} r={5} fill={color} className="ladder-dot" />
+              <circle cx={x(emphasized)} cy={cy} r={5} fill={color} className="ladder-dot" />
               <rect
                 x={0}
                 y={rowTop}
@@ -106,14 +107,20 @@ export function Ladder({ rows }: { rows: RankedRow[] }) {
                 height={ROW_H}
                 className="ladder-hit"
                 tabIndex={0}
-                aria-label={`${r.name}: median ${fmtExact(r.p50)} per mile, 90% range ${fmtExact(
-                  r.p05,
-                )}-${fmtExact(r.p95)}, P75 ${fmtExact(r.p75)}, tier ${r.statTier}`}
+                aria-label={`${r.name}: ${
+                  basis === "p75" ? "bad-luck cost P75" : "median"
+                } ${fmtExact(emphasized)} per mile, 90% range ${fmtExact(r.p05)}-${fmtExact(
+                  r.p95,
+                )}, ${basis === "p75" ? "typical P50" : "P75"} ${fmtExact(
+                  basis === "p75" ? r.p50 : r.p75,
+                )}, tier ${r.statTier}`}
               >
                 <title>
-                  {`${r.name} — median ${fmtExact(r.p50)}/mi · 90% range ${fmtExact(
-                    r.p05,
-                  )}–${fmtExact(r.p95)} · P75 ${fmtExact(r.p75)} · tier ${r.statTier}`}
+                  {`${r.name} — ${basis === "p75" ? "bad-luck cost P75" : "median"} ${fmtExact(
+                    emphasized,
+                  )}/mi · 90% range ${fmtExact(r.p05)}–${fmtExact(r.p95)} · ${
+                    basis === "p75" ? "typical P50" : "P75"
+                  } ${fmtExact(basis === "p75" ? r.p50 : r.p75)} · tier ${r.statTier}`}
                 </title>
               </rect>
             </g>

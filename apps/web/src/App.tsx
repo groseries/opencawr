@@ -20,23 +20,35 @@ export function App() {
   const { byP50, byP75, ms, computing } = useEngine(inputs);
   const rows = rankBasis === "p50" ? byP50 : byP75;
 
+  // The primary (emphasized) column follows the active rank basis; the other
+  // quantile moves to the secondary column instead of going stale/hidden.
+  const primaryValue = (r: { p50: number; p75: number }) =>
+    rankBasis === "p75" ? r.p75 : r.p50;
+  const secondaryValue = (r: { p50: number; p75: number; p90: number }) =>
+    rankBasis === "p75" ? r.p50 : r.p90;
+  const primaryLabel = rankBasis === "p75" ? "bad-luck cost" : "$/mi";
+  const primarySub = rankBasis === "p75" ? "P75" : "median";
+  const secondaryLabel = rankBasis === "p75" ? "typical cost" : "bad luck";
+  const secondarySub = rankBasis === "p75" ? "P50" : "P90";
+
   const horizonLabel =
     inputs.holdMiles === "eol"
       ? "until it dies"
       : `${((inputs.holdMiles as number) / 1000).toFixed(0)}k mi hold`;
 
-  // remember previous P50s so changed values can flash
+  // remember previous primary values so changed values can flash
   const prev = useMemo(() => new Map<string, number>(), []);
   const flashKeys = useMemo(() => {
     if (!rows) return new Map<string, boolean>();
     const out = new Map<string, boolean>();
     for (const r of rows) {
       const was = prev.get(r.name);
-      out.set(r.name, was !== undefined && Math.abs(was - r.p50) > 0.0005);
-      prev.set(r.name, r.p50);
+      const now = primaryValue(r);
+      out.set(r.name, was !== undefined && Math.abs(was - now) > 0.0005);
+      prev.set(r.name, now);
     }
     return out;
-  }, [rows, prev]);
+  }, [rows, prev, rankBasis]);
 
   return (
     <div className="shell">
@@ -96,7 +108,7 @@ export function App() {
           {!rows ? (
             <div className="loading">Running {DEFAULTS.draws ?? 1100} simulations per car…</div>
           ) : view === "ladder" ? (
-            <Ladder rows={rows} />
+            <Ladder rows={rows} basis={rankBasis} />
           ) : (
             <table className="ranking">
               <thead>
@@ -105,13 +117,13 @@ export function App() {
                   <th className="col-tier">tier</th>
                   <th>vehicle</th>
                   <th className="num">
-                    $/mi <span className="th-sub">median</span>
+                    {primaryLabel} <span className="th-sub">{primarySub}</span>
                   </th>
                   <th className="num">
                     90% band <span className="th-sub">P05–P95</span>
                   </th>
                   <th className="num">
-                    bad luck <span className="th-sub">P90</span>
+                    {secondaryLabel} <span className="th-sub">{secondarySub}</span>
                   </th>
                   <th className="num">
                     beats next <span className="th-sub">prob.</span>
@@ -152,15 +164,15 @@ export function App() {
                         </span>
                       </td>
                       <td
-                        key={`${r.name}-${r.p50.toFixed(4)}`}
+                        key={`${r.name}-${primaryValue(r).toFixed(4)}`}
                         className={`num p50 mono${flashKeys.get(r.name) ? " flash" : ""}`}
                       >
-                        {fmt(r.p50)}
+                        {fmt(primaryValue(r))}
                       </td>
                       <td className="num band mono">
                         {fmt(r.p05)}–{fmt(r.p95)}
                       </td>
-                      <td className="num band mono">{fmt(r.p90)}</td>
+                      <td className="num band mono">{fmt(secondaryValue(r))}</td>
                       <td className="num band mono">
                         {r.beatsNext === null ? "—" : `${Math.round(r.beatsNext * 100)}%`}
                       </td>
