@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import type { EngineInputs } from "@opencawr/core";
 import { Assumptions, DEFAULTS, RankBasisToggle, type RankBasis } from "./controls.js";
 import { useEngine } from "./useEngine.js";
+import { useBuyPoints } from "./useBuyPoints.js";
 import { Ladder } from "./charts/Ladder.js";
 import { tierColor, tierTextColor } from "./charts/tierColors.js";
 import { DealAnalyzer } from "./deal/DealAnalyzer.js";
@@ -40,6 +41,10 @@ export function App() {
   const [drawerCar, setDrawerCar] = useState<string | null>(null);
   const { byP50, byP75, ms, computing } = useEngine(inputs);
   const rows = rankBasis === "p50" ? byP50 : byP75;
+  // Decoupled from the rank request (R4 review fixup) so re-ranking stays live
+  // while dragging the rail — see useBuyPoints.ts. `computing: true` here must
+  // never be papered over with the previous inputs' figures.
+  const { points: buyPoints, computing: buyPointsComputing } = useBuyPoints(inputs);
 
   const dismissIntake = () => {
     safeLocalSet(INTAKE_SEEN_KEY, "1");
@@ -239,6 +244,7 @@ export function App() {
                       .filter(Boolean)
                       .join(" ");
                   const openDrawer = () => setDrawerCar(r.name);
+                  const bp = buyPoints?.[r.name];
                   return (
                     <tr
                       key={r.name}
@@ -275,15 +281,21 @@ export function App() {
                       <td>
                         <span className="car-name">{r.name}</span>
                         <span className="car-meta">
-                          <span className="mono">{r.idealYear}</span> ·{" "}
-                          <span className="mono">{Math.round(r.idealOdo / 1000)}k mi</span>
-                          {r.upperOdo !== null ? (
+                          {buyPointsComputing || !bp ? (
+                            <span className="mono">…</span>
+                          ) : (
                             <>
-                              {" "}
-                              · up to{" "}
-                              <span className="mono">{Math.round(r.upperOdo / 1000)}k mi</span>
+                              <span className="mono">{bp.idealYear}</span> ·{" "}
+                              <span className="mono">{Math.round(bp.idealOdo / 1000)}k mi</span>
+                              {bp.upperOdo !== null ? (
+                                <>
+                                  {" "}
+                                  · up to{" "}
+                                  <span className="mono">{Math.round(bp.upperOdo / 1000)}k mi</span>
+                                </>
+                              ) : null}
                             </>
-                          ) : null}
+                          )}
                           {r.feasNote ? ` · ${r.feasNote}` : ""}
                           {isDimmed ? " · misses 1 filter" : ""}
                         </span>
@@ -324,7 +336,12 @@ export function App() {
           </footer>
         </main>
       </div>
-      <CarDrawer vehicleName={drawerCar} inputs={inputs} onClose={() => setDrawerCar(null)} />
+      <CarDrawer
+        vehicleName={drawerCar}
+        etype={rows?.find((r) => r.name === drawerCar)?.etype ?? null}
+        inputs={inputs}
+        onClose={() => setDrawerCar(null)}
+      />
     </div>
   );
 }

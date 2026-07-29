@@ -708,6 +708,13 @@ th.num {
   padding-right: 32px;
 }
 
+.drawer-etype {
+  margin-left: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 400;
+}
+
 .drawer-headline {
   margin-top: 6px;
   color: var(--muted);

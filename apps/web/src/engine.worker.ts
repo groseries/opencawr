@@ -38,14 +38,6 @@ export interface RankedRow {
   impliedBuyYear: number;
   /** Human note when the odometer↔year coupling is off in either direction. */
   feasNote: string | null;
-  /** Buy-point sweep (spec §4/R4): the odometer minimizing P50 over this car's
-   *  own feasible range — priced at reduced draws, NOT the same buy point as
-   *  the p50/p75/p90 columns above (those stay at `buyOdo`). */
-  idealOdo: number;
-  idealYear: number;
-  /** Last odometer still within tolerance of the ideal's P50; null if the walk
-   *  can't take a single step (see `buyPointSweep`). */
-  upperOdo: number | null;
 }
 
 export interface EngineResponse {
@@ -131,16 +123,46 @@ export interface SurveyResponse {
   sensGasPrice: SweepPoint[];
 }
 
+/** Buy-point sweep request (R4, decoupled from `rank` — see fixup note below):
+ * every car's own cost-minimizing buy point (idealOdo/idealYear/upperOdo). */
+export interface BuyPointsRequest {
+  kind: "buypoints";
+  id: number;
+  inputs: EngineInputs;
+}
+
+/** Buy-point sweep (spec §4/R4): the odometer minimizing P50 over this car's
+ *  own feasible range — priced at reduced draws, NOT the same buy point as
+ *  the rank response's p50/p75/p90 (those stay at `buyOdo`). */
+export interface BuyPointEntry {
+  idealOdo: number;
+  idealYear: number;
+  /** Last odometer still within tolerance of the ideal's P50; null if the walk
+   *  can't take a single step (see `buyPointSweep`). */
+  upperOdo: number | null;
+}
+
+export interface BuyPointsResponse {
+  kind: "buypoints";
+  id: number;
+  /** Keyed by vehicle name — one entry per car in the field. */
+  points: Record<string, BuyPointEntry>;
+}
+
 /** All response kinds share one worker (see sharedWorker.ts) — hooks filter their
  * own `onmessage` listener on `kind` (and their own request id) so a rank/deal/
- * survey response can never be consumed by a different hook. */
-export type EngineWorkerResponse = EngineResponse | DealResponse | SurveyResponse;
+ * survey/buypoints response can never be consumed by a different hook. */
+export type EngineWorkerResponse = EngineResponse | DealResponse | SurveyResponse | BuyPointsResponse;
 
-self.onmessage = (e: MessageEvent<EngineRequest | DealRequest | SurveyRequest>) => {
+self.onmessage = (
+  e: MessageEvent<EngineRequest | DealRequest | SurveyRequest | BuyPointsRequest>,
+) => {
   if (e.data.kind === "deal") {
     handleDeal(e.data);
   } else if (e.data.kind === "survey") {
     handleSurvey(e.data);
+  } else if (e.data.kind === "buypoints") {
+    handleBuyPoints(e.data);
   } else {
     handleRank(e.data);
   }
@@ -153,7 +175,6 @@ function handleRank(req: EngineRequest) {
   const results = data.vehicles.map((v) => ({
     vehicle: v,
     res: costPerMile(v, data.constants, inputs),
-    sweep: buyPointSweep(v, data.constants, inputs),
   }));
   const byName = new Map(results.map((r) => [r.vehicle.name, r]));
   const am = inputs.annualMiles ?? data.constants.annual_miles;
@@ -170,7 +191,7 @@ function handleRank(req: EngineRequest) {
       })),
     );
     return ranked.map((rk) => {
-      const { vehicle, res, sweep } = byName.get(rk.id)!;
+      const { vehicle, res } = byName.get(rk.id)!;
       const rawYear = impliedModelYear(res.buyOdo, am, data.constants.now_year);
       const feasNote =
         Math.round(rawYear) > vehicle.last_year
@@ -195,9 +216,6 @@ function handleRank(req: EngineRequest) {
         buyPrice: res.buyPrice,
         impliedBuyYear: res.impliedBuyYear,
         feasNote,
-        idealOdo: sweep.idealOdo,
-        idealYear: sweep.idealYear,
-        upperOdo: sweep.upperOdo,
       };
     });
   };
@@ -209,6 +227,27 @@ function handleRank(req: EngineRequest) {
     byP50: buildRows("p50"),
     byP75: buildRows("p75"),
   };
+  self.postMessage(msg);
+}
+
+/** Buy-point sweep (R4) for every car in the field. Split out of `handleRank`
+ * (fixup, R4 review): the sweep's grid search is several times the cost of the
+ * base rank pass, and DECISIONS.md requires the rank response to stay live on
+ * every input change (annual-miles slider drags in particular). The hook that
+ * drives this (`useBuyPoints`) debounces longer than rank's, so it lands a
+ * short while after the rank response rather than blocking it. */
+function handleBuyPoints(req: BuyPointsRequest) {
+  const { id, inputs } = req;
+  const points: Record<string, BuyPointEntry> = {};
+  for (const v of data.vehicles) {
+    const sweep = buyPointSweep(v, data.constants, inputs);
+    points[v.name] = {
+      idealOdo: sweep.idealOdo,
+      idealYear: sweep.idealYear,
+      upperOdo: sweep.upperOdo,
+    };
+  }
+  const msg: BuyPointsResponse = { kind: "buypoints", id, points };
   self.postMessage(msg);
 }
 

@@ -131,4 +131,29 @@ describe("buyPointSweep", () => {
     expect(result.idealOdo).toBe(0);
     expect(result.upperOdo).toBeNull();
   });
+
+  it("regression: year-implied lower bound past eol_maintained_miles collapses to the capped point instead of throwing (Porsche 996 crash)", () => {
+    // At high annual miles, a narrow-production-window, low-eol vehicle can have
+    // feasibleOdoRange's lower bound (year-implied) exceed eol_maintained_miles —
+    // uncapped this inverts the range (lo > hi) and `grid[idealIdx]!` throws on
+    // an empty grid. rangeLo = (2025-2020)*20000 = 100,000 > eol_maintained_miles
+    // (50,000), so the fix's `lo = min(max(0, rangeLo), hi)` must collapse this to
+    // the single physically-capped point rather than crash.
+    const vehicle = makeVehicle({
+      first_year: 2015,
+      last_year: 2020,
+      eol_maintained_miles: 50_000,
+    });
+    const constants = makeConstants();
+
+    expect(() =>
+      buyPointSweep(vehicle, constants, { annualMiles: 20_000 }, { step: 10_000 }),
+    ).not.toThrow();
+
+    const result = buyPointSweep(vehicle, constants, { annualMiles: 20_000 }, { step: 10_000 });
+
+    expect(result.grid).toEqual([{ odo: 50_000, p50: result.idealP50 }]);
+    expect(result.idealOdo).toBe(50_000);
+    expect(result.upperOdo).toBeNull();
+  });
 });
