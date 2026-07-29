@@ -1,4 +1,5 @@
 import { CALIBRATION } from "./calibration.js";
+import { parseCurve } from "./curves.js";
 import { costPerMile } from "./engine.js";
 import { deriveBuyYear, feasibleOdoRange } from "./feasibility.js";
 import type { Constants, EngineInputs, Vehicle } from "./types.js";
@@ -47,11 +48,17 @@ export function buyPointSweep(
 
   const [rangeLo, rangeHi] = feasibleOdoRange(vehicle, am, constants.now_year);
   const hi = Math.min(rangeHi, vehicle.eol_maintained_miles);
+  // Floor at the price curve's first observed odometer (R11): below that,
+  // `curveAt` clamps flat rather than inventing a price, so offering buy
+  // points there would price a 0-mile car identically to a 10k-mile one —
+  // the grid must not offer buy points where there's no real depreciation
+  // data to distinguish them.
+  const firstCurveOdo = parseCurve(vehicle.price_vs_odometer_usd)[0]!.x;
   // The year-implied minimum can exceed the eol_maintained_miles cap (e.g. a
   // low-production car whose oldest-in-window odometer already tops out past
   // its typical maintained life at high annual miles) — collapse to the single
   // capped point rather than produce an inverted (empty) range.
-  const lo = Math.min(Math.max(0, rangeLo), hi);
+  const lo = Math.min(Math.max(0, rangeLo, firstCurveOdo), hi);
 
   const grid: BuyPointSweepPoint[] = [];
   let idealIdx = 0;

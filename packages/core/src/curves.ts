@@ -12,9 +12,12 @@ export function parseCurve(raw: Record<string, number>): CurvePoint[] {
 }
 
 /**
- * Interpolate, extrapolating past both ends with the edge segment's slope
- * (spec §2: "extrapolated past the last data point ... never clamped flat"),
- * floored at `floor` (scrap value for price curves; 0 for maintenance).
+ * Interpolate. Below the first point: clamped flat at the first point's value
+ * (no seed vehicle has a price observation below ~10k mi, so extrapolating
+ * leftward would invent near-new prices — see R11). Past the last point:
+ * extrapolated with the edge segment's slope (spec §2: "extrapolated past the
+ * last data point ... never clamped flat"), floored at `floor` (scrap value
+ * for price curves; 0 for maintenance).
  */
 export function curveAt(pts: CurvePoint[], x: number, floor = 0): number {
   const n = pts.length;
@@ -24,8 +27,7 @@ export function curveAt(pts: CurvePoint[], x: number, floor = 0): number {
   if (n === 1) {
     y = first.y;
   } else if (x <= first.x) {
-    const s = (pts[1]!.y - first.y) / (pts[1]!.x - first.x);
-    y = first.y + (x - first.x) * s;
+    y = first.y;
   } else if (x >= last.x) {
     const s = (last.y - pts[n - 2]!.y) / (last.x - pts[n - 2]!.x);
     y = last.y + (x - last.x) * s;

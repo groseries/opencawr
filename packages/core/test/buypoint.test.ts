@@ -132,6 +132,46 @@ describe("buyPointSweep", () => {
     expect(result.upperOdo).toBeNull();
   });
 
+  it("R11: the grid never proposes a buy odometer below the vehicle's first curve point", () => {
+    // first_year 2020, last_year 2025, am=10,000 → feasibleOdoRange lower bound
+    // is 0 (a current-production vehicle), but the price curve's first
+    // observation is at 15,000 mi — the grid must floor there, not at 0.
+    const vehicle = makeVehicle({
+      price_vs_odometer_usd: { "15000": 30_000, "50000": 20_000 },
+    });
+    const constants = makeConstants();
+
+    const result = buyPointSweep(vehicle, constants, {}, { step: 10_000 });
+
+    expect(result.grid[0]!.odo).toBe(15_000);
+    for (const p of result.grid) {
+      expect(p.odo).toBeGreaterThanOrEqual(15_000);
+    }
+    expect(result.idealOdo).toBeGreaterThanOrEqual(15_000);
+  });
+
+  it("regression: a feasible range lying entirely below the first curve point collapses to a single point instead of throwing", () => {
+    // first_year/last_year make the year-implied feasible range [0, 20,000],
+    // but the price curve's first observation is at 25,000 mi — the R11 floor
+    // pushes lo up past hi, which must collapse to the single point at hi
+    // (same class of degeneracy as the Porsche 996 case below), not invert.
+    const vehicle = makeVehicle({
+      first_year: 2023,
+      last_year: 2025,
+      eol_maintained_miles: 1_000_000,
+      price_vs_odometer_usd: { "25000": 30_000, "50000": 20_000 },
+    });
+    const constants = makeConstants();
+
+    expect(() => buyPointSweep(vehicle, constants, {}, { step: 10_000 })).not.toThrow();
+
+    const result = buyPointSweep(vehicle, constants, {}, { step: 10_000 });
+
+    expect(result.grid).toEqual([{ odo: 20_000, p50: result.idealP50 }]);
+    expect(result.idealOdo).toBe(20_000);
+    expect(result.upperOdo).toBeNull();
+  });
+
   it("regression: year-implied lower bound past eol_maintained_miles collapses to the capped point instead of throwing (Porsche 996 crash)", () => {
     // At high annual miles, a narrow-production-window, low-eol vehicle can have
     // feasibleOdoRange's lower bound (year-implied) exceed eol_maintained_miles —
