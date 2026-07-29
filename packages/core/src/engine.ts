@@ -38,10 +38,20 @@ export function costPerMile(
     throw new RangeError(`holdMiles must be positive or "eol", got ${holdMiles}`);
   }
   const insMult = inputs.insuranceMultiplier ?? constants.insurance_multiplier_USAA;
-  // an explicit real quote is used as-is; the per-model estimate gets the multiplier
-  const fullCov =
-    inputs.fullCoverageUsdYr ?? vehicle.specs.full_coverage_ins_usd_yr * insMult;
-  const liab = constants.liability_only_usd_yr * insMult;
+  // Insurance = NAIC state average premium split by what each coverage insures
+  // (ASSUMPTIONS.md §A). Liability covers damage to OTHERS, so it does not scale
+  // with this car's value and is charged flat. Collision + comprehensive cover THIS
+  // car, so they scale linearly with its book value against `insurance_ref_book_usd`
+  // — which is what makes the premium fall as the car depreciates. An explicit real
+  // quote (`fullCoverageUsdYr`) bypasses all of it, including the multiplier.
+  const esc = constants.insurance_cpi_escalator;
+  const liab = esc * (inputs.liabilityUsdYr ?? constants.liability_only_usd_yr) * insMult;
+  const physDmgAtRefBook =
+    esc *
+    ((inputs.collisionUsdYr ?? constants.collision_premium_usd_yr) +
+      (inputs.comprehensiveUsdYr ?? constants.comprehensive_premium_usd_yr)) *
+    insMult;
+  const quoteUsdYr = inputs.fullCoverageUsdYr;
   const reg = inputs.registrationUsdYr ?? constants.registration_usd_yr_FL;
   const taxRate = inputs.useTaxRate ?? constants.use_tax_rate;
 
@@ -132,6 +142,8 @@ export function costPerMile(
       maintPV += w * maintenanceAt(maintCurve, age, 1) * upkeepEsc(age) * df;
       const book = curveAt(priceCurve, buyOdo + (t - 1) * am, scrap);
       const full = book > constants.full_cov_threshold_usd;
+      const fullCov =
+        quoteUsdYr ?? liab + physDmgAtRefBook * (book / constants.insurance_ref_book_usd);
       // insurance noise: Normal(1, σ) per year (documented)
       insPV +=
         w * (full ? fullCov : liab) * (1 + CAL.insuranceNoiseSigma * rngIns.normal()) * df;

@@ -31,6 +31,11 @@ export function IntakeCard({ inputs, onApply, onSetMinSeats, onDismiss }: Props)
       patch.elecUsdPerKwh = region.elecUsdPerKwh;
       patch.useTaxRate = region.useTaxRate;
       patch.registrationUsdYr = region.registrationUsdYr;
+      // NAIC state average premiums, NOT a real quote — deliberately not written into
+      // `fullCoverageUsdYr`, which means "use my actual quote as-is" (ASSUMPTIONS.md §A).
+      patch.liabilityUsdYr = region.liabilityUsdYr;
+      patch.collisionUsdYr = region.collisionUsdYr;
+      patch.comprehensiveUsdYr = region.comprehensiveUsdYr;
     }
     onApply(patch);
     onSetMinSeats(seats === "" ? null : seats);
@@ -65,7 +70,7 @@ export function IntakeCard({ inputs, onApply, onSetMinSeats, onDismiss }: Props)
           <span className="control-hint">
             {zipUnrecognized
               ? "ZIP not recognized — regional prices will use defaults"
-              : "Sets gas, electricity, tax, and registration for your state"}
+              : "Sets gas, electricity, tax, registration, and insurance for your state"}
           </span>
         </label>
 

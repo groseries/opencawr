@@ -1,10 +1,10 @@
 /**
  * ZIP → state regionalization: per-state gas price, electricity price, vehicle
- * sales/use tax rate, and annual registration fee, used to prefill the four
- * region-dependent `EngineInputs` fields from the intake card's ZIP question.
- * This is an optional overlay on top of `controls.tsx`'s `DEFAULTS` — nothing
- * here changes the app's baseline defaults, and every value stays editable in
- * the Assumptions rail afterward.
+ * sales/use tax rate, annual registration fee, and the three NAIC auto-insurance
+ * average premiums, used to prefill the region-dependent `EngineInputs` fields
+ * from the intake card's ZIP question. This is an optional overlay on top of
+ * `controls.tsx`'s `DEFAULTS` — nothing here changes the app's baseline defaults,
+ * and every value stays editable in the Assumptions rail afterward.
  *
  * Sources (see ASSUMPTIONS.md §G for the full write-up):
  *  - gasUsdPerGal    — AAA state average retail regular-gasoline price (snapshot).
@@ -18,7 +18,16 @@
  *    one-time title/plate fees and any separate ad valorem vehicle property
  *    tax some states charge (e.g. CT, VA, MS) — those are a distinct, harder
  *    to generalize recurring cost, flagged as an open item in the ledger.
- * Snapshot date: 2026-07-27/28 — real-world prices drift; re-pull periodically.
+ *  - liabilityUsdYr / collisionUsdYr / comprehensiveUsdYr — NAIC average premium
+ *    by coverage, calendar year 2023, verbatim from the 2022/2023 Auto Insurance
+ *    Database Report Tables 1-3. Stored as published CY2023 dollars, NOT trended:
+ *    the engine applies `constants.insurance_cpi_escalator` (BLS CPI-U
+ *    `CUUR0000SETE`) so this table stays digit-for-digit checkable against the
+ *    source. Liability is charged flat; collision + comprehensive scale with the
+ *    car's own modeled book value (see ASSUMPTIONS.md §A). Premium is really set
+ *    by garaging ZIP, not state — a state anchor is a partial fix (spec §4).
+ * Snapshot date: 2026-07-27/28 (gas, elec, tax, registration), 2026-07-29
+ * (insurance) — real-world prices drift; re-pull periodically.
  */
 export interface RegionRow {
   state: string;
@@ -26,68 +35,80 @@ export interface RegionRow {
   elecUsdPerKwh: number;
   useTaxRate: number;
   registrationUsdYr: number;
+  /** NAIC CY2023 liability average premium, $/yr (pre-escalator, pre-multiplier). */
+  liabilityUsdYr: number;
+  /** NAIC CY2023 collision average premium, $/yr (pre-escalator, pre-multiplier). */
+  collisionUsdYr: number;
+  /** NAIC CY2023 comprehensive average premium, $/yr (pre-escalator, pre-multiplier). */
+  comprehensiveUsdYr: number;
   sources: string;
 }
 
+const INSURANCE_SOURCE =
+  "insurance: NAIC 2022/2023 Auto Insurance Database Report, Tables 1-3, average premium by coverage, CY2023 (© 2025 NAIC — factual state averages cited, not a republished compilation; see ASSUMPTIONS.md §A), trended by BLS CPI-U CUUR0000SETE in the engine";
+
 const SOURCES =
-  "gas: AAA state avg retail regular (Jul 2026) · elec: EIA state avg residential price via ElectricChoice.com (Jul 2026) · use tax: state DOR/DMV published vehicle sales-or-use tax rate, statewide statutory rate · registration: midpoint of state DMV published base annual registration fee range (autoinsurance.org)";
+  "gas: AAA state avg retail regular (Jul 2026) · elec: EIA state avg residential price via ElectricChoice.com (Jul 2026) · use tax: state DOR/DMV published vehicle sales-or-use tax rate, statewide statutory rate · registration: midpoint of state DMV published base annual registration fee range (autoinsurance.org) · " +
+  INSURANCE_SOURCE;
 
 const SOURCES_DC =
-  "gas: AAA DC avg retail regular (Jul 2026) · elec: EIA DC avg residential price via ElectricChoice.com (Jul 2026) · use tax: DC OTR published ~6% vehicle excise tax (DC not in the compiled 50-state tax table; estimated separately) · registration: DC DMV published base fee, averaged (DC not in the compiled 50-state registration table; estimated separately)";
+  "gas: AAA DC avg retail regular (Jul 2026) · elec: EIA DC avg residential price via ElectricChoice.com (Jul 2026) · use tax: DC OTR published ~6% vehicle excise tax (DC not in the compiled 50-state tax table; estimated separately) · registration: DC DMV published base fee, averaged (DC not in the compiled 50-state registration table; estimated separately) · " +
+  INSURANCE_SOURCE +
+  " (DC IS a published NAIC row — the insurance figures are not estimated)";
 
 /** Per-state region data, keyed by two-letter USPS state code (+ DC). */
 export const REGION_BY_STATE: Record<string, RegionRow> = {
-  AL: { state: "AL", gasUsdPerGal: 3.78, elecUsdPerKwh: 0.1741, useTaxRate: 0.02, registrationUsdYr: 54, sources: SOURCES },
-  AK: { state: "AK", gasUsdPerGal: 4.74, elecUsdPerKwh: 0.2735, useTaxRate: 0, registrationUsdYr: 150, sources: SOURCES },
-  AZ: { state: "AZ", gasUsdPerGal: 4.41, elecUsdPerKwh: 0.1548, useTaxRate: 0.056, registrationUsdYr: 64, sources: SOURCES },
-  AR: { state: "AR", gasUsdPerGal: 3.80, elecUsdPerKwh: 0.1416, useTaxRate: 0.065, registrationUsdYr: 24, sources: SOURCES },
-  CA: { state: "CA", gasUsdPerGal: 5.65, elecUsdPerKwh: 0.3525, useTaxRate: 0.0725, registrationUsdYr: 380, sources: SOURCES },
-  CO: { state: "CO", gasUsdPerGal: 4.08, elecUsdPerKwh: 0.1654, useTaxRate: 0.029, registrationUsdYr: 82.5, sources: SOURCES },
-  CT: { state: "CT", gasUsdPerGal: 4.21, elecUsdPerKwh: 0.3224, useTaxRate: 0.0635, registrationUsdYr: 165, sources: SOURCES },
-  DE: { state: "DE", gasUsdPerGal: 4.17, elecUsdPerKwh: 0.1879, useTaxRate: 0, registrationUsdYr: 55, sources: SOURCES },
-  DC: { state: "DC", gasUsdPerGal: 4.23, elecUsdPerKwh: 0.2541, useTaxRate: 0.06, registrationUsdYr: 100, sources: SOURCES_DC },
-  FL: { state: "FL", gasUsdPerGal: 3.97, elecUsdPerKwh: 0.1538, useTaxRate: 0.06, registrationUsdYr: 47, sources: SOURCES },
-  GA: { state: "GA", gasUsdPerGal: 3.92, elecUsdPerKwh: 0.1537, useTaxRate: 0.07, registrationUsdYr: 77.5, sources: SOURCES },
-  HI: { state: "HI", gasUsdPerGal: 5.43, elecUsdPerKwh: 0.4662, useTaxRate: 0.04, registrationUsdYr: 147.5, sources: SOURCES },
-  ID: { state: "ID", gasUsdPerGal: 4.24, elecUsdPerKwh: 0.1270, useTaxRate: 0.06, registrationUsdYr: 59, sources: SOURCES },
-  IL: { state: "IL", gasUsdPerGal: 4.26, elecUsdPerKwh: 0.2047, useTaxRate: 0.0625, registrationUsdYr: 151, sources: SOURCES },
-  IN: { state: "IN", gasUsdPerGal: 3.49, elecUsdPerKwh: 0.1790, useTaxRate: 0.07, registrationUsdYr: 25.5, sources: SOURCES },
-  IA: { state: "IA", gasUsdPerGal: 3.77, elecUsdPerKwh: 0.1386, useTaxRate: 0.05, registrationUsdYr: 87.5, sources: SOURCES },
-  KS: { state: "KS", gasUsdPerGal: 3.75, elecUsdPerKwh: 0.1578, useTaxRate: 0.075, registrationUsdYr: 69.5, sources: SOURCES },
-  KY: { state: "KY", gasUsdPerGal: 3.74, elecUsdPerKwh: 0.1502, useTaxRate: 0.06, registrationUsdYr: 41, sources: SOURCES },
-  LA: { state: "LA", gasUsdPerGal: 3.70, elecUsdPerKwh: 0.1444, useTaxRate: 0.05, registrationUsdYr: 51.5, sources: SOURCES },
-  ME: { state: "ME", gasUsdPerGal: 4.10, elecUsdPerKwh: 0.2842, useTaxRate: 0.055, registrationUsdYr: 45, sources: SOURCES },
-  MD: { state: "MD", gasUsdPerGal: 4.18, elecUsdPerKwh: 0.2207, useTaxRate: 0.06, registrationUsdYr: 161, sources: SOURCES },
-  MA: { state: "MA", gasUsdPerGal: 4.13, elecUsdPerKwh: 0.2945, useTaxRate: 0.0625, registrationUsdYr: 80, sources: SOURCES },
-  MI: { state: "MI", gasUsdPerGal: 4.22, elecUsdPerKwh: 0.2139, useTaxRate: 0.06, registrationUsdYr: 164, sources: SOURCES },
-  MN: { state: "MN", gasUsdPerGal: 4.04, elecUsdPerKwh: 0.1639, useTaxRate: 0.0688, registrationUsdYr: 90, sources: SOURCES },
-  MS: { state: "MS", gasUsdPerGal: 3.67, elecUsdPerKwh: 0.1676, useTaxRate: 0.05, registrationUsdYr: 20, sources: SOURCES },
-  MO: { state: "MO", gasUsdPerGal: 3.85, elecUsdPerKwh: 0.1401, useTaxRate: 0.0423, registrationUsdYr: 30.5, sources: SOURCES },
-  MT: { state: "MT", gasUsdPerGal: 4.30, elecUsdPerKwh: 0.1390, useTaxRate: 0, registrationUsdYr: 122.5, sources: SOURCES },
-  NE: { state: "NE", gasUsdPerGal: 3.96, elecUsdPerKwh: 0.1328, useTaxRate: 0.055, registrationUsdYr: 54, sources: SOURCES },
-  NV: { state: "NV", gasUsdPerGal: 4.79, elecUsdPerKwh: 0.1429, useTaxRate: 0.0685, registrationUsdYr: 87, sources: SOURCES },
-  NH: { state: "NH", gasUsdPerGal: 4.07, elecUsdPerKwh: 0.2724, useTaxRate: 0, registrationUsdYr: 51, sources: SOURCES },
-  NJ: { state: "NJ", gasUsdPerGal: 4.19, elecUsdPerKwh: 0.2353, useTaxRate: 0.0663, registrationUsdYr: 66, sources: SOURCES },
-  NM: { state: "NM", gasUsdPerGal: 3.98, elecUsdPerKwh: 0.1515, useTaxRate: 0.04, registrationUsdYr: 44.5, sources: SOURCES },
-  NY: { state: "NY", gasUsdPerGal: 4.23, elecUsdPerKwh: 0.2945, useTaxRate: 0.04, registrationUsdYr: 83, sources: SOURCES },
-  NC: { state: "NC", gasUsdPerGal: 3.80, elecUsdPerKwh: 0.1625, useTaxRate: 0.03, registrationUsdYr: 66, sources: SOURCES },
-  ND: { state: "ND", gasUsdPerGal: 3.91, elecUsdPerKwh: 0.1235, useTaxRate: 0.05, registrationUsdYr: 120, sources: SOURCES },
-  OH: { state: "OH", gasUsdPerGal: 3.88, elecUsdPerKwh: 0.1949, useTaxRate: 0.0575, registrationUsdYr: 45.5, sources: SOURCES },
-  OK: { state: "OK", gasUsdPerGal: 3.77, elecUsdPerKwh: 0.1331, useTaxRate: 0.045, registrationUsdYr: 104.5, sources: SOURCES },
-  OR: { state: "OR", gasUsdPerGal: 4.63, elecUsdPerKwh: 0.1578, useTaxRate: 0, registrationUsdYr: 219, sources: SOURCES },
-  PA: { state: "PA", gasUsdPerGal: 4.23, elecUsdPerKwh: 0.2147, useTaxRate: 0.06, registrationUsdYr: 59.5, sources: SOURCES },
-  RI: { state: "RI", gasUsdPerGal: 4.13, elecUsdPerKwh: 0.2830, useTaxRate: 0.07, registrationUsdYr: 114, sources: SOURCES },
-  SC: { state: "SC", gasUsdPerGal: 3.77, elecUsdPerKwh: 0.1706, useTaxRate: 0.05, registrationUsdYr: 64.5, sources: SOURCES },
-  SD: { state: "SD", gasUsdPerGal: 4.02, elecUsdPerKwh: 0.1452, useTaxRate: 0.04, registrationUsdYr: 90, sources: SOURCES },
-  TN: { state: "TN", gasUsdPerGal: 3.71, elecUsdPerKwh: 0.1494, useTaxRate: 0.07, registrationUsdYr: 55, sources: SOURCES },
-  TX: { state: "TX", gasUsdPerGal: 3.69, elecUsdPerKwh: 0.1699, useTaxRate: 0.0625, registrationUsdYr: 79.5, sources: SOURCES },
-  UT: { state: "UT", gasUsdPerGal: 4.14, elecUsdPerKwh: 0.1329, useTaxRate: 0.0696, registrationUsdYr: 130.5, sources: SOURCES },
-  VT: { state: "VT", gasUsdPerGal: 4.21, elecUsdPerKwh: 0.2456, useTaxRate: 0.06, registrationUsdYr: 97, sources: SOURCES },
-  VA: { state: "VA", gasUsdPerGal: 3.98, elecUsdPerKwh: 0.1738, useTaxRate: 0.0415, registrationUsdYr: 60, sources: SOURCES },
-  WA: { state: "WA", gasUsdPerGal: 5.11, elecUsdPerKwh: 0.1436, useTaxRate: 0.068, registrationUsdYr: 95, sources: SOURCES },
-  WV: { state: "WV", gasUsdPerGal: 3.88, elecUsdPerKwh: 0.1606, useTaxRate: 0.06, registrationUsdYr: 40.5, sources: SOURCES },
-  WI: { state: "WI", gasUsdPerGal: 3.88, elecUsdPerKwh: 0.1921, useTaxRate: 0.05, registrationUsdYr: 80, sources: SOURCES },
-  WY: { state: "WY", gasUsdPerGal: 4.14, elecUsdPerKwh: 0.1468, useTaxRate: 0.04, registrationUsdYr: 42, sources: SOURCES },
+  AL: { state: "AL", gasUsdPerGal: 3.78, elecUsdPerKwh: 0.1741, useTaxRate: 0.02, registrationUsdYr: 54, liabilityUsdYr: 575.51, collisionUsdYr: 452.04, comprehensiveUsdYr: 241.16, sources: SOURCES },
+  AK: { state: "AK", gasUsdPerGal: 4.74, elecUsdPerKwh: 0.2735, useTaxRate: 0, registrationUsdYr: 150, liabilityUsdYr: 624.01, collisionUsdYr: 458.33, comprehensiveUsdYr: 180.15, sources: SOURCES },
+  AZ: { state: "AZ", gasUsdPerGal: 4.41, elecUsdPerKwh: 0.1548, useTaxRate: 0.056, registrationUsdYr: 64, liabilityUsdYr: 792.89, collisionUsdYr: 436.44, comprehensiveUsdYr: 275.26, sources: SOURCES },
+  AR: { state: "AR", gasUsdPerGal: 3.80, elecUsdPerKwh: 0.1416, useTaxRate: 0.065, registrationUsdYr: 24, liabilityUsdYr: 538.39, collisionUsdYr: 466.45, comprehensiveUsdYr: 291.62, sources: SOURCES },
+  CA: { state: "CA", gasUsdPerGal: 5.65, elecUsdPerKwh: 0.3525, useTaxRate: 0.0725, registrationUsdYr: 380, liabilityUsdYr: 660.84, collisionUsdYr: 607.06, comprehensiveUsdYr: 150.04, sources: SOURCES },
+  CO: { state: "CO", gasUsdPerGal: 4.08, elecUsdPerKwh: 0.1654, useTaxRate: 0.029, registrationUsdYr: 82.5, liabilityUsdYr: 781.9, collisionUsdYr: 426.6, comprehensiveUsdYr: 446.8, sources: SOURCES },
+  CT: { state: "CT", gasUsdPerGal: 4.21, elecUsdPerKwh: 0.3224, useTaxRate: 0.0635, registrationUsdYr: 165, liabilityUsdYr: 853.74, collisionUsdYr: 477.53, comprehensiveUsdYr: 176.94, sources: SOURCES },
+  DE: { state: "DE", gasUsdPerGal: 4.17, elecUsdPerKwh: 0.1879, useTaxRate: 0, registrationUsdYr: 55, liabilityUsdYr: 962.42, collisionUsdYr: 422.8, comprehensiveUsdYr: 183.99, sources: SOURCES },
+  DC: { state: "DC", gasUsdPerGal: 4.23, elecUsdPerKwh: 0.2541, useTaxRate: 0.06, registrationUsdYr: 100, liabilityUsdYr: 890.7, collisionUsdYr: 663.87, comprehensiveUsdYr: 263.7, sources: SOURCES_DC },
+  FL: { state: "FL", gasUsdPerGal: 3.97, elecUsdPerKwh: 0.1538, useTaxRate: 0.06, registrationUsdYr: 47, liabilityUsdYr: 1294.57, collisionUsdYr: 468.92, comprehensiveUsdYr: 230.32, sources: SOURCES },
+  GA: { state: "GA", gasUsdPerGal: 3.92, elecUsdPerKwh: 0.1537, useTaxRate: 0.07, registrationUsdYr: 77.5, liabilityUsdYr: 1046.3, collisionUsdYr: 473.22, comprehensiveUsdYr: 226.8, sources: SOURCES },
+  HI: { state: "HI", gasUsdPerGal: 5.43, elecUsdPerKwh: 0.4662, useTaxRate: 0.04, registrationUsdYr: 147.5, liabilityUsdYr: 463.89, collisionUsdYr: 416.92, comprehensiveUsdYr: 117.23, sources: SOURCES },
+  ID: { state: "ID", gasUsdPerGal: 4.24, elecUsdPerKwh: 0.1270, useTaxRate: 0.06, registrationUsdYr: 59, liabilityUsdYr: 481.74, collisionUsdYr: 324.41, comprehensiveUsdYr: 174.86, sources: SOURCES },
+  IL: { state: "IL", gasUsdPerGal: 4.26, elecUsdPerKwh: 0.2047, useTaxRate: 0.0625, registrationUsdYr: 151, liabilityUsdYr: 597.91, collisionUsdYr: 439.9, comprehensiveUsdYr: 218.77, sources: SOURCES },
+  IN: { state: "IN", gasUsdPerGal: 3.49, elecUsdPerKwh: 0.1790, useTaxRate: 0.07, registrationUsdYr: 25.5, liabilityUsdYr: 485.37, collisionUsdYr: 357.31, comprehensiveUsdYr: 189.18, sources: SOURCES },
+  IA: { state: "IA", gasUsdPerGal: 3.77, elecUsdPerKwh: 0.1386, useTaxRate: 0.05, registrationUsdYr: 87.5, liabilityUsdYr: 386.85, collisionUsdYr: 312.87, comprehensiveUsdYr: 310.69, sources: SOURCES },
+  KS: { state: "KS", gasUsdPerGal: 3.75, elecUsdPerKwh: 0.1578, useTaxRate: 0.075, registrationUsdYr: 69.5, liabilityUsdYr: 483.45, collisionUsdYr: 349.16, comprehensiveUsdYr: 349.08, sources: SOURCES },
+  KY: { state: "KY", gasUsdPerGal: 3.74, elecUsdPerKwh: 0.1502, useTaxRate: 0.06, registrationUsdYr: 41, liabilityUsdYr: 632.75, collisionUsdYr: 357.54, comprehensiveUsdYr: 218.0, sources: SOURCES },
+  LA: { state: "LA", gasUsdPerGal: 3.70, elecUsdPerKwh: 0.1444, useTaxRate: 0.05, registrationUsdYr: 51.5, liabilityUsdYr: 1055.1, collisionUsdYr: 581.47, comprehensiveUsdYr: 346.08, sources: SOURCES },
+  ME: { state: "ME", gasUsdPerGal: 4.10, elecUsdPerKwh: 0.2842, useTaxRate: 0.055, registrationUsdYr: 45, liabilityUsdYr: 424.93, collisionUsdYr: 336.48, comprehensiveUsdYr: 164.61, sources: SOURCES },
+  MD: { state: "MD", gasUsdPerGal: 4.18, elecUsdPerKwh: 0.2207, useTaxRate: 0.06, registrationUsdYr: 161, liabilityUsdYr: 868.68, collisionUsdYr: 513.43, comprehensiveUsdYr: 219.52, sources: SOURCES },
+  MA: { state: "MA", gasUsdPerGal: 4.13, elecUsdPerKwh: 0.2945, useTaxRate: 0.0625, registrationUsdYr: 80, liabilityUsdYr: 710.19, collisionUsdYr: 519.88, comprehensiveUsdYr: 183.42, sources: SOURCES },
+  MI: { state: "MI", gasUsdPerGal: 4.22, elecUsdPerKwh: 0.2139, useTaxRate: 0.06, registrationUsdYr: 164, liabilityUsdYr: 765.72, collisionUsdYr: 570.16, comprehensiveUsdYr: 236.9, sources: SOURCES },
+  MN: { state: "MN", gasUsdPerGal: 4.04, elecUsdPerKwh: 0.1639, useTaxRate: 0.0688, registrationUsdYr: 90, liabilityUsdYr: 542.43, collisionUsdYr: 360.33, comprehensiveUsdYr: 320.72, sources: SOURCES },
+  MS: { state: "MS", gasUsdPerGal: 3.67, elecUsdPerKwh: 0.1676, useTaxRate: 0.05, registrationUsdYr: 20, liabilityUsdYr: 636.67, collisionUsdYr: 443.72, comprehensiveUsdYr: 314.13, sources: SOURCES },
+  MO: { state: "MO", gasUsdPerGal: 3.85, elecUsdPerKwh: 0.1401, useTaxRate: 0.0423, registrationUsdYr: 30.5, liabilityUsdYr: 614.25, collisionUsdYr: 400.34, comprehensiveUsdYr: 307.96, sources: SOURCES },
+  MT: { state: "MT", gasUsdPerGal: 4.30, elecUsdPerKwh: 0.1390, useTaxRate: 0, registrationUsdYr: 122.5, liabilityUsdYr: 471.84, collisionUsdYr: 346.36, comprehensiveUsdYr: 365.45, sources: SOURCES },
+  NE: { state: "NE", gasUsdPerGal: 3.96, elecUsdPerKwh: 0.1328, useTaxRate: 0.055, registrationUsdYr: 54, liabilityUsdYr: 483.69, collisionUsdYr: 356.57, comprehensiveUsdYr: 343.62, sources: SOURCES },
+  NV: { state: "NV", gasUsdPerGal: 4.79, elecUsdPerKwh: 0.1429, useTaxRate: 0.0685, registrationUsdYr: 87, liabilityUsdYr: 1040.03, collisionUsdYr: 424.33, comprehensiveUsdYr: 135.76, sources: SOURCES },
+  NH: { state: "NH", gasUsdPerGal: 4.07, elecUsdPerKwh: 0.2724, useTaxRate: 0, registrationUsdYr: 51, liabilityUsdYr: 482.42, collisionUsdYr: 391.38, comprehensiveUsdYr: 158.2, sources: SOURCES },
+  NJ: { state: "NJ", gasUsdPerGal: 4.19, elecUsdPerKwh: 0.2353, useTaxRate: 0.0663, registrationUsdYr: 66, liabilityUsdYr: 1032.5, collisionUsdYr: 490.55, comprehensiveUsdYr: 170.34, sources: SOURCES },
+  NM: { state: "NM", gasUsdPerGal: 3.98, elecUsdPerKwh: 0.1515, useTaxRate: 0.04, registrationUsdYr: 44.5, liabilityUsdYr: 623.83, collisionUsdYr: 418.17, comprehensiveUsdYr: 259.13, sources: SOURCES },
+  NY: { state: "NY", gasUsdPerGal: 4.23, elecUsdPerKwh: 0.2945, useTaxRate: 0.04, registrationUsdYr: 83, liabilityUsdYr: 1115.97, collisionUsdYr: 541.06, comprehensiveUsdYr: 238.96, sources: SOURCES },
+  NC: { state: "NC", gasUsdPerGal: 3.80, elecUsdPerKwh: 0.1625, useTaxRate: 0.03, registrationUsdYr: 66, liabilityUsdYr: 447.99, collisionUsdYr: 440.9, comprehensiveUsdYr: 207.67, sources: SOURCES },
+  ND: { state: "ND", gasUsdPerGal: 3.91, elecUsdPerKwh: 0.1235, useTaxRate: 0.05, registrationUsdYr: 120, liabilityUsdYr: 331.5, collisionUsdYr: 320.36, comprehensiveUsdYr: 309.43, sources: SOURCES },
+  OH: { state: "OH", gasUsdPerGal: 3.88, elecUsdPerKwh: 0.1949, useTaxRate: 0.0575, registrationUsdYr: 45.5, liabilityUsdYr: 485.07, collisionUsdYr: 363.31, comprehensiveUsdYr: 189.24, sources: SOURCES },
+  OK: { state: "OK", gasUsdPerGal: 3.77, elecUsdPerKwh: 0.1331, useTaxRate: 0.045, registrationUsdYr: 104.5, liabilityUsdYr: 565.91, collisionUsdYr: 420.48, comprehensiveUsdYr: 337.76, sources: SOURCES },
+  OR: { state: "OR", gasUsdPerGal: 4.63, elecUsdPerKwh: 0.1578, useTaxRate: 0, registrationUsdYr: 219, liabilityUsdYr: 751.17, collisionUsdYr: 352.06, comprehensiveUsdYr: 165.24, sources: SOURCES },
+  PA: { state: "PA", gasUsdPerGal: 4.23, elecUsdPerKwh: 0.2147, useTaxRate: 0.06, registrationUsdYr: 59.5, liabilityUsdYr: 567.27, collisionUsdYr: 465.3, comprehensiveUsdYr: 240.89, sources: SOURCES },
+  RI: { state: "RI", gasUsdPerGal: 4.13, elecUsdPerKwh: 0.2830, useTaxRate: 0.07, registrationUsdYr: 114, liabilityUsdYr: 984.27, collisionUsdYr: 539.91, comprehensiveUsdYr: 185.5, sources: SOURCES },
+  SC: { state: "SC", gasUsdPerGal: 3.77, elecUsdPerKwh: 0.1706, useTaxRate: 0.05, registrationUsdYr: 64.5, liabilityUsdYr: 879.4, collisionUsdYr: 386.48, comprehensiveUsdYr: 250.82, sources: SOURCES },
+  SD: { state: "SD", gasUsdPerGal: 4.02, elecUsdPerKwh: 0.1452, useTaxRate: 0.04, registrationUsdYr: 90, liabilityUsdYr: 378.14, collisionUsdYr: 306.78, comprehensiveUsdYr: 472.78, sources: SOURCES },
+  TN: { state: "TN", gasUsdPerGal: 3.71, elecUsdPerKwh: 0.1494, useTaxRate: 0.07, registrationUsdYr: 55, liabilityUsdYr: 541.98, collisionUsdYr: 440.52, comprehensiveUsdYr: 229.22, sources: SOURCES },
+  TX: { state: "TX", gasUsdPerGal: 3.69, elecUsdPerKwh: 0.1699, useTaxRate: 0.0625, registrationUsdYr: 79.5, liabilityUsdYr: 797.86, collisionUsdYr: 529.05, comprehensiveUsdYr: 400.01, sources: SOURCES },
+  UT: { state: "UT", gasUsdPerGal: 4.14, elecUsdPerKwh: 0.1329, useTaxRate: 0.0696, registrationUsdYr: 130.5, liabilityUsdYr: 746.43, collisionUsdYr: 378.17, comprehensiveUsdYr: 160.01, sources: SOURCES },
+  VT: { state: "VT", gasUsdPerGal: 4.21, elecUsdPerKwh: 0.2456, useTaxRate: 0.06, registrationUsdYr: 97, liabilityUsdYr: 381.32, collisionUsdYr: 385.07, comprehensiveUsdYr: 191.41, sources: SOURCES },
+  VA: { state: "VA", gasUsdPerGal: 3.98, elecUsdPerKwh: 0.1738, useTaxRate: 0.0415, registrationUsdYr: 60, liabilityUsdYr: 626.63, collisionUsdYr: 407.01, comprehensiveUsdYr: 204.49, sources: SOURCES },
+  WA: { state: "WA", gasUsdPerGal: 5.11, elecUsdPerKwh: 0.1436, useTaxRate: 0.068, registrationUsdYr: 95, liabilityUsdYr: 708.06, collisionUsdYr: 372.69, comprehensiveUsdYr: 153.93, sources: SOURCES },
+  WV: { state: "WV", gasUsdPerGal: 3.88, elecUsdPerKwh: 0.1606, useTaxRate: 0.06, registrationUsdYr: 40.5, liabilityUsdYr: 523.08, collisionUsdYr: 402.2, comprehensiveUsdYr: 302.12, sources: SOURCES },
+  WI: { state: "WI", gasUsdPerGal: 3.88, elecUsdPerKwh: 0.1921, useTaxRate: 0.05, registrationUsdYr: 80, liabilityUsdYr: 446.8, collisionUsdYr: 314.51, comprehensiveUsdYr: 238.68, sources: SOURCES },
+  WY: { state: "WY", gasUsdPerGal: 4.14, elecUsdPerKwh: 0.1468, useTaxRate: 0.04, registrationUsdYr: 42, liabilityUsdYr: 389.93, collisionUsdYr: 337.83, comprehensiveUsdYr: 452.24, sources: SOURCES },
 };
 
 /**

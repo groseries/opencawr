@@ -161,10 +161,15 @@ in order of how much they matter:
   NHTSA edge 403s Node's default User-Agent *and* any UA containing `(+https://…)`.
 Report §7 lists file-by-file what would change. Rewriting seed tiers stays an owner review gate.
 
-**R13. Insurance re-basing — blocked on licensing, not on data** (launch gate; investigation
-2026-07-29, `docs/investigations/2026-07-29-insurance-source.md`). Owner decision 2026-07-29 was
-*"re-base the estimates on a public source."* That is achievable, but the good source is not
-openly licensed:
+**R13. Insurance re-basing — SHIPPED 2026-07-29 without IIHS-HLDI** (launch gate; investigation
+2026-07-29, `docs/investigations/2026-07-29-insurance-source.md`). Owner decision 2026-07-29:
+re-base on NAIC + BLS, **drop IIHS-HLDI entirely** rather than wait on written permission, and
+recover per-model and per-year variation by splitting the NAIC state premium by what each
+coverage insures — liability flat, collision + comprehensive scaled by the car's own modeled
+book value. Landed with per-state regionalization (three new `region.ts` columns) and a
+deliberate reference regeneration; see `ASSUMPTIONS.md` §A/§E/§G for the formula, sourcing,
+licence posture, measured blast radius and the OPEN items. The notes below are the original
+investigation summary, kept for the HLDI revisit path:
 - **IIHS-HLDI** publishes per-series *relative* loss indices standardizing out state,
   demographics, deductible and model year — exactly the vehicle effect needed, covering
   2004-06 through 2022-24. **But its site policy permits "limited noncommercial, educational and
