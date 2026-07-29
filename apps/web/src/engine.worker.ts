@@ -1,5 +1,6 @@
 /// <reference lib="webworker" />
 import {
+  buyPointSweep,
   costPerMile,
   curveAt,
   impliedModelYear,
@@ -37,6 +38,14 @@ export interface RankedRow {
   impliedBuyYear: number;
   /** Human note when the odometer↔year coupling is off in either direction. */
   feasNote: string | null;
+  /** Buy-point sweep (spec §4/R4): the odometer minimizing P50 over this car's
+   *  own feasible range — priced at reduced draws, NOT the same buy point as
+   *  the p50/p75/p90 columns above (those stay at `buyOdo`). */
+  idealOdo: number;
+  idealYear: number;
+  /** Last odometer still within tolerance of the ideal's P50; null if the walk
+   *  can't take a single step (see `buyPointSweep`). */
+  upperOdo: number | null;
 }
 
 export interface EngineResponse {
@@ -144,6 +153,7 @@ function handleRank(req: EngineRequest) {
   const results = data.vehicles.map((v) => ({
     vehicle: v,
     res: costPerMile(v, data.constants, inputs),
+    sweep: buyPointSweep(v, data.constants, inputs),
   }));
   const byName = new Map(results.map((r) => [r.vehicle.name, r]));
   const am = inputs.annualMiles ?? data.constants.annual_miles;
@@ -160,7 +170,7 @@ function handleRank(req: EngineRequest) {
       })),
     );
     return ranked.map((rk) => {
-      const { vehicle, res } = byName.get(rk.id)!;
+      const { vehicle, res, sweep } = byName.get(rk.id)!;
       const rawYear = impliedModelYear(res.buyOdo, am, data.constants.now_year);
       const feasNote =
         Math.round(rawYear) > vehicle.last_year
@@ -185,6 +195,9 @@ function handleRank(req: EngineRequest) {
         buyPrice: res.buyPrice,
         impliedBuyYear: res.impliedBuyYear,
         feasNote,
+        idealOdo: sweep.idealOdo,
+        idealYear: sweep.idealYear,
+        upperOdo: sweep.upperOdo,
       };
     });
   };

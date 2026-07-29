@@ -9,12 +9,6 @@ import { IntakeCard } from "./intake.js";
 import { CarDrawer } from "./drawer/CarDrawer.js";
 
 const fmt = (x: number) => `$${x.toFixed(3)}`;
-const ETYPE_LABEL: Record<string, string> = {
-  gas: "gas",
-  hybrid: "hybrid",
-  ev: "EV",
-  phev: "PHEV",
-};
 
 const INTAKE_SEEN_KEY = "opencawr:intake-seen";
 
@@ -69,7 +63,9 @@ export function App() {
   const secondaryValue = (r: { p50: number; p75: number; p90: number }) =>
     rankBasis === "p75" ? r.p50 : r.p90;
   const primaryLabel = rankBasis === "p75" ? "bad-luck cost" : "$/mi";
-  const primarySub = rankBasis === "p75" ? "P75" : "median";
+  // Disclose the pricing odometer here because the row's "ideal mileage" (buy-point
+  // sweep argmin) can land on a different odometer than this column's own price.
+  const primarySub = rankBasis === "p75" ? "P75 · at buy odo" : "median · at buy odo";
   const secondaryLabel = rankBasis === "p75" ? "typical cost" : "bad luck";
   const secondarySub = rankBasis === "p75" ? "P50" : "P90";
 
@@ -162,6 +158,11 @@ export function App() {
                 <p className="results-note">
                   Cars in the same tie tier are statistically indistinguishable — the model
                   can't honestly order them.
+                </p>
+                <p className="results-note">
+                  Each row's ideal mileage marks that car's own cost-minimizing buy point, not a
+                  recommendation — the $/mi columns are still priced at that car's default buy
+                  odometer, so the two figures can disagree.
                 </p>
               </div>
               <div className="results-controls">
@@ -274,8 +275,15 @@ export function App() {
                       <td>
                         <span className="car-name">{r.name}</span>
                         <span className="car-meta">
-                          {ETYPE_LABEL[r.etype]} · buy ~{Math.round(r.buyOdo / 1000)}k mi ·{" "}
-                          {r.impliedBuyYear}
+                          <span className="mono">{r.idealYear}</span> ·{" "}
+                          <span className="mono">{Math.round(r.idealOdo / 1000)}k mi</span>
+                          {r.upperOdo !== null ? (
+                            <>
+                              {" "}
+                              · up to{" "}
+                              <span className="mono">{Math.round(r.upperOdo / 1000)}k mi</span>
+                            </>
+                          ) : null}
                           {r.feasNote ? ` · ${r.feasNote}` : ""}
                           {isDimmed ? " · misses 1 filter" : ""}
                         </span>

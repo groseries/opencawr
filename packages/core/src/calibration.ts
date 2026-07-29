@@ -32,4 +32,16 @@ export const CALIBRATION = {
 
   /** Tie-tier walk: a car starts a new tier when the tier leader beats it with ≥ this prob. */
   tieTierBeatProb: 0.85,
+
+  /** JUDGMENT: reduced-precision draws for the buy-point sweep (buypoint.ts) — the
+   *  survey drawer's 400-draw reduction (ASSUMPTIONS.md §I) is the existing precedent
+   *  for trading Monte Carlo precision for speed on a many-point grid search. */
+  sweepDraws: 300,
+
+  /** JUDGMENT: buy-point sweep grid step, in miles. */
+  sweepStepMiles: 10_000,
+
+  /** JUDGMENT: "still worth buying" = within this fraction of the sweep's cheapest
+   *  feasible P50 — sets the buy-point sweep's upper-mileage-limit tolerance. */
+  worthwhileP50Tolerance: 0.05,
 } as const;
