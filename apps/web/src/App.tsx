@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { lazy, Suspense, useMemo, useState } from "react";
 import type { EngineInputs } from "@opencawr/core";
 import { Inputs, DEFAULTS, RankBasisToggle, type RankBasis } from "./controls.js";
 import { useEngine } from "./useEngine.js";
@@ -8,7 +8,12 @@ import { tierColor, tierTextColor } from "./charts/tierColors.js";
 import { DealAnalyzer } from "./deal/DealAnalyzer.js";
 import { IntakeCard } from "./intake.js";
 import { CarDrawer } from "./drawer/CarDrawer.js";
-import { AssumptionsTab } from "./assumptions/AssumptionsTab.js";
+
+// Code-split: the tab embeds ~69 KB of `?raw` markdown (see AssumptionsTab.tsx)
+// that only needs to load when this tab is actually opened.
+const AssumptionsTab = lazy(() =>
+  import("./assumptions/AssumptionsTab.js").then((m) => ({ default: m.AssumptionsTab })),
+);
 
 const fmt = (x: number) => `$${x.toFixed(3)}`;
 
@@ -345,7 +350,11 @@ export function App() {
               </div>
             )}
           </div>
-          {tab === "assumptions" && <AssumptionsTab />}
+          {tab === "assumptions" && (
+            <Suspense fallback={<div className="loading">Loading…</div>}>
+              <AssumptionsTab />
+            </Suspense>
+          )}
           <footer className="foot">
             <span>
               OpenCAWR · reliability inputs pending public re-derivation (see ledger) ·

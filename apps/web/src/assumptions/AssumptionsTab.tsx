@@ -1,4 +1,5 @@
 import { CALIBRATION } from "@opencawr/core";
+import type { Constants } from "@opencawr/core";
 import { DEFAULTS, HORIZONS } from "../controls.js";
 import { Markdown, MarkdownInline, findOpenRows, findRow, sliceSection } from "./markdown.js";
 
@@ -8,6 +9,13 @@ import { Markdown, MarkdownInline, findOpenRows, findRow, sliceSection } from ".
 import ASSUMPTIONS_MD from "../../../../ASSUMPTIONS.md?raw";
 import RELIABILITY_MD from "../../../../docs/reliability-methodology.md?raw";
 import SPEC_MD from "../../../../OpenCAWR_SPEC.md?raw";
+// Same live-data property, for the one rail default (registration) that isn't
+// in DEFAULTS and instead falls back to the engine's `constants` (see
+// packages/core/src/engine.ts:45) — read from the actual data file rather
+// than duplicating its number here.
+import opencawrData from "../../../../opencawr_data.json";
+
+const CONSTANTS = (opencawrData as unknown as { constants: Constants }).constants;
 
 const SPEC_COST_MODEL = sliceSection(SPEC_MD, "\n## 2.", "\n## 6.");
 const SPEC_LAUNCH_GATE = sliceSection(SPEC_MD, "\n## 9.", "\n## 10.");
@@ -79,47 +87,47 @@ export function AssumptionsTab() {
               </tr>
               <tr>
                 <td>Miles you drive per year</td>
-                <td className="mono">{(DEFAULTS.annualMiles ?? 13_000).toLocaleString()} mi/yr</td>
+                <td className="mono">{DEFAULTS.annualMiles!.toLocaleString()} mi/yr</td>
                 <td>Converts the holding horizon to miles and couples odometer to implied model year.</td>
               </tr>
               <tr>
                 <td>Your money could earn (real)</td>
-                <td className="mono">{((DEFAULTS.discountRate ?? 0.07) * 100).toFixed(1)}%/yr</td>
+                <td className="mono">{(DEFAULTS.discountRate! * 100).toFixed(1)}%/yr</td>
                 <td>The discount rate — opportunity cost of capital enters ONLY here (spec §2). 0% = don't count it.</td>
               </tr>
               <tr>
                 <td>Gas price</td>
-                <td className="mono">${(DEFAULTS.gasUsdPerGal ?? 5.455).toFixed(3)}/gal</td>
+                <td className="mono">${DEFAULTS.gasUsdPerGal!.toFixed(3)}/gal</td>
                 <td>Priced against each car's gallons/mile in the energy term.</td>
               </tr>
               <tr>
                 <td>Electricity price</td>
-                <td className="mono">${(DEFAULTS.elecUsdPerKwh ?? 0.38).toFixed(2)}/kWh</td>
+                <td className="mono">${DEFAULTS.elecUsdPerKwh!.toFixed(2)}/kWh</td>
                 <td>Priced against each EV/PHEV's kWh/mile in the energy term.</td>
               </tr>
               <tr>
                 <td>Insurance vs. average</td>
-                <td className="mono">{(DEFAULTS.insuranceMultiplier ?? 0.8).toFixed(2)}×</td>
+                <td className="mono">{DEFAULTS.insuranceMultiplier!.toFixed(2)}×</td>
                 <td>Multiplies the per-model premium; 0.8 = a 20% cheaper insurer than the seed data assumes.</td>
               </tr>
               <tr>
                 <td>Sales / use tax</td>
-                <td className="mono">{((DEFAULTS.useTaxRate ?? 0.07) * 100).toFixed(1)}%</td>
+                <td className="mono">{(DEFAULTS.useTaxRate! * 100).toFixed(1)}%</td>
                 <td>Applied once, to purchase price at t0.</td>
               </tr>
               <tr>
                 <td>Vehicle registration</td>
-                <td className="mono">${DEFAULTS.registrationUsdYr ?? 55}/yr</td>
+                <td className="mono">${CONSTANTS.registration_usd_yr_FL}/yr</td>
                 <td>Flat annual operating cost, discounted like the other operating-cost terms.</td>
               </tr>
               <tr>
                 <td>Monte Carlo draws</td>
-                <td className="mono">{DEFAULTS.draws ?? 1_100}</td>
+                <td className="mono">{DEFAULTS.draws}</td>
                 <td>Not user-editable in the rail. Randomizes EOL mileage, repair events, insurance noise, battery timing.</td>
               </tr>
               <tr>
                 <td>Random seed</td>
-                <td className="mono">{DEFAULTS.seed ?? 42}</td>
+                <td className="mono">{DEFAULTS.seed}</td>
                 <td>Not user-editable. Fixed so the engine reproduces the reference test outputs exactly.</td>
               </tr>
             </tbody>

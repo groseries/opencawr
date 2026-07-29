@@ -1080,6 +1080,12 @@ th.num {
   white-space: nowrap;
 }
 
+.status-sourced {
+  border-color: var(--ink);
+  background: var(--panel);
+  color: var(--ink);
+}
+
 .status-documented {
   border-color: var(--rule);
   color: var(--muted);

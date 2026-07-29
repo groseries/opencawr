@@ -5,11 +5,14 @@ import type { ReactNode } from "react";
  *
  * Deliberately narrow scope: headings, GFM pipe tables, unordered (-/*) and
  * ordered (N.) lists with lazy continuation lines, fenced code blocks (```),
- * paragraphs, and inline `code`, **bold**, and [text](url) links. No italics,
- * no nested emphasis, no blockquotes, no HTML passthrough — the three source
- * docs this renders (ASSUMPTIONS.md, docs/reliability-methodology.md,
- * OpenCAWR_SPEC.md) don't use more than this, and this is a renderer for
- * those docs, not a general-purpose markdown engine.
+ * paragraphs, and inline `code`, **bold**, and [text](url) links — bold
+ * content is itself inline-parsed, so a code span nested inside bold (e.g.
+ * docs/reliability-methodology.md's "**`sport` is never derived.**") renders
+ * as a real nested `<code>`, not literal backticks. No italics, no
+ * blockquotes, no HTML passthrough — the three source docs this renders
+ * (ASSUMPTIONS.md, docs/reliability-methodology.md, OpenCAWR_SPEC.md) don't
+ * use more than this, and this is a renderer for those docs, not a
+ * general-purpose markdown engine.
  *
  * One known cosmetic gap: single-asterisk italics (`*word*`, used a couple of
  * times in ASSUMPTIONS.md, e.g. "*Electric Power Monthly*") render as literal
@@ -28,6 +31,11 @@ const SEP_RE = /^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$/;
 const HEADING_RE = /^(#{1,6})\s+(.*)$/;
 const UL_RE = /^\s*[-*]\s+(.*)$/;
 const OL_RE = /^\s*\d+\.\s+(.*)$/;
+// GFM thematic break (`---`/`***`/`___` alone on a line, used as a section
+// divider throughout OpenCAWR_SPEC.md) — dropped rather than rendered, since
+// the sliced sections already get their own heading; the point is just that
+// the literal dashes must not leak through as body text.
+const HR_RE = /^\s*(-{3,}|\*{3,}|_{3,})\s*$/;
 
 /** Split one markdown table row into cells. Handles `\|` (escaped literal
  *  pipe — GFM's own convention for a pipe that must NOT split the cell) and
@@ -72,6 +80,10 @@ export function parseMarkdown(source: string): Block[] {
   while (i < lines.length) {
     const line = lines[i]!;
     if (line.trim() === "") {
+      i++;
+      continue;
+    }
+    if (HR_RE.test(line)) {
       i++;
       continue;
     }
@@ -197,14 +209,20 @@ function renderInline(text: string, keyPrefix: string): ReactNode[] {
   const out: ReactNode[] = [];
   let last = 0;
   let n = 0;
-  INLINE_RE.lastIndex = 0;
+  // A fresh RegExp instance per call (rather than resetting the shared
+  // module-level INLINE_RE) so a recursive call — used below to inline-parse
+  // bold content — can't clobber this call's `lastIndex` mid-loop.
+  const re = new RegExp(INLINE_RE.source, "g");
   let m: RegExpExecArray | null;
-  while ((m = INLINE_RE.exec(text))) {
+  while ((m = re.exec(text))) {
     if (m.index > last) out.push(text.slice(last, m.index));
     if (m[1] !== undefined) {
       out.push(<code key={`${keyPrefix}-${n++}`}>{m[1]}</code>);
     } else if (m[2] !== undefined) {
-      out.push(<strong key={`${keyPrefix}-${n++}`}>{m[2]}</strong>);
+      // Recurse so a code span nested inside bold (e.g. "**`sport` is never
+      // derived.**") renders as a real nested <code>, not literal backticks.
+      out.push(<strong key={`${keyPrefix}-${n}`}>{renderInline(m[2], `${keyPrefix}-${n}-b`)}</strong>);
+      n++;
     } else {
       out.push(
         <a key={`${keyPrefix}-${n++}`} href={m[4]} target="_blank" rel="noreferrer">
@@ -212,7 +230,7 @@ function renderInline(text: string, keyPrefix: string): ReactNode[] {
         </a>,
       );
     }
-    last = INLINE_RE.lastIndex;
+    last = re.lastIndex;
   }
   if (last < text.length) out.push(text.slice(last));
   return out;
