@@ -7,8 +7,8 @@ import type { SweepPoint } from "../engine.worker.js";
  * current value is marked in needle-red ("this is your live assumption"), the
  * rest in ink. */
 
-const CHART_W = 300;
-const CHART_H = 108;
+const CHART_W = 380;
+const CHART_H = 150;
 const MARGIN = { top: 10, right: 8, bottom: 22, left: 48 };
 
 const fmtCpm = (x: number) => `$${x.toFixed(3)}`;

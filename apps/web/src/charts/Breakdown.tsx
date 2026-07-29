@@ -1,10 +1,14 @@
+import { useLayoutEffect, useRef, useState } from "react";
 import type { CostBreakdown } from "@opencawr/core";
+import { breakdownColor, breakdownTextColor } from "./breakdownColors.js";
 
 /** Cost breakdown (spec §6.4): part-to-whole stacked bar of one car's expected
  * $/mi by component. Segments are ordered by descending share (the order itself
- * is the story: "biggest driver first") and shaded as monotone steps of a single
- * --ink wash — not a new categorical palette, since every segment is directly
- * labeled in the list below, which also serves as the chart's table view. */
+ * is the story: "biggest driver first") and colored with a fixed categorical
+ * palette keyed by component (`./breakdownColors.ts`), not by sort rank, so a
+ * component's color stays stable across cars. Wide segments (>8% of total)
+ * carry a direct in-bar label; the `breakdown-list` below remains the full
+ * table view for every segment regardless of width. */
 
 const LABELS: Record<Exclude<keyof CostBreakdown, "total">, string> = {
   depreciation: "Depreciation",
@@ -19,7 +23,30 @@ const LABELS: Record<Exclude<keyof CostBreakdown, "total">, string> = {
   energy: "Fuel / energy",
 };
 
+const IN_BAR_LABEL_MIN_PCT = 8;
+
 const fmt = (x: number) => `$${x.toFixed(3)}`;
+
+/** In-bar segment label, candidate above IN_BAR_LABEL_MIN_PCT but measured
+ * against its actual rendered width (spec: dataviz skill, "a label that won't
+ * fit doesn't get clipped — measure first"): if the text still overflows its
+ * segment once laid out, it un-renders itself before paint rather than
+ * showing a truncated ellipsis. The tooltip and the full list below always
+ * carry the name regardless. */
+function SegLabel({ text, color }: { text: string; color: string }) {
+  const ref = useRef<HTMLSpanElement | null>(null);
+  const [fits, setFits] = useState(true);
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (el && el.scrollWidth > el.clientWidth) setFits(false);
+  }, [text]);
+  if (!fits) return null;
+  return (
+    <span ref={ref} className="breakdown-seg-label" style={{ color }}>
+      {text}
+    </span>
+  );
+}
 
 export function Breakdown({ breakdown }: { breakdown: CostBreakdown }) {
   const total = breakdown.total || 1;
@@ -27,14 +54,10 @@ export function Breakdown({ breakdown }: { breakdown: CostBreakdown }) {
     .map((key) => ({ key, label: LABELS[key], value: breakdown[key] }))
     .sort((a, b) => b.value - a.value);
 
-  // Monotone opacity steps over a single --ink hue, darkest = biggest driver.
-  const n = rows.length;
-  const opacityFor = (rank: number) => (n <= 1 ? 0.85 : 0.9 - (rank / (n - 1)) * 0.68);
-
   let offset = 0;
-  const segments = rows.map((r, i) => {
+  const segments = rows.map((r) => {
     const widthPct = (Math.max(r.value, 0) / total) * 100;
-    const seg = { ...r, offsetPct: offset, widthPct, opacity: opacityFor(i) };
+    const seg = { ...r, offsetPct: offset, widthPct };
     offset += widthPct;
     return seg;
   });
@@ -52,10 +75,14 @@ export function Breakdown({ breakdown }: { breakdown: CostBreakdown }) {
           <div
             key={s.key}
             className="breakdown-seg"
-            style={{ width: `${s.widthPct}%`, background: `rgba(20, 25, 29, ${s.opacity})` }}
+            style={{ width: `${s.widthPct}%`, background: breakdownColor(s.key) }}
             tabIndex={s.widthPct > 0 ? 0 : undefined}
             title={`${s.label}: ${fmt(s.value)}/mi (${Math.round((s.value / total) * 100)}%)`}
-          />
+          >
+            {s.widthPct > IN_BAR_LABEL_MIN_PCT && (
+              <SegLabel text={s.label} color={breakdownTextColor(s.key)} />
+            )}
+          </div>
         ))}
       </div>
       <ul className="breakdown-list">
@@ -63,7 +90,7 @@ export function Breakdown({ breakdown }: { breakdown: CostBreakdown }) {
           <li key={s.key} className="breakdown-row">
             <span
               className="breakdown-swatch"
-              style={{ background: `rgba(20, 25, 29, ${s.opacity})` }}
+              style={{ background: breakdownColor(s.key) }}
             />
             <span className="breakdown-name">{s.label}</span>
             <span className="breakdown-value mono">{fmt(s.value)}</span>

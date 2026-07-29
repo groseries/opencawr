@@ -669,7 +669,7 @@ th.num {
 .drawer-panel {
   position: relative;
   width: 100%;
-  max-width: 620px;
+  max-width: 840px;
   height: 100%;
   overflow-y: auto;
   background: var(--panel);
@@ -887,12 +887,24 @@ th.num {
 .breakdown-bar {
   display: flex;
   width: 100%;
-  height: 22px;
+  height: 34px;
   gap: 2px;
 }
 
 .breakdown-seg {
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.breakdown-seg-label {
+  font-size: 10.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 4px;
 }
 
 .breakdown-list {
