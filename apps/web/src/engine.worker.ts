@@ -87,7 +87,7 @@ export interface DealResponse {
 
 /** Survey drawer request (Task F): one car's cost-vs-buy-point grid, its default
  * breakdown, and two sensitivity sweeps. All grid/sweep cells run at reduced
- * draws (see SURVEY_DRAWS) — a documented speed/precision tradeoff (ASSUMPTIONS.md §H). */
+ * draws (see SURVEY_DRAWS) — a documented speed/precision tradeoff (ASSUMPTIONS.md §I). */
 export interface SurveyRequest {
   kind: "survey";
   id: number;
@@ -114,6 +114,9 @@ export interface SurveyResponse {
   vehicleName: string;
   /** This car's own default-buy-point P50 (current rail assumptions) — drawer headline. */
   p50: number;
+  /** The odometer `p50` is priced at. Shown beside it because the Rankings row now
+   * reports the sweep's *ideal* odometer instead, and the two can disagree. */
+  buyOdo: number;
   breakdown: CostBreakdown;
   buyOdoAxis: number[];
   holdMilesAxis: number[];
@@ -341,7 +344,7 @@ const ANNUAL_MILES_AXIS = [
 const GAS_PRICE_AXIS = [2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5];
 
 /** Draws per cell for the 96-cell grid + 20 sensitivity points (reduced from the
- * default 1,100 for speed — documented tradeoff, ASSUMPTIONS.md §H). */
+ * default 1,100 for speed — documented tradeoff, ASSUMPTIONS.md §I). */
 const SURVEY_DRAWS = 400;
 
 function handleSurvey(req: SurveyRequest) {
@@ -388,6 +391,7 @@ function handleSurvey(req: SurveyRequest) {
     id,
     vehicleName,
     p50: defaultRes.p50,
+    buyOdo: defaultRes.buyOdo,
     breakdown: defaultRes.breakdown,
     buyOdoAxis: BUY_ODO_AXIS,
     holdMilesAxis: HOLD_MILES_AXIS,

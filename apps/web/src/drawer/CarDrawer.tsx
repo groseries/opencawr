@@ -119,7 +119,9 @@ export function CarDrawer({
         ) : (
           <>
             <p className="drawer-headline">
-              <span className="mono">{fmt(result.p50)}/mi</span> at your current assumptions
+              <span className="mono">{fmt(result.p50)}/mi</span> bought at{" "}
+              <span className="mono">{Math.round(result.buyOdo / 1000)}k mi</span>, at your
+              current assumptions
             </p>
 
             <section className="drawer-section">

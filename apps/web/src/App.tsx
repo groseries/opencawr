@@ -180,7 +180,8 @@ export function App() {
                 <p className="results-note">
                   Each row's ideal mileage marks that car's own cost-minimizing buy point, not a
                   recommendation — the $/mi columns are still priced at that car's default buy
-                  odometer, so the two figures can disagree.
+                  odometer, so the two figures can disagree. Open a row to see which odometer
+                  its $/mi was priced at.
                 </p>
               </div>
               <div className="results-controls">

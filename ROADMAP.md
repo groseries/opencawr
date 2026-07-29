@@ -17,8 +17,9 @@ verification, 2026-07-28 — needs an owner decision on what "ideal" should mean
 `packages/core/src/buypoint.ts`, `apps/web/src/App.tsx` car-meta line. R4 shipped
 `buyPointSweep`, whose `idealOdo` is the unconstrained argmin of P50 across the feasible
 odometer range. Measured across all 71 seed vehicles at default assumptions: **`idealOdo`
-sits at the lowest feasible odometer for 60/71 (85%), and at literally 0 mi for 53/71
-(75%)**; only 11 cars have an interior optimum. This is structural, not a bug — at r = 7%
+sits at the lowest point of the car's own sweep grid for 62/71 (87%), and at literally 0 mi
+for 53/71 (75%)**; only 9 cars have a true interior optimum, and 2 more have a single-point
+grid (the `eol_maintained_miles` cap collapses their feasible range). 3 have no upper limit. This is structural, not a bug — at r = 7%
 real, present-value $/mi decreases monotonically with newness for most cars, which is the
 same monotonicity `DECISIONS.md` already notes ("at r=0 the newest-buy-is-always-cheapest
 monotonicity no longer holds"). Consequences: the column mostly reads "buy new," which is
@@ -89,7 +90,6 @@ Prerequisites and constraints:
   CVD ΔE does not clear the dataviz skill's ceiling — ten fixed categorical identities
   exceed what any palette can separate. Mitigated by the always-visible list and tooltips;
   documented in `ASSUMPTIONS.md` §I.
-- `role="img"` on the four chart SVGs (unchanged from the earlier review).
 
 ## Owner decisions still open (from ASSUMPTIONS.md §E)
 
