@@ -4,6 +4,19 @@ import { costPerMile } from "./engine.js";
 import { deriveBuyYear, feasibleOdoRange } from "./feasibility.js";
 import type { Constants, EngineInputs, Vehicle } from "./types.js";
 
+/**
+ * `buyPointSweep`'s own input type: identical to `EngineInputs` except
+ * `holdMiles` is required and numeric — `"eol"` is unrepresentable here.
+ * Comparing $/mi across buy points only makes sense when every grid point
+ * shares one holding horizon (R10, ASSUMPTIONS.md §B): at `"eol"` the horizon
+ * is itself a function of the buy odometer, so an identical cost stream
+ * reports cheaper for whichever candidate implies the longer hold — the
+ * unequal-lives problem (a shorter hold is never charged for the replacement
+ * car it will need). Making the open-ended horizon a type error, rather than
+ * silently defaulting to one, is the point.
+ */
+export type SweepInputs = Omit<EngineInputs, "holdMiles"> & { holdMiles: number };
+
 /** One point on the buy-point sweep grid (reduced-draws P50 — see `CALIBRATION.sweepDraws`). */
 export interface BuyPointSweepPoint {
   odo: number;
@@ -35,13 +48,27 @@ export interface BuyPointSweepOpts {
  * across a vehicle's feasible odometer range to find the point that minimizes
  * P50 $/mi. Adds no new pricing logic — `costPerMile` itself is untouched, this
  * is purely a grid search over its existing input (one engine, one cost model).
+ *
+ * Requires a numeric `holdMiles` (R10): every grid point must share the same
+ * holding horizon for the comparison to be valid, and `"eol"` makes the
+ * horizon itself a function of the buy odometer under comparison. Callers
+ * holding an open-ended horizon must not run this sweep at all — see
+ * `engine.worker.ts`'s `handleBuyPoints`.
  */
 export function buyPointSweep(
   vehicle: Vehicle,
   constants: Constants,
-  inputs: EngineInputs = {},
+  inputs: SweepInputs,
   opts: BuyPointSweepOpts = {},
 ): BuyPointSweepResult {
+  // Runtime backstop: the type signature is the primary gate (a typed caller
+  // cannot compile a call passing "eol"), but this guards untyped/`any`
+  // callers too — see the "refuses" test in buypoint.test.ts.
+  if ((inputs.holdMiles as unknown) === "eol") {
+    throw new TypeError(
+      'buyPointSweep requires a numeric holdMiles; "eol" is not comparable across buy points (R10, ASSUMPTIONS.md §B)',
+    );
+  }
   const am = inputs.annualMiles ?? constants.annual_miles;
   const draws = opts.draws ?? CALIBRATION.sweepDraws;
   const step = opts.step ?? CALIBRATION.sweepStepMiles;

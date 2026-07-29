@@ -35,7 +35,8 @@ What the next agent needs to know:
   fixing or flooring that is a prerequisite for trusting the left edge of any version of
   this chart.
 
-**R10. The $/mi metric is not comparable across different holding periods.**
+**R10. The $/mi metric is not comparable across different holding periods —
+SHIPPED 2026-07-29, option 1.**
 Full analysis: `docs/investigations/2026-07-29-ideal-new.md`. Cost per mile is
 present-value dollars ÷ **undiscounted** miles. With `holdMiles: "eol"` the horizon is a
 function of the buy odometer (Corolla: 19.2 yr bought new vs 10.0 yr bought at 120k), so a
@@ -51,12 +52,23 @@ The framing to avoid: this is *not* "miles lose value over time" (owner's object
 a 20-year hold never charges the shorter option for the replacement car it will need. Options,
 cheapest first:
 1. **Run `buyPointSweep` at a fixed hold** instead of `"eol"` — `buypoint.ts` only, changes no
-   reference output, takes the degenerate count 62/71 → ~7/71. Recommended.
+   reference output, takes the degenerate count 62/71 → ~7/71. Recommended. **SHIPPED**: the
+   sweep's own input type now requires a numeric `holdMiles` (`"eol"` is a type error, backed by
+   a runtime refusal for callers that bypass TypeScript) and uses the rail's own number
+   verbatim, no substitution of its own. When the rail is `"eol"`, the sweep does not run at
+   all and the Rankings row shows no ideal/upper mileage — the owner chose showing nothing over
+   quietly answering a different question. Re-measured post-R11 (grid floored at the first
+   price-curve point) at a 100k hold: **4/71 land at the grid floor, 3/71 collapse to a
+   single-point grid, 64/71 have a genuine interior optimum** — see `ASSUMPTIONS.md` §B for the
+   full write-up, the 50k/150k comparisons, and the copy changes in `App.tsx`/§I. This is a hard
+   prerequisite for adding MSRP price anchors (tracked separately): anchoring would drop the
+   sweep's grid floor toward 0, and at `"eol"` 9/13 anchored vehicles were measured to snap
+   `idealOdo` back to 0, versus 0/13 at a fixed hold.
 2. **Levelize the denominator** (discount miles as well — the standard equivalent-annual-cost
    correction, same construction as LCOE). Internally consistent at any horizon, but a large
    deliberate numbers-change: mean headline $0.520 → $0.770/mi (+48%), mean rank shift 6.3
-   places, max 22, top 10 reshuffles. Owner sign-off required.
-3. Document only, and treat "until it dies" as a non-comparable basis.
+   places, max 22, top 10 reshuffles. Owner sign-off required. Not taken.
+3. Document only, and treat "until it dies" as a non-comparable basis. Not taken.
 Secondary findings from the same investigation, both worth a ledger row: at r=0, half the
 field *still* prefers the newest buy point, so `DECISIONS.md`'s claim that the monotonicity
 disappears at r=0 is only partly true as implemented; and the odometer-implied-age limitation
@@ -246,9 +258,10 @@ investigation summary, kept for the HLDI revisit path:
 
 - **What "ideal mileage" should mean** — see R8, and R10/R11 which now explain most of it.
   Largely a metric artifact plus a price-curve defect, not a definition problem.
-- **The $/mi metric across unequal holding periods** (R10) — fix the sweep's horizon only, or
-  levelize the denominator and accept a +48% headline shift. Owner explanation given
-  2026-07-29; decision still open.
+- ~~The $/mi metric across unequal holding periods (R10) — fix the sweep's horizon only, or
+  levelize the denominator and accept a +48% headline shift.~~ **Decided and shipped
+  2026-07-29**: option 1 (fix the sweep's horizon; the sweep refuses to run at `"eol"` at all).
+  See `ASSUMPTIONS.md` §B/§E.
 - **Reliability method replacement** (R12) — the shipped derivation has no measurable signal
   (41% agreement, worse than guessing). Recommended replacement is powertrain complaint share
   on a single global distribution. Rewriting seed tiers remains an owner review gate.

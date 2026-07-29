@@ -178,10 +178,22 @@ export function App() {
                   can't honestly order them.
                 </p>
                 <p className="results-note">
-                  Each row's ideal mileage marks that car's own cost-minimizing buy point, not a
-                  recommendation — the $/mi columns are still priced at that car's default buy
-                  odometer, so the two figures can disagree. Open a row to see which odometer
-                  its $/mi was priced at.
+                  {inputs.holdMiles === "eol" ? (
+                    <>
+                      Ideal buy mileage isn't shown at "until it dies" — the holding period would
+                      itself depend on the buy odometer, so buy points aren't on equal footing to
+                      compare. Pick a fixed holding period on the left to reveal each car's
+                      cost-minimizing buy point. Meanwhile, each row's mileage shows the odometer
+                      its $/mi is actually priced at.
+                    </>
+                  ) : (
+                    <>
+                      Each row's ideal mileage marks that car's own cost-minimizing buy point, not
+                      a recommendation — the $/mi columns are still priced at that car's default
+                      buy odometer, so the two figures can disagree. Open a row to see which
+                      odometer its $/mi was priced at.
+                    </>
+                  )}
                 </p>
               </div>
               <div className="results-controls">
@@ -304,9 +316,9 @@ export function App() {
                       <td>
                         <span className="car-name">{r.name}</span>
                         <span className="car-meta">
-                          {buyPointsComputing || !bp ? (
+                          {buyPointsComputing ? (
                             <span className="mono">…</span>
-                          ) : (
+                          ) : bp ? (
                             <>
                               <span className="mono">{bp.idealYear}</span> ·{" "}
                               <span className="mono">{Math.round(bp.idealOdo / 1000)}k mi</span>
@@ -317,6 +329,14 @@ export function App() {
                                   <span className="mono">{Math.round(bp.upperOdo / 1000)}k mi</span>
                                 </>
                               ) : null}
+                            </>
+                          ) : (
+                            // No sweep result (rail hold is "eol" — see ASSUMPTIONS.md §B/R10):
+                            // show the odometer this row's $/mi is actually priced at instead of
+                            // leaving the line empty.
+                            <>
+                              <span className="mono">{r.impliedBuyYear}</span> · priced at{" "}
+                              <span className="mono">{Math.round(r.buyOdo / 1000)}k mi</span>
                             </>
                           )}
                           {r.feasNote ? ` · ${r.feasNote}` : ""}

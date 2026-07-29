@@ -148,8 +148,13 @@ export interface BuyPointEntry {
 export interface BuyPointsResponse {
   kind: "buypoints";
   id: number;
-  /** Keyed by vehicle name — one entry per car in the field. */
-  points: Record<string, BuyPointEntry>;
+  /** Keyed by vehicle name — one entry per car in the field. `null` when the
+   *  rail's `holdMiles` is `"eol"`: the sweep cannot answer an open-ended
+   *  horizon (R10) and does not run at all. Distinct from "not landed yet"
+   *  (the hook's own `computing` flag covers that) — a response with
+   *  `points: null` has landed, it is just reporting "no sweep at this
+   *  horizon" rather than a result. */
+  points: Record<string, BuyPointEntry> | null;
 }
 
 /** All response kinds share one worker (see sharedWorker.ts) — hooks filter their
@@ -241,9 +246,20 @@ function handleRank(req: EngineRequest) {
  * short while after the rank response rather than blocking it. */
 function handleBuyPoints(req: BuyPointsRequest) {
   const { id, inputs } = req;
+  const { holdMiles } = inputs;
+  if (holdMiles === "eol" || holdMiles === undefined) {
+    // The sweep cannot answer an open-ended horizon (R10 — see buypoint.ts's
+    // SweepInputs): every grid point would imply a different hold, so the
+    // comparison isn't valid. Skip the sweep entirely rather than substitute
+    // a hold the rail didn't choose, and respond right away (not "still
+    // computing") so the hook/UI can tell the two states apart.
+    const msg: BuyPointsResponse = { kind: "buypoints", id, points: null };
+    self.postMessage(msg);
+    return;
+  }
   const points: Record<string, BuyPointEntry> = {};
   for (const v of data.vehicles) {
-    const sweep = buyPointSweep(v, data.constants, inputs);
+    const sweep = buyPointSweep(v, data.constants, { ...inputs, holdMiles });
     points[v.name] = {
       idealOdo: sweep.idealOdo,
       idealYear: sweep.idealYear,

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buyPointSweep } from "../src/buypoint.js";
+import type { SweepInputs } from "../src/buypoint.js";
 import type { Constants, Vehicle } from "../src/types.js";
 
 /**
@@ -80,10 +81,21 @@ describe("buyPointSweep", () => {
     // total $/mi = price / (eol_maintained_miles - buyOdo) is strictly
     // increasing in buyOdo (shrinking denominator, constant numerator) — the
     // true argmin is unambiguously the feasible range's lower bound.
+    // holdMiles is set equal to eol_maintained_miles (1,000,000) so that
+    // buyOdo + holdMiles saturates the eol_maintained_miles cap at every grid
+    // point (0-50,000) — a legitimate numeric hold that reproduces the same
+    // "sell = eol" arithmetic this fixture was built around (R10: the sweep
+    // no longer defaults to "eol" itself, but a large-enough numeric hold can
+    // still land on the cap).
     const vehicle = makeVehicle(); // first_year 2020, last_year 2025 → range [0, 50000]
     const constants = makeConstants();
 
-    const result = buyPointSweep(vehicle, constants, {}, { step: 10_000 });
+    const result = buyPointSweep(
+      vehicle,
+      constants,
+      { holdMiles: 1_000_000 },
+      { step: 10_000 },
+    );
 
     expect(result.grid.length).toBeGreaterThan(1);
     expect(result.idealOdo).toBe(0);
@@ -115,7 +127,14 @@ describe("buyPointSweep", () => {
     });
     const constants = makeConstants();
 
-    const result = buyPointSweep(vehicle, constants, {}, { step: 10_000 });
+    // Same saturation trick as the test above: holdMiles = eol_maintained_miles
+    // makes sell = eol at every grid point, matching the hand-picked targets.
+    const result = buyPointSweep(
+      vehicle,
+      constants,
+      { holdMiles: 1_000_000 },
+      { step: 10_000 },
+    );
 
     expect(result.idealOdo).toBe(10_000);
     expect(result.idealP50).toBeCloseTo(0.1, 9);
@@ -129,7 +148,7 @@ describe("buyPointSweep", () => {
     const vehicle = makeVehicle({ first_year: 2025, last_year: 2025 });
     const constants = makeConstants();
 
-    const result = buyPointSweep(vehicle, constants, {}, { step: 10_000 });
+    const result = buyPointSweep(vehicle, constants, { holdMiles: 1_000_000 }, { step: 10_000 });
 
     expect(result.grid).toEqual([{ odo: 0, p50: result.idealP50 }]);
     expect(result.idealOdo).toBe(0);
@@ -145,7 +164,7 @@ describe("buyPointSweep", () => {
     });
     const constants = makeConstants();
 
-    const result = buyPointSweep(vehicle, constants, {}, { step: 10_000 });
+    const result = buyPointSweep(vehicle, constants, { holdMiles: 1_000_000 }, { step: 10_000 });
 
     expect(result.grid[0]!.odo).toBe(15_000);
     for (const p of result.grid) {
@@ -167,9 +186,11 @@ describe("buyPointSweep", () => {
     });
     const constants = makeConstants();
 
-    expect(() => buyPointSweep(vehicle, constants, {}, { step: 10_000 })).not.toThrow();
+    expect(() =>
+      buyPointSweep(vehicle, constants, { holdMiles: 1_000_000 }, { step: 10_000 }),
+    ).not.toThrow();
 
-    const result = buyPointSweep(vehicle, constants, {}, { step: 10_000 });
+    const result = buyPointSweep(vehicle, constants, { holdMiles: 1_000_000 }, { step: 10_000 });
 
     expect(result.grid).toEqual([{ odo: 20_000, p50: result.idealP50 }]);
     expect(result.idealOdo).toBe(20_000);
@@ -191,13 +212,55 @@ describe("buyPointSweep", () => {
     const constants = makeConstants();
 
     expect(() =>
-      buyPointSweep(vehicle, constants, { annualMiles: 20_000 }, { step: 10_000 }),
+      buyPointSweep(
+        vehicle,
+        constants,
+        { annualMiles: 20_000, holdMiles: 1_000_000 },
+        { step: 10_000 },
+      ),
     ).not.toThrow();
 
-    const result = buyPointSweep(vehicle, constants, { annualMiles: 20_000 }, { step: 10_000 });
+    const result = buyPointSweep(
+      vehicle,
+      constants,
+      { annualMiles: 20_000, holdMiles: 1_000_000 },
+      { step: 10_000 },
+    );
 
     expect(result.grid).toEqual([{ odo: 50_000, p50: result.idealP50 }]);
     expect(result.idealOdo).toBe(50_000);
     expect(result.upperOdo).toBeNull();
+  });
+
+  it("refuses an open-ended horizon: rejected by the type system, and by a runtime backstop for callers that bypass it", () => {
+    // The primary gate is SweepInputs (holdMiles: number, not number | "eol") —
+    // a typed caller cannot compile `buyPointSweep(v, c, { holdMiles: "eol" })`.
+    // This test exercises the runtime backstop in buyPointSweep itself, which
+    // exists for callers that bypass the type system (plain JS, an `any` cast).
+    const vehicle = makeVehicle();
+    const constants = makeConstants();
+
+    expect(() =>
+      buyPointSweep(vehicle, constants, { holdMiles: "eol" } as unknown as SweepInputs, {
+        step: 10_000,
+      }),
+    ).toThrow(/numeric holdMiles/);
+  });
+
+  it("uses the rail's own numeric holding period, not a fixed default", () => {
+    // A price curve with real variation (not the flat single-point fixture
+    // above) so a different holdMiles genuinely reprices every grid point —
+    // demonstrating holdMiles is threaded through to costPerMile, not ignored
+    // in favor of some other fixed hold.
+    const vehicle = makeVehicle({
+      price_vs_odometer_usd: { "0": 40_000, "50000": 20_000, "100000": 0 },
+      eol_maintained_miles: 1_000_000,
+    });
+    const constants = makeConstants();
+
+    const short = buyPointSweep(vehicle, constants, { holdMiles: 20_000 }, { step: 10_000 });
+    const long = buyPointSweep(vehicle, constants, { holdMiles: 80_000 }, { step: 10_000 });
+
+    expect(short.grid.map((p) => p.p50)).not.toEqual(long.grid.map((p) => p.p50));
   });
 });
