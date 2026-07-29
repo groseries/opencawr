@@ -8,7 +8,7 @@
  *
  * Sources (see ASSUMPTIONS.md §G for the full write-up):
  *  - gasUsdPerGal    — AAA state average retail regular-gasoline price (snapshot).
- *  - elecUsdPerKwh   — EIA state average electricity price, all sectors, as
+ *  - elecUsdPerKwh   — EIA state average electricity price, residential sector, as
  *    compiled/republished by ElectricChoice.com's EIA-sourced state table.
  *  - useTaxRate      — state Department of Revenue / DMV published vehicle
  *    sales-or-use tax rate (statewide statutory rate; local/county add-ons,
@@ -30,10 +30,10 @@ export interface RegionRow {
 }
 
 const SOURCES =
-  "gas: AAA state avg retail regular (Jul 2026) · elec: EIA state avg all-sector price via ElectricChoice.com (Jul 2026) · use tax: state DOR/DMV published vehicle sales-or-use tax rate, statewide statutory rate · registration: midpoint of state DMV published base annual registration fee range (autoinsurance.org)";
+  "gas: AAA state avg retail regular (Jul 2026) · elec: EIA state avg residential price via ElectricChoice.com (Jul 2026) · use tax: state DOR/DMV published vehicle sales-or-use tax rate, statewide statutory rate · registration: midpoint of state DMV published base annual registration fee range (autoinsurance.org)";
 
 const SOURCES_DC =
-  "gas: AAA DC avg retail regular (Jul 2026) · elec: EIA DC avg all-sector price via ElectricChoice.com (Jul 2026) · use tax: DC OTR published ~6% vehicle excise tax (DC not in the compiled 50-state tax table; estimated separately) · registration: DC DMV published base fee, averaged (DC not in the compiled 50-state registration table; estimated separately)";
+  "gas: AAA DC avg retail regular (Jul 2026) · elec: EIA DC avg residential price via ElectricChoice.com (Jul 2026) · use tax: DC OTR published ~6% vehicle excise tax (DC not in the compiled 50-state tax table; estimated separately) · registration: DC DMV published base fee, averaged (DC not in the compiled 50-state registration table; estimated separately)";
 
 /** Per-state region data, keyed by two-letter USPS state code (+ DC). */
 export const REGION_BY_STATE: Record<string, RegionRow> = {

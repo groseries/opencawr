@@ -7,12 +7,17 @@ import opencawrData from "../../../opencawr_data.json";
  * deliberately does NOT set `registrationUsdYr` — the region table fills it from ZIP. */
 const REGISTRATION_DEFAULT = opencawrData.constants.registration_usd_yr_FL;
 
+/** Same rationale: the engine's own electricity default, not a literal that could
+ * drift from `opencawr_data.json`'s `constants.elec_usd_per_kwh` (standardized on
+ * the CA region value, see ASSUMPTIONS.md §A). */
+const ELEC_DEFAULT = opencawrData.constants.elec_usd_per_kwh;
+
 export const DEFAULTS: EngineInputs = {
   holdMiles: "eol",
   annualMiles: 13_000,
   discountRate: 0.07,
   gasUsdPerGal: 5.455,
-  elecUsdPerKwh: 0.38,
+  elecUsdPerKwh: ELEC_DEFAULT,
   insuranceMultiplier: 0.8,
   useTaxRate: 0.07,
   draws: 1100,
@@ -114,7 +119,7 @@ export function Inputs({ inputs, onChange }: Props) {
       />
       <NumberControl
         label="Electricity price"
-        value={inputs.elecUsdPerKwh ?? 0.38}
+        value={inputs.elecUsdPerKwh ?? ELEC_DEFAULT}
         step={0.02}
         min={0.05}
         max={0.8}
