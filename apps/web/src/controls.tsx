@@ -6,7 +6,7 @@ export const DEFAULTS: EngineInputs = {
   annualMiles: 13_000,
   discountRate: 0.07,
   gasUsdPerGal: 5.455,
-  elecUsdPerKwh: 0.32,
+  elecUsdPerKwh: 0.38,
   insuranceMultiplier: 0.8,
   useTaxRate: 0.07,
   draws: 1100,
@@ -108,7 +108,7 @@ export function Assumptions({ inputs, onChange }: Props) {
       />
       <NumberControl
         label="Electricity price"
-        value={inputs.elecUsdPerKwh ?? 0.32}
+        value={inputs.elecUsdPerKwh ?? 0.38}
         step={0.02}
         min={0.05}
         max={0.8}
