@@ -25,14 +25,14 @@ interface Props {
   onChange: (next: EngineInputs) => void;
 }
 
-export function Assumptions({ inputs, onChange }: Props) {
+export function Inputs({ inputs, onChange }: Props) {
   const set = (patch: Partial<EngineInputs>) => onChange({ ...inputs, ...patch });
   const [customHold, setCustomHold] = useState(false);
   const holdIsPreset = HORIZONS.some((h) => h.value === inputs.holdMiles);
 
   return (
     <div className="assumptions">
-      <h2 className="rail-title">Your assumptions</h2>
+      <h2 className="rail-title">Your inputs</h2>
 
       <fieldset className="control control-hero">
         <legend>How long will you keep it?</legend>

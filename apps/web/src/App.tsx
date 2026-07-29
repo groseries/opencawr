@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import type { EngineInputs } from "@opencawr/core";
-import { Assumptions, DEFAULTS, RankBasisToggle, type RankBasis } from "./controls.js";
+import { Inputs, DEFAULTS, RankBasisToggle, type RankBasis } from "./controls.js";
 import { useEngine } from "./useEngine.js";
 import { useBuyPoints } from "./useBuyPoints.js";
 import { Ladder } from "./charts/Ladder.js";
@@ -8,6 +8,7 @@ import { tierColor, tierTextColor } from "./charts/tierColors.js";
 import { DealAnalyzer } from "./deal/DealAnalyzer.js";
 import { IntakeCard } from "./intake.js";
 import { CarDrawer } from "./drawer/CarDrawer.js";
+import { AssumptionsTab } from "./assumptions/AssumptionsTab.js";
 
 const fmt = (x: number) => `$${x.toFixed(3)}`;
 
@@ -35,7 +36,7 @@ export function App() {
   const [inputs, setInputs] = useState<EngineInputs>(DEFAULTS);
   const [rankBasis, setRankBasis] = useState<RankBasis>("p50");
   const [view, setView] = useState<"table" | "ladder">("table");
-  const [tab, setTab] = useState<"rankings" | "deal">("rankings");
+  const [tab, setTab] = useState<"rankings" | "analyze" | "assumptions">("rankings");
   const [minSeats, setMinSeats] = useState<number | null>(null);
   const [showIntake, setShowIntake] = useState(() => !safeLocalGet(INTAKE_SEEN_KEY));
   const [drawerCar, setDrawerCar] = useState<string | null>(null);
@@ -139,19 +140,26 @@ export function App() {
         </button>
         <button
           type="button"
-          className={tab === "deal" ? "seg seg-active" : "seg"}
-          onClick={() => setTab("deal")}
+          className={tab === "analyze" ? "seg seg-active" : "seg"}
+          onClick={() => setTab("analyze")}
         >
-          Deal Analyzer
+          Analyze
+        </button>
+        <button
+          type="button"
+          className={tab === "assumptions" ? "seg seg-active" : "seg"}
+          onClick={() => setTab("assumptions")}
+        >
+          Assumptions
         </button>
       </div>
 
       <div className="layout">
         <aside className="rail">
-          <Assumptions inputs={inputs} onChange={setInputs} />
+          <Inputs inputs={inputs} onChange={setInputs} />
           <p className="disclaimer">
-            Estimates from a simulation, not advice. Every assumption is editable above and
-            documented in the project's assumptions ledger.
+            Estimates from a simulation, not advice. Every input above is editable — see the
+            Assumptions tab for what backs each one.
           </p>
         </aside>
 
@@ -198,12 +206,21 @@ export function App() {
                 </p>
               )}
             </>
-          ) : (
+          ) : tab === "analyze" ? (
             <div className="results-head">
               <h2>Deal Analyzer</h2>
               <p className="results-note">
                 Score a specific listing against the modeled field. Estimates only — never
                 advice.
+              </p>
+            </div>
+          ) : (
+            <div className="results-head">
+              <h2>Assumptions</h2>
+              <p className="results-note">
+                Every number in this app traces to a source file — the cost equation, every input
+                default, every calibration constant, and the full assumptions ledger, rendered
+                live from the repo.
               </p>
             </div>
           )}
@@ -319,7 +336,7 @@ export function App() {
               </tbody>
             </table>
             ))}
-          <div style={{ display: tab === "deal" ? "block" : "none" }}>
+          <div style={{ display: tab === "analyze" ? "block" : "none" }}>
             {rows ? (
               <DealAnalyzer inputs={inputs} rows={rows} />
             ) : (
@@ -328,6 +345,7 @@ export function App() {
               </div>
             )}
           </div>
+          {tab === "assumptions" && <AssumptionsTab />}
           <footer className="foot">
             <span>
               OpenCAWR · reliability inputs pending public re-derivation (see ledger) ·
