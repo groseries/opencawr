@@ -1,5 +1,11 @@
 import { useState } from "react";
 import type { EngineInputs } from "@opencawr/core";
+import opencawrData from "../../../opencawr_data.json";
+
+/** The engine's own registration default (engine.ts reads the same constant), rather
+ * than a literal that would silently go stale if the data changed. `DEFAULTS` below
+ * deliberately does NOT set `registrationUsdYr` — the region table fills it from ZIP. */
+const REGISTRATION_DEFAULT = opencawrData.constants.registration_usd_yr_FL;
 
 export const DEFAULTS: EngineInputs = {
   holdMiles: "eol",
@@ -136,7 +142,7 @@ export function Inputs({ inputs, onChange }: Props) {
       />
       <NumberControl
         label="Vehicle registration"
-        value={inputs.registrationUsdYr ?? 55}
+        value={inputs.registrationUsdYr ?? REGISTRATION_DEFAULT}
         step={5}
         min={0}
         max={400}
