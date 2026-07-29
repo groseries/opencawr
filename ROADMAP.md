@@ -90,10 +90,12 @@ first, then re-measure before redefining anything.** Original entry follows.
 odometer range. Measured across all 71 seed vehicles at default assumptions: **`idealOdo`
 sits at the lowest point of the car's own sweep grid for 62/71 (87%), and at literally 0 mi
 for 53/71 (75%)**; only 9 cars have a true interior optimum, and 2 more have a single-point
-grid (the `eol_maintained_miles` cap collapses their feasible range). 3 have no upper limit. This is structural, not a bug — at r = 7%
-real, present-value $/mi decreases monotonically with newness for most cars, which is the
-same monotonicity `DECISIONS.md` already notes ("at r=0 the newest-buy-is-always-cheapest
-monotonicity no longer holds"). Consequences: the column mostly reads "buy new," which is
+grid (the `eol_maintained_miles` cap collapses their feasible range). 3 have no upper limit.
+~~This is structural, not a bug — at r = 7% real, present-value $/mi decreases monotonically
+with newness for most cars.~~ **Superseded 2026-07-29**: the 2026-07-28 reading was wrong. It
+is ~90% artifact (R10 + R11), and `DECISIONS.md`'s "at r=0 the newest-buy-is-always-cheapest
+monotonicity no longer holds" is itself only partly true as implemented — at r=0 half the field
+still prefers the newest buy point. Consequences: the column mostly reads "buy new," which is
 uninformative for a used-car tool and drifts toward advice. **Owner decision required** on
 the definition — candidates: argmin subject to a purchase-price budget; the knee of the
 cost-vs-odometer curve (where marginal savings flatten) rather than its minimum; a used-car
