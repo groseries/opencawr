@@ -9,6 +9,10 @@ export interface VehicleSpecs {
   kwh_per_100mi: number | null;
   phev_gas_mpg: number | null;
   phev_utility_factor: number | null;
+  /** EPA electric-only range (mi), fresh-battery. PHEV only; feeds the mileage-dependent
+   *  utility factor (see ASSUMPTIONS.md §B). Optional — absent means the fixed seed
+   *  `phev_utility_factor` is used with no mileage sensitivity. */
+  electric_range_mi?: number;
   seats: number;
   cargo_cu_ft: number;
   co2_g_per_mi: number;

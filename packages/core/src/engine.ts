@@ -65,7 +65,7 @@ export function costPerMile(
         ? yearMults.sweet_spot
         : yearMults.normal;
 
-  const epm = energyPerMile(vehicle, constants, gas, elec);
+  const epm = energyPerMile(vehicle, constants, gas, elec, am);
   const lnr = Math.log(1 + r);
   const a0 = buyOdo / am; // odometer-implied age (prototype limitation, see ASSUMPTIONS.md)
   const upkeepEsc = (age: number) =>
@@ -219,12 +219,13 @@ export function costPerMile(
   };
 }
 
-/** Energy $/mi incl. documented EV degradation and DC-fast-charge premiums. */
+/** Energy $/mi incl. documented EV/PHEV degradation and DC-fast-charge premiums. */
 export function energyPerMile(
   vehicle: Vehicle,
   constants: Constants,
   gas: number,
   elec: number,
+  annualMiles: number,
 ): number {
   const s = vehicle.specs;
   switch (vehicle.etype) {
@@ -239,9 +240,29 @@ export function energyPerMile(
         constants.dcfc_elec_mult_ev
       );
     case "phev": {
-      const uf = s.phev_utility_factor ?? 0.6;
+      const ufSeed = s.phev_utility_factor ?? 0.6;
+      const range = s.electric_range_mi;
+      // Mileage-dependent utility factor, anchored to the seed value at baseline
+      // annual_miles (J2841-shaped approximation, not J2841 itself — see ASSUMPTIONS.md
+      // §B). Falls back to the fixed seed UF when electric_range_mi is absent.
+      let uf = ufSeed;
+      if (range != null) {
+        const rangeEff = range / constants.ev_kwh_degradation_mult; // pack degradation shrinks range
+        const ufRaw = (r: number, am: number) => 1 - Math.exp(-r / (am / 365));
+        uf = Math.min(
+          1,
+          Math.max(
+            0,
+            ufSeed * (ufRaw(rangeEff, annualMiles) / ufRaw(range, constants.annual_miles)),
+          ),
+        );
+      }
       return (
-        uf * ((s.kwh_per_100mi ?? 30) / 100) * elec * constants.dcfc_elec_mult_phev +
+        uf *
+          ((s.kwh_per_100mi ?? 30) / 100) *
+          constants.ev_kwh_degradation_mult * // pack degradation raises electric consumption
+          elec *
+          constants.dcfc_elec_mult_phev +
         (1 - uf) * (gas / (s.phev_gas_mpg ?? 40))
       );
     }
