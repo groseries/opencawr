@@ -12,8 +12,79 @@ assumption, estimates-not-advice copy, Node ≥ 20.
 
 ## P0 — Correctness and honesty (do first)
 
+**R9. Heatmap should be years × miles, not hold-miles × buy-miles** (owner, 2026-07-29:
+*"Our heat map was a map of years and miles originally but it morphed into a map of hold vs
+buy miles"*). **Owner is assigning this to a separate agent — do not implement it here; this
+entry exists to give that agent the context.**
+`apps/web/src/charts/Heatmap.tsx`, `engine.worker.ts`'s `handleSurvey`, `SurveyCell`.
+Current axes: buy odometer across (10k–120k in 10k steps), hold miles down (25k–200k in 25k).
+Model year appears nowhere, which is the drift the owner is describing, and it overlaps
+directly with **R2** (year as a designed surface) — read that entry too.
+What the next agent needs to know:
+- Odometer and model year are **coupled**, not independent: `impliedModelYear(odo, annualMiles,
+  nowYear) = nowYear − odo/annualMiles` (`packages/core/src/feasibility.ts`). At the default
+  13,000 mi/yr, putting model year on the buy axis is close to a relabel of the axis that is
+  already there. Reuse `impliedModelYear`/`deriveBuyYear`/`isFeasibleBuy`; never re-derive.
+- **The hold axis is load-bearing and should not simply be replaced.** Holding the hold-miles
+  constant per row is exactly what makes this chart trustworthy — see R10 below. A years ×
+  buy-miles grid at a *variable* horizon would reintroduce the artifact R10 describes. If the
+  hold axis goes, replace it with a single fixed hold, not with `"eol"`.
+- `model_year_reliability` (landmine ×1.40 / caution ×1.15 / sweet-spot ×0.95) is the data
+  that makes a year axis worth having — marking those years is the point, per R2.
+- The heatmap's low-odometer columns are currently showing **invented prices** (see R11);
+  fixing or flooring that is a prerequisite for trusting the left edge of any version of
+  this chart.
+
+**R10. The $/mi metric is not comparable across different holding periods.**
+Full analysis: `docs/investigations/2026-07-29-ideal-new.md`. Cost per mile is
+present-value dollars ÷ **undiscounted** miles. With `holdMiles: "eol"` the horizon is a
+function of the buy odometer (Corolla: 19.2 yr bought new vs 10.0 yr bought at 120k), so a
+longer hold discounts costs harder while its miles still count in full, and an identical
+cost stream reports ~23% cheaper for the newer car. **This is the dominant cause of R8's
+"buy new" result — roughly 90% of it.**
+Measured, and this is the number that matters: at a **fixed** hold the field behaves
+normally — 65/67 cars have an interior cheapest buy point at a 50k hold, 63/67 at 100k —
+while at `"eol"` only 9/71 do. **The heatmap is already correct** because it fixes the hold
+per row; the rankings and `buyPointSweep` are not.
+The framing to avoid: this is *not* "miles lose value over time" (owner's objection,
+2026-07-29 — correct). It is the **unequal-lives problem**: comparing a 10-year hold against
+a 20-year hold never charges the shorter option for the replacement car it will need. Options,
+cheapest first:
+1. **Run `buyPointSweep` at a fixed hold** instead of `"eol"` — `buypoint.ts` only, changes no
+   reference output, takes the degenerate count 62/71 → ~7/71. Recommended.
+2. **Levelize the denominator** (discount miles as well — the standard equivalent-annual-cost
+   correction, same construction as LCOE). Internally consistent at any horizon, but a large
+   deliberate numbers-change: mean headline $0.520 → $0.770/mi (+48%), mean rank shift 6.3
+   places, max 22, top 10 reshuffles. Owner sign-off required.
+3. Document only, and treat "until it dies" as a non-comparable basis.
+Secondary findings from the same investigation, both worth a ledger row: at r=0, half the
+field *still* prefers the newest buy point, so `DECISIONS.md`'s claim that the monotonicity
+disappears at r=0 is only partly true as implemented; and the odometer-implied-age limitation
+contributes **exactly zero** at default settings, because at 13,000 mi/yr `deriveBuyYear`
+reduces to the same arithmetic (it does bite at other mileages — 17 cars move at 20k mi/yr).
+
+**R11. `curveAt` extrapolates left of the first price point — near-new prices are invented.**
+Full analysis: `docs/investigations/2026-07-29-ideal-new.md`. `packages/core/src/curves.ts`.
+Spec §2 sanctions extrapolating past the **last** curve point; the code also extrapolates past
+the **first**. No seed vehicle has a price observation below 10,000 miles (the curves are
+used-market pulls), so every price below that is off the end of the data. Because used-car
+curves are relatively flat, extending them leftward makes a nearly-new car cost barely more
+than a 10,000-mile one: **modeled year-one depreciation averages 9.3% against a real-world
+~20%** — Civic 2.7%, Prius 3.6%, Suburban 5.3%. This is the second, independent reason new
+cars look too cheap, and unlike R10 it is a plain defect.
+Fix: clamp below the first point (mirroring what `maintenanceAt` already does) **and** floor
+the sweep grid at that odometer — they must ship together, because clamping alone makes new
+cars look cheaper still. Verified to change **no reference outputs** (no seed vehicle's
+`pinned_buy_odo` sits below its first curve point). Live impact today: the heatmap's 10k/20k/30k
+columns and the Deal Analyzer's price-vs-curve figure for low-mileage listings.
+
 **R8. "Ideal mileage" is degenerate for most of the field** (found in R4's own live
-verification, 2026-07-28 — needs an owner decision on what "ideal" should mean).
+verification, 2026-07-28). **Largely explained as of 2026-07-29 — see R10 and R11, which are
+the actual causes.** The investigation found this is ~90% an artifact of the metric being
+compared across unequal holding periods (R10) plus invented near-new prices (R11), not a
+genuine property of the cost model. After both are fixed, 60+ of 71 cars have a real interior
+optimum, which makes most of the redefinition candidates below unnecessary. **Fix R10 and R11
+first, then re-measure before redefining anything.** Original entry follows.
 `packages/core/src/buypoint.ts`, `apps/web/src/App.tsx` car-meta line. R4 shipped
 `buyPointSweep`, whose `idealOdo` is the unconstrained argmin of P50 across the feasible
 odometer range. Measured across all 71 seed vehicles at default assumptions: **`idealOdo`
@@ -50,6 +121,79 @@ Prerequisites and constraints:
 - Anything year-level that touches repair cost is gated behind the reliability launch gate
   (spec §9) exactly as the current multipliers are.
 - Estimates, not advice: "what changed in 2019" is a fact; "buy the 2019" is not.
+
+**R12. Reliability re-derivation — the current method has no measurable signal** (launch gate;
+investigation 2026-07-29, `docs/investigations/2026-07-29-reliability-corpus.md`).
+All 71 vehicles were mapped and pulled from NHTSA (999 cached requests, 0 failures). Findings,
+in order of how much they matter:
+- **The shipped method does not work.** Full-corpus agreement with the seed is **28/69 (41%)** —
+  *worse* than answering "mid" for everything (46%) and inside the random-shuffle noise band.
+  Correlation between its `rate` and the seed tier is ρ=+0.11, p=0.34.
+- **The owner's powertrain hypothesis is statistically real but causally false.** η²=0.19,
+  p=0.003 — but same-model pairs expose it as a sales-mix artifact: RAV4 58.3 vs RAV4 Hybrid
+  2.7, Highlander 53.6 vs Highlander Hybrid 1.5, Camry 37.4 vs Camry Hybrid 1.6. No car is 36×
+  more reliable than itself; the hybrid trim just sells fewer units. Body style *is* unrelated
+  (η²=0.10, p=0.59), confirming the other half of the owner's intuition. `make` dominates
+  everything (η² 0.50–0.64, p<0.001) — the closest proxy to "quality of work".
+- **Recommended replacement: powertrain complaint *share*** (engine/powertrain/transmission
+  complaints ÷ that model's total), percentile cuts on **one global distribution, no per-class
+  partition**. Numerator and denominator both scale with sales, so the volume confound cancels
+  exactly — the only signal tested with p<0.01 (ρ=+0.385). This **dissolves** the small-class
+  problem rather than relocating it. `sport` stays an owner carve-out. Agreement 34/69 (49%),
+  bootstrap CI 39–59%, but the real gain is failing safely: **1 two-tier inversion vs 11**.
+- **Caveat the owner must weigh:** agreement with the seed is *not* validation. ρ(seed tier,
+  `eol_maintained_miles`) = −0.838 and ρ(seed tier, `repair_cost_multiplier_by_make`) = +0.602 —
+  those three fields are one Consumer-Reports-derived judgment wearing three hats. High
+  agreement would only prove we reproduced CR, which is the thing the gate exists to escape.
+- **Recommend striking CarComplaints and RepairPal from spec §9.** Both are commercial sites
+  with restrictive ToS and no free API; §9 currently prescribes clearing a legal gate using two
+  sources that create one. NHTSA alone is public-domain and takedown-safe. Recalls and
+  investigations were fetched and **evaluated, then rejected** for scoring (ρ=−0.005 and +0.197;
+  adding them lowers agreement) — they measure regulator action, not owner-experienced failure.
+- **Two live bugs found in the fetch layer**, worth fixing regardless: NHTSA's model catalogue is
+  trim-fragmented and inconsistent year-to-year (`RANGER` → `RANGER SUPER CAB`; `XC60` → `XC60
+  T5/T6/T8` → `B5 AWD`), and the current single-string query therefore returns **zero complaints
+  for every year of Volvo XC90**, which the method reads as a perfect car. Also
+  `api.nhtsa.gov/investigations` accepts `make`/`model` filters and **silently ignores them**,
+  the recalls endpoint returns HTTP 400 with a valid `Count: 0` body for empty results, and the
+  NHTSA edge 403s Node's default User-Agent *and* any UA containing `(+https://…)`.
+Report §7 lists file-by-file what would change. Rewriting seed tiers stays an owner review gate.
+
+**R13. Insurance re-basing — blocked on licensing, not on data** (launch gate; investigation
+2026-07-29, `docs/investigations/2026-07-29-insurance-source.md`). Owner decision 2026-07-29 was
+*"re-base the estimates on a public source."* That is achievable, but the good source is not
+openly licensed:
+- **IIHS-HLDI** publishes per-series *relative* loss indices standardizing out state,
+  demographics, deductible and model year — exactly the vehicle effect needed, covering
+  2004-06 through 2022-24. **But its site policy permits "limited noncommercial, educational and
+  personal use only"** and explicitly treats anything "distributed for a period of time" (i.e. a
+  live web app) as prohibited repetitive use; the report PDFs are marked "COPYRIGHTED DOCUMENT,
+  DISTRIBUTION RESTRICTED." NAIC is standard all-rights-reserved. Only BLS CPI-U is public domain.
+- **The units bridge is sound**: `premium(v,s) = E × [P_liab(s) + idx_coll(v)/100 × P_coll(s) +
+  idx_comp(v)/100 × P_comp(s)]`, anchoring HLDI relativities to NAIC state dollars. It is an
+  identity at index 100 (reproduces NAIC's published CA combined premium exactly). Main residual:
+  applying a *loss* relativity to a *premium* average overstates model-to-model spread.
+- **Recommended split.** *Step A, clean and unblocked*: re-base the level and add regionalization
+  from NAIC + BLS. Insurance is currently the **only** major cost component with zero regional
+  variation, against a real **2.15× state spread** ($926 ME → $1,994 FL) — wider than gas.
+  `region.ts` has no insurance column today and three NAIC columns fit its existing shape.
+  *Step B, gated*: write to `legal@iihs.org` (they have a published request process) before
+  shipping HLDI relativities. *If refused*: fall back to state × body-class and say plainly that
+  it is coarser — measured cost of that fallback is retaining only **25%** of per-model variance.
+- **Evidence the seed numbers need replacing**: 64/71 vehicles matched to HLDI; correlation
+  between the seed estimates and the re-basing is only **Pearson 0.43 / Spearman 0.47**. Hyundai
+  Elantra is seeded near-cheapest but HLDI puts its collision index at 159 (the Hyundai/Kia theft
+  wave); Chevy Bolt is seeded mid-pack and lands lowest in the field.
+- **Blast radius is small**: insurance is 17.6% of $/mi (3rd of 10), and full re-basing moves the
+  median premium −26% but reorders by a mean of **1.21 rank places** (max 7); 8 of the top 10
+  stay, and only 2/71 stat tiers change. Every reference output regenerates; the field does not
+  materially reorder.
+- **Constants**: `insurance_multiplier_USAA` is *not* a double-count — it becomes correct for the
+  first time once the base is a real average (recommend renaming, defaulting to 1.0, USAA 0.8 as
+  a preset — owner call). `full_cov_threshold_usd` ($6,000) looks too low on its own terms
+  (~$480/yr expected recovery vs ~$780–970/yr premium) — flagged, and recommended **not** to be
+  changed in the same commit. Design trap: `fullCoverageUsdYr` means "real quote, bypass the
+  multiplier", so `region.ts` must not write into it.
 
 ## P1 — Readability of what we already show
 
@@ -93,8 +237,18 @@ Prerequisites and constraints:
 
 ## Owner decisions still open (from ASSUMPTIONS.md §E)
 
-- **What "ideal mileage" should mean** — see R8 above. Currently the unconstrained argmin,
-  which lands on "buy new" for 75% of the field.
+- **What "ideal mileage" should mean** — see R8, and R10/R11 which now explain most of it.
+  Largely a metric artifact plus a price-curve defect, not a definition problem.
+- **The $/mi metric across unequal holding periods** (R10) — fix the sweep's horizon only, or
+  levelize the denominator and accept a +48% headline shift. Owner explanation given
+  2026-07-29; decision still open.
+- **Reliability method replacement** (R12) — the shipped derivation has no measurable signal
+  (41% agreement, worse than guessing). Recommended replacement is powertrain complaint share
+  on a single global distribution. Rewriting seed tiers remains an owner review gate.
+- **IIHS-HLDI licence** (R13) — needs a written request to `legal@iihs.org` before HLDI-derived
+  relativities can ship. Only the owner can send that. The NAIC/BLS half needs no permission.
+- **Strike CarComplaints and RepairPal from spec §9** (R12) — the spec currently prescribes
+  clearing a legal gate using two sources that create one.
 - **Electricity default vs. the region table.** R3 raised the bare default to $0.38/kWh, but
   `region.ts`'s CA entry is $0.3525/kWh, so resolving a CA ZIP now *lowers* the price below
   the default. The two were sourced independently and neither is wrong on its own terms;
