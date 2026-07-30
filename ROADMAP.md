@@ -115,6 +115,35 @@ odometer floor; or reporting the whole curve instead of a single point. `upperOd
 5% tolerance walk are unaffected by whichever is chosen. Do not re-derive
 `feasibleOdoRange`/`deriveBuyYear` — reuse them.
 
+**R14. Re-derive `eol_maintained_miles` and `repair_cost_multiplier_by_make` — what actually
+closes the Consumer Reports gate.** *Next item (owner, 2026-07-29).*
+R12 re-derived `reliability_tier` from NHTSA and stopped there. These two fields still trace to
+the same lost-prototype CR judgment, and they are not incidental: they correlate with the old seed
+tier at **−0.838** and **+0.602** — one judgment wearing three hats. So R12 broke the seed's
+internal consistency **without removing the CR dependency**, and `OpenCAWR_SPEC.md` §9 is
+deliberately marked PARTIALLY CLEARED until this lands. Both fields move real money:
+`repair_cost_multiplier_by_make` multiplies every major-repair event cost, and
+`eol_maintained_miles` sets the end-of-life distribution's median, so it drives the holding
+horizon, the resale floor and the sweep's grid cap.
+Why this is harder than R12 was:
+- **`eol_maintained_miles`** — spec §9's own table cites the iSeeCars longevity study plus
+  owner-reported/high-mileage registries. iSeeCars publishes model-level figures in press releases
+  (quotable) but the underlying dataset is proprietary; establish the licence position *before*
+  building on it, the same way R13 did for IIHS-HLDI. There is no NHTSA equivalent — complaint data
+  says nothing about longevity.
+- **`repair_cost_multiplier_by_make`** — the obvious source (RepairPal) has just been struck from
+  §9 as a scraping target, so the easy answer is closed by our own decision. NHTSA carries no cost
+  data at all. Candidates worth evaluating: BLS producer/consumer price series for motor vehicle
+  maintenance and repair (public domain, but economy-wide, not per-make); published OEM parts
+  pricing; insurance physical-damage severity by make, which runs into the same IIHS licence wall
+  R13 hit. **A well-argued negative result is an acceptable outcome** — if no public per-make repair
+  cost source exists, the honest move is to collapse the multiplier toward 1.0, say plainly that
+  make-level repair cost is not modeled, and log what that costs in accuracy.
+Sequencing note: do NOT re-derive these to agree with the current tiers. R12's tiers are now NHTSA
+-derived; deriving these from the tiers would recreate the three-hats problem in the other
+direction. They need genuinely independent sources or an explicit statement that they are not
+derived.
+
 **R2. Model year as a designed surface, not an axis label** (rewritten and re-queued
 2026-07-28 at the owner's direction; the original framing — "put implied model year on the
 heatmap axis" — was rejected as too small for the problem).
@@ -136,7 +165,7 @@ Prerequisites and constraints:
   (spec §9) exactly as the current multipliers are.
 - Estimates, not advice: "what changed in 2019" is a fact; "buy the 2019" is not.
 
-**R12. Reliability re-derivation — SHIPPED 2026-07-29, launch gate CLEARED** (investigation
+**R12. Reliability re-derivation — SHIPPED 2026-07-29, launch gate PARTIALLY cleared** (investigation
 2026-07-29, `docs/investigations/2026-07-29-reliability-corpus.md`). Owner released the
 seed-agreement constraint ("we have moved past the original 71 framework"); the recommended method
 below was implemented, **41 of 71 tiers were rewritten and reference outputs regenerated**, EVs got
@@ -261,6 +290,10 @@ investigation summary, kept for the HLDI revisit path:
 
 ## Owner decisions still open (from ASSUMPTIONS.md §E)
 
+- **The Consumer Reports gate is only PARTIALLY cleared** — `reliability_tier` is NHTSA-derived as
+  of R12, but `repair_cost_multiplier_by_make` and `eol_maintained_miles` still trace to the same
+  CR judgment. **R14 is the next item and is what actually closes it.** Do not describe the gate as
+  closed until then.
 - **What "ideal mileage" should mean** — see R8, and R10/R11 which now explain most of it.
   Largely a metric artifact plus a price-curve defect, not a definition problem.
 - ~~The $/mi metric across unequal holding periods (R10) — fix the sweep's horizon only, or
