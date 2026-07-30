@@ -26,7 +26,7 @@ export function AssumptionsTab() {
   return (
     <div className="assumptions-tab">
       <section className="at-section gate-section">
-        <h3>Launch gate — reliability data is not shippable yet</h3>
+        <h3>Launch gate — reliability re-derived from NHTSA; listing-data clause still stands</h3>
         <p className="md-source">Source: OpenCAWR_SPEC.md §9 (also recorded in DECISIONS.md)</p>
         <div className="gate-banner">
           <Markdown source={SPEC_LAUNCH_GATE} />

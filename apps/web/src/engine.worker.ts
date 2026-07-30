@@ -317,7 +317,7 @@ function handleDeal(req: DealRequest) {
   }
 
   notes.push(
-    "reliability inputs are seed data pending public re-derivation — treat repair and tail-risk estimates with caution",
+    "reliability tier is derived from NHTSA complaint mix, not a measured defect rate — treat repair and tail-risk estimates with caution",
   );
 
   const msg: DealResponse = {

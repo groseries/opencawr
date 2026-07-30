@@ -1,0 +1,89 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC60+T6&modelYear=2020",
+  "fetchedAt": "2026-07-30T00:24:50.409Z",
+  "body": {
+    "count": 20,
+    "results": [
+      {
+        "odiNumber": 11745254,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11742884,
+        "components": "ELECTRICAL SYSTEM,STRUCTURE"
+      },
+      {
+        "odiNumber": 11735113,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11633493,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11624075,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11620083,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11594356,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11567128,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11551241,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11525617,
+        "components": "POWER TRAIN,WHEELS"
+      },
+      {
+        "odiNumber": 11523444,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11495787,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11495081,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11492842,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER,LANE DEPARTURE"
+      },
+      {
+        "odiNumber": 11476320,
+        "components": "FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11443740,
+        "components": "TIRES"
+      },
+      {
+        "odiNumber": 11438075,
+        "components": "ELECTRICAL SYSTEM,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11385337,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11364197,
+        "components": "ELECTRICAL SYSTEM,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11330568,
+        "components": "VISIBILITY,UNKNOWN OR OTHER"
+      }
+    ]
+  }
+}

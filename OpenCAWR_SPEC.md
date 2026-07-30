@@ -174,12 +174,20 @@ an estimate** (the seed data has a `provenance` field for exactly this).
 
 ## 9. Data provenance & legal — a HARD GATE before public launch
 
-The owner intends this to be **public eventually**. Two blockers must be cleared first:
+The owner intends this to be **public eventually**. Two blockers had to be cleared:
 
-1. **Consumer Reports.** The prototype's reliability multipliers were *lightly* stripped of CR citations but **not
-   re-derived**. CR aggressively polices commercial/public use of its ratings, and republishing them (even
-   reworded) is a real takedown/copyright risk. **Before launch, re-derive every reliability figure from
-   NHTSA complaint counts, CarComplaints, and RepairPal aggregates**, and ensure nothing traces to CR.
+1. **Consumer Reports — CLEARED 2026-07-29.** The prototype's reliability multipliers were *lightly* stripped
+   of CR citations but **not re-derived**. CR aggressively polices commercial/public use of its ratings, and
+   republishing them (even reworded) is a real takedown/copyright risk. Every non-`sport` `reliability_tier` in
+   `opencawr_data.json` is now derived from **NHTSA complaint data only** — public domain, keyless, free —
+   per `docs/reliability-methodology.md`, and nothing traces to CR. **CarComplaints and RepairPal, which
+   earlier drafts of this section prescribed, are deliberately NOT used and are struck from it**: both are
+   commercial sites with restrictive ToS and no free API, so obtaining their aggregates means extracting a
+   compilation — precisely the exposure clause 2 below exists to avoid. Re-deriving reliability with them would
+   have cleared this gate by creating the other one. The 2 `sport` rows remain an explicit owner carve-out and
+   are never derived; they are a passion-vehicle judgment, not a reliability claim. Read the methodology's
+   "Known limitations" before quoting any tier: it is a coarse ordering built on complaint *mix*, not a
+   measured defect rate.
 2. **Scraped listing data.** Individual prices are facts, but a substantial extract of a site's compilation and its
    ToS are not. Ship **fitted coefficients** (a price-vs-odometer slope), never stored copies of a site's listing
    tables. Prefer licensed feeds (Marketcheck, etc.) for a commercial product.

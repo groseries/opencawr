@@ -1,0 +1,77 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90+T6&modelYear=2021",
+  "fetchedAt": "2026-07-30T00:25:00.681Z",
+  "body": {
+    "count": 17,
+    "results": [
+      {
+        "odiNumber": 11678085,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER,BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11646018,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11613402,
+        "components": "WHEELS,SERVICE BRAKES,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11611104,
+        "components": "STEERING,POWER TRAIN"
+      },
+      {
+        "odiNumber": 11564107,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11532602,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11520629,
+        "components": "Chest Clip, Buckle, Harness"
+      },
+      {
+        "odiNumber": 11511651,
+        "components": "STEERING,ENGINE"
+      },
+      {
+        "odiNumber": 11511411,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11493737,
+        "components": "TIRES"
+      },
+      {
+        "odiNumber": 11491884,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11486819,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11446230,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11440067,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11389044,
+        "components": "SERVICE BRAKES,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11388231,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11385260,
+        "components": "BACK OVER PREVENTION"
+      }
+    ]
+  }
+}

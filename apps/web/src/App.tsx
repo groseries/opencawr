@@ -378,8 +378,8 @@ export function App() {
           )}
           <footer className="foot">
             <span>
-              OpenCAWR · reliability inputs pending public re-derivation (see ledger) ·
-              estimates, not advice
+              OpenCAWR · reliability tiers derived from NHTSA complaint data (a coarse ordering —
+              see ledger) · estimates, not advice
             </span>
           </footer>
         </main>

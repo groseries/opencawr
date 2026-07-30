@@ -1,0 +1,37 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=V90CC&modelYear=2018",
+  "fetchedAt": "2026-07-29T14:39:23.261Z",
+  "body": {
+    "count": 7,
+    "results": [
+      {
+        "odiNumber": 11669331,
+        "components": "ELECTRICAL SYSTEM,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11655459,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11651761,
+        "components": "ELECTRICAL SYSTEM,EXTERIOR LIGHTING,STRUCTURE"
+      },
+      {
+        "odiNumber": 11628012,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11599915,
+        "components": "UNKNOWN OR OTHER,LANE DEPARTURE"
+      },
+      {
+        "odiNumber": 11503788,
+        "components": "AIR BAGS,STRUCTURE"
+      },
+      {
+        "odiNumber": 11306651,
+        "components": "UNKNOWN OR OTHER"
+      }
+    ]
+  }
+}

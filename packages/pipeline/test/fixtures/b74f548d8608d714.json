@@ -1,0 +1,125 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90+T6+AWD&modelYear=2022",
+  "fetchedAt": "2026-07-30T00:25:02.713Z",
+  "body": {
+    "count": 29,
+    "results": [
+      {
+        "odiNumber": 11751217,
+        "components": "UNKNOWN OR OTHER,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11735479,
+        "components": "LANE DEPARTURE,BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11720490,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11696466,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11688979,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11675175,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11668145,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11615583,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11592932,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11583268,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11578997,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11556573,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11556577,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11556578,
+        "components": "ELECTRICAL SYSTEM,BACK OVER PREVENTION,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11556579,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11547911,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11547449,
+        "components": "SEAT BELTS,SEATS"
+      },
+      {
+        "odiNumber": 11543669,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11543428,
+        "components": "ELECTRICAL SYSTEM,LATCHES/LOCKS/LINKAGES"
+      },
+      {
+        "odiNumber": 11541903,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11528023,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11506012,
+        "components": "ELECTRICAL SYSTEM,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11503950,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11495467,
+        "components": "CHILD SEAT"
+      },
+      {
+        "odiNumber": 11486820,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11485574,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11481092,
+        "components": "ELECTRICAL SYSTEM,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11480246,
+        "components": "VEHICLE SPEED CONTROL,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11473422,
+        "components": "UNKNOWN OR OTHER,LANE DEPARTURE"
+      }
+    ]
+  }
+}

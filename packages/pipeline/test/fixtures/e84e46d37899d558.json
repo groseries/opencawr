@@ -1,0 +1,133 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC60+T5&modelYear=2021",
+  "fetchedAt": "2026-07-30T00:24:51.008Z",
+  "body": {
+    "count": 31,
+    "results": [
+      {
+        "odiNumber": 11688891,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11632886,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11631036,
+        "components": "LATCHES/LOCKS/LINKAGES"
+      },
+      {
+        "odiNumber": 11630286,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11626930,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11626461,
+        "components": "ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11613270,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11564361,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11552620,
+        "components": "TIRES"
+      },
+      {
+        "odiNumber": 11529485,
+        "components": "SERVICE BRAKES,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11527193,
+        "components": "ELECTRICAL SYSTEM,SERVICE BRAKES,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11499902,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER,LANE DEPARTURE"
+      },
+      {
+        "odiNumber": 11490467,
+        "components": "UNKNOWN OR OTHER,SERVICE BRAKES,ENGINE"
+      },
+      {
+        "odiNumber": 11486621,
+        "components": "ELECTRICAL SYSTEM,SEATS,LANE DEPARTURE"
+      },
+      {
+        "odiNumber": 11485300,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11484780,
+        "components": "LANE DEPARTURE"
+      },
+      {
+        "odiNumber": 11482966,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11481259,
+        "components": "LANE DEPARTURE"
+      },
+      {
+        "odiNumber": 11475285,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11474508,
+        "components": "STEERING,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11474232,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11473455,
+        "components": "ELECTRICAL SYSTEM,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11461792,
+        "components": "ELECTRICAL SYSTEM,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11453722,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11452548,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11440071,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11433850,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11433852,
+        "components": "POWER TRAIN,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11429521,
+        "components": "UNKNOWN OR OTHER,FORWARD COLLISION AVOIDANCE,LANE DEPARTURE"
+      },
+      {
+        "odiNumber": 11429186,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11424387,
+        "components": "FORWARD COLLISION AVOIDANCE"
+      }
+    ]
+  }
+}

@@ -1,149 +1,291 @@
-# Reliability re-derivation methodology (Task D, launch gate)
+# Reliability re-derivation methodology (launch gate, spec §9)
 
-Seed `reliability_tier` values trace back to the lost prototype's Consumer-Reports-derived
-judgment calls (ASSUMPTIONS.md §D) — public launch is blocked until tiers are re-derived from
-a free, keyless, no-Consumer-Reports source. This document specifies that derivation exactly;
-`packages/pipeline/src/reliability/derive.ts` implements it — no code should diverge from what's
-written here without updating this file in the same commit.
+Seed `reliability_tier` values traced back to the lost prototype's Consumer-Reports-derived
+judgment calls (ASSUMPTIONS.md §D). Public launch was blocked until they were re-derived from a
+free, keyless, no-Consumer-Reports source. **This document specifies that derivation exactly, and
+as of 2026-07-29 it is the source of every non-`sport` `reliability_tier` in `opencawr_data.json`.**
+`packages/pipeline/src/reliability/derive.ts` implements it and
+`packages/pipeline/src/reliability/corpus.ts` maps the 71 seed vehicles onto NHTSA — no code should
+diverge from what's written here without updating this file in the same commit.
+
+Evidence for every choice below: `docs/investigations/2026-07-29-reliability-corpus.md`.
 
 ## Source
 
-NHTSA `complaintsByVehicle` (`api.nhtsa.gov/complaints/complaintsByVehicle`), the same free/keyless
-endpoint `src/sources/nhtsa.ts` already uses for `model_year_reliability`. Two things are read off
-each complaint record: its existence (a count) and its `components` field (a comma-separated list
-of NHTSA component categories, e.g. `"ENGINE,FUEL/PROPULSION SYSTEM"`) — never `summary` (free text)
-or `vin`, matching the "counts only" discipline already documented at the top of `nhtsa.ts`.
+NHTSA `complaintsByVehicle` (`api.nhtsa.gov/complaints/complaintsByVehicle`) — free, keyless,
+US-government public domain, zero takedown risk. Two things are read off each complaint record: its
+`odiNumber` (identity, for de-duplication) and its `components` field (a comma-separated list of
+NHTSA component categories, e.g. `"ENGINE,FUEL/PROPULSION SYSTEM"`) — never `summary` (free text)
+or `vin`, matching the "counts only" discipline documented at the top of `nhtsa.ts`.
 
-## Why not complaints-per-1000-sold
+**Queries are driven from the per-model-year catalogue, never from one hard-coded model string.**
+`api.nhtsa.gov/products/vehicle/models?modelYear=&make=&issueType=c` is NHTSA's own list of
+queryable model strings, and it is **trim-fragmented and inconsistent year to year for the same
+physical car**:
+
+| seed vehicle | NHTSA model string, by model year |
+|---|---|
+| Ford Ranger (2019+) | `RANGER` (2019–20) → `RANGER SUPER CAB` + `RANGER SUPER CREW` (2021–22) |
+| Volvo XC60 | `XC60` (2017) → `XC60 T5/T6/T8` (2018–21) → `XC60 B5 AWD/B5 FWD/B6 AWD` (2022) |
+| Volvo XC90 | **never a bare `XC90`** in the window — only `T5/T6/T8`, then `T5 AWD/T5 FWD/T6 AWD` |
+| Mini Cooper | `COOPER`/`COOPER S`/`HARDTOP` … and **no `COOPER` at all in MY2021** |
+| Nissan Leaf | no bare `LEAF` in MY2022 — trim strings only |
+| Chevy Bolt EV | `BOLT` (2017–18) → `BOLT EV` (2019+) |
+| Chevy Suburban | `SUBURBAN 1500` (2016–21) → `SUBURBAN` (2021+) |
+
+A single string therefore returns **nothing at all** for whole model years — for Volvo XC90, for
+every year in the window. NHTSA answers such a query with **HTTP 400 carrying a valid
+`{"count":0,"message":"Results returned successfully","results":[]}` body**, so depending on how the
+caller treats the status it is either a hard fetch failure or, worse, a silent zero that a
+share-based derivation reads as a flawless car. Neither is acceptable.
+
+The fix, in `complaintComponentsByCatalogue`: resolve the catalogue for each model year, apply the
+vehicle's include/exclude predicate (`corpus.ts`), query **every** matching string, and
+**de-duplicate the results by `odiNumber`**. De-duplication is load-bearing, not hygiene: NHTSA
+returns the *same* complaint set for `XC90 T5` and `XC90 T6` (it ignores the trim suffix), so
+unioning without it exactly doubles that vehicle's counts. `GOLF GTI` and `GTI` are both listed in
+MY2018–19 and are genuinely disjoint — both cases are handled by the same rule.
+
+Two fetch-layer defects found and fixed alongside (`fetchCached.ts`):
+
+- **NHTSA's edge (Akamai) 403s Node/undici's default User-Agent** with an HTML "Access Denied" page.
+  `fetchCached` previously sent no `User-Agent` at all. It now sends `opencawr-pipeline/0.1`. A UA
+  containing the conventional `(+https://…)` contact-URL suffix is **also** blocked — do not add one.
+- **Non-2xx-with-valid-JSON**: `fetchCached` takes an opt-in `acceptNonOkJson` flag for the
+  `{"count":0}`-with-HTTP-400 answer described above. Off by default, so every other adapter still
+  fails loudly on a real error status.
+
+### Sources evaluated and rejected
+
+- **Consumer Reports** — permanently off the table (spec §9). Nothing here derives from it.
+- **CarComplaints.com / RepairPal** — both are commercial sites with restrictive ToS and no free
+  API; obtaining their aggregates means extracting a compilation, which is precisely the exposure
+  spec §9's second clause exists to avoid. **Struck from spec §9** in the same commit as this
+  derivation: the spec was prescribing a launch-gate remedy that created a launch-gate risk.
+- **NHTSA recalls** (`recalls/recallsByVehicle`) and **ODI investigations** (the
+  `static.nhtsa.gov/odi/ffdd/inv/FLAT_INV.zip` flat file) were both fetched and evaluated across the
+  full corpus, and are **rejected as tier inputs** — they measure regulator/manufacturer action, not
+  owner-experienced failure, and empirically they carry no signal:
+
+  | signal | volume-invariant? | ρ vs seed tier | p |
+  |---|---|---:|---:|
+  | `rate` (complaints ÷ years-on-road — the *previous* method) | no | +0.114 | 0.35 |
+  | total complaints | no | +0.037 | 0.76 |
+  | recalls / model-year | no | −0.005 | 0.97 |
+  | investigations / model-year | no | +0.197 | 0.10 |
+  | **powertrain complaint share** | **yes** | **+0.385** | **0.0013** |
+
+  Combining them makes it worse: rank(share)+rank(investigations) and rank(share)+rank(recalls) both
+  score below powertrain share alone. They remain useful as *disclosure* (a per-model "N open
+  investigations" badge), never as a tier input. Do not re-litigate this without new evidence.
+- **Trap, documented so nobody loses a day to it**: `api.nhtsa.gov/investigations?make=…&model=…`
+  returns HTTP 200 and **silently ignores the `make`/`model` filters**, paging the entire corpus.
+  `api.nhtsa.gov/investigations/investigationsByVehicle` does not exist (403 "Missing Authentication
+  Token"). The ODI flat file is the only working public route.
+
+## Why not complaints-per-1000-sold, and why not any count at all
 
 The textbook reliability metric is complaints (or repairs) per 1,000 vehicles sold. NHTSA doesn't
-publish sales, and no free/keyless source does either (that's exactly the gap Consumer Reports fills
-commercially, and CR is off the table — global constraint). So sales-volume is replaced with a proxy:
-**complaints per model-year per year-on-road.**
+publish sales and no free/keyless source does — that gap is exactly what Consumer Reports fills
+commercially, and CR is off the table.
 
-## Step 1 — per-model-year rate
+The previous version of this document substituted *years-on-road* for units-sold. **That does not
+work, and the failure is measurable, not theoretical**: `complaints ÷ years-on-road`, medianed
+across model years, correlates with the seed tier at **ρ = +0.11, p = 0.34** across all 69 non-sport
+vehicles. It is a sales-volume ranking. Under it the full corpus agreed with the seed 28/69, *worse
+than answering `mid` for every vehicle* (32/69) and inside the noise band of randomly shuffled
+labels.
 
-For a model year `Y`, with `currentYear` the year the derivation runs:
+The proof that this is a volume artifact rather than a real powertrain effect is a natural
+experiment — same make, same model, same body, different powertrain only:
 
-```
-yearsOnRoad(Y) = max(1, currentYear - Y)
-rate(Y) = complaints(Y) / yearsOnRoad(Y)
-```
+| gas variant | rate | electrified variant | rate | ratio |
+|---|---:|---|---:|---:|
+| Toyota Highlander | 53.6 | Toyota Highlander Hybrid | 1.5 | **35.7×** |
+| Toyota Camry | 37.4 | Toyota Camry Hybrid | 1.6 | **23.6×** |
+| Toyota RAV4 | 58.3 | Toyota RAV4 Hybrid | 2.7 | **22.0×** |
 
-`yearsOnRoad` stands in for "how long this model year has had to accumulate complaints and
-odometer miles" — a 2018 model year has had far longer to generate complaints than a 2022 one, so
-raw complaint counts alone would make newer model years look artificially reliable. This is the
-same shape of correction sales-volume would otherwise provide, using time-on-road instead of units-sold.
-Floored at 1 to avoid divide-by-zero for the current model year.
+No car is 22× more reliable than itself. The hybrid trim is a minority of that model's units sold,
+so it generates proportionally fewer complaints.
 
-**JUDGMENT**: this proxy conflates "complaints accumulate with calendar time" with "complaints
-accumulate with sales × usage," which isn't exactly true (a low-volume model with a devoted following
-that reports issues aggressively could look worse than a high-volume model that would objectively
-have more complaints if it had equal owners-with-a-NHTSA-account). Documented, not solved — no free
-sales data exists to solve it properly.
+**The fix is a ratio metric, not a better denominator.** Count-based metrics are unusable here.
 
-## Step 2 — per-model raw score
-
-```
-rawScore(model) = median( rate(Y) for Y in the model's queried model years )
-```
-
-Median (not mean) so that a single unusually bad or unusually clean model year doesn't dominate the
-model's overall score — the *model-year*-level landmine signal (Step 4) is a separate output.
-
-## Step 3 — normalize within body-class, then bucket by quartile
-
-Different body classes have structurally different complaint baselines (a minivan and a two-seater
-aren't complained about the same way regardless of reliability), so raw scores are compared only
-within the same seed `body` value, not globally:
+## Step 1 — per-model score: powertrain complaint SHARE
 
 ```
-bodyClassMedian(body) = median( rawScore(m) for m in the reference set with that body )
-index(model) = rawScore(model) / bodyClassMedian(model.body)
+powertrainComplaints(model) = complaints, pooled over the queried model years and
+                              de-duplicated by odiNumber, having at least one `components`
+                              top-level category (before any ":" subcategory) that starts
+                              with ENGINE, POWER TRAIN, or TRANSMISSION
+
+rawScore(model) = powertrainComplaints(model) / complaints(model)
 ```
 
-`index` is a body-class-relative "how much worse/better than a typical peer of the same body type"
-figure: `1.0` = exactly the body-class median.
+Numerator and denominator both scale with units sold, so the sales confound cancels **exactly**.
+That is why this is the only signal in the corpus with p < 0.01 (ρ = +0.385).
 
-Tiers are then assigned by quartile of `index` across the whole reference set (all models being
-derived together, regardless of body class — the normalization in the step above is what makes this
-cross-body comparison fair):
+Two deliberate details:
+
+- **Pooled across the window, not a median of per-year shares.** A 12-complaint model year would
+  otherwise weigh as much as a 2,000-complaint one.
+- **Each complaint counts once**, however many powertrain categories it carries. `rawScore` is a
+  share, bounded in [0, 1]. *(The investigation's tabulated `pt%` column summed per-category counts
+  instead, so a complaint tagged both `ENGINE` and `POWER TRAIN` counted twice and its percentages
+  can exceed 100% — Porsche 996 Turbo 97.4%. The implemented per-complaint definition gives
+  systematically lower percentages and shifts a handful of vehicles across a cut. It does **not**
+  change the signal: ρ vs the seed tier is +0.384 here against +0.385 there.)*
+
+## Step 2 — one global distribution, percentile cuts, no per-class partition
 
 ```
-Q1 = 25th percentile of all indices
-Q3 = 75th percentile of all indices
-
-index <= Q1  -> "low"   (bottom quartile: fewest normalized complaints -> most reliable)
-Q1 < index <= Q3 -> "mid"
-index > Q3   -> "high"  (top quartile: most normalized complaints -> least reliable)
+low   <=  p32 of the reference group's rawScore distribution
+high  >   p78
+mid       everything between
 ```
 
-Percentiles use linear interpolation between order statistics (the common "R type 7" / NumPy-default
-method) — the exact same formula intentionally used on both sides of every comparison so results are
-reproducible from the raw complaint counts alone.
+`p32`/`p78` are **the seed corpus's own tier marginals** (22 `low` / 32 `mid` / 15 `high` across the
+69 non-sport vehicles), so the derivation is not penalised for producing the wrong *proportion* of
+tiers. They are named constants (`TIER_CUT_LOW`/`TIER_CUT_HIGH`), not bare literals. Percentiles use
+linear interpolation between order statistics (the common "R type 7" / NumPy-default method).
+
+**There is no normalization step and no per-class partition — not by body, not by etype, not by
+make.** All three were tested on the full corpus and all three score worse:
+
+| method | agreement with seed | 2-tier inversions |
+|---|---:|---:|
+| `rate`, body-normalised, quartile cuts (the previous method) | 28/69 | **11** |
+| `rate`, etype-normalised | 29/69 | 10 |
+| powertrain share, body-normalised | 34/69 | 3 |
+| powertrain share, etype-normalised | 29/69 | 2 |
+| powertrain share, **make**-normalised | 32/69 | **11** |
+| **powertrain share, no normalisation (this method)** | 34/69 | **1** |
+
+Dropping the partition **dissolves** the small-class problem rather than relocating it: the
+1-member `EV SUV` and `PHEV SUV AWD` body groups, the 2-member `PHEV` and `Sport` groups, and the
+cross-contamination effect the previous version of this document spent three JUDGMENT notes
+disclosing (a singleton body class pinned to `bodyClassIndex ≡ 1.0` shifting everyone else's cut
+points) all simply stop existing. Those notes are retired because the mechanism is gone.
+
+**Do not normalise by `make`.** It is tempting — `make` explains the most variance of any factor
+(η² 0.50–0.64, p < 0.001, more than `etype`'s 0.14–0.19 and far more than `body`'s). But `make`
+*is* the signal, the closest available stand-in for the owner's "quality of work"; normalising by it
+deliberately erases the one thing that discriminates, which is why it restores 11 two-tier
+inversions.
+
+Also tested and rejected, with numbers: **absolute thresholds calibrated once** (best variant 24/69,
+clearly worse — the share distribution is not stable enough to hard-code) and **empirical-Bayes
+shrinkage** toward the corpus mean to damp thin denominators (ρ falls monotonically with the
+shrinkage constant, agreement 32 → 25). **Do not shrink.** Thin-denominator vehicles are flagged
+`provisional` instead.
+
+## Step 3 — reference groups: `sport` and EVs
 
 **`sport` is never derived.** It's an owner judgment for passion/collector vehicles (ASSUMPTIONS.md
-§B: "no special-case rule... a vehicle of passion runs through the same engine") and isn't a
-reliability statement at all, so it's out of scope for this pipeline.
+§B: "no special-case rule… a vehicle of passion runs through the same engine") and isn't a
+reliability statement at all. The 2 Porsche 996 rows are excluded **from the score distribution and
+from the cut-point computation**, not merely left unassigned — an explicit filter, and a unit test
+pins that removing a vehicle into the carve-out moves the cut points for everyone else.
 
-**JUDGMENT — reference-set size**: quartiles are only as meaningful as the population they're computed
-over. For this launch-gate validation, the reference set is exactly the 6 named seed models the task
-specifies (spanning all 4 non-sport tiers in the seed data: Corolla/CX-5 = low, Odyssey/Sorento = mid,
-Escape/Fiat 500 = high). Two of the four `body` groups among those 6 (`SUV AWD` → Sorento only,
-`Van` → Odyssey only) have exactly one member, so `bodyClassMedian` for those bodies trivially equals
-the model's own `rawScore` and `index` trivially equals `1.0` — i.e. for singleton body classes this
-derivation can only ever place the model near the *global* median (by construction), not truly compare
-it to same-body peers. That is an accurate description of what a 6-model reference set can support,
-not a bug; a full-corpus re-derivation (all ~90 seed vehicles, or better, the live make/model catalog)
-would need every seed vehicle's complaint history fetched and is out of scope for this task — noted as
-an open item in `ASSUMPTIONS.md` §E.
+**EVs are derived against an EV-only reference, with an EV-appropriate numerator.** An EV has no
+engine and no transmission, so the Step-1 numerator is *structurally impossible* for it, not merely
+small: measured median powertrain share is 33% for gas but **12% for EVs**. Left in the main
+distribution, a powertrain-share metric ranks EVs as the most reliable cars in the field for the
+wrong reason — the VW ID.4 derived a 2-tier improvement that way, an artifact that was rejected.
 
-**JUDGMENT — singleton indices shift the shared quartile cut points for every other model, not just
-themselves.** `Q1`/`Q3` (Step 3, above) are computed once, across all 6 models' `index` values
-together — Sorento's and Odyssey's artificial `1.0`s are two of the six numbers that decide where
-those cut points land, exactly as much as Corolla's, CX-5's, Escape's, or Fiat 500's real indices are.
-Concretely, with this task's 6-model batch the two `1.0`s sit in the middle of the sorted index list,
-which pulls `Q1`/`Q3` toward the center and makes the `low`/`high` bands narrower (easier to fall into)
-than they would be with only the 4 models that have a real same-body comparison. This is a
-cross-contamination effect, not a bug in the quartile math itself — it's what "compute quartiles over
-the whole batch together" necessarily does when some of the batch's indices aren't independently
-informative. Disclosed here (and in `ASSUMPTIONS.md` §G and the `reliability-report` output) rather
-than "fixed", per the launch-gate review: the fix would require either a larger reference set (so no
-body class is a singleton) or excluding singleton-body models from the quartile computation entirely —
-both are methodology changes for the owner to decide on, not a code bug to patch silently.
+So for `etype: "ev"` only:
+
+- the numerator is the Step-1 set **plus** `FUEL/PROPULSION SYSTEM`, `HYBRID PROPULSION SYSTEM` and
+  `ELECTRICAL SYSTEM` — the categories NHTSA files an electric drivetrain's failures under;
+- the cut points are percentiles of **the 4 EVs' own distribution**, not the main one.
+
+**Stated plainly: with n = 4 this is an ordering of four cars, not a calibrated tier.** At n = 4 the
+p32/p78 cuts necessarily produce 1 `low`, 2 `mid`, 1 `high`. All four EV tiers are marked
+`provisional`. It is used anyway because the alternative — keeping the seed values — would leave
+four rows still traceable to Consumer Reports, which is the one thing this gate exists to remove.
+
+**PHEVs and hybrids stay in the main distribution with the standard numerator.** They have both an
+engine and a transmission, so the metric is well defined for them, and the measured PHEV median
+share (38%) sits right alongside gas (33%). Hybrids run lower (16%), which is partly a real
+mechanical difference — an e-CVT and an Atkinson engine genuinely generate fewer transmission and
+engine complaints than a torque-converter automatic — and partly the same sales-mix effect leaking
+back in. Disclosed, not corrected: a per-`etype` adjustment factor was tested and scores worse
+(29/69), and with n = 4 EVs and n = 4 PHEVs it cannot be estimated to better than a factor of two.
+Record the medians (gas 33%, PHEV 38%, hybrid 16%, EV 12%); revisit at a larger corpus.
 
 ## Step 4 — landmine model years (independent of tier)
 
-Within a model's queried years:
+Unchanged. Within a model's queried years:
 
 ```
-countMedian = median( complaints(Y) for Y in the model's queried years )   -- raw counts, not rate
-powertrainShare(Y) = ( complaints in Y whose components include a powertrain category ) / complaints(Y)
+countMedian = median( complaints(Y) for Y in the model's queried years )   -- raw counts
+powertrainShare(Y) = ( complaints in Y with a powertrain category ) / complaints(Y)
 
 landmine(Y)  <=>  complaints(Y) > 2 * countMedian  AND  powertrainShare(Y) > 0.30
 ```
 
-A "powertrain category" is a complaint whose `components` field has a top-level segment (split on `,`,
-then on `:` — NHTSA's `components` string is comma-separated top-level categories, each optionally
-followed by `:`-delimited subcategories) that starts with `ENGINE` (covers `ENGINE`, `ENGINE AND
-ENGINE COOLING`), starts with `POWER TRAIN` (covers `POWER TRAIN`, `POWER TRAIN:AUTOMATIC
-TRANSMISSION`, etc.), or starts with `TRANSMISSION`.
+Worth saying explicitly now: this rule already uses a *share*, so it is already volume-invariant —
+the same family of statistic as the tier score, arrived at independently.
 
-This mirrors — and is intended to eventually replace — the placeholder `caution`-only heuristic
-already flagged `launchBlocked: true` in `assemble.ts`'s `classifyModelYearReliability` (2× median
-complaints, no component check, never emits `bad`). The Task D landmine rule is stricter (requires a
-powertrain-component majority too) and is the one that should feed `model_year_reliability.bad`
-once this derivation graduates from validation to production — see `ASSUMPTIONS.md` §F.
+**JUDGMENT**: the `2x` count threshold, the `30%` share threshold and the `ENGINE` / `POWER TRAIN` /
+`TRANSMISSION` keyword set are judgment calls with no external benchmark — they are the values the
+original task brief gave, not values derived from data.
 
-**JUDGMENT**: the `2x` count threshold, the `30%` powertrain-share threshold, and the specific
-`ENGINE` / `POWER TRAIN` / `TRANSMISSION` keyword set are all judgment calls with no external
-benchmark — chosen because they're the values given in the task brief, not derived from data.
+This mirrors — and is intended to eventually replace — the placeholder `caution`-only heuristic in
+`assemble.ts`'s `classifyModelYearReliability` (2× median complaints, no component check, never
+emits `bad`), which is still what pipeline-*assembled* (non-seed) vehicles get. See ASSUMPTIONS.md §F.
 
-## What this task does — and does not — do
+## Year window
 
-This derivation is run and validated against the 6 named seed models
-(`packages/pipeline/src/reliability/derive.ts`, `npm run reliability-report -w @opencawr/pipeline`),
-producing an agreement table of derived tier vs. current seed `reliability_tier`. **It does not
-rewrite `opencawr_data.json`.** Rewriting seed tiers — for these 6 or the other ~85 seed vehicles —
-is an explicit owner review gate (ASSUMPTIONS.md §D/§E); the validation report is this task's
-deliverable, not a data migration.
+`corpusQueries()` gives each vehicle at most **6 model years, ending no later than MY2022**, so
+every queried model year has ≥ 4 years on road to accumulate complaints, intersected with
+`[first_year, last_year]`. Models that begin after 2022 (Kia K4, Mazda CX-90) fall back to their own
+short span. That is 383 vehicle-model-years across the corpus.
+
+**3 of those 383 return no matching model string at all** — Fiat 500 MY2019, Fiat 500X MY2021,
+Volvo V90 Cross Country MY2021. They are handled as missing years, never as zeros. After the
+catalogue fix, no vehicle ends up with zero complaints overall.
+
+## Known limitations — read these before quoting a tier
+
+1. **This is a coarse ordering, not a measurement.** Restricted to the 55 gas vehicles (where
+   powertrain type is held constant) and recomputing the cuts within them, agreement with the seed
+   is 23/55 against a chance baseline of 20.9 — barely above noise. The bootstrap 90% CI on the
+   headline agreement rate contains the all-`mid` baseline. **No NHTSA-only signal in this corpus
+   reproduces a per-model reliability judgment with confidence.** What this method does defensibly
+   is order vehicles coarsely and avoid catastrophic inversions (1 two-tier inversion against the
+   old method's 11; 0 vehicles moved 2 tiers when the tiers were actually written).
+2. **Complaint share measures the *mix* of what owners report, not a defect rate.** A model whose
+   owners complain mostly about infotainment scores "reliable" on this metric. It cannot see
+   anything owners don't report to NHTSA, and it cannot see severity or cost.
+3. **EV tiers rest on 4 vehicles** (Step 3). Battery risk — where EV reliability actually lives for
+   this engine — is modelled separately in each vehicle's `battery` block and is unaffected.
+4. **`make` is the dominant factor and is deliberately not normalised away** (Step 2). Two
+   systematic consequences are visible in the results and are the derivation's biggest judgment
+   call: Toyota/Honda are compressed upward (their powertrain shares are mid-pack, and the seed's
+   Japanese-brand `low` tiers came from CR's long-run owner-survey reputation, which complaint *mix*
+   cannot see), and Hyundai/Kia are pushed downward (shares of 50–77%, the highest in the corpus —
+   the Theta II GDI engine failures, which is arguably the derivation correcting the seed).
+5. **Agreement with the seed tier is not validation.** The seed tier is the CR-derived judgment
+   being replaced, and it is internally near-deterministic: ρ(seed tier, `eol_maintained_miles`) =
+   −0.838 and ρ(seed tier, `repair_cost_multiplier_by_make`) = +0.602. Those two fields are
+   restatements of the same judgment, so they cannot serve as independent predictors, and high
+   agreement would only mean "we successfully reproduced CR". The rate is reported as an
+   observation; it is never a target and nothing here was tuned toward it.
+6. **Some NHTSA mappings are genuinely ambiguous** and are disclosed rather than resolved — the two
+   Ford Rangers and the two Toyota Siennas share a model string and are separated only by year
+   window; Hyundai Santa Fe's seed row spans two physically different vehicles; Kia Niro's MY2021+
+   string pools HEV/PHEV/BEV. `MAPPING_NOTES` in `corpus.ts` carries all 19, and the report prints them.
+
+## What this produces
+
+`npm run reliability-report -w @opencawr/pipeline` re-derives the full 71-vehicle corpus and prints
+it against the current seed `reliability_tier`. It is read-only by default; `-- --write` applies the
+derived tiers to `opencawr_data.json`.
+
+**Writing tiers is a numbers-change event, not a routine refresh**: `reliability_tier` selects the
+repair-frequency and median-repair-cost row in `constants.reliability_tiers` and the EOL dispersion
+σ, so it moves real money. It must be followed by `npm run gen-reference -w @opencawr/core` and
+reviewed. The 2026-07-29 run — the one that cleared the launch gate — is recorded with its full
+blast radius in ASSUMPTIONS.md §E.
+
+Estimates, not advice.

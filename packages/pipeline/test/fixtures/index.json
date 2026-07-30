@@ -328,5 +328,205 @@
     "hash": "a232b0ca81a3ae08",
     "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=Fiat&model=500&modelYear=2019",
     "note": "NHTSA complaintsByVehicle: Fiat 500 2019 (reliability re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "1c5830bfb65564d8",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=V90+CC&modelYear=2017",
+    "note": "NHTSA complaintsByVehicle: Volvo V90 CC 2017 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "9ae5cf7fe72f685f",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=V90+CC&modelYear=2018",
+    "note": "NHTSA complaintsByVehicle: Volvo V90 CC 2018 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "067139850c8ee776",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=V90+CC+B6+AWD&modelYear=2022",
+    "note": "NHTSA complaintsByVehicle: Volvo V90 CC B6 AWD 2022 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "a16f949fbbbdeafc",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=V90+CC+T5&modelYear=2019",
+    "note": "NHTSA complaintsByVehicle: Volvo V90 CC T5 2019 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "3a755d4dce66f14c",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=V90+CC+T6&modelYear=2019",
+    "note": "NHTSA complaintsByVehicle: Volvo V90 CC T6 2019 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "deb6a1df4d6b82f6",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=V90+CC+T6&modelYear=2020",
+    "note": "NHTSA complaintsByVehicle: Volvo V90 CC T6 2020 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "fb8490d5479c7207",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=V90CC&modelYear=2018",
+    "note": "NHTSA complaintsByVehicle: Volvo V90CC 2018 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "d2880aac4fb83e5a",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=V90CC&modelYear=2020",
+    "note": "NHTSA complaintsByVehicle: Volvo V90CC 2020 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "296e7a6b75ed2dba",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=V90CC&modelYear=2022",
+    "note": "NHTSA complaintsByVehicle: Volvo V90CC 2022 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "58810b27ce85721d",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC60+B5+AWD&modelYear=2022",
+    "note": "NHTSA complaintsByVehicle: Volvo XC60 B5 AWD 2022 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "cafee7a6ce8b7d27",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC60+B5+FWD&modelYear=2022",
+    "note": "NHTSA complaintsByVehicle: Volvo XC60 B5 FWD 2022 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "4da281e1326a82e1",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC60+B6+AWD&modelYear=2022",
+    "note": "NHTSA complaintsByVehicle: Volvo XC60 B6 AWD 2022 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "c04097db888050db",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC60+T5&modelYear=2018",
+    "note": "NHTSA complaintsByVehicle: Volvo XC60 T5 2018 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "298cb762456f7c57",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC60+T5&modelYear=2019",
+    "note": "NHTSA complaintsByVehicle: Volvo XC60 T5 2019 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "3aad8967ec745e31",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC60+T5&modelYear=2020",
+    "note": "NHTSA complaintsByVehicle: Volvo XC60 T5 2020 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "e84e46d37899d558",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC60+T5&modelYear=2021",
+    "note": "NHTSA complaintsByVehicle: Volvo XC60 T5 2021 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "3ae4a5820e0d8753",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC60+T6&modelYear=2018",
+    "note": "NHTSA complaintsByVehicle: Volvo XC60 T6 2018 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "9c88e94e8889399e",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC60+T6&modelYear=2019",
+    "note": "NHTSA complaintsByVehicle: Volvo XC60 T6 2019 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "c01686ab84b8baa2",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC60+T6&modelYear=2020",
+    "note": "NHTSA complaintsByVehicle: Volvo XC60 T6 2020 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "95a977ecb7326177",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC60+T6&modelYear=2021",
+    "note": "NHTSA complaintsByVehicle: Volvo XC60 T6 2021 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "d75780fceec4bc16",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90&modelYear=2017",
+    "note": "NHTSA complaintsByVehicle: bare 'XC90' 2017 \u2014 the single model string the pre-catalogue pipeline used. NHTSA does not list it for that year and answers HTTP 400 with count 0."
+  },
+  {
+    "hash": "ea5ccd8ffbd9a382",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90+T5&modelYear=2017",
+    "note": "NHTSA complaintsByVehicle: Volvo XC90 T5 2017 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "b7ee593e5ae48f75",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90+T5&modelYear=2018",
+    "note": "NHTSA complaintsByVehicle: Volvo XC90 T5 2018 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "726c874f43ccdfc0",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90+T5&modelYear=2019",
+    "note": "NHTSA complaintsByVehicle: Volvo XC90 T5 2019 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "f443b41d81f6e65d",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90+T5&modelYear=2020",
+    "note": "NHTSA complaintsByVehicle: Volvo XC90 T5 2020 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "1b90d75312d3f83b",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90+T5&modelYear=2021",
+    "note": "NHTSA complaintsByVehicle: Volvo XC90 T5 2021 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "6c6eca890e2546e6",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90+T5+AWD&modelYear=2022",
+    "note": "NHTSA complaintsByVehicle: Volvo XC90 T5 AWD 2022 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "1795d17e07117358",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90+T5+FWD&modelYear=2022",
+    "note": "NHTSA complaintsByVehicle: Volvo XC90 T5 FWD 2022 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "58c0862550970fd5",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90+T6&modelYear=2017",
+    "note": "NHTSA complaintsByVehicle: Volvo XC90 T6 2017 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "68a253ceb3c31718",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90+T6&modelYear=2018",
+    "note": "NHTSA complaintsByVehicle: Volvo XC90 T6 2018 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "afb9860240292918",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90+T6&modelYear=2019",
+    "note": "NHTSA complaintsByVehicle: Volvo XC90 T6 2019 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "f1fa9a0da495b923",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90+T6&modelYear=2020",
+    "note": "NHTSA complaintsByVehicle: Volvo XC90 T6 2020 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "32fc22c12f95477a",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90+T6&modelYear=2021",
+    "note": "NHTSA complaintsByVehicle: Volvo XC90 T6 2021 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "b74f548d8608d714",
+    "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90+T6+AWD&modelYear=2022",
+    "note": "NHTSA complaintsByVehicle: Volvo XC90 T6 AWD 2022 (full-corpus re-derivation, trimmed to odiNumber+components)"
+  },
+  {
+    "hash": "76e8005f9c267525",
+    "url": "https://api.nhtsa.gov/products/vehicle/models?modelYear=2017&make=VOLVO&issueType=c",
+    "note": "NHTSA model catalogue: Volvo 2017"
+  },
+  {
+    "hash": "34597dcf838bb7b6",
+    "url": "https://api.nhtsa.gov/products/vehicle/models?modelYear=2018&make=VOLVO&issueType=c",
+    "note": "NHTSA model catalogue: Volvo 2018"
+  },
+  {
+    "hash": "1a80b198d83b090a",
+    "url": "https://api.nhtsa.gov/products/vehicle/models?modelYear=2019&make=VOLVO&issueType=c",
+    "note": "NHTSA model catalogue: Volvo 2019"
+  },
+  {
+    "hash": "6dc9079c79a08a14",
+    "url": "https://api.nhtsa.gov/products/vehicle/models?modelYear=2020&make=VOLVO&issueType=c",
+    "note": "NHTSA model catalogue: Volvo 2020"
+  },
+  {
+    "hash": "f0f13c2a11764969",
+    "url": "https://api.nhtsa.gov/products/vehicle/models?modelYear=2021&make=VOLVO&issueType=c",
+    "note": "NHTSA model catalogue: Volvo 2021"
+  },
+  {
+    "hash": "6904b60bd1384325",
+    "url": "https://api.nhtsa.gov/products/vehicle/models?modelYear=2022&make=VOLVO&issueType=c",
+    "note": "NHTSA model catalogue: Volvo 2022"
   }
 ]

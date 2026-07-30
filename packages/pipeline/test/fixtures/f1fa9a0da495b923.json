@@ -1,0 +1,125 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90+T6&modelYear=2020",
+  "fetchedAt": "2026-07-30T00:24:59.636Z",
+  "body": {
+    "count": 29,
+    "results": [
+      {
+        "odiNumber": 11752094,
+        "components": "ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11743304,
+        "components": "POWER TRAIN,VEHICLE SPEED CONTROL,ENGINE"
+      },
+      {
+        "odiNumber": 11737179,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11735004,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11733717,
+        "components": "ELECTRICAL SYSTEM,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11727942,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11724311,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11717769,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11713668,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11707332,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11704687,
+        "components": "LATCHES/LOCKS/LINKAGES"
+      },
+      {
+        "odiNumber": 11704480,
+        "components": "ELECTRICAL SYSTEM,STRUCTURE,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11703455,
+        "components": "BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11658023,
+        "components": "ELECTRICAL SYSTEM,VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11655857,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11639716,
+        "components": "EQUIPMENT"
+      },
+      {
+        "odiNumber": 11637504,
+        "components": "LATCHES/LOCKS/LINKAGES"
+      },
+      {
+        "odiNumber": 11626185,
+        "components": "ELECTRICAL SYSTEM,VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11604353,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11584613,
+        "components": "ELECTRICAL SYSTEM,AIR BAGS"
+      },
+      {
+        "odiNumber": 11555192,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11511040,
+        "components": "STEERING,POWER TRAIN,ENGINE"
+      },
+      {
+        "odiNumber": 11483375,
+        "components": "SERVICE BRAKES,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11464084,
+        "components": "VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11455609,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11432078,
+        "components": "UNKNOWN OR OTHER,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11413682,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11329741,
+        "components": "SUSPENSION"
+      },
+      {
+        "odiNumber": 11322553,
+        "components": "SERVICE BRAKES"
+      }
+    ]
+  }
+}

@@ -136,8 +136,13 @@ Prerequisites and constraints:
   (spec §9) exactly as the current multipliers are.
 - Estimates, not advice: "what changed in 2019" is a fact; "buy the 2019" is not.
 
-**R12. Reliability re-derivation — the current method has no measurable signal** (launch gate;
-investigation 2026-07-29, `docs/investigations/2026-07-29-reliability-corpus.md`).
+**R12. Reliability re-derivation — SHIPPED 2026-07-29, launch gate CLEARED** (investigation
+2026-07-29, `docs/investigations/2026-07-29-reliability-corpus.md`). Owner released the
+seed-agreement constraint ("we have moved past the original 71 framework"); the recommended method
+below was implemented, **41 of 71 tiers were rewritten and reference outputs regenerated**, EVs got
+their own reference group, the fetch-layer bugs were fixed, and CarComplaints/RepairPal were struck
+from spec §9. Method, blast radius and residual limitations: `ASSUMPTIONS.md` §E/§H and
+`docs/reliability-methodology.md`. The findings that drove it, kept for the record:
 All 71 vehicles were mapped and pulled from NHTSA (999 cached requests, 0 failures). Findings,
 in order of how much they matter:
 - **The shipped method does not work.** Full-corpus agreement with the seed is **28/69 (41%)** —
@@ -262,13 +267,13 @@ investigation summary, kept for the HLDI revisit path:
   levelize the denominator and accept a +48% headline shift.~~ **Decided and shipped
   2026-07-29**: option 1 (fix the sweep's horizon; the sweep refuses to run at `"eol"` at all).
   See `ASSUMPTIONS.md` §B/§E.
-- **Reliability method replacement** (R12) — the shipped derivation has no measurable signal
-  (41% agreement, worse than guessing). Recommended replacement is powertrain complaint share
-  on a single global distribution. Rewriting seed tiers remains an owner review gate.
+- ~~**Reliability method replacement** (R12) — the shipped derivation has no measurable signal.~~
+  **Decided and shipped 2026-07-29**: powertrain complaint share on a single global distribution,
+  EVs on their own reference, tiers written and reference outputs regenerated.
 - **IIHS-HLDI licence** (R13) — needs a written request to `legal@iihs.org` before HLDI-derived
   relativities can ship. Only the owner can send that. The NAIC/BLS half needs no permission.
-- **Strike CarComplaints and RepairPal from spec §9** (R12) — the spec currently prescribes
-  clearing a legal gate using two sources that create one.
+- ~~**Strike CarComplaints and RepairPal from spec §9** (R12) — the spec currently prescribes
+  clearing a legal gate using two sources that create one.~~ **Struck 2026-07-29.**
 - **Electricity default vs. the region table.** R3 raised the bare default to $0.38/kWh, but
   `region.ts`'s CA entry is $0.3525/kWh, so resolving a CA ZIP now *lowers* the price below
   the default. The two were sourced independently and neither is wrong on its own terms;
@@ -282,9 +287,10 @@ investigation summary, kept for the HLDI revisit path:
   EPA certification while `pinned_buy_year_est` = 2021 (41 from 2020 on). Disclosed in
   `ASSUMPTIONS.md` §B during R7, deliberately not reconciled.
 - Real USAA premiums (engine already accepts `fullCoverageUsdYr` as a real quote).
-- **Reliability re-derivation = the public-launch gate.** `npm run reliability-report -w
-  @opencawr/pipeline` derives tiers from real NHTSA data; 4/6 match the seed. Replacing the
-  seed tiers is an owner decision, not an agent's.
+- ~~**Reliability re-derivation = the public-launch gate.**~~ **Cleared 2026-07-29** for the 71
+  seed vehicles. Still open underneath it: `eol_maintained_miles` and
+  `repair_cost_multiplier_by_make` were NOT re-derived and still trace to the same CR-derived
+  judgment, and pipeline-*assembled* vehicles still get a proxied tier (`ASSUMPTIONS.md` §E).
 - Real calendar age as a state variable (age is still odometer-derived).
 - Total-loss should truncate the holding period, not just charge annually.
 

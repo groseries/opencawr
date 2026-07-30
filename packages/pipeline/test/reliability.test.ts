@@ -3,12 +3,21 @@ import {
   classifyLandmineYears,
   deriveReliability,
   percentile,
-  perYearOnRoadRate,
+  referenceFor,
+  type ReliabilityQuery,
 } from "../src/reliability/derive.js";
+import { corpusQueries, yearsFor } from "../src/reliability/corpus.js";
+import { complaintCounts, complaintComponentsByCatalogue } from "../src/sources/nhtsa.js";
 
 beforeAll(() => {
   process.env.OPENCAWR_PIPELINE_OFFLINE = "1";
 });
+
+/** Volvo is the recorded regression corpus for NHTSA's trim-fragmented,
+ *  year-inconsistent model catalogue (see test/fixtures/index.json). */
+const VOLVO_YEARS = [2017, 2018, 2019, 2020, 2021, 2022];
+const volvoQuery = (name: string): ReliabilityQuery =>
+  corpusQueries().find((q) => q.name === name)!;
 
 describe("percentile (linear interpolation)", () => {
   it("matches known order statistics", () => {
@@ -25,17 +34,7 @@ describe("percentile (linear interpolation)", () => {
   });
 });
 
-describe("perYearOnRoadRate", () => {
-  it("divides complaints by years-on-road", () => {
-    expect(perYearOnRoadRate(2018, 100, 2026)).toBeCloseTo(100 / 8, 6);
-  });
-
-  it("floors years-on-road at 1 for the current model year", () => {
-    expect(perYearOnRoadRate(2026, 10, 2026)).toBe(10);
-  });
-});
-
-describe("classifyLandmineYears (methodology §4, pure/synthetic)", () => {
+describe("classifyLandmineYears (methodology 'Step 4', pure/synthetic)", () => {
   it("flags a year as landmine only when BOTH the 2x-median count AND the >30% powertrain share hold", () => {
     const result = classifyLandmineYears([
       { year: 2017, complaints: 10, components: Array(10).fill(["EXTERIOR LIGHTING"]) },
@@ -78,77 +77,126 @@ describe("classifyLandmineYears (methodology §4, pure/synthetic)", () => {
   });
 });
 
-describe("deriveReliability (offline, real NHTSA fixtures for the 6 named seed models)", () => {
-  it("derives a low/mid/high tier plus landmine years for each model, using a fixed currentYear for determinism", async () => {
-    const derivations = await deriveReliability(
-      [
-        { name: "Toyota Corolla", make: "Toyota", model: "Corolla", body: "Car", years: [2018, 2019, 2020, 2021, 2022] },
-        { name: "Mazda CX-5", make: "Mazda", model: "CX-5", body: "SUV", years: [2018, 2019, 2020, 2021, 2022] },
-        { name: "Kia Sorento", make: "Kia", model: "Sorento", body: "SUV AWD", years: [2018, 2019, 2020, 2021, 2022] },
-        { name: "Ford Escape", make: "Ford", model: "Escape", body: "SUV", years: [2018, 2019, 2020, 2021, 2022] },
-        { name: "Honda Odyssey", make: "Honda", model: "Odyssey", body: "Van", years: [2018, 2019, 2020, 2021, 2022] },
-        { name: "Fiat 500", make: "Fiat", model: "500", body: "Car", years: [2015, 2016, 2017, 2018, 2019] },
-      ],
-      2026,
+describe("per-year catalogue resolution (real NHTSA fixtures, Volvo XC90)", () => {
+  it("finds complaints for every model year that a single hard-coded model string finds none for", async () => {
+    // The defect this replaces: NHTSA never lists a bare `XC90` in this window,
+    // so the old one-string-per-model query returned count 0 for EVERY year of
+    // a car that plainly has complaints -- a failed query the derivation would
+    // have read as a flawless vehicle.
+    const bareString = await complaintCounts("VOLVO", "XC90", [2017]);
+    expect(bareString[0]!.complaints).toBe(0);
+
+    const resolved = await complaintComponentsByCatalogue(
+      "VOLVO",
+      VOLVO_YEARS,
+      volvoQuery("Volvo XC90").matchesModel,
     );
-
-    expect(derivations).toHaveLength(6);
-    for (const d of derivations) {
-      expect(["low", "mid", "high"]).toContain(d.tier);
-      expect(d.byYear.length).toBeGreaterThan(0);
-      expect(Number.isFinite(d.rawScore)).toBe(true);
-      expect(Number.isFinite(d.bodyClassIndex)).toBe(true);
+    expect(resolved).toHaveLength(6);
+    for (const y of resolved) {
+      expect(y.matchedModels.length).toBeGreaterThan(0);
+      expect(y.complaints).toBeGreaterThan(0);
+      expect(y.components).toHaveLength(y.complaints);
     }
-
-    // Real-data spot checks that should hold regardless of exact thresholds:
-    // Ford Escape's 2018 model year (well-documented EcoBoost-era complaint spike)
-    // is a landmine, and CX-5's normalized index is below Sorento's/Escape's.
-    const escape = derivations.find((d) => d.name === "Ford Escape")!;
-    expect(escape.landmineYears).toContain(2018);
-    const cx5 = derivations.find((d) => d.name === "Mazda CX-5")!;
-    const sorento = derivations.find((d) => d.name === "Kia Sorento")!;
-    expect(cx5.bodyClassIndex).toBeLessThan(sorento.bodyClassIndex);
+    // MY2017-2021 are trim strings; MY2022 renames them again.
+    expect(resolved[0]!.matchedModels).toEqual(["XC90 T5", "XC90 T6"]);
+    expect(resolved[5]!.matchedModels).toEqual(["XC90 T5 AWD", "XC90 T5 FWD", "XC90 T6 AWD"]);
   });
 
-  it("documents the singleton-body-class cross-contamination effect (methodology §3 / ASSUMPTIONS.md §G)", async () => {
-    // Sorento (SUV AWD) and Odyssey (Van) are the only members of their body
-    // classes in this 6-model batch, so their bodyClassIndex is trivially 1.0
-    // (methodology §3). Because Q1/Q3 are computed once across ALL 6 indices
-    // together, those two 1.0s shift the shared cut points for the OTHER four
-    // models too -- not just for themselves. This pins that effect against
-    // real data: removing the two singletons from the batch changes CX-5's
-    // and Escape's derived tier, even though neither of their own rawScores
-    // or body-class medians changed (CX-5/Escape's body-class peer is each
-    // other, unaffected by Sorento/Odyssey being in a different body class).
-    const fourModelQueries = [
-      { name: "Toyota Corolla", make: "Toyota", model: "Corolla", body: "Car", years: [2018, 2019, 2020, 2021, 2022] },
-      { name: "Mazda CX-5", make: "Mazda", model: "CX-5", body: "SUV", years: [2018, 2019, 2020, 2021, 2022] },
-      { name: "Ford Escape", make: "Ford", model: "Escape", body: "SUV", years: [2018, 2019, 2020, 2021, 2022] },
-      { name: "Fiat 500", make: "Fiat", model: "500", body: "Car", years: [2015, 2016, 2017, 2018, 2019] },
-    ];
-    const sixModelQueries = [
-      ...fourModelQueries,
-      { name: "Kia Sorento", make: "Kia", model: "Sorento", body: "SUV AWD", years: [2018, 2019, 2020, 2021, 2022] },
-      { name: "Honda Odyssey", make: "Honda", model: "Odyssey", body: "Van", years: [2018, 2019, 2020, 2021, 2022] },
-    ];
+  it("de-duplicates by odiNumber across the matched model strings", async () => {
+    // NHTSA returns the SAME complaint set for `XC90 T5` and `XC90 T6` (it
+    // ignores the trim suffix), so unioning without de-duplication would
+    // exactly double MY2017's count.
+    const perString = await Promise.all(
+      ["XC90 T5", "XC90 T6"].map((m) => complaintCounts("VOLVO", m, [2017])),
+    );
+    const summed = perString.reduce((n, s) => n + s[0]!.complaints, 0);
+    const resolved = await complaintComponentsByCatalogue(
+      "VOLVO",
+      [2017],
+      volvoQuery("Volvo XC90").matchesModel,
+    );
+    expect(summed).toBe(148);
+    expect(resolved[0]!.complaints).toBe(74);
+  });
 
-    const fourModel = await deriveReliability(fourModelQueries, 2026);
-    const sixModel = await deriveReliability(sixModelQueries, 2026);
+  it("excludes the PHEV trim strings the seed row is not (XC90 T8/Recharge)", () => {
+    const match = volvoQuery("Volvo XC90").matchesModel;
+    expect(match("XC90 T6 AWD")).toBe(true);
+    expect(match("XC90 T8 RECHARGE")).toBe(false);
+    expect(match("XC90 T8")).toBe(false);
+  });
+});
 
-    const cx5Four = fourModel.find((d) => d.name === "Mazda CX-5")!;
-    const cx5Six = sixModel.find((d) => d.name === "Mazda CX-5")!;
-    const escapeFour = fourModel.find((d) => d.name === "Ford Escape")!;
-    const escapeSix = sixModel.find((d) => d.name === "Ford Escape")!;
+describe("deriveReliability — powertrain complaint SHARE (real NHTSA fixtures)", () => {
+  const volvoBatch = () =>
+    ["Volvo XC90", "Volvo XC60", "Volvo V90 Cross Country"].map(volvoQuery);
 
-    // Same underlying rawScore/bodyClassIndex either way -- CX-5/Escape's
-    // only body-class peer is each other, so adding Sorento (SUV AWD) and
-    // Odyssey (Van) can't touch that ratio...
-    expect(cx5Six.bodyClassIndex).toBeCloseTo(cx5Four.bodyClassIndex, 9);
-    expect(escapeSix.bodyClassIndex).toBeCloseTo(escapeFour.bodyClassIndex, 9);
-    // ...yet their derived TIER still differs, because the shared Q1/Q3 the
-    // singletons' pinned-1.0 indices helped compute are different from batch
-    // to batch. This is the disclosed cross-contamination effect, not a bug.
-    expect(cx5Six.tier).not.toBe(cx5Four.tier);
-    expect(escapeSix.tier).not.toBe(escapeFour.tier);
+  it("scores each vehicle as its pooled powertrain complaints / total complaints", async () => {
+    const derivations = await deriveReliability(volvoBatch());
+    expect(derivations).toHaveLength(3);
+    for (const d of derivations) {
+      expect(d.reference).toBe("main");
+      expect(d.rawScore).toBeCloseTo(d.evidence.powertrainComplaints / d.evidence.complaints, 12);
+      expect(d.rawScore).toBeGreaterThanOrEqual(0);
+      expect(d.rawScore).toBeLessThanOrEqual(1);
+      expect(["low", "mid", "high"]).toContain(d.tier);
+    }
+    // A share, so the tier ordering follows the score ordering globally --
+    // there is no per-class partition that could reorder them.
+    const sorted = [...derivations].sort((a, b) => a.rawScore - b.rawScore);
+    const rank = { low: 0, mid: 1, high: 2 };
+    for (let i = 1; i < sorted.length; i++) {
+      expect(rank[sorted[i]!.tier!]).toBeGreaterThanOrEqual(rank[sorted[i - 1]!.tier!]);
+    }
+  });
+
+  it("excludes `sport` from the cut-point computation, not just from assignment", async () => {
+    const batch = volvoBatch();
+    const asSport = batch.map((q) =>
+      q.name === "Volvo V90 Cross Country" ? { ...q, seedTier: "sport" } : q,
+    );
+
+    const plain = await deriveReliability(batch);
+    const withSport = await deriveReliability(asSport);
+
+    const carveOut = withSport.find((d) => d.name === "Volvo V90 Cross Country")!;
+    expect(carveOut.tier).toBeNull();
+    expect(carveOut.reference).toBeNull();
+    // Its (lowest) score no longer drags the cut points down for the others.
+    const xc90 = (ds: typeof plain) => ds.find((d) => d.name === "Volvo XC90")!;
+    expect(xc90(plain).rawScore).toBeCloseTo(xc90(withSport).rawScore, 12);
+    expect(xc90(withSport).cuts!.low).toBeGreaterThan(xc90(plain).cuts!.low);
+  });
+
+  it("routes EVs to their own reference and counts electric propulsion in the numerator", async () => {
+    // Mechanism check on recorded data: the same complaints re-scored under the
+    // EV reference must include ELECTRICAL SYSTEM / FUEL-PROPULSION, which an
+    // EV can generate and an engine/transmission numerator cannot see at all.
+    const [gas] = await deriveReliability([volvoQuery("Volvo XC90")]);
+    const [ev] = await deriveReliability([{ ...volvoQuery("Volvo XC90"), etype: "ev" }]);
+    expect(gas!.reference).toBe("main");
+    expect(ev!.reference).toBe("ev");
+    expect(ev!.rawScore).toBeGreaterThan(gas!.rawScore);
+    expect(ev!.evidence.provisional).toBe(true);
+    expect(gas!.evidence.provisional).toBe(false);
+  });
+
+  it("routes every seed vehicle to a reference group, with sport never derived", () => {
+    const queries = corpusQueries();
+    expect(queries).toHaveLength(71);
+    const sport = queries.filter((q) => q.seedTier === "sport");
+    expect(sport).toHaveLength(2);
+    expect(sport.every((q) => referenceFor(q) === null)).toBe(true);
+    expect(queries.filter((q) => referenceFor(q) === "ev")).toHaveLength(4);
+    expect(queries.filter((q) => referenceFor(q) === "main")).toHaveLength(65);
+  });
+
+  it("windows queries at <= 6 model years ending no later than MY2022", () => {
+    expect(yearsFor({ first_year: 2013, last_year: 2026 })).toEqual([
+      2017, 2018, 2019, 2020, 2021, 2022,
+    ]);
+    expect(yearsFor({ first_year: 2019, last_year: 2022 })).toEqual([2019, 2020, 2021, 2022]);
+    // Models that start after the window keep their own (short) span.
+    expect(yearsFor({ first_year: 2025, last_year: 2026 })).toEqual([2025, 2026]);
   });
 });

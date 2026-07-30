@@ -79,19 +79,68 @@ export function splitComponents(raw: string): string[] {
     .filter(Boolean);
 }
 
-/** Same endpoint as complaintCounts, but keeps each complaint's `components`
- *  category list instead of discarding it — still no complaint text or VIN. */
-export async function complaintComponents(
+interface CatalogueResponse {
+  results?: { model: string }[];
+}
+
+/** NHTSA's own list of model strings that are queryable for `make` in
+ *  `modelYear`. This catalogue is **trim-fragmented and inconsistent year to
+ *  year** for the same physical car — `RANGER` becomes `RANGER SUPER
+ *  CAB`/`RANGER SUPER CREW`, `XC60` becomes `XC60 T5|T6|T8` and then `XC60 B5
+ *  AWD`, `COOPER` disappears entirely in MY2021 — so a single hard-coded model
+ *  string silently returns ZERO complaints for whole model years (Volvo XC90
+ *  returns zero for *every* year in the window, which a naive derivation reads
+ *  as a flawless car rather than a failed query). Resolve per year against this
+ *  list instead. Cheap: one request per make-year, cached like everything else. */
+export async function modelsForYear(
   make: string,
-  model: string,
+  modelYear: number,
+  issueType: "c" | "r" = "c",
+): Promise<string[]> {
+  const params = new URLSearchParams({
+    modelYear: String(modelYear),
+    make,
+    issueType,
+  });
+  const res = (await fetchCached(
+    `https://api.nhtsa.gov/products/vehicle/models?${params.toString()}`,
+  )) as CatalogueResponse;
+  return [...new Set((res.results ?? []).map((r) => r.model.toUpperCase()))].sort();
+}
+
+export interface YearComplaintCatalogue extends YearComplaintComponents {
+  /** The catalogue strings that matched this model year — reported so a
+   *  zero-match year is visibly a mapping gap, not a clean car. */
+  matchedModels: string[];
+}
+
+/** Complaints for one vehicle across `years`, resolving each year's real
+ *  catalogue (`modelsForYear`) with `matchesModel`, querying every matching
+ *  string, and **de-duplicating by `odiNumber`** — NHTSA lists the same
+ *  physical car under several strings in some years (`GOLF GTI` *and* `GTI`),
+ *  which would otherwise double-count. Keeps each complaint's `components`
+ *  category list; still never its `summary` text or `vin`. */
+export async function complaintComponentsByCatalogue(
+  make: string,
   years: number[],
-): Promise<YearComplaintComponents[]> {
-  const out: YearComplaintComponents[] = [];
+  matchesModel: (model: string) => boolean,
+): Promise<YearComplaintCatalogue[]> {
+  const out: YearComplaintCatalogue[] = [];
   for (const year of years) {
-    const res = (await fetchCached(complaintsUrl(make, model, year))) as ComplaintsResponse;
-    const results = res.results ?? [];
-    const components = results.map((r) => splitComponents(r.components ?? ""));
-    out.push({ year, complaints: res.count ?? results.length, components });
+    const matchedModels = (await modelsForYear(make, year)).filter(matchesModel);
+    const byOdi = new Map<number, string[]>();
+    for (const model of matchedModels) {
+      const res = (await fetchCached(complaintsUrl(make, model, year))) as ComplaintsResponse;
+      for (const r of res.results ?? []) {
+        byOdi.set(r.odiNumber, splitComponents(r.components ?? ""));
+      }
+    }
+    out.push({
+      year,
+      matchedModels,
+      complaints: byOdi.size,
+      components: [...byOdi.values()],
+    });
   }
   return out;
 }

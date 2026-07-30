@@ -25,6 +25,13 @@ export const FIXTURE_DIR = join(here, "../test/fixtures");
 
 const TIMEOUT_MS = 10_000;
 
+/** NHTSA's edge (Akamai) answers `403 Access Denied` (an HTML page) to requests
+ *  carrying Node/undici's default User-Agent, which is why some large
+ *  complaint responses failed repeatedly with no cache entry to fall back on.
+ *  A plain product token fixes it; the conventional `(+https://…)` contact-URL
+ *  suffix is ALSO blocked, so do not add one. Callers can still override it. */
+const DEFAULT_USER_AGENT = "opencawr-pipeline/0.1";
+
 export function urlHash(url: string): string {
   return createHash("sha256").update(url).digest("hex").slice(0, 16);
 }
@@ -51,31 +58,57 @@ function isOffline(): boolean {
   return process.env.OPENCAWR_PIPELINE_OFFLINE === "1";
 }
 
-async function fetchOnce(url: string, headers: Record<string, string>): Promise<unknown> {
+async function fetchOnce(
+  url: string,
+  headers: Record<string, string>,
+  acceptNonOkJson: boolean,
+): Promise<unknown> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
   try {
-    const res = await fetch(url, { headers, signal: controller.signal });
-    if (!res.ok) throw new Error(`${url} -> HTTP ${res.status}`);
-    return await res.json();
+    const res = await fetch(url, {
+      headers: { "User-Agent": DEFAULT_USER_AGENT, ...headers },
+      signal: controller.signal,
+    });
+    if (!res.ok && !acceptNonOkJson) throw new Error(`${url} -> HTTP ${res.status}`);
+    try {
+      return await res.json();
+    } catch (err) {
+      throw res.ok ? err : new Error(`${url} -> HTTP ${res.status} (no JSON body)`);
+    }
   } finally {
     clearTimeout(timer);
   }
 }
 
-async function fetchWithRetry(url: string, headers: Record<string, string>): Promise<unknown> {
+async function fetchWithRetry(
+  url: string,
+  headers: Record<string, string>,
+  acceptNonOkJson: boolean,
+): Promise<unknown> {
   try {
-    return await fetchOnce(url, headers);
+    return await fetchOnce(url, headers, acceptNonOkJson);
   } catch {
     // one retry
-    return await fetchOnce(url, headers);
+    return await fetchOnce(url, headers, acceptNonOkJson);
   }
 }
 
-/** Fetch JSON from `url`, honoring the cache/fixture/offline rules above. */
+/** Fetch JSON from `url`, honoring the cache/fixture/offline rules above.
+ *
+ *  `acceptNonOkJson` opts into "a non-2xx response carrying a parseable JSON
+ *  body is a real answer, not a failure". NHTSA needs it: **both**
+ *  `recalls/recallsByVehicle` and `complaints/complaintsByVehicle` answer HTTP
+ *  **400** with a perfectly well-formed `{"count":0,"message":"Results
+ *  returned successfully","results":[]}` when a make/model/year simply has no
+ *  data — ~30% of recall queries across the seed corpus, and any complaint
+ *  query for a model string NHTSA doesn't list that year. The default
+ *  `!res.ok -> throw` turns that real answer into a hard failure. Off by
+ *  default so every other adapter keeps failing loudly on a real error status. */
 export async function fetchCached(
   url: string,
   headers: Record<string, string> = {},
+  acceptNonOkJson = false,
 ): Promise<unknown> {
   const hash = urlHash(url);
 
@@ -93,7 +126,7 @@ export async function fetchCached(
   if (cached) return cached.body;
 
   try {
-    const body = await fetchWithRetry(url, headers);
+    const body = await fetchWithRetry(url, headers, acceptNonOkJson);
     writeEntry(url, body);
     return body;
   } catch (err) {

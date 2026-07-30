@@ -1,0 +1,115 @@
+{
+  "url": "https://api.nhtsa.gov/products/vehicle/models?modelYear=2019&make=VOLVO&issueType=c",
+  "fetchedAt": "2026-07-29T14:29:54.736Z",
+  "body": {
+    "count": 21,
+    "message": "Results returned successfully",
+    "results": [
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "S60 T8"
+      },
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "V60 T5"
+      },
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "V60 T6"
+      },
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "V60 T8"
+      },
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "V90 T5"
+      },
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "V90 T6"
+      },
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "V90 CC T5"
+      },
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "XC40 T5"
+      },
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "XC40 T4"
+      },
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "XC60 T5"
+      },
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "XC60 T5"
+      },
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "XC60 T6"
+      },
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "XC60 T8"
+      },
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "XC90 T5"
+      },
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "XC90 T5"
+      },
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "V90 CC T6"
+      },
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "S60 T5"
+      },
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "S60 T6"
+      },
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "XC90 T6"
+      },
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "XC90 T8"
+      },
+      {
+        "modelYear": "2019",
+        "make": "VOLVO",
+        "model": "VNL"
+      }
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=V90+CC+B6+AWD&modelYear=2022",
+  "fetchedAt": "2026-07-30T00:24:53.568Z",
+  "body": {
+    "count": 1,
+    "results": [
+      {
+        "odiNumber": 11494317,
+        "components": "ELECTRICAL SYSTEM,VEHICLE SPEED CONTROL,VISIBILITY/WIPER"
+      }
+    ]
+  }
+}

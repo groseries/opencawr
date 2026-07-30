@@ -1,0 +1,13 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=V90+CC+T5&modelYear=2019",
+  "fetchedAt": "2026-07-30T00:24:52.091Z",
+  "body": {
+    "count": 1,
+    "results": [
+      {
+        "odiNumber": 11477140,
+        "components": "POWER TRAIN,VEHICLE SPEED CONTROL"
+      }
+    ]
+  }
+}
