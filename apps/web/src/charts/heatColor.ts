@@ -17,6 +17,12 @@
 // renders HEAT_RAMP_STEPS in index order under a left "costliest" label — stays
 // in agreement with the cells by construction. Reverse this array to flip the
 // ramp and both flip together.
+//
+// The intended reading is "cheapest = darkest green", which is the OPPOSITE of
+// the hex values below, deliberately: the ramp is calibrated for a forced-dark
+// browser extension that inverts page lightness, so #22c55e (cheapest) paints as
+// the darkest cell there. Without that extension the ramp reads inverted. Don't
+// flip this back on the hex values alone — see ASSUMPTIONS.md §I.
 const HEAT_FILLS = ["#14532d", "#15803d", "#16a34a", "#22c55e"]; // darkest(costliest) -> lightest(cheapest)
 
 /** Text color that clears 4.5:1 against the matching HEAT_FILLS step (computed
