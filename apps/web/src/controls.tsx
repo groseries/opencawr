@@ -1,12 +1,23 @@
 import { useState } from "react";
 import type { EngineInputs } from "@opencawr/core";
+import opencawrData from "../../../opencawr_data.json";
+
+/** The engine's own registration default (engine.ts reads the same constant), rather
+ * than a literal that would silently go stale if the data changed. `DEFAULTS` below
+ * deliberately does NOT set `registrationUsdYr` — the region table fills it from ZIP. */
+const REGISTRATION_DEFAULT = opencawrData.constants.registration_usd_yr_FL;
+
+/** Same rationale: the engine's own electricity default, not a literal that could
+ * drift from `opencawr_data.json`'s `constants.elec_usd_per_kwh` (standardized on
+ * the CA region value, see ASSUMPTIONS.md §A). */
+const ELEC_DEFAULT = opencawrData.constants.elec_usd_per_kwh;
 
 export const DEFAULTS: EngineInputs = {
   holdMiles: "eol",
   annualMiles: 13_000,
   discountRate: 0.07,
   gasUsdPerGal: 5.455,
-  elecUsdPerKwh: 0.32,
+  elecUsdPerKwh: ELEC_DEFAULT,
   insuranceMultiplier: 0.8,
   useTaxRate: 0.07,
   draws: 1100,
@@ -25,14 +36,14 @@ interface Props {
   onChange: (next: EngineInputs) => void;
 }
 
-export function Assumptions({ inputs, onChange }: Props) {
+export function Inputs({ inputs, onChange }: Props) {
   const set = (patch: Partial<EngineInputs>) => onChange({ ...inputs, ...patch });
   const [customHold, setCustomHold] = useState(false);
   const holdIsPreset = HORIZONS.some((h) => h.value === inputs.holdMiles);
 
   return (
     <div className="assumptions">
-      <h2 className="rail-title">Your assumptions</h2>
+      <h2 className="rail-title">Your inputs</h2>
 
       <fieldset className="control control-hero">
         <legend>How long will you keep it?</legend>
@@ -108,7 +119,7 @@ export function Assumptions({ inputs, onChange }: Props) {
       />
       <NumberControl
         label="Electricity price"
-        value={inputs.elecUsdPerKwh ?? 0.32}
+        value={inputs.elecUsdPerKwh ?? ELEC_DEFAULT}
         step={0.02}
         min={0.05}
         max={0.8}
@@ -136,7 +147,7 @@ export function Assumptions({ inputs, onChange }: Props) {
       />
       <NumberControl
         label="Vehicle registration"
-        value={inputs.registrationUsdYr ?? 55}
+        value={inputs.registrationUsdYr ?? REGISTRATION_DEFAULT}
         step={5}
         min={0}
         max={400}

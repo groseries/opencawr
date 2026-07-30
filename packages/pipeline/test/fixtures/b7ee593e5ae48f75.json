@@ -1,0 +1,197 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90+T5&modelYear=2018",
+  "fetchedAt": "2026-07-30T00:24:56.559Z",
+  "body": {
+    "count": 47,
+    "results": [
+      {
+        "odiNumber": 11749955,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11748675,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11746058,
+        "components": "ELECTRICAL SYSTEM,AIR BAGS,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11744366,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11744495,
+        "components": "ELECTRICAL SYSTEM,VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11731985,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11730540,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11720776,
+        "components": "SEAT BELTS"
+      },
+      {
+        "odiNumber": 11715235,
+        "components": "LATCHES/LOCKS/LINKAGES"
+      },
+      {
+        "odiNumber": 11711121,
+        "components": "LATCHES/LOCKS/LINKAGES"
+      },
+      {
+        "odiNumber": 11691437,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11688273,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11676768,
+        "components": "ELECTRICAL SYSTEM,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11663103,
+        "components": "VISIBILITY"
+      },
+      {
+        "odiNumber": 11657576,
+        "components": "STEERING,ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11655729,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11655417,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11654773,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11631071,
+        "components": "STRUCTURE,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11622921,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11602688,
+        "components": "ELECTRICAL SYSTEM,VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11601082,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11587090,
+        "components": "ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11555413,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11549503,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11514415,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11514328,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11509748,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11501518,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11499816,
+        "components": "STEERING,ELECTRICAL SYSTEM,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11415659,
+        "components": "FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11382704,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11307755,
+        "components": "WHEELS"
+      },
+      {
+        "odiNumber": 11292570,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11257744,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11256252,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11243142,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11241056,
+        "components": "UNKNOWN OR OTHER,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11208577,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11195745,
+        "components": "FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11183474,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11161200,
+        "components": "POWER TRAIN"
+      },
+      {
+        "odiNumber": 11152941,
+        "components": "ELECTRICAL SYSTEM,ENGINE,FUEL/PROPULSION SYSTEM"
+      },
+      {
+        "odiNumber": 11150284,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11121658,
+        "components": "ELECTRICAL SYSTEM,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11080094,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11056836,
+        "components": "ELECTRICAL SYSTEM,SERVICE BRAKES"
+      }
+    ]
+  }
+}

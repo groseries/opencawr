@@ -8,6 +8,13 @@ export {
   feasibleOdoRange,
 } from "./feasibility.js";
 export { curveAt, maintenanceAt, parseCurve } from "./curves.js";
+export { buyPointSweep } from "./buypoint.js";
+export type {
+  BuyPointSweepPoint,
+  BuyPointSweepResult,
+  BuyPointSweepOpts,
+  SweepInputs,
+} from "./buypoint.js";
 export type { CurvePoint } from "./curves.js";
 export { CALIBRATION } from "./calibration.js";
 export { Rng, hashString } from "./rng.js";

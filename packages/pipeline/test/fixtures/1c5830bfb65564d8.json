@@ -1,0 +1,21 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=V90+CC&modelYear=2017",
+  "fetchedAt": "2026-07-30T00:24:51.347Z",
+  "body": {
+    "count": 3,
+    "results": [
+      {
+        "odiNumber": 11745069,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11642861,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11552411,
+        "components": "EXTERIOR LIGHTING"
+      }
+    ]
+  }
+}

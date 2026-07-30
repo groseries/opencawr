@@ -2,13 +2,13 @@ import type { SweepPoint } from "../engine.worker.js";
 
 /** Sensitivity lines (spec §6.4): how one car's P50 $/mi moves as annual mileage
  * or gas price change, holding every other assumption fixed at the rail's current
- * values (reduced draws — see engine.worker.ts, ASSUMPTIONS.md §H). Single series
+ * values (reduced draws — see engine.worker.ts, ASSUMPTIONS.md §I). Single series
  * per chart (no legend needed — the title names it); the point nearest the rail's
  * current value is marked in needle-red ("this is your live assumption"), the
  * rest in ink. */
 
-const CHART_W = 300;
-const CHART_H = 108;
+const CHART_W = 380;
+const CHART_H = 150;
 const MARGIN = { top: 10, right: 8, bottom: 22, left: 48 };
 
 const fmtCpm = (x: number) => `$${x.toFixed(3)}`;

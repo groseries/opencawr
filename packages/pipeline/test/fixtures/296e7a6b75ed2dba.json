@@ -1,0 +1,17 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=V90CC&modelYear=2022",
+  "fetchedAt": "2026-07-29T14:39:29.699Z",
+  "body": {
+    "count": 2,
+    "results": [
+      {
+        "odiNumber": 11739112,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11720992,
+        "components": "ELECTRICAL SYSTEM,BACK OVER PREVENTION,FORWARD COLLISION AVOIDANCE"
+      }
+    ]
+  }
+}

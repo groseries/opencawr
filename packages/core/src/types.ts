@@ -9,9 +9,17 @@ export interface VehicleSpecs {
   kwh_per_100mi: number | null;
   phev_gas_mpg: number | null;
   phev_utility_factor: number | null;
+  /** EPA electric-only range (mi), fresh-battery. PHEV only; feeds the mileage-dependent
+   *  utility factor (see ASSUMPTIONS.md §B). Optional — absent means the fixed seed
+   *  `phev_utility_factor` is used with no mileage sensitivity. */
+  electric_range_mi?: number;
   seats: number;
   cargo_cu_ft: number;
   co2_g_per_mi: number;
+  /** @deprecated Unprovenanced seed estimate, no longer read by the engine (R13,
+   *  2026-07-29). Insurance is now NAIC state premium × value-scaling — see
+   *  ASSUMPTIONS.md §A. Kept in the schema/data per the revision-log ethos
+   *  (old numbers stay visible, never deleted); the pipeline still fills it. */
   full_coverage_ins_usd_yr: number;
 }
 
@@ -53,7 +61,17 @@ export interface Constants {
   discount_rate_real: number;
   gas_usd_per_gal: number;
   elec_usd_per_kwh: number;
+  /** NAIC liability average premium, CY2023 $/yr (pre-escalator, pre-multiplier). */
   liability_only_usd_yr: number;
+  /** NAIC collision average premium, CY2023 $/yr (pre-escalator, pre-multiplier). */
+  collision_premium_usd_yr: number;
+  /** NAIC comprehensive average premium, CY2023 $/yr (pre-escalator, pre-multiplier). */
+  comprehensive_premium_usd_yr: number;
+  /** BLS CPI-U `CUUR0000SETE` escalator, CY2023 → snapshot date (ASSUMPTIONS.md §A). */
+  insurance_cpi_escalator: number;
+  /** Book value at which a car pays exactly the NAIC average collision+comprehensive
+   *  premium; the own-vehicle half scales linearly against it (ASSUMPTIONS.md §A). */
+  insurance_ref_book_usd: number;
   full_cov_threshold_usd: number;
   insurance_multiplier_USAA: number;
   registration_usd_yr_FL: number;
@@ -92,9 +110,16 @@ export interface EngineInputs {
   discountRate?: number;
   gasUsdPerGal?: number;
   elecUsdPerKwh?: number;
-  /** Real full-coverage quote in $/yr. When set, used as-is (no multiplier applied).
-   *  Default: vehicle.specs.full_coverage_ins_usd_yr × insuranceMultiplier. */
+  /** Real full-coverage quote in $/yr. When set, used as-is (no multiplier, no
+   *  value-scaling, no escalator) — it is the user's actual number, not an average.
+   *  Default: the NAIC-based estimate below. */
   fullCoverageUsdYr?: number;
+  /** NAIC state average premiums, CY2023 $/yr, one per coverage — regional prefills,
+   *  NOT quotes: the escalator and the insurance multiplier both still apply.
+   *  Defaults: the matching `constants.*` values. */
+  liabilityUsdYr?: number;
+  collisionUsdYr?: number;
+  comprehensiveUsdYr?: number;
   insuranceMultiplier?: number;
   registrationUsdYr?: number;
   /** Sales/use tax rate on the purchase (state-specific). Default constants.use_tax_rate. */

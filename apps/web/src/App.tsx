@@ -1,20 +1,21 @@
-import { useMemo, useState } from "react";
+import { lazy, Suspense, useMemo, useState } from "react";
 import type { EngineInputs } from "@opencawr/core";
-import { Assumptions, DEFAULTS, RankBasisToggle, type RankBasis } from "./controls.js";
+import { Inputs, DEFAULTS, RankBasisToggle, type RankBasis } from "./controls.js";
 import { useEngine } from "./useEngine.js";
+import { useBuyPoints } from "./useBuyPoints.js";
 import { Ladder } from "./charts/Ladder.js";
 import { tierColor, tierTextColor } from "./charts/tierColors.js";
 import { DealAnalyzer } from "./deal/DealAnalyzer.js";
 import { IntakeCard } from "./intake.js";
 import { CarDrawer } from "./drawer/CarDrawer.js";
 
+// Code-split: the tab embeds ~69 KB of `?raw` markdown (see AssumptionsTab.tsx)
+// that only needs to load when this tab is actually opened.
+const AssumptionsTab = lazy(() =>
+  import("./assumptions/AssumptionsTab.js").then((m) => ({ default: m.AssumptionsTab })),
+);
+
 const fmt = (x: number) => `$${x.toFixed(3)}`;
-const ETYPE_LABEL: Record<string, string> = {
-  gas: "gas",
-  hybrid: "hybrid",
-  ev: "EV",
-  phev: "PHEV",
-};
 
 const INTAKE_SEEN_KEY = "opencawr:intake-seen";
 
@@ -40,12 +41,16 @@ export function App() {
   const [inputs, setInputs] = useState<EngineInputs>(DEFAULTS);
   const [rankBasis, setRankBasis] = useState<RankBasis>("p50");
   const [view, setView] = useState<"table" | "ladder">("table");
-  const [tab, setTab] = useState<"rankings" | "deal">("rankings");
+  const [tab, setTab] = useState<"rankings" | "analyze" | "assumptions">("rankings");
   const [minSeats, setMinSeats] = useState<number | null>(null);
   const [showIntake, setShowIntake] = useState(() => !safeLocalGet(INTAKE_SEEN_KEY));
   const [drawerCar, setDrawerCar] = useState<string | null>(null);
   const { byP50, byP75, ms, computing } = useEngine(inputs);
   const rows = rankBasis === "p50" ? byP50 : byP75;
+  // Decoupled from the rank request (R4 review fixup) so re-ranking stays live
+  // while dragging the rail — see useBuyPoints.ts. `computing: true` here must
+  // never be papered over with the previous inputs' figures.
+  const { points: buyPoints, computing: buyPointsComputing } = useBuyPoints(inputs);
 
   const dismissIntake = () => {
     safeLocalSet(INTAKE_SEEN_KEY, "1");
@@ -69,7 +74,9 @@ export function App() {
   const secondaryValue = (r: { p50: number; p75: number; p90: number }) =>
     rankBasis === "p75" ? r.p50 : r.p90;
   const primaryLabel = rankBasis === "p75" ? "bad-luck cost" : "$/mi";
-  const primarySub = rankBasis === "p75" ? "P75" : "median";
+  // Disclose the pricing odometer here because the row's "ideal mileage" (buy-point
+  // sweep argmin) can land on a different odometer than this column's own price.
+  const primarySub = rankBasis === "p75" ? "P75 · at buy odo" : "median · at buy odo";
   const secondaryLabel = rankBasis === "p75" ? "typical cost" : "bad luck";
   const secondarySub = rankBasis === "p75" ? "P50" : "P90";
 
@@ -138,19 +145,26 @@ export function App() {
         </button>
         <button
           type="button"
-          className={tab === "deal" ? "seg seg-active" : "seg"}
-          onClick={() => setTab("deal")}
+          className={tab === "analyze" ? "seg seg-active" : "seg"}
+          onClick={() => setTab("analyze")}
         >
-          Deal Analyzer
+          Analyze
+        </button>
+        <button
+          type="button"
+          className={tab === "assumptions" ? "seg seg-active" : "seg"}
+          onClick={() => setTab("assumptions")}
+        >
+          Assumptions
         </button>
       </div>
 
       <div className="layout">
         <aside className="rail">
-          <Assumptions inputs={inputs} onChange={setInputs} />
+          <Inputs inputs={inputs} onChange={setInputs} />
           <p className="disclaimer">
-            Estimates from a simulation, not advice. Every assumption is editable above and
-            documented in the project's assumptions ledger.
+            Estimates from a simulation, not advice. Every input above is editable — see the
+            Assumptions tab for what backs each one.
           </p>
         </aside>
 
@@ -162,6 +176,24 @@ export function App() {
                 <p className="results-note">
                   Cars in the same tie tier are statistically indistinguishable — the model
                   can't honestly order them.
+                </p>
+                <p className="results-note">
+                  {inputs.holdMiles === "eol" ? (
+                    <>
+                      Ideal buy mileage isn't shown at "until it dies" — the holding period would
+                      itself depend on the buy odometer, so buy points aren't on equal footing to
+                      compare. Pick a fixed holding period on the left to reveal each car's
+                      cost-minimizing buy point. Meanwhile, each row's mileage shows the odometer
+                      its $/mi is actually priced at.
+                    </>
+                  ) : (
+                    <>
+                      Each row's ideal mileage marks that car's own cost-minimizing buy point, not
+                      a recommendation — the $/mi columns are still priced at that car's default
+                      buy odometer, so the two figures can disagree. Open a row to see which
+                      odometer its $/mi was priced at.
+                    </>
+                  )}
                 </p>
               </div>
               <div className="results-controls">
@@ -192,12 +224,21 @@ export function App() {
                 </p>
               )}
             </>
-          ) : (
+          ) : tab === "analyze" ? (
             <div className="results-head">
               <h2>Deal Analyzer</h2>
               <p className="results-note">
                 Score a specific listing against the modeled field. Estimates only — never
                 advice.
+              </p>
+            </div>
+          ) : (
+            <div className="results-head">
+              <h2>Assumptions</h2>
+              <p className="results-note">
+                Every number in this app traces to a source file — the cost equation, every input
+                default, every calibration constant, and the full assumptions ledger, rendered
+                live from the repo.
               </p>
             </div>
           )}
@@ -238,6 +279,7 @@ export function App() {
                       .filter(Boolean)
                       .join(" ");
                   const openDrawer = () => setDrawerCar(r.name);
+                  const bp = buyPoints?.[r.name];
                   return (
                     <tr
                       key={r.name}
@@ -274,8 +316,29 @@ export function App() {
                       <td>
                         <span className="car-name">{r.name}</span>
                         <span className="car-meta">
-                          {ETYPE_LABEL[r.etype]} · buy ~{Math.round(r.buyOdo / 1000)}k mi ·{" "}
-                          {r.impliedBuyYear}
+                          {buyPointsComputing ? (
+                            <span className="mono">…</span>
+                          ) : bp ? (
+                            <>
+                              <span className="mono">{bp.idealYear}</span> ·{" "}
+                              <span className="mono">{Math.round(bp.idealOdo / 1000)}k mi</span>
+                              {bp.upperOdo !== null ? (
+                                <>
+                                  {" "}
+                                  · up to{" "}
+                                  <span className="mono">{Math.round(bp.upperOdo / 1000)}k mi</span>
+                                </>
+                              ) : null}
+                            </>
+                          ) : (
+                            // No sweep result (rail hold is "eol" — see ASSUMPTIONS.md §B/R10):
+                            // show the odometer this row's $/mi is actually priced at instead of
+                            // leaving the line empty.
+                            <>
+                              <span className="mono">{r.impliedBuyYear}</span> · priced at{" "}
+                              <span className="mono">{Math.round(r.buyOdo / 1000)}k mi</span>
+                            </>
+                          )}
                           {r.feasNote ? ` · ${r.feasNote}` : ""}
                           {isDimmed ? " · misses 1 filter" : ""}
                         </span>
@@ -299,7 +362,7 @@ export function App() {
               </tbody>
             </table>
             ))}
-          <div style={{ display: tab === "deal" ? "block" : "none" }}>
+          <div style={{ display: tab === "analyze" ? "block" : "none" }}>
             {rows ? (
               <DealAnalyzer inputs={inputs} rows={rows} />
             ) : (
@@ -308,15 +371,25 @@ export function App() {
               </div>
             )}
           </div>
+          {tab === "assumptions" && (
+            <Suspense fallback={<div className="loading">Loading…</div>}>
+              <AssumptionsTab />
+            </Suspense>
+          )}
           <footer className="foot">
             <span>
-              OpenCAWR · reliability inputs pending public re-derivation (see ledger) ·
-              estimates, not advice
+              OpenCAWR · reliability tiers derived from NHTSA complaint data (a coarse ordering —
+              see ledger) · estimates, not advice
             </span>
           </footer>
         </main>
       </div>
-      <CarDrawer vehicleName={drawerCar} inputs={inputs} onClose={() => setDrawerCar(null)} />
+      <CarDrawer
+        vehicleName={drawerCar}
+        etype={rows?.find((r) => r.name === drawerCar)?.etype ?? null}
+        inputs={inputs}
+        onClose={() => setDrawerCar(null)}
+      />
     </div>
   );
 }

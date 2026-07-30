@@ -71,6 +71,20 @@ describe("price curve behavior (spec §2)", () => {
     expect(curveAt(pts, 400_000, 500)).toBe(500); // never below scrap
   });
 
+  it("clamps flat below the first point instead of extrapolating leftward (R11)", () => {
+    const pts = parseCurve({ "10000": 20_000, "50000": 15_000 });
+    // Below the first point: clamped at the first point's value, not the
+    // leftward-projected slope (which would give 20,000 + (0-10000)*slope = 21,250).
+    expect(curveAt(pts, 0, 500)).toBe(20_000);
+    expect(curveAt(pts, 5_000, 500)).toBe(20_000);
+    expect(curveAt(pts, 10_000, 500)).toBe(20_000); // exactly at the first point
+  });
+
+  it("the floor still applies below the first point", () => {
+    const pts = parseCurve({ "10000": 400, "50000": 300 });
+    expect(curveAt(pts, 0, 500)).toBe(500); // first point's value (400) is below scrap
+  });
+
   it("purchase price override flows through (Deal Analyzer hook)", () => {
     const modeled = costPerMile(bolt, constants, { seed: 1 });
     const overpaid = costPerMile(bolt, constants, { seed: 1, purchasePrice: modeled.buyPrice + 3000 });

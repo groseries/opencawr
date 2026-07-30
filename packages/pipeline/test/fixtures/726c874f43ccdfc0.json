@@ -1,0 +1,161 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90+T5&modelYear=2019",
+  "fetchedAt": "2026-07-30T00:24:57.929Z",
+  "body": {
+    "count": 38,
+    "results": [
+      {
+        "odiNumber": 11749584,
+        "components": "VISIBILITY"
+      },
+      {
+        "odiNumber": 11743566,
+        "components": "FUEL SYSTEM, GASOLINE"
+      },
+      {
+        "odiNumber": 11741732,
+        "components": "VISIBILITY"
+      },
+      {
+        "odiNumber": 11740350,
+        "components": "VISIBILITY"
+      },
+      {
+        "odiNumber": 11738272,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11736779,
+        "components": "SUSPENSION,ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11730933,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11719068,
+        "components": "ENGINE AND ENGINE COOLING"
+      },
+      {
+        "odiNumber": 11712444,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11708339,
+        "components": "STEERING,ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11704235,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11701504,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11690299,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11689054,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11663618,
+        "components": "UNKNOWN OR OTHER,ENGINE"
+      },
+      {
+        "odiNumber": 11661570,
+        "components": "BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11661326,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11651860,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11635297,
+        "components": "VISIBILITY,AIR BAGS,SEAT BELTS"
+      },
+      {
+        "odiNumber": 11629383,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11629386,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11621625,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11621462,
+        "components": "SERVICE BRAKES, HYDRAULIC"
+      },
+      {
+        "odiNumber": 11600947,
+        "components": "SERVICE BRAKES, HYDRAULIC"
+      },
+      {
+        "odiNumber": 11597916,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11575869,
+        "components": "ELECTRICAL SYSTEM,AIR BAGS,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11566201,
+        "components": "ELECTRICAL SYSTEM,STRUCTURE,LATCHES/LOCKS/LINKAGES"
+      },
+      {
+        "odiNumber": 11566341,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11542433,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11541932,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11501084,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11480231,
+        "components": "SERVICE BRAKES,BACK OVER PREVENTION"
+      },
+      {
+        "odiNumber": 11471587,
+        "components": "ELECTRICAL SYSTEM,VISIBILITY"
+      },
+      {
+        "odiNumber": 11464259,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11439155,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11428347,
+        "components": "POWER TRAIN,ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11232882,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11189914,
+        "components": "ELECTRICAL SYSTEM,ENGINE"
+      }
+    ]
+  }
+}

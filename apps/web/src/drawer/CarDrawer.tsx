@@ -6,6 +6,14 @@ import { Breakdown } from "../charts/Breakdown.js";
 import { Sensitivity } from "../charts/Sensitivity.js";
 
 const fmt = (x: number) => `$${x.toFixed(3)}`;
+// Restores the powertrain-type token dropped from the Rankings row (R4 review
+// fixup) — this is the only place in the UI it's shown now.
+const ETYPE_LABEL: Record<string, string> = {
+  gas: "gas",
+  hybrid: "hybrid",
+  ev: "EV",
+  phev: "PHEV",
+};
 
 const FOCUSABLE_SELECTOR =
   'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
@@ -16,10 +24,12 @@ const FOCUSABLE_SELECTOR =
  * null` renders nothing — the drawer is closed. */
 export function CarDrawer({
   vehicleName,
+  etype,
   inputs,
   onClose,
 }: {
   vehicleName: string | null;
+  etype: string | null;
   inputs: EngineInputs;
   onClose: () => void;
 }) {
@@ -100,13 +110,18 @@ export function CarDrawer({
         >
           ×
         </button>
-        <h2 className="drawer-title">{vehicleName}</h2>
+        <h2 className="drawer-title">
+          {vehicleName}
+          {etype ? <span className="drawer-etype">{ETYPE_LABEL[etype] ?? etype}</span> : null}
+        </h2>
         {!ready ? (
           <div className="loading">Running the survey grid…</div>
         ) : (
           <>
             <p className="drawer-headline">
-              <span className="mono">{fmt(result.p50)}/mi</span> at your current assumptions
+              <span className="mono">{fmt(result.p50)}/mi</span> bought at{" "}
+              <span className="mono">{Math.round(result.buyOdo / 1000)}k mi</span>, at your
+              current assumptions
             </p>
 
             <section className="drawer-section">

@@ -1,5 +1,6 @@
 /// <reference lib="webworker" />
 import {
+  buyPointSweep,
   costPerMile,
   curveAt,
   impliedModelYear,
@@ -86,7 +87,7 @@ export interface DealResponse {
 
 /** Survey drawer request (Task F): one car's cost-vs-buy-point grid, its default
  * breakdown, and two sensitivity sweeps. All grid/sweep cells run at reduced
- * draws (see SURVEY_DRAWS) — a documented speed/precision tradeoff (ASSUMPTIONS.md §H). */
+ * draws (see SURVEY_DRAWS) — a documented speed/precision tradeoff (ASSUMPTIONS.md §I). */
 export interface SurveyRequest {
   kind: "survey";
   id: number;
@@ -113,6 +114,9 @@ export interface SurveyResponse {
   vehicleName: string;
   /** This car's own default-buy-point P50 (current rail assumptions) — drawer headline. */
   p50: number;
+  /** The odometer `p50` is priced at. Shown beside it because the Rankings row now
+   * reports the sweep's *ideal* odometer instead, and the two can disagree. */
+  buyOdo: number;
   breakdown: CostBreakdown;
   buyOdoAxis: number[];
   holdMilesAxis: number[];
@@ -122,16 +126,51 @@ export interface SurveyResponse {
   sensGasPrice: SweepPoint[];
 }
 
+/** Buy-point sweep request (R4, decoupled from `rank` — see fixup note below):
+ * every car's own cost-minimizing buy point (idealOdo/idealYear/upperOdo). */
+export interface BuyPointsRequest {
+  kind: "buypoints";
+  id: number;
+  inputs: EngineInputs;
+}
+
+/** Buy-point sweep (spec §4/R4): the odometer minimizing P50 over this car's
+ *  own feasible range — priced at reduced draws, NOT the same buy point as
+ *  the rank response's p50/p75/p90 (those stay at `buyOdo`). */
+export interface BuyPointEntry {
+  idealOdo: number;
+  idealYear: number;
+  /** Last odometer still within tolerance of the ideal's P50; null if the walk
+   *  can't take a single step (see `buyPointSweep`). */
+  upperOdo: number | null;
+}
+
+export interface BuyPointsResponse {
+  kind: "buypoints";
+  id: number;
+  /** Keyed by vehicle name — one entry per car in the field. `null` when the
+   *  rail's `holdMiles` is `"eol"`: the sweep cannot answer an open-ended
+   *  horizon (R10) and does not run at all. Distinct from "not landed yet"
+   *  (the hook's own `computing` flag covers that) — a response with
+   *  `points: null` has landed, it is just reporting "no sweep at this
+   *  horizon" rather than a result. */
+  points: Record<string, BuyPointEntry> | null;
+}
+
 /** All response kinds share one worker (see sharedWorker.ts) — hooks filter their
  * own `onmessage` listener on `kind` (and their own request id) so a rank/deal/
- * survey response can never be consumed by a different hook. */
-export type EngineWorkerResponse = EngineResponse | DealResponse | SurveyResponse;
+ * survey/buypoints response can never be consumed by a different hook. */
+export type EngineWorkerResponse = EngineResponse | DealResponse | SurveyResponse | BuyPointsResponse;
 
-self.onmessage = (e: MessageEvent<EngineRequest | DealRequest | SurveyRequest>) => {
+self.onmessage = (
+  e: MessageEvent<EngineRequest | DealRequest | SurveyRequest | BuyPointsRequest>,
+) => {
   if (e.data.kind === "deal") {
     handleDeal(e.data);
   } else if (e.data.kind === "survey") {
     handleSurvey(e.data);
+  } else if (e.data.kind === "buypoints") {
+    handleBuyPoints(e.data);
   } else {
     handleRank(e.data);
   }
@@ -199,6 +238,38 @@ function handleRank(req: EngineRequest) {
   self.postMessage(msg);
 }
 
+/** Buy-point sweep (R4) for every car in the field. Split out of `handleRank`
+ * (fixup, R4 review): the sweep's grid search is several times the cost of the
+ * base rank pass, and DECISIONS.md requires the rank response to stay live on
+ * every input change (annual-miles slider drags in particular). The hook that
+ * drives this (`useBuyPoints`) debounces longer than rank's, so it lands a
+ * short while after the rank response rather than blocking it. */
+function handleBuyPoints(req: BuyPointsRequest) {
+  const { id, inputs } = req;
+  const { holdMiles } = inputs;
+  if (holdMiles === "eol" || holdMiles === undefined) {
+    // The sweep cannot answer an open-ended horizon (R10 — see buypoint.ts's
+    // SweepInputs): every grid point would imply a different hold, so the
+    // comparison isn't valid. Skip the sweep entirely rather than substitute
+    // a hold the rail didn't choose, and respond right away (not "still
+    // computing") so the hook/UI can tell the two states apart.
+    const msg: BuyPointsResponse = { kind: "buypoints", id, points: null };
+    self.postMessage(msg);
+    return;
+  }
+  const points: Record<string, BuyPointEntry> = {};
+  for (const v of data.vehicles) {
+    const sweep = buyPointSweep(v, data.constants, { ...inputs, holdMiles });
+    points[v.name] = {
+      idealOdo: sweep.idealOdo,
+      idealYear: sweep.idealYear,
+      upperOdo: sweep.upperOdo,
+    };
+  }
+  const msg: BuyPointsResponse = { kind: "buypoints", id, points };
+  self.postMessage(msg);
+}
+
 function handleDeal(req: DealRequest) {
   const { id, inputs, deal } = req;
   const vehicle = data.vehicles.find((v) => v.name === deal.vehicleName);
@@ -246,7 +317,7 @@ function handleDeal(req: DealRequest) {
   }
 
   notes.push(
-    "reliability inputs are seed data pending public re-derivation — treat repair and tail-risk estimates with caution",
+    "reliability tier is derived from NHTSA complaint mix, not a measured defect rate — treat repair and tail-risk estimates with caution",
   );
 
   const msg: DealResponse = {
@@ -289,7 +360,7 @@ const ANNUAL_MILES_AXIS = [
 const GAS_PRICE_AXIS = [2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5];
 
 /** Draws per cell for the 96-cell grid + 20 sensitivity points (reduced from the
- * default 1,100 for speed — documented tradeoff, ASSUMPTIONS.md §H). */
+ * default 1,100 for speed — documented tradeoff, ASSUMPTIONS.md §I). */
 const SURVEY_DRAWS = 400;
 
 function handleSurvey(req: SurveyRequest) {
@@ -336,6 +407,7 @@ function handleSurvey(req: SurveyRequest) {
     id,
     vehicleName,
     p50: defaultRes.p50,
+    buyOdo: defaultRes.buyOdo,
     breakdown: defaultRes.breakdown,
     buyOdoAxis: BUY_ODO_AXIS,
     holdMilesAxis: HOLD_MILES_AXIS,

@@ -50,6 +50,15 @@ truth for the model; this file records product-flow and implementation decisions
 
 ## Launch gate (spec §9 — machine-readable)
 
-`opencawr_data.json` meta confirms reliability multipliers were NOT re-derived from
-NHTSA/CarComplaints/RepairPal. Until that happens, every seed vehicle's reliability figure is
-**public-launch-blocked**. The app must carry this flag; do not remove it in a refactor.
+**CLEARED 2026-07-29 for the seed set.** Every non-`sport` `reliability_tier` in
+`opencawr_data.json` is re-derived from NHTSA complaint data alone (`docs/reliability-methodology.md`;
+`npm run reliability-report -w @opencawr/pipeline`), and `meta.provenance_note` records that.
+**CarComplaints and RepairPal were evaluated and deliberately NOT used** — commercial sites, no free
+API, extracting their aggregates would create the very exposure spec §9's second clause guards
+against; they are struck from §9. Owner decision the same day: "we have made sufficient changes that
+deviations from the seed are expected at this point," releasing the seed-agreement constraint.
+
+Two things this does **not** clear, and which must keep their flags: pipeline-**assembled**
+(non-seed) vehicles still get a proxied `reliability_tier` and a placeholder model-year heuristic,
+both still marked in the provenance report; and the derivation is a coarse ordering with real
+limitations (methodology, "Known limitations"). Do not remove those flags in a refactor.

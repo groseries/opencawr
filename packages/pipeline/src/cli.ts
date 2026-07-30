@@ -28,7 +28,11 @@ async function main(): Promise<void> {
 
   console.log("\n=== Provenance ===");
   for (const entry of report) {
-    const flag = entry.launchBlocked ? " [LAUNCH-BLOCKED: pending re-derivation]" : "";
+    // Spec §9's Consumer-Reports gate is cleared for the 71 SEED vehicles
+    // (docs/reliability-methodology.md). An assembled vehicle is not one of
+    // them: its tier is copied from a segment peer and its model-year flags
+    // come from the placeholder heuristic, neither of which is the derivation.
+    const flag = entry.launchBlocked ? " [NOT DERIVED: proxy/placeholder reliability]" : "";
     console.log(`  [${entry.source}] ${entry.field}: ${entry.detail}${flag}`);
   }
 

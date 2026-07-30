@@ -1,0 +1,153 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC60+T6&modelYear=2018",
+  "fetchedAt": "2026-07-30T00:24:48.087Z",
+  "body": {
+    "count": 36,
+    "results": [
+      {
+        "odiNumber": 11746434,
+        "components": "AIR BAGS,VEHICLE SPEED CONTROL"
+      },
+      {
+        "odiNumber": 11708031,
+        "components": "ELECTRICAL SYSTEM,VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11706416,
+        "components": "EXTERIOR LIGHTING"
+      },
+      {
+        "odiNumber": 11635940,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11618357,
+        "components": "ELECTRICAL SYSTEM,VEHICLE SPEED CONTROL,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11587470,
+        "components": "ENGINE"
+      },
+      {
+        "odiNumber": 11569169,
+        "components": "ELECTRICAL SYSTEM,UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11565416,
+        "components": "AIR BAGS"
+      },
+      {
+        "odiNumber": 11535147,
+        "components": "VISIBILITY/WIPER"
+      },
+      {
+        "odiNumber": 11527394,
+        "components": "FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11521266,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11518428,
+        "components": "SUSPENSION"
+      },
+      {
+        "odiNumber": 11503218,
+        "components": "TIRES"
+      },
+      {
+        "odiNumber": 11493672,
+        "components": "POWER TRAIN,SEATS"
+      },
+      {
+        "odiNumber": 11492401,
+        "components": "ELECTRICAL SYSTEM,AIR BAGS"
+      },
+      {
+        "odiNumber": 11488336,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11468783,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11452624,
+        "components": "LANE DEPARTURE"
+      },
+      {
+        "odiNumber": 11431329,
+        "components": "STEERING"
+      },
+      {
+        "odiNumber": 11428582,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11352727,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11338864,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11308508,
+        "components": "SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11307312,
+        "components": "STRUCTURE,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11299270,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11290340,
+        "components": "ELECTRICAL SYSTEM"
+      },
+      {
+        "odiNumber": 11286684,
+        "components": "TIRES,WHEELS"
+      },
+      {
+        "odiNumber": 11266969,
+        "components": "LANE DEPARTURE"
+      },
+      {
+        "odiNumber": 11207490,
+        "components": "ELECTRICAL SYSTEM,AIR BAGS,STRUCTURE,ELECTRONIC STABILITY CONTROL (ESC)"
+      },
+      {
+        "odiNumber": 11194622,
+        "components": "STRUCTURE"
+      },
+      {
+        "odiNumber": 11175670,
+        "components": "LANE DEPARTURE"
+      },
+      {
+        "odiNumber": 11182168,
+        "components": "ELECTRICAL SYSTEM,SERVICE BRAKES,ENGINE"
+      },
+      {
+        "odiNumber": 11132304,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11104618,
+        "components": "ELECTRICAL SYSTEM,ENGINE"
+      },
+      {
+        "odiNumber": 11076417,
+        "components": "STEERING,VEHICLE SPEED CONTROL,ELECTRONIC STABILITY CONTROL (ESC)"
+      },
+      {
+        "odiNumber": 11075545,
+        "components": "SEAT BELTS"
+      }
+    ]
+  }
+}

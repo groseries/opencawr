@@ -1,0 +1,130 @@
+{
+  "url": "https://api.nhtsa.gov/products/vehicle/models?modelYear=2022&make=VOLVO&issueType=c",
+  "fetchedAt": "2026-07-29T14:29:56.188Z",
+  "body": {
+    "count": 24,
+    "message": "Results returned successfully",
+    "results": [
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "C40 P8 RECHARGE"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "S60 B5 FWD"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "S60 B5 AWD"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "S60 T6 AWD"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "S60 T8 RECHARGE"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "S60 T8 POLESTAR ENGINEERED"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "S90 B6 AWD"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "S90 T8 RECHARGE"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "V90 CC B6 AWD"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "XC40 T5 AWD"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "XC40 T4 FWD"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "XC40 P8 RECHARGE AWD"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "XC60 B5 FWD"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "XC60 B5 AWD"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "XC60 B6 AWD"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "XC60 T8 RECHARGE"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "XC60 T8 POLESTAR ENGINEERED"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "XC90 T5 FWD"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "XC90 T5 AWD"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "XC90 T6 AWD"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "XC90 T8 RECHARGE"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "VNL"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "V90CC"
+      },
+      {
+        "modelYear": "2022",
+        "make": "VOLVO",
+        "model": "V60 CC T5 AWD"
+      }
+    ]
+  }
+}

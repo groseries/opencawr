@@ -1,0 +1,4311 @@
+[
+ {
+  "name": "Chevy Volt",
+  "make": "CHEVROLET",
+  "years": [
+   {
+    "year": 2016,
+    "matchedStrings": [
+     "VOLT"
+    ],
+    "complaints": 169,
+    "powertrainComplaints": 92,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "VOLT"
+    ],
+    "complaints": 692,
+    "powertrainComplaints": 364,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "VOLT"
+    ],
+    "complaints": 215,
+    "powertrainComplaints": 118,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "VOLT"
+    ],
+    "complaints": 34,
+    "powertrainComplaints": 18,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Chevy Bolt EV",
+  "make": "CHEVROLET",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "BOLT"
+    ],
+    "complaints": 316,
+    "powertrainComplaints": 36,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "BOLT"
+    ],
+    "complaints": 73,
+    "powertrainComplaints": 16,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "BOLT EV"
+    ],
+    "complaints": 175,
+    "powertrainComplaints": 14,
+    "recalls": 6,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "BOLT EV"
+    ],
+    "complaints": 171,
+    "powertrainComplaints": 18,
+    "recalls": 8,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "BOLT EV"
+    ],
+    "complaints": 66,
+    "powertrainComplaints": 11,
+    "recalls": 5,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "BOLT EV"
+    ],
+    "complaints": 59,
+    "powertrainComplaints": 13,
+    "recalls": 7,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Toyota Prius (hybrid)",
+  "make": "TOYOTA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "PRIUS"
+    ],
+    "complaints": 101,
+    "powertrainComplaints": 17,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "PRIUS"
+    ],
+    "complaints": 35,
+    "powertrainComplaints": 5,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "PRIUS"
+    ],
+    "complaints": 29,
+    "powertrainComplaints": 6,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "PRIUS"
+    ],
+    "complaints": 14,
+    "powertrainComplaints": 2,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "PRIUS"
+    ],
+    "complaints": 6,
+    "powertrainComplaints": 2,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "PRIUS"
+    ],
+    "complaints": 24,
+    "powertrainComplaints": 4,
+    "recalls": 1,
+    "powertrainRecalls": 1
+   }
+  ]
+ },
+ {
+  "name": "Toyota Prius Prime",
+  "make": "TOYOTA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "PRIUS PRIME"
+    ],
+    "complaints": 143,
+    "powertrainComplaints": 23,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "PRIUS PLUG-IN HYBRID",
+     "PRIUS PRIME"
+    ],
+    "complaints": 15,
+    "powertrainComplaints": 3,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "PRIUS PRIME"
+    ],
+    "complaints": 8,
+    "powertrainComplaints": 0,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "PRIUS PRIME"
+    ],
+    "complaints": 16,
+    "powertrainComplaints": 3,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "PRIUS PRIME"
+    ],
+    "complaints": 10,
+    "powertrainComplaints": 3,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "PRIUS PRIME"
+    ],
+    "complaints": 8,
+    "powertrainComplaints": 1,
+    "recalls": 1,
+    "powertrainRecalls": 1
+   }
+  ]
+ },
+ {
+  "name": "Toyota Corolla",
+  "make": "TOYOTA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "COROLLA"
+    ],
+    "complaints": 188,
+    "powertrainComplaints": 27,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "COROLLA"
+    ],
+    "complaints": 133,
+    "powertrainComplaints": 24,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "COROLLA"
+    ],
+    "complaints": 200,
+    "powertrainComplaints": 87,
+    "recalls": 5,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "COROLLA"
+    ],
+    "complaints": 302,
+    "powertrainComplaints": 138,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "COROLLA"
+    ],
+    "complaints": 184,
+    "powertrainComplaints": 59,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "COROLLA"
+    ],
+    "complaints": 95,
+    "powertrainComplaints": 28,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Toyota Camry Hybrid",
+  "make": "TOYOTA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "CAMRY HYBRID"
+    ],
+    "complaints": 142,
+    "powertrainComplaints": 14,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "CAMRY HYBRID"
+    ],
+    "complaints": 28,
+    "powertrainComplaints": 4,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "CAMRY HYBRID"
+    ],
+    "complaints": 11,
+    "powertrainComplaints": 1,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "CAMRY HYBRID"
+    ],
+    "complaints": 9,
+    "powertrainComplaints": 0,
+    "recalls": 2,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "CAMRY HYBRID"
+    ],
+    "complaints": 8,
+    "powertrainComplaints": 0,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "CAMRY HYBRID"
+    ],
+    "complaints": 2,
+    "powertrainComplaints": 0,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Nissan Leaf",
+  "make": "NISSAN",
+  "years": [
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "LEAF"
+    ],
+    "complaints": 64,
+    "powertrainComplaints": 7,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "LEAF",
+     "LEAF PLUS"
+    ],
+    "complaints": 251,
+    "powertrainComplaints": 19,
+    "recalls": 5,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "LEAF",
+     "LEAF PLUS"
+    ],
+    "complaints": 159,
+    "powertrainComplaints": 17,
+    "recalls": 6,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "LEAF"
+    ],
+    "complaints": 52,
+    "powertrainComplaints": 8,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "LEAF (40 KWH BATTERY)",
+     "LEAF PLUS (62 KWH BATTERY)"
+    ],
+    "complaints": 88,
+    "powertrainComplaints": 15,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Honda Civic",
+  "make": "HONDA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "CIVIC",
+     "CIVIC HATCHBACK"
+    ],
+    "complaints": 578,
+    "powertrainComplaints": 88,
+    "recalls": 6,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "CIVIC",
+     "CIVIC SI"
+    ],
+    "complaints": 598,
+    "powertrainComplaints": 59,
+    "recalls": 6,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "CIVIC",
+     "CIVIC HATCH",
+     "CIVIC SI"
+    ],
+    "complaints": 424,
+    "powertrainComplaints": 45,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "CIVIC",
+     "CIVIC HATCH",
+     "CIVIC HATCHBACK",
+     "CIVIC SI"
+    ],
+    "complaints": 222,
+    "powertrainComplaints": 43,
+    "recalls": 5,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "CIVIC",
+     "CIVIC HATCH"
+    ],
+    "complaints": 139,
+    "powertrainComplaints": 8,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "CIVIC",
+     "CIVIC HATCHBACK",
+     "CIVIC SEDAN SI"
+    ],
+    "complaints": 953,
+    "powertrainComplaints": 23,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Honda Accord",
+  "make": "HONDA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "ACCORD"
+    ],
+    "complaints": 528,
+    "powertrainComplaints": 90,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "ACCORD"
+    ],
+    "complaints": 1815,
+    "powertrainComplaints": 599,
+    "recalls": 6,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "ACCORD"
+    ],
+    "complaints": 655,
+    "powertrainComplaints": 188,
+    "recalls": 6,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "ACCORD"
+    ],
+    "complaints": 341,
+    "powertrainComplaints": 81,
+    "recalls": 5,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "ACCORD"
+    ],
+    "complaints": 217,
+    "powertrainComplaints": 39,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "ACCORD"
+    ],
+    "complaints": 217,
+    "powertrainComplaints": 32,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Hyundai Elantra",
+  "make": "HYUNDAI",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "ELANTRA",
+     "ELANTRA GT"
+    ],
+    "complaints": 782,
+    "powertrainComplaints": 335,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "ELANTRA",
+     "ELANTRA GT"
+    ],
+    "complaints": 328,
+    "powertrainComplaints": 181,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "ELANTRA",
+     "ELANTRA GT"
+    ],
+    "complaints": 248,
+    "powertrainComplaints": 137,
+    "recalls": 1,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "ELANTRA",
+     "ELANTRA GT"
+    ],
+    "complaints": 247,
+    "powertrainComplaints": 139,
+    "recalls": 3,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "ELANTRA"
+    ],
+    "complaints": 128,
+    "powertrainComplaints": 20,
+    "recalls": 6,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "ELANTRA"
+    ],
+    "complaints": 95,
+    "powertrainComplaints": 15,
+    "recalls": 5,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Kia K4",
+  "make": "KIA",
+  "years": [
+   {
+    "year": 2025,
+    "matchedStrings": [
+     "K4"
+    ],
+    "complaints": 43,
+    "powertrainComplaints": 12,
+    "recalls": 2,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2026,
+    "matchedStrings": [
+     "K4",
+     "K4 5DR"
+    ],
+    "complaints": 6,
+    "powertrainComplaints": 0,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Toyota Camry",
+  "make": "TOYOTA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "CAMRY"
+    ],
+    "complaints": 148,
+    "powertrainComplaints": 17,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "CAMRY"
+    ],
+    "complaints": 729,
+    "powertrainComplaints": 283,
+    "recalls": 8,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "CAMRY"
+    ],
+    "complaints": 388,
+    "powertrainComplaints": 172,
+    "recalls": 6,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "CAMRY"
+    ],
+    "complaints": 264,
+    "powertrainComplaints": 84,
+    "recalls": 3,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "CAMRY"
+    ],
+    "complaints": 154,
+    "powertrainComplaints": 17,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "CAMRY"
+    ],
+    "complaints": 57,
+    "powertrainComplaints": 9,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Mazda3 (SkyActiv)",
+  "make": "MAZDA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "MAZDA3"
+    ],
+    "complaints": 83,
+    "powertrainComplaints": 8,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "MAZDA3"
+    ],
+    "complaints": 107,
+    "powertrainComplaints": 15,
+    "recalls": 4,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "MAZDA3"
+    ],
+    "complaints": 73,
+    "powertrainComplaints": 21,
+    "recalls": 6,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "MAZDA3"
+    ],
+    "complaints": 32,
+    "powertrainComplaints": 2,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "MAZDA3"
+    ],
+    "complaints": 49,
+    "powertrainComplaints": 21,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "MAZDA3"
+    ],
+    "complaints": 23,
+    "powertrainComplaints": 4,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Toyota RAV4 Hybrid",
+  "make": "TOYOTA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "RAV4 HYBRID"
+    ],
+    "complaints": 302,
+    "powertrainComplaints": 47,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "RAV4 HYBRID"
+    ],
+    "complaints": 15,
+    "powertrainComplaints": 3,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "RAV4 HYBRID"
+    ],
+    "complaints": 22,
+    "powertrainComplaints": 0,
+    "recalls": 3,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "RAV4 HYBRID"
+    ],
+    "complaints": 13,
+    "powertrainComplaints": 2,
+    "recalls": 5,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "RAV4 HYBRID"
+    ],
+    "complaints": 22,
+    "powertrainComplaints": 0,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "RAV4 HYBRID"
+    ],
+    "complaints": 5,
+    "powertrainComplaints": 0,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Kia Niro (hybrid)",
+  "make": "KIA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "NIRO HYBRID"
+    ],
+    "complaints": 95,
+    "powertrainComplaints": 47,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "NIRO HYBRID"
+    ],
+    "complaints": 56,
+    "powertrainComplaints": 33,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "NIRO HYBRID"
+    ],
+    "complaints": 79,
+    "powertrainComplaints": 43,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "NIRO HYBRID"
+    ],
+    "complaints": 36,
+    "powertrainComplaints": 17,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "NIRO",
+     "NIRO HYBRID"
+    ],
+    "complaints": 10,
+    "powertrainComplaints": 4,
+    "recalls": 1,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "NIRO"
+    ],
+    "complaints": 28,
+    "powertrainComplaints": 8,
+    "recalls": 1,
+    "powertrainRecalls": 1
+   }
+  ]
+ },
+ {
+  "name": "Tesla Model 3",
+  "make": "TESLA",
+  "years": [
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "MODEL 3"
+    ],
+    "complaints": 985,
+    "powertrainComplaints": 35,
+    "recalls": 18,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "MODEL 3"
+    ],
+    "complaints": 594,
+    "powertrainComplaints": 11,
+    "recalls": 21,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "MODEL 3"
+    ],
+    "complaints": 436,
+    "powertrainComplaints": 9,
+    "recalls": 20,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "MODEL 3"
+    ],
+    "complaints": 651,
+    "powertrainComplaints": 22,
+    "recalls": 21,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "MODEL 3"
+    ],
+    "complaints": 749,
+    "powertrainComplaints": 20,
+    "recalls": 17,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Hyundai Sonata",
+  "make": "HYUNDAI",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "SONATA"
+    ],
+    "complaints": 761,
+    "powertrainComplaints": 415,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "SONATA"
+    ],
+    "complaints": 366,
+    "powertrainComplaints": 229,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "SONATA"
+    ],
+    "complaints": 155,
+    "powertrainComplaints": 91,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "SONATA"
+    ],
+    "complaints": 169,
+    "powertrainComplaints": 45,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "SONATA"
+    ],
+    "complaints": 121,
+    "powertrainComplaints": 50,
+    "recalls": 4,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "SONATA"
+    ],
+    "complaints": 88,
+    "powertrainComplaints": 39,
+    "recalls": 3,
+    "powertrainRecalls": 1
+   }
+  ]
+ },
+ {
+  "name": "Toyota RAV4",
+  "make": "TOYOTA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "RAV4"
+    ],
+    "complaints": 301,
+    "powertrainComplaints": 48,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "RAV4"
+    ],
+    "complaints": 328,
+    "powertrainComplaints": 56,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "RAV4"
+    ],
+    "complaints": 870,
+    "powertrainComplaints": 273,
+    "recalls": 7,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "RAV4"
+    ],
+    "complaints": 627,
+    "powertrainComplaints": 216,
+    "recalls": 6,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "RAV4"
+    ],
+    "complaints": 378,
+    "powertrainComplaints": 52,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "RAV4"
+    ],
+    "complaints": 135,
+    "powertrainComplaints": 32,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Honda CR-V",
+  "make": "HONDA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "CR-V"
+    ],
+    "complaints": 1742,
+    "powertrainComplaints": 630,
+    "recalls": 7,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "CR-V"
+    ],
+    "complaints": 2096,
+    "powertrainComplaints": 559,
+    "recalls": 5,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "CR-V"
+    ],
+    "complaints": 1071,
+    "powertrainComplaints": 120,
+    "recalls": 8,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "CR-V"
+    ],
+    "complaints": 335,
+    "powertrainComplaints": 52,
+    "recalls": 7,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "CR-V"
+    ],
+    "complaints": 313,
+    "powertrainComplaints": 42,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "CR-V"
+    ],
+    "complaints": 242,
+    "powertrainComplaints": 25,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Fiat 500",
+  "make": "FIAT",
+  "years": [
+   {
+    "year": 2014,
+    "matchedStrings": [
+     "500",
+     "500 CABRIO"
+    ],
+    "complaints": 124,
+    "powertrainComplaints": 76,
+    "recalls": 4,
+    "powertrainRecalls": 3
+   },
+   {
+    "year": 2015,
+    "matchedStrings": [
+     "500"
+    ],
+    "complaints": 92,
+    "powertrainComplaints": 42,
+    "recalls": 4,
+    "powertrainRecalls": 3
+   },
+   {
+    "year": 2016,
+    "matchedStrings": [
+     "500",
+     "500 CABRIO"
+    ],
+    "complaints": 14,
+    "powertrainComplaints": 10,
+    "recalls": 4,
+    "powertrainRecalls": 2
+   },
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "500",
+     "500 CABRIO"
+    ],
+    "complaints": 13,
+    "powertrainComplaints": 4,
+    "recalls": 2,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "500",
+     "500 CABRIO"
+    ],
+    "complaints": 5,
+    "powertrainComplaints": 0,
+    "recalls": 2,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [],
+    "complaints": 0,
+    "powertrainComplaints": 0,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "VW ID.4 (AWD avail)",
+  "make": "VOLKSWAGEN",
+  "years": [
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "ID.4"
+    ],
+    "complaints": 324,
+    "powertrainComplaints": 34,
+    "recalls": 11,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "ID.4"
+    ],
+    "complaints": 133,
+    "powertrainComplaints": 16,
+    "recalls": 7,
+    "powertrainRecalls": 1
+   }
+  ]
+ },
+ {
+  "name": "Toyota RAV4 Prime",
+  "make": "TOYOTA",
+  "years": [
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "RAV4 PRIME"
+    ],
+    "complaints": 98,
+    "powertrainComplaints": 8,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "RAV4 PRIME"
+    ],
+    "complaints": 21,
+    "powertrainComplaints": 4,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Kia Soul",
+  "make": "KIA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "SOUL"
+    ],
+    "complaints": 270,
+    "powertrainComplaints": 199,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "SOUL"
+    ],
+    "complaints": 212,
+    "powertrainComplaints": 154,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "SOUL"
+    ],
+    "complaints": 133,
+    "powertrainComplaints": 90,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "SOUL"
+    ],
+    "complaints": 365,
+    "powertrainComplaints": 290,
+    "recalls": 1,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "SOUL"
+    ],
+    "complaints": 222,
+    "powertrainComplaints": 180,
+    "recalls": 2,
+    "powertrainRecalls": 2
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "SOUL"
+    ],
+    "complaints": 88,
+    "powertrainComplaints": 75,
+    "recalls": 1,
+    "powertrainRecalls": 1
+   }
+  ]
+ },
+ {
+  "name": "VW Passat",
+  "make": "VOLKSWAGEN",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "PASSAT"
+    ],
+    "complaints": 108,
+    "powertrainComplaints": 10,
+    "recalls": 7,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "PASSAT"
+    ],
+    "complaints": 45,
+    "powertrainComplaints": 13,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "PASSAT"
+    ],
+    "complaints": 12,
+    "powertrainComplaints": 4,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "PASSAT"
+    ],
+    "complaints": 15,
+    "powertrainComplaints": 5,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "PASSAT"
+    ],
+    "complaints": 0,
+    "powertrainComplaints": 0,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "PASSAT"
+    ],
+    "complaints": 11,
+    "powertrainComplaints": 5,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Hyundai Kona",
+  "make": "HYUNDAI",
+  "years": [
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "KONA"
+    ],
+    "complaints": 74,
+    "powertrainComplaints": 44,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "KONA"
+    ],
+    "complaints": 185,
+    "powertrainComplaints": 142,
+    "recalls": 1,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "KONA"
+    ],
+    "complaints": 152,
+    "powertrainComplaints": 113,
+    "recalls": 2,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "KONA"
+    ],
+    "complaints": 113,
+    "powertrainComplaints": 84,
+    "recalls": 1,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "KONA"
+    ],
+    "complaints": 94,
+    "powertrainComplaints": 40,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Buick Encore",
+  "make": "BUICK",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "ENCORE"
+    ],
+    "complaints": 89,
+    "powertrainComplaints": 44,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "ENCORE"
+    ],
+    "complaints": 72,
+    "powertrainComplaints": 37,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "ENCORE"
+    ],
+    "complaints": 82,
+    "powertrainComplaints": 42,
+    "recalls": 2,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "ENCORE"
+    ],
+    "complaints": 19,
+    "powertrainComplaints": 7,
+    "recalls": 2,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "ENCORE"
+    ],
+    "complaints": 9,
+    "powertrainComplaints": 6,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "ENCORE"
+    ],
+    "complaints": 8,
+    "powertrainComplaints": 3,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Mazda CX-5",
+  "make": "MAZDA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "CX-5"
+    ],
+    "complaints": 148,
+    "powertrainComplaints": 26,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "CX-5"
+    ],
+    "complaints": 116,
+    "powertrainComplaints": 107,
+    "recalls": 3,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "CX-5"
+    ],
+    "complaints": 261,
+    "powertrainComplaints": 140,
+    "recalls": 2,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "CX-5"
+    ],
+    "complaints": 105,
+    "powertrainComplaints": 25,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "CX-5"
+    ],
+    "complaints": 139,
+    "powertrainComplaints": 85,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "CX-5"
+    ],
+    "complaints": 62,
+    "powertrainComplaints": 15,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Toyota Highlander Hybrid",
+  "make": "TOYOTA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "HIGHLANDER HYBRID"
+    ],
+    "complaints": 224,
+    "powertrainComplaints": 80,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "HIGHLANDER HYBRID"
+    ],
+    "complaints": 5,
+    "powertrainComplaints": 1,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "HIGHLANDER HYBRID"
+    ],
+    "complaints": 6,
+    "powertrainComplaints": 2,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "HIGHLANDER HYBRID"
+    ],
+    "complaints": 9,
+    "powertrainComplaints": 0,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "HIGHLANDER HYBRID"
+    ],
+    "complaints": 15,
+    "powertrainComplaints": 0,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "HIGHLANDER HYBRID"
+    ],
+    "complaints": 6,
+    "powertrainComplaints": 2,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Subaru Outback",
+  "make": "SUBARU",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "OUTBACK"
+    ],
+    "complaints": 917,
+    "powertrainComplaints": 84,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "OUTBACK"
+    ],
+    "complaints": 806,
+    "powertrainComplaints": 46,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "OUTBACK"
+    ],
+    "complaints": 1030,
+    "powertrainComplaints": 51,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "OUTBACK"
+    ],
+    "complaints": 893,
+    "powertrainComplaints": 89,
+    "recalls": 6,
+    "powertrainRecalls": 2
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "OUTBACK"
+    ],
+    "complaints": 291,
+    "powertrainComplaints": 27,
+    "recalls": 4,
+    "powertrainRecalls": 3
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "OUTBACK"
+    ],
+    "complaints": 457,
+    "powertrainComplaints": 34,
+    "recalls": 4,
+    "powertrainRecalls": 2
+   }
+  ]
+ },
+ {
+  "name": "Subaru Forester",
+  "make": "SUBARU",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "FORESTER"
+    ],
+    "complaints": 579,
+    "powertrainComplaints": 82,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "FORESTER"
+    ],
+    "complaints": 490,
+    "powertrainComplaints": 52,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "FORESTER"
+    ],
+    "complaints": 831,
+    "powertrainComplaints": 137,
+    "recalls": 3,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "FORESTER"
+    ],
+    "complaints": 593,
+    "powertrainComplaints": 100,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "FORESTER"
+    ],
+    "complaints": 207,
+    "powertrainComplaints": 39,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "FORESTER"
+    ],
+    "complaints": 94,
+    "powertrainComplaints": 14,
+    "recalls": 1,
+    "powertrainRecalls": 1
+   }
+  ]
+ },
+ {
+  "name": "Toyota Sienna Hybrid",
+  "make": "TOYOTA",
+  "years": [
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "SIENNA HYBRID"
+    ],
+    "complaints": 37,
+    "powertrainComplaints": 5,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "SIENNA HYBRID"
+    ],
+    "complaints": 11,
+    "powertrainComplaints": 0,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Toyota Tacoma",
+  "make": "TOYOTA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "TACOMA"
+    ],
+    "complaints": 237,
+    "powertrainComplaints": 95,
+    "recalls": 5,
+    "powertrainRecalls": 2
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "TACOMA"
+    ],
+    "complaints": 202,
+    "powertrainComplaints": 49,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "TACOMA"
+    ],
+    "complaints": 210,
+    "powertrainComplaints": 62,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "TACOMA"
+    ],
+    "complaints": 85,
+    "powertrainComplaints": 22,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "TACOMA"
+    ],
+    "complaints": 77,
+    "powertrainComplaints": 23,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "TACOMA"
+    ],
+    "complaints": 57,
+    "powertrainComplaints": 15,
+    "recalls": 3,
+    "powertrainRecalls": 1
+   }
+  ]
+ },
+ {
+  "name": "Nissan Rogue",
+  "make": "NISSAN",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "ROGUE"
+    ],
+    "complaints": 592,
+    "powertrainComplaints": 171,
+    "recalls": 5,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "ROGUE"
+    ],
+    "complaints": 609,
+    "powertrainComplaints": 77,
+    "recalls": 3,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "ROGUE"
+    ],
+    "complaints": 331,
+    "powertrainComplaints": 37,
+    "recalls": 3,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "ROGUE"
+    ],
+    "complaints": 147,
+    "powertrainComplaints": 11,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "ROGUE"
+    ],
+    "complaints": 271,
+    "powertrainComplaints": 69,
+    "recalls": 10,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "ROGUE"
+    ],
+    "complaints": 246,
+    "powertrainComplaints": 174,
+    "recalls": 6,
+    "powertrainRecalls": 1
+   }
+  ]
+ },
+ {
+  "name": "Chevy Equinox",
+  "make": "CHEVROLET",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "EQUINOX"
+    ],
+    "complaints": 270,
+    "powertrainComplaints": 203,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "EQUINOX"
+    ],
+    "complaints": 392,
+    "powertrainComplaints": 138,
+    "recalls": 5,
+    "powertrainRecalls": 2
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "EQUINOX"
+    ],
+    "complaints": 293,
+    "powertrainComplaints": 125,
+    "recalls": 4,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "EQUINOX"
+    ],
+    "complaints": 297,
+    "powertrainComplaints": 116,
+    "recalls": 4,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "EQUINOX"
+    ],
+    "complaints": 88,
+    "powertrainComplaints": 30,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "EQUINOX"
+    ],
+    "complaints": 156,
+    "powertrainComplaints": 32,
+    "recalls": 5,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Toyota Sienna (V6)",
+  "make": "TOYOTA",
+  "years": [
+   {
+    "year": 2015,
+    "matchedStrings": [
+     "SIENNA"
+    ],
+    "complaints": 229,
+    "powertrainComplaints": 26,
+    "recalls": 6,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2016,
+    "matchedStrings": [
+     "SIENNA"
+    ],
+    "complaints": 75,
+    "powertrainComplaints": 6,
+    "recalls": 5,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "SIENNA"
+    ],
+    "complaints": 152,
+    "powertrainComplaints": 49,
+    "recalls": 10,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "SIENNA"
+    ],
+    "complaints": 69,
+    "powertrainComplaints": 22,
+    "recalls": 7,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "SIENNA"
+    ],
+    "complaints": 45,
+    "powertrainComplaints": 10,
+    "recalls": 7,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "SIENNA"
+    ],
+    "complaints": 36,
+    "powertrainComplaints": 11,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Ford Ranger (old compact)",
+  "make": "FORD",
+  "years": [
+   {
+    "year": 2006,
+    "matchedStrings": [
+     "RANGER"
+    ],
+    "complaints": 271,
+    "powertrainComplaints": 22,
+    "recalls": 12,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2007,
+    "matchedStrings": [
+     "RANGER"
+    ],
+    "complaints": 269,
+    "powertrainComplaints": 6,
+    "recalls": 6,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2008,
+    "matchedStrings": [
+     "RANGER"
+    ],
+    "complaints": 324,
+    "powertrainComplaints": 6,
+    "recalls": 6,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2009,
+    "matchedStrings": [
+     "RANGER"
+    ],
+    "complaints": 168,
+    "powertrainComplaints": 8,
+    "recalls": 8,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2010,
+    "matchedStrings": [
+     "RANGER REGULAR",
+     "RANGER SUPERCAB"
+    ],
+    "complaints": 164,
+    "powertrainComplaints": 6,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2011,
+    "matchedStrings": [
+     "RANGER"
+    ],
+    "complaints": 235,
+    "powertrainComplaints": 9,
+    "recalls": 6,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Mini Cooper",
+  "make": "MINI",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "COOPER",
+     "COOPER S",
+     "HARDTOP"
+    ],
+    "complaints": 32,
+    "powertrainComplaints": 11,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "COOPER",
+     "HARDTOP"
+    ],
+    "complaints": 8,
+    "powertrainComplaints": 1,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "COOPER",
+     "COOPER S"
+    ],
+    "complaints": 14,
+    "powertrainComplaints": 4,
+    "recalls": 2,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "COOPER",
+     "COOPER S"
+    ],
+    "complaints": 11,
+    "powertrainComplaints": 3,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "HARDTOP 2DR",
+     "HARDTOP 4DR"
+    ],
+    "complaints": 7,
+    "powertrainComplaints": 0,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "COOPER",
+     "COOPER S"
+    ],
+    "complaints": 7,
+    "powertrainComplaints": 1,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Fiat 500X",
+  "make": "FIAT",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "500X"
+    ],
+    "complaints": 15,
+    "powertrainComplaints": 7,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "500X"
+    ],
+    "complaints": 11,
+    "powertrainComplaints": 9,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "500X"
+    ],
+    "complaints": 3,
+    "powertrainComplaints": 1,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "500X"
+    ],
+    "complaints": 2,
+    "powertrainComplaints": 0,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [],
+    "complaints": 0,
+    "powertrainComplaints": 0,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "500X"
+    ],
+    "complaints": 2,
+    "powertrainComplaints": 0,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "VW GTI",
+  "make": "VOLKSWAGEN",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "GOLF GTI"
+    ],
+    "complaints": 230,
+    "powertrainComplaints": 53,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "GOLF GTI",
+     "GTI"
+    ],
+    "complaints": 49,
+    "powertrainComplaints": 10,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "GOLF GTI",
+     "GTI"
+    ],
+    "complaints": 239,
+    "powertrainComplaints": 198,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "GOLF GTI"
+    ],
+    "complaints": 8,
+    "powertrainComplaints": 4,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "GOLF GTI"
+    ],
+    "complaints": 9,
+    "powertrainComplaints": 3,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "GOLF GTI"
+    ],
+    "complaints": 108,
+    "powertrainComplaints": 49,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Kia Sportage",
+  "make": "KIA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "SPORTAGE"
+    ],
+    "complaints": 397,
+    "powertrainComplaints": 243,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "SPORTAGE"
+    ],
+    "complaints": 159,
+    "powertrainComplaints": 99,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "SPORTAGE"
+    ],
+    "complaints": 68,
+    "powertrainComplaints": 39,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "SPORTAGE"
+    ],
+    "complaints": 157,
+    "powertrainComplaints": 81,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "SPORTAGE"
+    ],
+    "complaints": 48,
+    "powertrainComplaints": 26,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "SPORTAGE"
+    ],
+    "complaints": 44,
+    "powertrainComplaints": 21,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Toyota Highlander",
+  "make": "TOYOTA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "HIGHLANDER"
+    ],
+    "complaints": 261,
+    "powertrainComplaints": 109,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "HIGHLANDER"
+    ],
+    "complaints": 257,
+    "powertrainComplaints": 86,
+    "recalls": 5,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "HIGHLANDER"
+    ],
+    "complaints": 467,
+    "powertrainComplaints": 239,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "HIGHLANDER"
+    ],
+    "complaints": 301,
+    "powertrainComplaints": 132,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "HIGHLANDER"
+    ],
+    "complaints": 479,
+    "powertrainComplaints": 225,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "HIGHLANDER"
+    ],
+    "complaints": 228,
+    "powertrainComplaints": 55,
+    "recalls": 5,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Hyundai Tucson",
+  "make": "HYUNDAI",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "TUCSON"
+    ],
+    "complaints": 1078,
+    "powertrainComplaints": 815,
+    "recalls": 3,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "TUCSON"
+    ],
+    "complaints": 385,
+    "powertrainComplaints": 297,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "TUCSON"
+    ],
+    "complaints": 370,
+    "powertrainComplaints": 204,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "TUCSON"
+    ],
+    "complaints": 173,
+    "powertrainComplaints": 73,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "TUCSON"
+    ],
+    "complaints": 75,
+    "powertrainComplaints": 42,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "TUCSON"
+    ],
+    "complaints": 364,
+    "powertrainComplaints": 142,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Toyota 4Runner",
+  "make": "TOYOTA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "4RUNNER"
+    ],
+    "complaints": 36,
+    "powertrainComplaints": 3,
+    "recalls": 5,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "4RUNNER"
+    ],
+    "complaints": 58,
+    "powertrainComplaints": 7,
+    "recalls": 5,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "4RUNNER"
+    ],
+    "complaints": 64,
+    "powertrainComplaints": 10,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "4RUNNER"
+    ],
+    "complaints": 31,
+    "powertrainComplaints": 1,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "4RUNNER"
+    ],
+    "complaints": 34,
+    "powertrainComplaints": 1,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "4RUNNER"
+    ],
+    "complaints": 39,
+    "powertrainComplaints": 3,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Honda Odyssey",
+  "make": "HONDA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "ODYSSEY"
+    ],
+    "complaints": 39,
+    "powertrainComplaints": 15,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "ODYSSEY"
+    ],
+    "complaints": 941,
+    "powertrainComplaints": 320,
+    "recalls": 16,
+    "powertrainRecalls": 2
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "ODYSSEY"
+    ],
+    "complaints": 897,
+    "powertrainComplaints": 232,
+    "recalls": 20,
+    "powertrainRecalls": 3
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "ODYSSEY"
+    ],
+    "complaints": 432,
+    "powertrainComplaints": 75,
+    "recalls": 14,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "ODYSSEY"
+    ],
+    "complaints": 130,
+    "powertrainComplaints": 28,
+    "recalls": 8,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "ODYSSEY"
+    ],
+    "complaints": 127,
+    "powertrainComplaints": 29,
+    "recalls": 9,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Kia Sorento",
+  "make": "KIA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "SORENTO"
+    ],
+    "complaints": 788,
+    "powertrainComplaints": 412,
+    "recalls": 4,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "SORENTO"
+    ],
+    "complaints": 248,
+    "powertrainComplaints": 110,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "SORENTO"
+    ],
+    "complaints": 418,
+    "powertrainComplaints": 188,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "SORENTO"
+    ],
+    "complaints": 130,
+    "powertrainComplaints": 76,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "SORENTO"
+    ],
+    "complaints": 0,
+    "powertrainComplaints": 0,
+    "recalls": 4,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "SORENTO"
+    ],
+    "complaints": 183,
+    "powertrainComplaints": 95,
+    "recalls": 6,
+    "powertrainRecalls": 2
+   }
+  ]
+ },
+ {
+  "name": "Hyundai Santa Fe",
+  "make": "HYUNDAI",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "SANTA FE"
+    ],
+    "complaints": 945,
+    "powertrainComplaints": 731,
+    "recalls": 6,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "SANTA FE"
+    ],
+    "complaints": 108,
+    "powertrainComplaints": 60,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "SANTA FE"
+    ],
+    "complaints": 192,
+    "powertrainComplaints": 84,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "SANTA FE"
+    ],
+    "complaints": 199,
+    "powertrainComplaints": 82,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "SANTA FE"
+    ],
+    "complaints": 163,
+    "powertrainComplaints": 73,
+    "recalls": 7,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "SANTA FE"
+    ],
+    "complaints": 191,
+    "powertrainComplaints": 97,
+    "recalls": 5,
+    "powertrainRecalls": 2
+   }
+  ]
+ },
+ {
+  "name": "VW Tiguan",
+  "make": "VOLKSWAGEN",
+  "years": [
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "TIGUAN"
+    ],
+    "complaints": 274,
+    "powertrainComplaints": 97,
+    "recalls": 13,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "TIGUAN"
+    ],
+    "complaints": 185,
+    "powertrainComplaints": 51,
+    "recalls": 5,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "TIGUAN"
+    ],
+    "complaints": 132,
+    "powertrainComplaints": 28,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "TIGUAN"
+    ],
+    "complaints": 129,
+    "powertrainComplaints": 52,
+    "recalls": 5,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "TIGUAN"
+    ],
+    "complaints": 246,
+    "powertrainComplaints": 126,
+    "recalls": 5,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Chrysler Pacifica PHEV",
+  "make": "CHRYSLER",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "PACIFICA PHEV"
+    ],
+    "complaints": 79,
+    "powertrainComplaints": 25,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "PACIFICA PHEV"
+    ],
+    "complaints": 223,
+    "powertrainComplaints": 85,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "PACIFICA PHEV"
+    ],
+    "complaints": 39,
+    "powertrainComplaints": 20,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "PACIFICA HYBRID"
+    ],
+    "complaints": 58,
+    "powertrainComplaints": 34,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "PACIFICA HYBRID"
+    ],
+    "complaints": 26,
+    "powertrainComplaints": 8,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "PACIFICA HYBRID"
+    ],
+    "complaints": 115,
+    "powertrainComplaints": 83,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Subaru Ascent",
+  "make": "SUBARU",
+  "years": [
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "ASCENT"
+    ],
+    "complaints": 434,
+    "powertrainComplaints": 120,
+    "recalls": 9,
+    "powertrainRecalls": 4
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "ASCENT"
+    ],
+    "complaints": 317,
+    "powertrainComplaints": 79,
+    "recalls": 5,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "ASCENT"
+    ],
+    "complaints": 99,
+    "powertrainComplaints": 27,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "ASCENT"
+    ],
+    "complaints": 55,
+    "powertrainComplaints": 22,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Ford Ranger (2019+ midsize)",
+  "make": "FORD",
+  "years": [
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "RANGER"
+    ],
+    "complaints": 262,
+    "powertrainComplaints": 111,
+    "recalls": 11,
+    "powertrainRecalls": 2
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "RANGER"
+    ],
+    "complaints": 122,
+    "powertrainComplaints": 57,
+    "recalls": 7,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "RANGER SUPER CAB",
+     "RANGER SUPER CREW"
+    ],
+    "complaints": 106,
+    "powertrainComplaints": 62,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "RANGER SUPER CAB",
+     "RANGER SUPER CREW"
+    ],
+    "complaints": 36,
+    "powertrainComplaints": 20,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Honda Pilot",
+  "make": "HONDA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "PILOT"
+    ],
+    "complaints": 903,
+    "powertrainComplaints": 554,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "PILOT"
+    ],
+    "complaints": 429,
+    "powertrainComplaints": 212,
+    "recalls": 7,
+    "powertrainRecalls": 2
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "PILOT"
+    ],
+    "complaints": 872,
+    "powertrainComplaints": 296,
+    "recalls": 13,
+    "powertrainRecalls": 2
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "PILOT"
+    ],
+    "complaints": 472,
+    "powertrainComplaints": 132,
+    "recalls": 11,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "PILOT"
+    ],
+    "complaints": 410,
+    "powertrainComplaints": 114,
+    "recalls": 10,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "PILOT"
+    ],
+    "complaints": 132,
+    "powertrainComplaints": 30,
+    "recalls": 5,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Mini Countryman",
+  "make": "MINI",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "COUNTRYMAN"
+    ],
+    "complaints": 7,
+    "powertrainComplaints": 1,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "COUNTRYMAN"
+    ],
+    "complaints": 11,
+    "powertrainComplaints": 3,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "COUNTRYMAN"
+    ],
+    "complaints": 10,
+    "powertrainComplaints": 3,
+    "recalls": 2,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "COUNTRYMAN"
+    ],
+    "complaints": 6,
+    "powertrainComplaints": 2,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "COUNTRYMAN"
+    ],
+    "complaints": 2,
+    "powertrainComplaints": 0,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "COUNTRYMAN"
+    ],
+    "complaints": 2,
+    "powertrainComplaints": 0,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Toyota Sequoia",
+  "make": "TOYOTA",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "SEQUOIA"
+    ],
+    "complaints": 7,
+    "powertrainComplaints": 1,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "SEQUOIA"
+    ],
+    "complaints": 20,
+    "powertrainComplaints": 0,
+    "recalls": 5,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "SEQUOIA"
+    ],
+    "complaints": 7,
+    "powertrainComplaints": 0,
+    "recalls": 6,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "SEQUOIA"
+    ],
+    "complaints": 4,
+    "powertrainComplaints": 2,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "SEQUOIA"
+    ],
+    "complaints": 4,
+    "powertrainComplaints": 1,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "SEQUOIA"
+    ],
+    "complaints": 1,
+    "powertrainComplaints": 0,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Hyundai Palisade",
+  "make": "HYUNDAI",
+  "years": [
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "PALISADE"
+    ],
+    "complaints": 518,
+    "powertrainComplaints": 140,
+    "recalls": 5,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "PALISADE"
+    ],
+    "complaints": 414,
+    "powertrainComplaints": 65,
+    "recalls": 6,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "PALISADE"
+    ],
+    "complaints": 295,
+    "powertrainComplaints": 53,
+    "recalls": 5,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Chrysler Pacifica",
+  "make": "CHRYSLER",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "PACIFICA"
+    ],
+    "complaints": 1485,
+    "powertrainComplaints": 856,
+    "recalls": 11,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "PACIFICA"
+    ],
+    "complaints": 826,
+    "powertrainComplaints": 450,
+    "recalls": 12,
+    "powertrainRecalls": 2
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "PACIFICA"
+    ],
+    "complaints": 338,
+    "powertrainComplaints": 142,
+    "recalls": 7,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "PACIFICA"
+    ],
+    "complaints": 163,
+    "powertrainComplaints": 77,
+    "recalls": 5,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "PACIFICA"
+    ],
+    "complaints": 351,
+    "powertrainComplaints": 201,
+    "recalls": 7,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "PACIFICA"
+    ],
+    "complaints": 198,
+    "powertrainComplaints": 109,
+    "recalls": 10,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Chevy Colorado",
+  "make": "CHEVROLET",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "COLORADO"
+    ],
+    "complaints": 215,
+    "powertrainComplaints": 126,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "COLORADO"
+    ],
+    "complaints": 179,
+    "powertrainComplaints": 92,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "COLORADO"
+    ],
+    "complaints": 145,
+    "powertrainComplaints": 81,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "COLORADO"
+    ],
+    "complaints": 79,
+    "powertrainComplaints": 44,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "COLORADO"
+    ],
+    "complaints": 68,
+    "powertrainComplaints": 24,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "COLORADO"
+    ],
+    "complaints": 48,
+    "powertrainComplaints": 7,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Kia Telluride",
+  "make": "KIA",
+  "years": [
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "TELLURIDE"
+    ],
+    "complaints": 739,
+    "powertrainComplaints": 185,
+    "recalls": 7,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "TELLURIDE"
+    ],
+    "complaints": 339,
+    "powertrainComplaints": 77,
+    "recalls": 5,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "TELLURIDE"
+    ],
+    "complaints": 311,
+    "powertrainComplaints": 44,
+    "recalls": 7,
+    "powertrainRecalls": 1
+   }
+  ]
+ },
+ {
+  "name": "Mazda CX-90",
+  "make": "MAZDA",
+  "years": [
+   {
+    "year": 2024,
+    "matchedStrings": [
+     "CX-90-MHEV"
+    ],
+    "complaints": 312,
+    "powertrainComplaints": 65,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2025,
+    "matchedStrings": [
+     "CX-90"
+    ],
+    "complaints": 24,
+    "powertrainComplaints": 6,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2026,
+    "matchedStrings": [
+     "CX-90 MHEV"
+    ],
+    "complaints": 5,
+    "powertrainComplaints": 0,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Chevy Traverse",
+  "make": "CHEVROLET",
+  "years": [
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "TRAVERSE"
+    ],
+    "complaints": 452,
+    "powertrainComplaints": 258,
+    "recalls": 2,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "TRAVERSE"
+    ],
+    "complaints": 400,
+    "powertrainComplaints": 213,
+    "recalls": 3,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "TRAVERSE"
+    ],
+    "complaints": 216,
+    "powertrainComplaints": 119,
+    "recalls": 8,
+    "powertrainRecalls": 2
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "TRAVERSE"
+    ],
+    "complaints": 86,
+    "powertrainComplaints": 28,
+    "recalls": 3,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "TRAVERSE"
+    ],
+    "complaints": 93,
+    "powertrainComplaints": 53,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "VW Atlas",
+  "make": "VOLKSWAGEN",
+  "years": [
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "ATLAS"
+    ],
+    "complaints": 455,
+    "powertrainComplaints": 109,
+    "recalls": 16,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "ATLAS"
+    ],
+    "complaints": 467,
+    "powertrainComplaints": 83,
+    "recalls": 11,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "ATLAS"
+    ],
+    "complaints": 27,
+    "powertrainComplaints": 4,
+    "recalls": 4,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "ATLAS"
+    ],
+    "complaints": 450,
+    "powertrainComplaints": 93,
+    "recalls": 17,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "ATLAS"
+    ],
+    "complaints": 172,
+    "powertrainComplaints": 50,
+    "recalls": 7,
+    "powertrainRecalls": 1
+   }
+  ]
+ },
+ {
+  "name": "Ford Explorer",
+  "make": "FORD",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "EXPLORER"
+    ],
+    "complaints": 1674,
+    "powertrainComplaints": 387,
+    "recalls": 14,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "EXPLORER"
+    ],
+    "complaints": 714,
+    "powertrainComplaints": 152,
+    "recalls": 7,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "EXPLORER"
+    ],
+    "complaints": 287,
+    "powertrainComplaints": 56,
+    "recalls": 6,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "EXPLORER"
+    ],
+    "complaints": 1175,
+    "powertrainComplaints": 554,
+    "recalls": 33,
+    "powertrainRecalls": 9
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "EXPLORER"
+    ],
+    "complaints": 403,
+    "powertrainComplaints": 154,
+    "recalls": 26,
+    "powertrainRecalls": 8
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "EXPLORER"
+    ],
+    "complaints": 249,
+    "powertrainComplaints": 77,
+    "recalls": 24,
+    "powertrainRecalls": 7
+   }
+  ]
+ },
+ {
+  "name": "Buick Enclave",
+  "make": "BUICK",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "ENCLAVE"
+    ],
+    "complaints": 178,
+    "powertrainComplaints": 8,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "ENCLAVE"
+    ],
+    "complaints": 64,
+    "powertrainComplaints": 27,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "ENCLAVE"
+    ],
+    "complaints": 41,
+    "powertrainComplaints": 25,
+    "recalls": 1,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "ENCLAVE"
+    ],
+    "complaints": 54,
+    "powertrainComplaints": 23,
+    "recalls": 6,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "ENCLAVE"
+    ],
+    "complaints": 24,
+    "powertrainComplaints": 4,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "ENCLAVE"
+    ],
+    "complaints": 12,
+    "powertrainComplaints": 3,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Volvo XC60",
+  "make": "VOLVO",
+  "years": [
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "XC60 T5",
+     "XC60 T6"
+    ],
+    "complaints": 36,
+    "powertrainComplaints": 4,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "XC60 T5",
+     "XC60 T6"
+    ],
+    "complaints": 34,
+    "powertrainComplaints": 4,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "XC60 T5",
+     "XC60 T6"
+    ],
+    "complaints": 20,
+    "powertrainComplaints": 3,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "XC60 T5",
+     "XC60 T6"
+    ],
+    "complaints": 31,
+    "powertrainComplaints": 6,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "XC60 B5 AWD",
+     "XC60 B5 FWD",
+     "XC60 B6 AWD"
+    ],
+    "complaints": 68,
+    "powertrainComplaints": 6,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Chevy Tahoe",
+  "make": "CHEVROLET",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "TAHOE"
+    ],
+    "complaints": 172,
+    "powertrainComplaints": 69,
+    "recalls": 4,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "TAHOE"
+    ],
+    "complaints": 100,
+    "powertrainComplaints": 35,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "TAHOE"
+    ],
+    "complaints": 101,
+    "powertrainComplaints": 58,
+    "recalls": 2,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "TAHOE"
+    ],
+    "complaints": 54,
+    "powertrainComplaints": 22,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "TAHOE"
+    ],
+    "complaints": 425,
+    "powertrainComplaints": 220,
+    "recalls": 16,
+    "powertrainRecalls": 3
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "TAHOE"
+    ],
+    "complaints": 175,
+    "powertrainComplaints": 97,
+    "recalls": 4,
+    "powertrainRecalls": 2
+   }
+  ]
+ },
+ {
+  "name": "Jeep Grand Cherokee L",
+  "make": "JEEP",
+  "years": [
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "GRAND CHEROKEE L"
+    ],
+    "complaints": 73,
+    "powertrainComplaints": 19,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "GRAND CHEROKEE L"
+    ],
+    "complaints": 213,
+    "powertrainComplaints": 46,
+    "recalls": 3,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Volvo V90 Cross Country",
+  "make": "VOLVO",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "V90 CC"
+    ],
+    "complaints": 3,
+    "powertrainComplaints": 0,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "V90 CC",
+     "V90CC"
+    ],
+    "complaints": 8,
+    "powertrainComplaints": 0,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "V90 CC T5",
+     "V90 CC T6"
+    ],
+    "complaints": 1,
+    "powertrainComplaints": 1,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "V90 CC T6",
+     "V90CC"
+    ],
+    "complaints": 5,
+    "powertrainComplaints": 0,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [],
+    "complaints": 0,
+    "powertrainComplaints": 0,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "V90 CC B6 AWD",
+     "V90CC"
+    ],
+    "complaints": 3,
+    "powertrainComplaints": 0,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Chevy Suburban",
+  "make": "CHEVROLET",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "SUBURBAN 1500"
+    ],
+    "complaints": 140,
+    "powertrainComplaints": 55,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "SUBURBAN 1500"
+    ],
+    "complaints": 81,
+    "powertrainComplaints": 32,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "SUBURBAN 1500"
+    ],
+    "complaints": 75,
+    "powertrainComplaints": 54,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "SUBURBAN 1500"
+    ],
+    "complaints": 40,
+    "powertrainComplaints": 23,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "SUBURBAN",
+     "SUBURBAN 1500"
+    ],
+    "complaints": 181,
+    "powertrainComplaints": 110,
+    "recalls": 12,
+    "powertrainRecalls": 3
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "SUBURBAN"
+    ],
+    "complaints": 105,
+    "powertrainComplaints": 71,
+    "recalls": 4,
+    "powertrainRecalls": 2
+   }
+  ]
+ },
+ {
+  "name": "Volvo XC90",
+  "make": "VOLVO",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "XC90 T5",
+     "XC90 T6"
+    ],
+    "complaints": 74,
+    "powertrainComplaints": 26,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "XC90 T5",
+     "XC90 T6"
+    ],
+    "complaints": 47,
+    "powertrainComplaints": 9,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "XC90 T5",
+     "XC90 T6"
+    ],
+    "complaints": 38,
+    "powertrainComplaints": 11,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "XC90 T5",
+     "XC90 T6"
+    ],
+    "complaints": 29,
+    "powertrainComplaints": 7,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "XC90 T5",
+     "XC90 T6"
+    ],
+    "complaints": 17,
+    "powertrainComplaints": 5,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "XC90 T5 AWD",
+     "XC90 T5 FWD",
+     "XC90 T6 AWD"
+    ],
+    "complaints": 29,
+    "powertrainComplaints": 7,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Porsche 996 Carrera",
+  "make": "PORSCHE",
+  "years": [
+   {
+    "year": 1999,
+    "matchedStrings": [
+     "911 CARRERA"
+    ],
+    "complaints": 13,
+    "powertrainComplaints": 3,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2000,
+    "matchedStrings": [
+     "911 CARRERA"
+    ],
+    "complaints": 2,
+    "powertrainComplaints": 0,
+    "recalls": 2,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2001,
+    "matchedStrings": [
+     "911 CARRERA"
+    ],
+    "complaints": 1,
+    "powertrainComplaints": 1,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2002,
+    "matchedStrings": [
+     "911 CARRERA 4S/CARRERA 4 CABRIO",
+     "911 CARRERA/CARRERA CABRIO"
+    ],
+    "complaints": 13,
+    "powertrainComplaints": 9,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2003,
+    "matchedStrings": [
+     "911 CARRERA 4S/CARRERA 4 CABRIO",
+     "911 CARRERA/CARRERA CABRIO"
+    ],
+    "complaints": 14,
+    "powertrainComplaints": 5,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2004,
+    "matchedStrings": [
+     "911 CARRERA",
+     "911 CARRERA 4S/CARRERA 4 CABRIOLET"
+    ],
+    "complaints": 16,
+    "powertrainComplaints": 12,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   }
+  ]
+ },
+ {
+  "name": "Ford Escape",
+  "make": "FORD",
+  "years": [
+   {
+    "year": 2017,
+    "matchedStrings": [
+     "ESCAPE"
+    ],
+    "complaints": 2639,
+    "powertrainComplaints": 2181,
+    "recalls": 4,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2018,
+    "matchedStrings": [
+     "ESCAPE"
+    ],
+    "complaints": 1744,
+    "powertrainComplaints": 1530,
+    "recalls": 4,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2019,
+    "matchedStrings": [
+     "ESCAPE"
+    ],
+    "complaints": 565,
+    "powertrainComplaints": 451,
+    "recalls": 3,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2020,
+    "matchedStrings": [
+     "ESCAPE"
+    ],
+    "complaints": 1491,
+    "powertrainComplaints": 320,
+    "recalls": 23,
+    "powertrainRecalls": 7
+   },
+   {
+    "year": 2021,
+    "matchedStrings": [
+     "ESCAPE"
+    ],
+    "complaints": 327,
+    "powertrainComplaints": 75,
+    "recalls": 19,
+    "powertrainRecalls": 5
+   },
+   {
+    "year": 2022,
+    "matchedStrings": [
+     "ESCAPE"
+    ],
+    "complaints": 226,
+    "powertrainComplaints": 58,
+    "recalls": 19,
+    "powertrainRecalls": 6
+   }
+  ]
+ },
+ {
+  "name": "Porsche 996 Turbo",
+  "make": "PORSCHE",
+  "years": [
+   {
+    "year": 2001,
+    "matchedStrings": [
+     "911 TURBO"
+    ],
+    "complaints": 22,
+    "powertrainComplaints": 18,
+    "recalls": 3,
+    "powertrainRecalls": 1
+   },
+   {
+    "year": 2002,
+    "matchedStrings": [
+     "911 GT2/TARGA/TURBO"
+    ],
+    "complaints": 24,
+    "powertrainComplaints": 22,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2003,
+    "matchedStrings": [
+     "911 GT2/TARGA/TURBO"
+    ],
+    "complaints": 23,
+    "powertrainComplaints": 18,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2004,
+    "matchedStrings": [
+     "911 GT3/TARGA/TURBO"
+    ],
+    "complaints": 40,
+    "powertrainComplaints": 40,
+    "recalls": 0,
+    "powertrainRecalls": 0
+   },
+   {
+    "year": 2005,
+    "matchedStrings": [
+     "911 GT",
+     "911 TURBO",
+     "911 TURBO CABRIOLET"
+    ],
+    "complaints": 8,
+    "powertrainComplaints": 8,
+    "recalls": 1,
+    "powertrainRecalls": 0
+   }
+  ]
+ }
+]

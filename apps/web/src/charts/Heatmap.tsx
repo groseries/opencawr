@@ -1,13 +1,13 @@
 import type { SurveyCell } from "../engine.worker.js";
-import { HEAT_RAMP_STEPS, heatColor } from "./heatColor.js";
+import { HEAT_RAMP_STEPS, heatColor, heatTextColor } from "./heatColor.js";
 
 /** Survey heatmap (spec §6.1): median $/mi across buy-odometer x hold-miles
  * combinations for one car, at reduced draws (see engine.worker.ts, ASSUMPTIONS.md
- * §H). Green ramp = cheaper; infeasible odo/year combinations (two-sided rule) are
+ * §I). Green ramp = cheaper; infeasible odo/year combinations (two-sided rule) are
  * hatched gray, never colored. */
 
-const CELL_W = 44;
-const CELL_H = 26;
+const CELL_W = 54;
+const CELL_H = 30;
 const MARGIN = { top: 26, right: 12, bottom: 14, left: 40 };
 
 const fmt = (x: number) => `$${x.toFixed(3)}`;
@@ -32,13 +32,6 @@ export function Heatmap({
   const chartH = holdMilesAxis.length * CELL_H;
   const vbW = MARGIN.left + chartW + MARGIN.right;
   const vbH = MARGIN.top + chartH + MARGIN.bottom;
-
-  // Label the extreme (marks-and-anatomy: label the endpoint/extreme, not every
-  // cell) — the single cheapest feasible combination in this car's grid.
-  const cheapest = cells.reduce<SurveyCell | null>((best, c) => {
-    if (!c.feasible) return best;
-    return !best || c.p50 < best.p50 ? c : best;
-  }, null);
 
   return (
     <div className="heatmap-wrap">
@@ -91,7 +84,6 @@ export function Heatmap({
           const x = MARGIN.left + ci * CELL_W;
           const y = MARGIN.top + ri * CELL_H;
           const cheapness = c.feasible ? (max - c.p50) / span : 0;
-          const isExtreme = cheapest !== null && c === cheapest;
           const label = c.feasible
             ? `Buy ${fmtK(c.buyOdo)} mi, hold ${fmtK(c.holdMiles)} mi — ${fmt(c.p50)} per mile`
             : `Buy ${fmtK(c.buyOdo)} mi, hold ${fmtK(c.holdMiles)} mi — not a feasible odometer for this model's production years`;
@@ -109,13 +101,15 @@ export function Heatmap({
               >
                 <title>{label}</title>
               </rect>
-              {isExtreme && (
+              {c.feasible && (
                 <text
                   x={x + CELL_W / 2}
                   y={y + CELL_H / 2}
                   textAnchor="middle"
                   dominantBaseline="middle"
-                  className="heatmap-extreme-label"
+                  className="heatmap-cell-label"
+                  style={{ fill: heatTextColor(cheapness) }}
+                  pointerEvents="none"
                 >
                   {fmt(c.p50)}
                 </text>
@@ -134,11 +128,17 @@ export function Heatmap({
             <span key={hex} className="heatmap-swatch" style={{ background: hex }} />
           ))}
         </span>
-        <span className="heatmap-legend-label">pricier → cheaper</span>
+        <span className="heatmap-legend-label">
+          {fmt(max)} costliest ← → {fmt(min)} cheapest
+        </span>
         <span className="heatmap-legend-infeasible">
           <span className="heatmap-swatch heatmap-swatch-infeasible" />
           not feasible
         </span>
+      </div>
+      <div className="heatmap-legend-caption">
+        Scale is per-car: {fmt(min)}–{fmt(max)} spans only this model's own feasible
+        cells, not a scale shared across cars.
       </div>
     </div>
   );

@@ -8,6 +8,8 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { urlHash, FIXTURE_DIR } from "../src/fetchCached.js";
+import { corpusQueries } from "../src/reliability/corpus.js";
+import { modelsForYear } from "../src/sources/nhtsa.js";
 
 const here = dirname(fileURLToPath(import.meta.url));
 void here;
@@ -19,9 +21,17 @@ interface IndexRow {
 }
 const index: IndexRow[] = [];
 
-async function record(url: string, note: string, transform?: (body: unknown) => unknown): Promise<void> {
+async function record(
+  url: string,
+  note: string,
+  transform?: (body: unknown) => unknown,
+  /** NHTSA answers HTTP 400 with a valid `{"count":0,...,"results":[]}` body
+   *  when a make/model/year has no data — e.g. any model string it doesn't
+   *  list for that year. That is a real answer worth recording, not a failure. */
+  acceptNonOkJson = false,
+): Promise<void> {
   const res = await fetch(url, { headers: { Accept: "application/json" } });
-  if (!res.ok) throw new Error(`${url} -> HTTP ${res.status}`);
+  if (!res.ok && !acceptNonOkJson) throw new Error(`${url} -> HTTP ${res.status}`);
   let body = await res.json();
   if (transform) body = transform(body);
   const hash = urlHash(url);
@@ -159,6 +169,43 @@ async function main(): Promise<void> {
         await job();
       }
     }),
+  );
+
+  // --- Full-corpus reliability re-derivation (launch gate): the Volvo trio is
+  // the regression case for NHTSA's trim-fragmented, year-inconsistent model
+  // catalogue. There is never a bare `XC90` string in the window (the bare
+  // query 400s with count 0 — recorded below as the pin), and `XC90 T5` and
+  // `XC90 T6` return the SAME complaints, so both the per-year catalogue and
+  // every matched string are needed to prove catalogue resolution AND ODI
+  // de-duplication. Matchers come from corpus.ts so they can't drift.
+  const volvoQueries = corpusQueries().filter((q) => q.make === "VOLVO");
+  for (const year of [2017, 2018, 2019, 2020, 2021, 2022]) {
+    await record(
+      `https://api.nhtsa.gov/products/vehicle/models?${new URLSearchParams({
+        modelYear: String(year),
+        make: "VOLVO",
+        issueType: "c",
+      })}`,
+      `NHTSA model catalogue: Volvo ${year}`,
+    );
+    const catalogue = await modelsForYear("VOLVO", year);
+    const models = new Set(
+      volvoQueries.filter((q) => q.years.includes(year)).flatMap((q) => catalogue.filter(q.matchesModel)),
+    );
+    for (const model of [...models].sort()) {
+      await record(
+        complaintsUrl("VOLVO", model, year),
+        `NHTSA complaintsByVehicle: Volvo ${model} ${year} (full-corpus re-derivation, trimmed to odiNumber+components)`,
+        trimComplaints,
+      );
+    }
+  }
+  await record(
+    complaintsUrl("VOLVO", "XC90", 2017),
+    "NHTSA complaintsByVehicle: bare 'XC90' 2017 — the single model string the pre-catalogue " +
+      "pipeline used. NHTSA does not list it for that year and answers HTTP 400 with count 0.",
+    trimComplaints,
+    true,
   );
 
   writeFileSync(join(FIXTURE_DIR, "index.json"), JSON.stringify(index, null, 2));

@@ -1,0 +1,160 @@
+{
+  "url": "https://api.nhtsa.gov/products/vehicle/models?modelYear=2021&make=VOLVO&issueType=c",
+  "fetchedAt": "2026-07-29T14:29:55.602Z",
+  "body": {
+    "count": 30,
+    "message": "Results returned successfully",
+    "results": [
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "S60 T5"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "S60 T5"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "S60 T6"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "S60 T8"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "S60 T8 POLESTAR ENGINEERED"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "V60 T5"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "V60 T6"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "V60 T8"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "V60 T8 POLESTAR ENGINEERED"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "V60 CC T5"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "V90 T5"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "V90 T6"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "XC40 T5"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "XC40 T4"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "XC40 T4"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "XC40 RECHARGE"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "XC40 RECHARGE"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "XC60 T5"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "XC60 T5"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "XC60 T6"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "XC60 T8"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "XC60 T8 POLESTAR ENGINEERED"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "XC90 T5"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "XC90 T5"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "XC90 T6"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "XC90 T8"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "VN"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "VNR"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "XC90H"
+      },
+      {
+        "modelYear": "2021",
+        "make": "VOLVO",
+        "model": "XC60PHEV"
+      }
+    ]
+  }
+}

@@ -38,10 +38,20 @@ export function costPerMile(
     throw new RangeError(`holdMiles must be positive or "eol", got ${holdMiles}`);
   }
   const insMult = inputs.insuranceMultiplier ?? constants.insurance_multiplier_USAA;
-  // an explicit real quote is used as-is; the per-model estimate gets the multiplier
-  const fullCov =
-    inputs.fullCoverageUsdYr ?? vehicle.specs.full_coverage_ins_usd_yr * insMult;
-  const liab = constants.liability_only_usd_yr * insMult;
+  // Insurance = NAIC state average premium split by what each coverage insures
+  // (ASSUMPTIONS.md §A). Liability covers damage to OTHERS, so it does not scale
+  // with this car's value and is charged flat. Collision + comprehensive cover THIS
+  // car, so they scale linearly with its book value against `insurance_ref_book_usd`
+  // — which is what makes the premium fall as the car depreciates. An explicit real
+  // quote (`fullCoverageUsdYr`) bypasses all of it, including the multiplier.
+  const esc = constants.insurance_cpi_escalator;
+  const liab = esc * (inputs.liabilityUsdYr ?? constants.liability_only_usd_yr) * insMult;
+  const physDmgAtRefBook =
+    esc *
+    ((inputs.collisionUsdYr ?? constants.collision_premium_usd_yr) +
+      (inputs.comprehensiveUsdYr ?? constants.comprehensive_premium_usd_yr)) *
+    insMult;
+  const quoteUsdYr = inputs.fullCoverageUsdYr;
   const reg = inputs.registrationUsdYr ?? constants.registration_usd_yr_FL;
   const taxRate = inputs.useTaxRate ?? constants.use_tax_rate;
 
@@ -65,7 +75,7 @@ export function costPerMile(
         ? yearMults.sweet_spot
         : yearMults.normal;
 
-  const epm = energyPerMile(vehicle, constants, gas, elec);
+  const epm = energyPerMile(vehicle, constants, gas, elec, am);
   const lnr = Math.log(1 + r);
   const a0 = buyOdo / am; // odometer-implied age (prototype limitation, see ASSUMPTIONS.md)
   const upkeepEsc = (age: number) =>
@@ -132,6 +142,8 @@ export function costPerMile(
       maintPV += w * maintenanceAt(maintCurve, age, 1) * upkeepEsc(age) * df;
       const book = curveAt(priceCurve, buyOdo + (t - 1) * am, scrap);
       const full = book > constants.full_cov_threshold_usd;
+      const fullCov =
+        quoteUsdYr ?? liab + physDmgAtRefBook * (book / constants.insurance_ref_book_usd);
       // insurance noise: Normal(1, σ) per year (documented)
       insPV +=
         w * (full ? fullCov : liab) * (1 + CAL.insuranceNoiseSigma * rngIns.normal()) * df;
@@ -219,12 +231,13 @@ export function costPerMile(
   };
 }
 
-/** Energy $/mi incl. documented EV degradation and DC-fast-charge premiums. */
+/** Energy $/mi incl. documented EV/PHEV degradation and DC-fast-charge premiums. */
 export function energyPerMile(
   vehicle: Vehicle,
   constants: Constants,
   gas: number,
   elec: number,
+  annualMiles: number,
 ): number {
   const s = vehicle.specs;
   switch (vehicle.etype) {
@@ -239,9 +252,29 @@ export function energyPerMile(
         constants.dcfc_elec_mult_ev
       );
     case "phev": {
-      const uf = s.phev_utility_factor ?? 0.6;
+      const ufSeed = s.phev_utility_factor ?? 0.6;
+      const range = s.electric_range_mi;
+      // Mileage-dependent utility factor, anchored to the seed value at baseline
+      // annual_miles (J2841-shaped approximation, not J2841 itself — see ASSUMPTIONS.md
+      // §B). Falls back to the fixed seed UF when electric_range_mi is absent.
+      let uf = ufSeed;
+      if (range != null) {
+        const rangeEff = range / constants.ev_kwh_degradation_mult; // pack degradation shrinks range
+        const ufRaw = (r: number, am: number) => 1 - Math.exp(-r / (am / 365));
+        uf = Math.min(
+          1,
+          Math.max(
+            0,
+            ufSeed * (ufRaw(rangeEff, annualMiles) / ufRaw(range, constants.annual_miles)),
+          ),
+        );
+      }
       return (
-        uf * ((s.kwh_per_100mi ?? 30) / 100) * elec * constants.dcfc_elec_mult_phev +
+        uf *
+          ((s.kwh_per_100mi ?? 30) / 100) *
+          constants.ev_kwh_degradation_mult * // pack degradation raises electric consumption
+          elec *
+          constants.dcfc_elec_mult_phev +
         (1 - uf) * (gas / (s.phev_gas_mpg ?? 40))
       );
     }

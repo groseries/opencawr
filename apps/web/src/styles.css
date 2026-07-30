@@ -669,7 +669,7 @@ th.num {
 .drawer-panel {
   position: relative;
   width: 100%;
-  max-width: 620px;
+  max-width: 840px;
   height: 100%;
   overflow-y: auto;
   background: var(--panel);
@@ -706,6 +706,13 @@ th.num {
   font-size: 17px;
   letter-spacing: 0.02em;
   padding-right: 32px;
+}
+
+.drawer-etype {
+  margin-left: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 400;
 }
 
 .drawer-headline {
@@ -771,11 +778,10 @@ th.num {
   outline: none;
 }
 
-.heatmap-extreme-label {
+.heatmap-cell-label {
   font-family: var(--font-mono);
   font-size: 9px;
   font-weight: 600;
-  fill: var(--paper);
   pointer-events: none;
 }
 
@@ -821,6 +827,12 @@ th.num {
   align-items: center;
   gap: 6px;
   margin-left: auto;
+}
+
+.heatmap-legend-caption {
+  margin-top: 4px;
+  font-size: 10.5px;
+  color: var(--muted);
 }
 
 /* ── sensitivity lines ────────────────────────────────────── */
@@ -882,12 +894,24 @@ th.num {
 .breakdown-bar {
   display: flex;
   width: 100%;
-  height: 22px;
+  height: 34px;
   gap: 2px;
 }
 
 .breakdown-seg {
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.breakdown-seg-label {
+  font-size: 10.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 4px;
 }
 
 .breakdown-list {
@@ -933,4 +957,212 @@ th.num {
 
 .breakdown-total .breakdown-value {
   margin-left: auto;
+}
+
+/* ── assumptions tab (R6): renders ASSUMPTIONS.md / reliability-methodology.md
+   / spec excerpts live from the repo — see apps/web/src/assumptions/ ───── */
+.at-section {
+  margin-bottom: 32px;
+}
+
+.at-section h3 {
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.md-source {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.md h3,
+.md h4,
+.md h5,
+.md h6 {
+  margin: 18px 0 8px;
+}
+
+.md h3:first-child,
+.md h4:first-child {
+  margin-top: 0;
+}
+
+.md p {
+  margin: 8px 0;
+}
+
+.md ul,
+.md ol {
+  margin: 8px 0 8px 1.3em;
+}
+
+.md li {
+  margin: 4px 0;
+}
+
+.md pre {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  padding: 10px 12px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+}
+
+.md code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: var(--panel);
+  padding: 1px 4px;
+}
+
+.md pre code {
+  background: none;
+  padding: 0;
+}
+
+.md a {
+  color: var(--ink);
+}
+
+.md-table-wrap {
+  overflow-x: auto;
+  margin: 10px 0;
+}
+
+.md table,
+.input-doc-table,
+.calibration-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 13px;
+}
+
+.md table {
+  min-width: 640px;
+}
+
+.md th,
+.input-doc-table th,
+.calibration-table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--ink);
+  white-space: nowrap;
+}
+
+.md td,
+.input-doc-table td,
+.calibration-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+/* status badges — border style/fill differ, not hue, per the app's
+   one-accent-color (--needle) palette */
+.status-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  padding: 1px 5px;
+  border: 1px solid var(--ink);
+  white-space: nowrap;
+}
+
+.status-sourced {
+  border-color: var(--ink);
+  background: var(--panel);
+  color: var(--ink);
+}
+
+.status-documented {
+  border-color: var(--rule);
+  color: var(--muted);
+}
+
+.status-judgment {
+  border-style: dashed;
+  color: var(--muted);
+}
+
+.status-user-specific {
+  border-color: var(--needle);
+  color: var(--needle);
+}
+
+.status-owner-decision {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* launch gate: stated plainly, high-contrast, impossible to skim past */
+.gate-banner {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 14px 16px;
+}
+
+.gate-banner .md h3,
+.gate-banner .md h4,
+.gate-banner .md p,
+.gate-banner .md li {
+  color: var(--paper);
+}
+
+.gate-banner .md code {
+  background: rgba(232, 234, 236, 0.15);
+  color: var(--paper);
+}
+
+.gate-banner .md a {
+  color: var(--paper);
+}
+
+/* open items: as visible as the answers, not a footnote */
+.open-list {
+  list-style: none;
+  padding: 0;
+}
+
+.open-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 13px;
+}
+
+.open-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  border: 1px solid var(--needle);
+  color: var(--needle);
+  padding: 1px 5px;
+  margin-right: 6px;
+}
+
+.open-heading {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-right: 6px;
+}
+
+.callout {
+  background: var(--panel);
+  border-left: 3px solid var(--needle);
+  padding: 10px 14px;
+  margin-top: 14px;
+  font-size: 13px;
 }

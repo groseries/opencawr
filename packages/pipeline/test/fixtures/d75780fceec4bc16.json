@@ -1,0 +1,8 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90&modelYear=2017",
+  "fetchedAt": "2026-07-30T00:30:12.845Z",
+  "body": {
+    "count": 0,
+    "results": []
+  }
+}

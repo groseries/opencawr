@@ -1,0 +1,25 @@
+{
+  "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=V90CC&modelYear=2020",
+  "fetchedAt": "2026-07-29T14:39:27.419Z",
+  "body": {
+    "count": 4,
+    "results": [
+      {
+        "odiNumber": 11635195,
+        "components": "ELECTRICAL SYSTEM,FORWARD COLLISION AVOIDANCE"
+      },
+      {
+        "odiNumber": 11527781,
+        "components": "UNKNOWN OR OTHER"
+      },
+      {
+        "odiNumber": 11521965,
+        "components": "STEERING,ELECTRICAL SYSTEM,SERVICE BRAKES"
+      },
+      {
+        "odiNumber": 11430114,
+        "components": "TIRES"
+      }
+    ]
+  }
+}
