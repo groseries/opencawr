@@ -9,6 +9,8 @@ import { HEAT_RAMP_STEPS, heatColor, heatTextColor } from "./heatColor.js";
 const CELL_W = 54;
 const CELL_H = 30;
 const MARGIN = { top: 26, right: 12, bottom: 14, left: 40 };
+const SWATCH_W = 16;
+const SWATCH_H = 12;
 
 const fmt = (x: number) => `$${x.toFixed(3)}`;
 const fmtK = (x: number) => `${Math.round(x / 1000)}k`;
@@ -123,16 +125,26 @@ export function Heatmap({
         <span>↑ miles held</span>
       </div>
       <div className="heatmap-legend">
-        <span className="heatmap-legend-swatches">
-          {HEAT_RAMP_STEPS.map((hex) => (
-            <span key={hex} className="heatmap-swatch" style={{ background: hex }} />
+        <span className="heatmap-legend-label">{fmt(max)} costliest</span>
+        {/* Swatches are inline SVG <rect fill> — the same element and attribute the
+         * cells use — so a forced-dark browser extension can't remap the legend and
+         * the grid through two different code paths and invert one relative to the
+         * other (it did, when these were HTML spans with a CSS background). */}
+        <svg
+          className="heatmap-legend-swatches"
+          width={HEAT_RAMP_STEPS.length * SWATCH_W}
+          height={SWATCH_H}
+          aria-hidden="true"
+        >
+          {HEAT_RAMP_STEPS.map((hex, i) => (
+            <rect key={hex} x={i * SWATCH_W} width={SWATCH_W} height={SWATCH_H} fill={hex} />
           ))}
-        </span>
-        <span className="heatmap-legend-label">
-          {fmt(max)} costliest ← → {fmt(min)} cheapest
-        </span>
+        </svg>
+        <span className="heatmap-legend-label">{fmt(min)} cheapest</span>
         <span className="heatmap-legend-infeasible">
-          <span className="heatmap-swatch heatmap-swatch-infeasible" />
+          <svg width={SWATCH_W} height={SWATCH_H} aria-hidden="true">
+            <rect width={SWATCH_W} height={SWATCH_H} fill="url(#heatmap-infeasible)" />
+          </svg>
           not feasible
         </span>
       </div>

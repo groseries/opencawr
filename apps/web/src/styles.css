@@ -803,23 +803,7 @@ th.num {
 }
 
 .heatmap-legend-swatches {
-  display: flex;
-}
-
-.heatmap-swatch {
-  display: inline-block;
-  width: 16px;
-  height: 12px;
-}
-
-.heatmap-swatch-infeasible {
-  background: repeating-linear-gradient(
-    45deg,
-    var(--rule),
-    var(--rule) 2px,
-    var(--muted) 2px,
-    var(--muted) 4px
-  );
+  display: block;
 }
 
 .heatmap-legend-infeasible {
