@@ -1,0 +1,56 @@
+{
+  "_note": "OEM-published MSRP, base trim, incl. destination/DPH. Retrieved 2026-07-29.",
+  "candidates": [
+    ["Toyota Corolla",            2026, "Corolla LE",                        22925, 1295, "toyota-pdf"],
+    ["Toyota Camry Hybrid",       2026, "Camry LE (hybrid-only for 2026)",   29600, 1295, "toyota-pdf"],
+    ["Toyota RAV4 Hybrid",        2026, "RAV4 Hybrid LE FWD",                31900, 1595, "toyota-pdf"],
+    ["Toyota Prius (hybrid)",     2027, "Prius LE",                          28755, 1295, "toyota-pdf"],
+    ["Toyota Prius Prime",        2027, "Prius Plug-in Hybrid SE",           33980, 1295, "toyota-pdf"],
+    ["Toyota Highlander",         2026, "Highlander XLE AWD",                46270, 1595, "toyota-pdf"],
+    ["Toyota Highlander Hybrid",  2026, "Highlander Hybrid XLE AWD",         48020, 1595, "toyota-pdf"],
+    ["Toyota Sienna Hybrid",      2026, "Sienna LE FWD 8-Passenger Hybrid",  40420, 1595, "toyota-pdf"],
+    ["Toyota Tacoma",             2026, "Tacoma 4x2 SR XtraCab LB",          32245, 1745, "toyota-pdf"],
+    ["Toyota Sequoia",            2026, "Sequoia 4x2 SR5 iForce MAX",        65725, 2195, "toyota-pdf"],
+    ["Toyota 4Runner",            2026, "4Runner 4x2 SR5",                   41370, 1595, "toyota-pdf"],
+    ["Toyota RAV4 Prime",         2026, "RAV4 Plug-in Hybrid SE",            41500, 1595, "toyota-pdf"],
+
+    ["Honda Civic",               2026, "Civic Sedan LX",                    24595, 1195, "hondanews"],
+    ["Honda Accord",              2026, "Accord LX",                         28395, 1195, "hondanews"],
+    ["Honda CR-V",                2026, "CR-V LX 2WD",                       30920, 1395, "hondanews"],
+    ["Honda Odyssey",             2026, "Odyssey EX-L",                      42795, 1495, "hondanews"],
+    ["Honda Pilot",               2026, "Pilot Sport 2WD",                   42395, 1495, "hondanews"],
+
+    ["Kia K4",                    2026, "K4 LX",                             22290, 1245, "kiamedia"],
+    ["Kia Niro (hybrid)",         2026, "Niro LX (HEV)",                     27390, 1495, "kiamedia"],
+    ["Kia Sportage",              2026, "Sportage LX FWD",                   28790, 1495, "kiamedia"],
+    ["Kia Sorento",               2026, "Sorento LX FWD",                    32390, 1495, "kiamedia"],
+    ["Kia Telluride",             2027, "Telluride LX FWD",                  39190, 1545, "kiamedia"],
+
+    ["Hyundai Elantra",           2026, "Elantra SE",                        22625, 1245, "hyundainews"],
+    ["Hyundai Sonata",            2026, "Sonata SE",                         27300, 1245, "hyundainews"],
+    ["Hyundai Kona",              2026, "Kona SE FWD",                       25500, 1600, "hyundainews"],
+    ["Hyundai Tucson",            2026, "Tucson SE FWD",                     29200, 1600, "hyundainews"],
+    ["Hyundai Santa Fe",          2026, "Santa Fe SE FWD",                   34800, 1600, "hyundainews"],
+    ["Hyundai Palisade",          2026, "Palisade SE FWD",                   39435, 1600, "hyundainews"],
+
+    ["Subaru Outback",            2026, "Outback Premium",                   34995, 1450, "subaru"],
+    ["Subaru Forester",           2026, "Forester (base)",                   29995, 1450, "subaru"],
+    ["Subaru Ascent",             2026, "Ascent Premium",                    40795, 1450, "subaru"],
+
+    ["Nissan Leaf",               2026, "LEAF S+",                           29990, 1545, "nissannews"],
+    ["Nissan Rogue",              2026, "Rogue S FWD (2026.5)",              29490, 1545, "nissannews"],
+
+    ["Mazda3 (SkyActiv)",         2026, "Mazda3 2.5 S Sedan FWD",            24650, 1235, "mazdanews"],
+    ["Mazda CX-5",                2026, "CX-5 2.5 S",                        29990, 1495, "mazdanews"],
+    ["Mazda CX-90",               2026, "CX-90 3.3 Turbo Select",            39300, 1530, "mazdanews"],
+
+    ["VW Atlas",                  2026, "Atlas SE FWD",                      39310, 1475, "mediavw"],
+    ["VW GTI",                    2026, "Golf GTI S",                        34590, 1275, "mediavw"],
+    ["VW Tiguan",                 2026, "Tiguan S FWD",                      30805, 1475, "mediavw"],
+
+    ["Chevy Suburban",            2026, "Suburban LS",                       63700, 2795, "chevrolet"],
+    ["Chevy Tahoe",               2026, "Tahoe LS",                          60700, 2795, "chevrolet"],
+    ["Chevy Colorado",            2026, "Colorado WT",                       32400, 2095, "chevrolet"],
+    ["Chevy Equinox",             2027, "Equinox LT",                        29000, 1995, "chevrolet"]
+  ]
+}

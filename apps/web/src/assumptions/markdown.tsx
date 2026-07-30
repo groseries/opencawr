@@ -185,7 +185,11 @@ export function findOpenRows(source: string): { heading: string; cells: string[]
     if (b.kind === "heading") heading = b.text;
     if (b.kind === "table") {
       for (const row of b.rows) {
-        if (row[0]?.trim() === "OPEN") out.push({ heading, cells: row.slice(1) });
+        // Matches a bare `OPEN` cell AND the dated `OPEN (2026-07-29)` form the
+        // decision log uses. Matching only the bare form hid 17 of 22 open items
+        // — including every one added since 2026-07-28 — from the very section
+        // whose purpose is making open items as visible as the answers.
+        if (/^OPEN\b/.test(row[0]?.trim() ?? "")) out.push({ heading, cells: row.slice(1) });
       }
     }
   }

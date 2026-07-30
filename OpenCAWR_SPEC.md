@@ -176,11 +176,17 @@ an estimate** (the seed data has a `provenance` field for exactly this).
 
 The owner intends this to be **public eventually**. Two blockers had to be cleared:
 
-1. **Consumer Reports — CLEARED 2026-07-29.** The prototype's reliability multipliers were *lightly* stripped
-   of CR citations but **not re-derived**. CR aggressively polices commercial/public use of its ratings, and
-   republishing them (even reworded) is a real takedown/copyright risk. Every non-`sport` `reliability_tier` in
-   `opencawr_data.json` is now derived from **NHTSA complaint data only** — public domain, keyless, free —
-   per `docs/reliability-methodology.md`, and nothing traces to CR. **CarComplaints and RepairPal, which
+1. **Consumer Reports — PARTIALLY CLEARED 2026-07-29.** The prototype's reliability multipliers were
+   *lightly* stripped of CR citations but **not re-derived**. CR aggressively polices commercial/public use of
+   its ratings, and republishing them (even reworded) is a real takedown/copyright risk. Every non-`sport`
+   `reliability_tier` in `opencawr_data.json` is now derived from **NHTSA complaint data only** — public
+   domain, keyless, free — per `docs/reliability-methodology.md`.
+   **Two fields still trace to the same CR-derived judgment and this gate is therefore NOT fully cleared:
+   `repair_cost_multiplier_by_make` and `eol_maintained_miles`.** They correlate with the old seed tier at
+   +0.602 and −0.838 respectively — one judgment wearing three hats — so re-deriving only the tier broke the
+   seed's internal consistency deliberately rather than removing the dependency. Do not describe this gate as
+   closed until those two are re-derived or independently sourced; the open rows in `ASSUMPTIONS.md` §D/§E
+   track it. **CarComplaints and RepairPal, which
    earlier drafts of this section prescribed, are deliberately NOT used and are struck from it**: both are
    commercial sites with restrictive ToS and no free API, so obtaining their aggregates means extracting a
    compilation — precisely the exposure clause 2 below exists to avoid. Re-deriving reliability with them would

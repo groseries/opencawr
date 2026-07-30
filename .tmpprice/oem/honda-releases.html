@@ -1,0 +1,2336 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+  <html lang="en">
+
+    
+      <head data-post-login-download="#">
+      
+
+    
+      
+        
+          
+            <script>
+                'use strict';
+                function ahmOneTrustIsReady(data) {
+                  data = data || null;
+                  if (window.WKOneTrust) {
+                    WKOneTrust.onConsentReady(data);
+                  } else {
+                    window._wkOneTrustPendingReady = data;
+                  }
+                }
+                function ahmConsentError(data) {
+                  console.error('AHM Consent Error: ' + data);
+                }
+                (function () {
+                  var ahmConsentSettings = {
+                    oneTrustDomain: 'hondanews.com',
+                    environment: 'PROD',
+                    eUser: false,
+                    userToken: false,
+                    delayForDataLoad: false,
+                    ononetrustready: ahmOneTrustIsReady,
+                    onError: ahmConsentError
+                  };
+                  function objectToQueryString(o){var r=[];for(var t in o){if(!o.hasOwnProperty(t))continue;var n=o[t];if(n!=null){if(typeof n==='function'){n=n.name}r.push(encodeURIComponent(t)+'='+encodeURIComponent(n))}}return r.length?'?'+r.join('&'):''}
+                  var queryString = objectToQueryString(ahmConsentSettings);
+                  var currentScript = document.getElementsByTagName('script')[0];
+                  var consentScript = document.createElement('script');
+                  consentScript.async = true;
+                  var scriptSrc = ahmConsentSettings.environment == 'PROD'
+                      ? 'https://content.services.honda.com/privacyconsent/ahm-privacy-consent.js'
+                      : 'https://staging.content.services.honda.com/privacyconsent/ahm-privacy-consent.js';
+                  consentScript.src = scriptSrc + queryString;
+                  consentScript.addEventListener('error', function(event) {
+                    ahmConsentError('Error loading the consent script');
+                  });
+                  currentScript.parentNode.insertBefore(consentScript, currentScript);
+                })();
+            </script>
+          
+        
+      
+    
+
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="author" content="">
+
+    <meta name="google-site-verification" content="TODO" />
+
+    <title>Honda Automobiles Newsroom</title>
+
+    
+
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/honda/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/honda/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/honda/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/favicon/honda/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/favicon/honda/safari-pinned-tab.svg" color="#000000">
+<link rel="shortcut icon" href="/assets/images/favicon/honda/favicon.ico">
+<meta name="msapplication-config" content="/assets/images/favicon/honda/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <link href="/assets/stylesheets/main.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/webjars/toastr/2.1.1/toastr.css">
+    <link href="/assets/division-honda-automobiles.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="/assets/admin/clever/assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    
+
+
+
+  
+    <meta name="description" content="Honda Automobiles Newsroom"/>
+  
+
+  
+
+  
+
+  
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Honda Automobiles Newsroom"/>
+  
+    <meta property="og:description" content="Honda Automobiles Newsroom"/>
+  
+  <meta property="og:url" content="http://hondanews.com/en-US/honda-automobiles"/>
+  <meta property="og:site_name" content="Honda Automobiles Newsroom"/>
+  <meta property="og:locale" content="en_US"/>
+
+  
+    <meta property="og:image" content="http://hondanews.com/assets/images/assets/logos/honda-automobiles-3x.min.png"/>
+    <meta property="og:image:type" content="image/png"/>
+    
+    
+    <meta property="og:image:alt" content="Honda Automobiles Newsroom"/>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  <meta name="twitter:card" content="summary"/>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+    
+      <script async
+      src="https://cdn.userway.org/widget.js"
+      data-account="6ZSTYoHsgj"
+      data-position="3"
+      data-color="#7a7a7a"
+        >
+      </script>
+    
+
+    
+
+      <script type="text/plain"
+      data-optanon-category="C0002"
+      data-src="https://www.googletagmanager.com/gtag/js?id=UA-29261107-1"
+      defer>
+      </script>
+
+      <script type="text/plain"
+      data-optanon-category="C0002"
+      data-script-type="inline">
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+
+        gtag('js', new Date());
+
+        gtag('consent', 'default', {
+          'ad_storage': 'denied',
+          'analytics_storage': 'denied',
+          'functionality_storage': 'denied',
+          'personalization_storage': 'denied',
+          'security_storage': 'denied'
+        });
+
+        gtag('config', 'UA-29261107-1', {
+        'custom_map': {
+        'dimension1': 'releaseId',
+        'dimension2': 'requestLocale'
+        }
+        });
+
+        
+
+        gtag('send', 'pageview');
+      </script>
+    
+
+  </head>
+
+    <body class="site--honda   theme--honda-automobiles-newsroom" data-market-route-prefix="en-US/honda-automobiles">
+
+      
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-default site-navbar honda-navbar sticky-navbar" id="globalHeader">
+
+  <div id="side-navbar">
+
+    <button class="close-nav test"><i class="fa fa-times-circle-o" aria-hidden="true"></i> Close</button>
+    <ul class="custom-navbar-menu">
+      <li class="menu-item"><a href="/"><i class="fa fa-home" aria-hidden="true"></i> HondaNews Home</a></li>
+      <div class="menu-divider"></div>
+      <li class="menu-item">
+        <h4 class="menu-item__header"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Division Newsrooms</h4>
+        <ul class="submenu">
+          <li class="submenu-item">
+            <a href="/en-US/electrification">Electrification</a>
+          </li>
+          <li class="submenu-item">
+            <a href="/en-US/safety">Safety For Everyone</a>
+          </li>
+          <li class="submenu-item">
+            <a href="/en-US/honda-corporate">Corporate</a>
+          </li>
+          <li class="submenu-item">
+            <a href="/en-US/honda-automobiles">Honda Autos</a>
+          </li>
+          <li class="submenu-item">
+            <a href="https://acuranews.com/en-US">Acura</a>
+          </li>
+          <li class="submenu-item">
+            <a href="/en-US/honda-racing">Racing</a>
+          </li>
+          <li class="submenu-item">
+            <a href="/en-US/powersports">Powersports</a>
+          </li>
+          <li class="submenu-item">
+            <a href="/en-US/power-equipment">Power Equipment</a>
+          </li>
+          <li class="submenu-item">
+            <a href="/en-US/honda-engines">Engines</a>
+          </li>
+          <li class="submenu-item">
+            <a href="/en-US/honda-marine">Marine</a>
+          </li>
+          <li class="submenu-item">
+            <a href="/en-US/hondajet">HondaJet</a>
+          </li>
+        </ul>
+      </li>
+      <div class="menu-divider"></div>
+      <li class="menu-item"><a href="/en-US/honda-corporate/channels/channel-3011"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Honda Perspectives</a></li>
+      <div class="menu-divider"></div>
+      <li class="menu-item"><a href="/honda-corporate/contact"><i class="fa fa-users" aria-hidden="true"></i> Press Contacts</a></li>
+      <div class="menu-divider"></div>
+      <li class="menu-item"><a href="/en-US/honda-automobiles/basket"><i class="fa fa-folder-open" aria-hidden="true"></i> Saved Items</a></li>
+      <div class="menu-divider"></div>
+      <li class="menu-item"><a href="/honda-corporate/subscribe"><i class="fa fa-envelope-o" aria-hidden="true"></i> Subscribe to Press Alerts</a></li>
+    </ul>
+
+  </div>
+
+  <div class="container">
+    <div class="navbar-container">
+      <div class="nav-header">
+        <button type="button" class="navbar-toggle hamburger">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <h3 class="hidden-xs">Honda Auto News</h3>
+      </div>
+
+      <div class="nav-logo">
+        <a href="/en-US/honda-automobiles">
+          <img class="img-responsive"
+          src="/assets/images/logos/honda-automobiles-1x.min.png"
+          srcset="/assets/images/logos/honda-automobiles-1x.min.png 1x,
+            /assets/images/logos/honda-automobiles-2x.min.png 2x,
+            /assets/images/logos/honda-automobiles-3x.min.png 3x,"
+          alt="Honda Newsroom | logo">
+        </a>
+      </div>
+
+      <ul class="nav navbar-nav navbar-actions">
+        <li>
+          <a class="nav-action nav-action--search-link"
+          href="javascript:void(0)"
+          data-toggle="modal"
+          data-target="#searchModal"
+          data-placeholder="Type your search and hit enter..."
+          title="Search"><i class="fa fa-search" aria-hidden="true"></i></a>
+          </li>
+
+          <li class="hidden-xs">
+          <a href="/en-US/honda-automobiles/basket"
+            title="Saved Items"
+            class="nav-action"><i class="fa fa-folder-open-o" aria-hidden="true"></i><span class="clientBasketItemCount"></span></a>
+          </li>
+
+          <li class="dropdown hidden-xs">
+          <a href="#"
+          class="dropdown-toggle account-dropdown-menu-btn"
+          title="My Account"
+          data-toggle="dropdown"><i class="fa fa-user-circle" aria-hidden="true"></i></a>
+          <ul class="dropdown-menu account-dropdown-menu">
+          <li><a href="#" class="close-account-dropdown-menu">Close <i class="fa fa-times-circle-o" aria-hidden="true"></i></a></li>
+        
+          <li class="dropdown-submenu"><a href="/login">Login <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+        
+      </ul>
+      </li>
+
+      <li class="hidden-xs">
+        <a href="/subscribe"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span class="hidden-sm"> Subscribe</span></a>
+      </li>
+
+      </ul>
+    </div>
+
+  </div>
+
+</nav>
+
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel">
+  <div class="modal-dialog search-modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close custom-close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <h2 class="modal-title">Search</h2>
+      </div>
+      <div class="modal-body">
+        
+        <form class="searchbox input-group" role="form" action="/search" method="get">
+          <input type="search"
+                 class="searchbox-input form-control"
+                 id="searchInput"
+                 name="query"
+                 title="Search Newsroom"
+                 autocomplete="off"
+                 placeholder="Type your search and hit enter...">
+          <div id="suggestions" style="display: none;">
+            <div id="suggested-title">Suggested Pages</div>
+            <ul></ul>
+          </div>
+          <input id="searchContentType" type="hidden" name="selectedContentType" value="releases">
+
+
+
+          <div class="search-divisions">
+            <h4>Included Divisions</h4>
+            <ul class="search-divisions--list">
+              <li class="search-divisions--list-item">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="channel-3001" checked> Honda Corporate
+                  </label>
+                </div>
+              </li>
+              <li class="search-divisions--list-item">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="channel-3031" checked> Honda Autos
+                  </label>
+                </div>
+              </li>
+              <li class="search-divisions--list-item">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="channel-3114" checked> Acura
+                  </label>
+                </div>
+              </li>
+              <li class="search-divisions--list-item">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="channel-3181" checked> Honda Racing
+                  </label>
+                </div>
+              </li>
+              <li class="search-divisions--list-item">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="channel-3188" checked> Honda PowerSports
+                  </label>
+                </div>
+              </li>
+              <li class="search-divisions--list-item">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="channel-3471" checked> Honda Power Equipment
+                  </label>
+                </div>
+              </li>
+              <li class="search-divisions--list-item">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="channel-3490" checked> Honda Engines
+                  </label>
+                </div>
+              </li>
+              <li class="search-divisions--list-item">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="channel-3508" checked> Honda Marine
+                  </label>
+                </div>
+              </li>
+              <li class="search-divisions--list-item">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="channel-3527" checked> HondaJet
+                  </label>
+                </div>
+              </li>
+              
+                <li class="search-divisions--list-item">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" value="channel-77dfefa32c6016754f9052f7ef1fa639" checked> Electrification
+                    </label>
+                  </div>
+                </li>
+              
+              
+                <li class="search-divisions--list-item">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" value="channel-529c89940db7fe7b11eb653d3a0205cc" checked> American Honda Collection Hall
+                    </label>
+                  </div>
+                </li>
+              
+              <input type="hidden" id="channels-constraint" name="channelsConstraint" value="">
+            </ul>
+          </div>
+
+          <div class="search-results-filter row" style="margin-bottom: 10px;">
+            <label class="col-xs-12 col-sm-3">Results Order</label>
+            <div class="search-dropdown-container col-xs-12 col-sm-9">
+              <button type="button" class="search-btn-dropdown btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="search-results-filter--option">Most recently published results first (Latest First)</span><span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu search-results-filter--sort">
+                <li style="display:none" data-sort-order="PublishedDescending">Most recently published results first (Latest First)</li>
+                <li data-sort-order="PublishedAscending">Most recently published results last (Oldest First)</li>
+                <li data-sort-order="Relevance">Most relevant results first (Relevance)</li>
+              </ul>
+            </div>
+            <input type="hidden" id="search-sort-order" name="sortOrder" value="PublishedDescending">
+          </div>
+
+          <div class="search-results-filter row">
+            <label class="col-xs-12 col-sm-3">Date Range</label>
+
+            
+
+            
+
+            <div class="search-dropdown-container col-xs-12 col-sm-9">
+              <div class="search-calendar">
+                <div class="input-group" style="margin-right: 5px;">
+                  <input type="text" class="form-control" id="startDateSearchModal" autocomplete="off" placeholder="Start">
+                  <span class="input-group-addon" id="startDateSearchModalIcon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                </div>
+                <div class="input-group" style="margin-left: 5px;">
+                  <input type="text" class="form-control" id="endDateSearchModal" autocomplete="off" placeholder="End">
+                  <span class="input-group-addon" id="endDateSearchModalIcon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                </div>
+
+                <input type="hidden" disabled="disabled" id="startYear" name="startYear" value="">
+                <input type="hidden" disabled="disabled" id="startMonth" name="startMonth" value="">
+                <input type="hidden" disabled="disabled" id="startDay" name="startDay" value="">
+                <input type="hidden" disabled="disabled" id="endYear" name="endYear" value="">
+                <input type="hidden" disabled="disabled" id="endMonth" name="endMonth" value="">
+                <input type="hidden" disabled="disabled" id="endDay" name="endDay" value="">
+                
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 5px;">Leave blank to search all dates.</div>
+
+          <button type="submit" class="search-form-btn pull-right">Go</button>
+
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="campaignMonitorModal" tabindex="-1" role="dialog" aria-labelledby="campaignMonitorModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Honda News Alerts</h5>
+      </div>
+      <div class="modal-body">
+
+      
+        <wk-onetrust-category category="C0003">
+          <!-- Content shown when functional cookies enabled -->
+          <form id="subForm" class="js-cm-form" action="https://www.createsend.com/t/subscribeerror?description=" method="post" data-id="TODO">
+            <p>
+              <input id="fieldName" name="cm-name" type="text" placeholder="Full name" />
+            </p>
+            <p>
+              <input id="fieldEmail" name="TODO" type="email" class="js-cm-email-input" placeholder="Email address" required />
+            </p>
+            <p>
+              <button class="js-cm-submit-button" type="submit">Subscribe</button>
+            </p>
+          </form>
+
+          <script type="text/plain" data-optanon-category="0003" src="https://js.createsend1.com/javascript/copypastesubscribeformlogic.js"></script>
+
+          <!-- Prompt shown when functional cookies disabled -->
+          <div slot="prompt" style="padding:1rem;border:1px solid #ccc;border-radius:.5rem;margin:.75rem 0;text-align:center;">
+            <p style="margin:0 0 .75rem 0;">To subscribe, please enable <strong>functional</strong> cookies.</p>
+            <button type="button" style="display:inline-block;min-width:220px;padding:.6rem 1rem;border:1px solid #999;border-radius:.5rem;background:#fff;">
+              Manage cookie preferences
+            </button>
+          </div>
+        </wk-onetrust-category>
+      
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      
+
+
+      
+
+  
+  
+    
+      
+        
+      
+    
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <div class="homepage container homepage-market-navbar-container sticky-market-navbar" id="globalMarketHeader">
+    <div class="market-navbar">
+
+      <div class="visible-xs homepage-market-navbar-header">
+        
+          <button class="homepage-market-navbar-button" onClick="$('.market-channel__container--level1').toggleClass('is-visible');"><i class="fa fa-angle-down"></i></button>
+        
+        <header class="homepage-market-navbar-title">Honda Auto News</header>
+      </div>
+
+      <ul class="nav navbar-nav market-channel__container--level1">
+        
+          
+            <li class="dropdown market-channel__item--level1">
+
+              
+                
+                  
+                  <a href="/en-US/honda-automobiles/channels/channel-4be614f989bd4c51f915279d6a0008ef"
+                     class="dropdown-toggle"
+                     data-toggle="dropdown"
+                     role="button"
+                     aria-haspopup="true"
+                     aria-expanded="true">Cars</a>
+
+                  <ul class="dropdown-menu market-channel__container--level2">
+                    
+
+                      
+                        
+                          
+                          <li class="market-channel--level2">
+                            <a href="/en-US/honda-automobiles/channels/honda-accord">Accord</a>
+                          </li>
+                        
+                      
+
+                    
+
+                      
+                        
+                          <li class="dropdown-submenu market-channel__item--level2">
+                            
+                            <a href="#"  class="dropdown-toggle disabled" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Civic</a>
+                            <ul class="dropdown-menu market-channel__container--level3">
+                              
+                                <li class="market-channel__item--level3"><a href="/en-US/honda-automobiles/channels/honda-civic-sedan">Sedan</a></li>
+                              
+                                <li class="market-channel__item--level3"><a href="/en-US/honda-automobiles/channels/honda-civic-hatchback">Hatchback</a></li>
+                              
+                                <li class="market-channel__item--level3"><a href="/en-US/honda-automobiles/channels/honda-civic-si">Si</a></li>
+                              
+                                <li class="market-channel__item--level3"><a href="/en-US/honda-automobiles/channels/honda-civic-type-r">Type R</a></li>
+                              
+                            </ul>
+                          </li>
+                        
+                      
+
+                    
+
+                      
+                        
+                          
+                          <li class="market-channel--level2">
+                            <a href="/en-US/honda-automobiles/channels/prelude">Prelude</a>
+                          </li>
+                        
+                      
+
+                    
+                  </ul>
+                
+              
+            </li>
+          
+            <li class="dropdown market-channel__item--level1">
+
+              
+                
+                  
+                  <a href="/en-US/honda-automobiles/channels/channel-4be614f989bd4c51f915279d6a000f37"
+                     class="dropdown-toggle"
+                     data-toggle="dropdown"
+                     role="button"
+                     aria-haspopup="true"
+                     aria-expanded="true">Crossovers &amp; SUVs</a>
+
+                  <ul class="dropdown-menu market-channel__container--level2">
+                    
+
+                      
+                        
+                          
+                          <li class="market-channel--level2">
+                            <a href="/en-US/honda-automobiles/channels/honda-cr-v">CR-V</a>
+                          </li>
+                        
+                      
+
+                    
+
+                      
+                        
+                          
+                          <li class="market-channel--level2">
+                            <a href="/en-US/honda-automobiles/channels/honda-hr-v">HR-V</a>
+                          </li>
+                        
+                      
+
+                    
+
+                      
+                        
+                          
+                          <li class="market-channel--level2">
+                            <a href="/en-US/honda-automobiles/channels/honda-passport">Passport</a>
+                          </li>
+                        
+                      
+
+                    
+
+                      
+                        
+                          
+                          <li class="market-channel--level2">
+                            <a href="/en-US/honda-automobiles/channels/honda-pilot">Pilot</a>
+                          </li>
+                        
+                      
+
+                    
+
+                      
+                        
+                          
+                          <li class="market-channel--level2">
+                            <a href="/honda-automobiles/channels/prologue" >Prologue</a>
+                          </li>
+                        
+                      
+
+                    
+                  </ul>
+                
+              
+            </li>
+          
+            <li class="dropdown market-channel__item--level1">
+
+              
+                
+                  
+                  <a href="/en-US/honda-automobiles/channels/channel-4be614f989bd4c51f915279d6a00168c"
+                     class="dropdown-toggle"
+                     data-toggle="dropdown"
+                     role="button"
+                     aria-haspopup="true"
+                     aria-expanded="true">Truck &amp; Minivan</a>
+
+                  <ul class="dropdown-menu market-channel__container--level2">
+                    
+
+                      
+                        
+                          
+                          <li class="market-channel--level2">
+                            <a href="/en-US/honda-automobiles/channels/honda-odyssey">Odyssey</a>
+                          </li>
+                        
+                      
+
+                    
+
+                      
+                        
+                          
+                          <li class="market-channel--level2">
+                            <a href="/en-US/honda-automobiles/channels/honda-ridgeline">Ridgeline</a>
+                          </li>
+                        
+                      
+
+                    
+                  </ul>
+                
+              
+            </li>
+          
+            <li class="dropdown market-channel__item--level1">
+
+              
+                
+                  
+                  <a href="/en-US/honda-automobiles/channels/channel-4be614f989bd4c51f915279d6a001f6c"
+                     class="dropdown-toggle"
+                     data-toggle="dropdown"
+                     role="button"
+                     aria-haspopup="true"
+                     aria-expanded="true">Electrified</a>
+
+                  <ul class="dropdown-menu market-channel__container--level2">
+                    
+
+                      
+                        
+                          
+                          <li class="market-channel--level2">
+                            <a href="/en-US/honda-automobiles/channels/prologue">Prologue</a>
+                          </li>
+                        
+                      
+
+                    
+
+                      
+                        
+                          
+                          <li class="market-channel--level2">
+                            <a href="/en-US/honda-automobiles/channels/cr-v-e-fcev">CR-V e:FCEV</a>
+                          </li>
+                        
+                      
+
+                    
+
+                      
+                        
+                          
+                          <li class="market-channel--level2">
+                            <a href="/en-US/honda-automobiles/channels/motocompacto">Motocompacto</a>
+                          </li>
+                        
+                      
+
+                    
+                  </ul>
+                
+              
+            </li>
+          
+            <li class="dropdown market-channel__item--level1">
+
+              
+                
+                  
+                  <a href="/en-US/honda-automobiles/channels/technology">Technology</a>
+                
+              
+            </li>
+          
+            <li class="dropdown market-channel__item--level1">
+
+              
+                
+                  
+                  <a href="https://hondanews.com/en-US/honda-corporate/channels/sales" >Sales</a>
+                
+              
+            </li>
+          
+            <li class="dropdown market-channel__item--level1">
+
+              
+                
+                  
+                  <a href="/en-US/honda-automobiles/channels/honda-autos-more"
+                     class="dropdown-toggle"
+                     data-toggle="dropdown"
+                     role="button"
+                     aria-haspopup="true"
+                     aria-expanded="true">More</a>
+
+                  <ul class="dropdown-menu market-channel__container--level2">
+                    
+
+                      
+                        
+                          <li class="dropdown-submenu market-channel__item--level2">
+                            
+                            <a href="#"  class="dropdown-toggle disabled" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Awards &amp; Recognition</a>
+                            <ul class="dropdown-menu market-channel__container--level3">
+                              
+                                <li class="market-channel__item--level3"><a href="/en-US/honda-automobiles/channels/channel-aa1632d71bce21759d5e70843c0002bb">Honda Brand</a></li>
+                              
+                                <li class="market-channel__item--level3"><a href="/en-US/honda-automobiles/channels/channel-aa1632d71bce21759d5e70843c0008b5">Accord</a></li>
+                              
+                                <li class="market-channel__item--level3"><a href="/en-US/honda-automobiles/channels/channel-aa1632d71bce21759d5e70843c001498">Civic</a></li>
+                              
+                                <li class="market-channel__item--level3"><a href="/en-US/honda-automobiles/channels/channel-aa1632d71bce21759d5e70843c001b3a">Fit</a></li>
+                              
+                                <li class="market-channel__item--level3"><a href="/en-US/honda-automobiles/channels/channel-aa1632d71bce21759d5e70843c00233b">Clarity</a></li>
+                              
+                                <li class="market-channel__item--level3"><a href="/en-US/honda-automobiles/channels/channel-aa1632d71bce21759d5e70843c0025f5">Insight</a></li>
+                              
+                                <li class="market-channel__item--level3"><a href="/en-US/honda-automobiles/channels/channel-aa1632d71bce21759d5e70843c002ab9">Pilot</a></li>
+                              
+                                <li class="market-channel__item--level3"><a href="/en-US/honda-automobiles/channels/channel-aa1632d71bce21759d5e70843c003615">Passport</a></li>
+                              
+                                <li class="market-channel__item--level3"><a href="/en-US/honda-automobiles/channels/channel-aa1632d71bce21759d5e70843c004327">CR-V</a></li>
+                              
+                                <li class="market-channel__item--level3"><a href="/en-US/honda-automobiles/channels/channel-aa1632d71bce21759d5e70843c004588">HR-V</a></li>
+                              
+                                <li class="market-channel__item--level3"><a href="/en-US/honda-automobiles/channels/channel-aa1632d71bce21759d5e70843c004f3f">Ridgeline</a></li>
+                              
+                                <li class="market-channel__item--level3"><a href="/en-US/honda-automobiles/channels/channel-aa1632d71bce21759d5e70843c0051e9">Odyssey</a></li>
+                              
+                            </ul>
+                          </li>
+                        
+                      
+
+                    
+
+                      
+                        
+                          
+                          <li class="market-channel--level2">
+                            <a href="/en-US/honda-automobiles/channels/honda-auto-shows">Shows &amp; Events</a>
+                          </li>
+                        
+                      
+
+                    
+
+                      
+                        
+                          
+                          <li class="market-channel--level2">
+                            <a href="/en-US/honda-automobiles/channels/honda-marketing">Marketing</a>
+                          </li>
+                        
+                      
+
+                    
+                  </ul>
+                
+              
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+  
+    
+      
+        
+
+        <style>
+	@media (min-width: 992px) {
+		.homepage-carousel-container #homepage-carousel .item figure {
+			width: 60%;
+		}
+		.homepage-carousel-container #homepage-carousel .item figure img {
+		   position: absolute;
+		   top: 50%;
+		   left: 50%;
+		   margin-top: -225px;
+		   margin-left: -399px;
+		}
+	}
+
+	@media (max-width: 991px) {
+		.homepage-carousel-container #homepage-carousel .item figure {
+			padding-top: 0;
+		}
+		.homepage-carousel-container #homepage-carousel .item figure img {
+			max-width: 100%;
+		}
+		html h2 a {
+			color: white;
+		}
+	}
+</style>
+
+ <div class="homepage container homepage-carousel-container">
+  <div class="row">
+    <div id="homepage-carousel" class="carousel slide carousel-fade" data-ride="carousel" data-interval="5000">
+      <div class="container">
+
+        <div class="carousel-actions">
+          <a class="custom-carousel-control" href="#homepage-carousel" role="button" data-slide="prev">
+            <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+            <span class="sr-only">Previous</span>
+          </a>
+          <ol class="carousel-indicators carousel-indicators-custom hidden-sm hidden-xs">
+            <li data-target="#homepage-carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#homepage-carousel" data-slide-to="1"></li>
+            <li data-target="#homepage-carousel" data-slide-to="2"></li>
+          </ol>
+          <a class="custom-carousel-control" href="#homepage-carousel" role="button" data-slide="next">
+            <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+
+        <div class="carousel-inner" role="listbox">
+		
+		<div class="item active" id="slide1">
+            <figure>
+            <a href="/en-US/honda-automobiles/releases/honda-adds-google-gemini-a-helpful-ai-assistant-to-civic-accord-cr-v-pilot-and-more-vehicles-with-google-built-in">
+            	<img src="https://wieck-honda-production.s3.us-west-1.amazonaws.com/pagePartImages/ef0596319eb7657074e2eee90fdd454aee949cbc" alt="">
+            </a>
+            </figure>
+            <div class="homepage-carousel-caption">
+             <h2><a href="/en-US/honda-automobiles/releases/honda-adds-google-gemini-a-helpful-ai-assistant-to-civic-accord-cr-v-pilot-and-more-vehicles-with-google-built-in">Honda Adds Google Gemini, a Helpful AI Assistant, to Civic, Accord, CR-V, Pilot and More Vehicles with Google built-in
+</a></h2>
+              <div class="homepage-carousel-caption__date">July 15, 2026</div>
+              <p>Honda is adding Google Gemini, a helpful AI assistant, to Honda vehicles equipped with Google built-in, giving drivers a more conversational, hands-free voice experience across select Civic, Accord, Prelude, CR-V, Passport and Pilot models.</p>
+            </div>			
+          </div>
+			
+			<div class="item" id="slide2">
+            <figure>
+            <a href="/en-US/honda-automobiles/releases/honda-celebrates-sale-of-15-millionth-honda-accord-in-america-buyers-sister-purchased-15000001st-accord-on-same-day">
+            	<img src="https://wieck-honda-production.s3.us-west-1.amazonaws.com/pagePartImages/c70bf0062129a0205cb2a34ff4f3737b3369b028" alt="">
+            </a>
+            </figure>
+            <div class="homepage-carousel-caption">
+             <h2><a href="/en-US/honda-automobiles/releases/honda-celebrates-sale-of-15-millionth-honda-accord-in-america-buyers-sister-purchased-15000001st-accord-on-same-day">Honda Celebrates Sale of 15 Millionth Honda Accord in America – Buyer’s Sister Purchased 15,000,001st Accord on Same Day
+</a></h2>
+              <div class="homepage-carousel-caption__date">June 29, 2026</div>
+              <p>Honda today celebrated the sale of 15 million Honda Accords in America, marking a major milestone for the country’s best-selling car over the past 50 years.</p>
+            </div>			
+          </div>
+			
+			
+			
+			<div class="item" id="slide3">
+            <figure>
+            <a href="/en-US/honda-automobiles/releases/honda-accord-turns-50-celebrates-half-a-century-of-unbeatable-value-performance-and-efficiency">
+            	<img src="https://wieck-honda-production.s3.us-west-1.amazonaws.com/pagePartImages/ab94f453a77018eee90f16ef98cc5c48b400100f" alt="">
+            </a>
+            </figure>
+            <div class="homepage-carousel-caption">
+              <h2><a href="/en-US/honda-automobiles/releases/honda-accord-turns-50-celebrates-half-a-century-of-unbeatable-value-performance-and-efficiency">Honda Accord Turns 50! Celebrates Half a Century of Unbeatable Value, Performance and Efficiency
+</a></h2>
+              <div class="homepage-carousel-caption__date">June 9, 2026</div>
+              <p>In June 1976, as Americans buzzed about the approaching U.S. Bicentennial celebration, the first Honda Accord arrived – a fun, fuel-efficient three-door hatchback that would launch a five-decade-long success story in America.</p>
+            </div>			
+          </div>
+			
+			
+		
+			
+		
+	
+        </div>
+      </div>
+      <a class="left carousel-control visible-sm-block visible-xs-block" href="#homepage-carousel" data-slide="prev">
+        <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control visible-sm-block visible-xs-block" href="#homepage-carousel" data-slide="next">
+        <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+        
+      
+    
+  
+
+
+  
+  
+    
+      
+        
+      
+    
+  
+
+
+  
+    
+      <div class="homepage container">
+        <div class="row">
+          
+
+          <div id="latest-news" class="homepage-section col-xs-12 release-grid">
+            <div class="homepage-section-container">
+
+              <div class="row">
+                <div class="homepage-section-header homepage-section-header--with-controls col-xs-12">
+                  <div class="homepage-section__display-style-toggle-container hidden-xs">
+                    <a class="release-grid-indicator" href="javascript: void(0);"><i class="fa fa-th-large"></i></a>
+                    <a class="release-list-indicator" href="javascript: void(0);"><i class="fa fa-bars"></i></a>
+                  </div>
+
+                  <h2 class="homepage-section__title">Latest News</h2>
+
+                  <div class="homepage-section__action-buttons hidden-xs">
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#searchModal" class="more-btn hidden-xs">Search <i class="fa fa-search"></i></a>
+                  </div>
+
+                </div>
+              </div>
+
+              
+              <div class="tab-content media-content paginated-content-container release-container" data-paginated-set-id="releases-70559091">
+              
+                
+
+
+
+
+
+
+<article class="release-item release-item--with-thumbnail row"
+         data-basket-item-type="Release"
+         data-basket-item-key="release-aa20ad9f0ac420f1adff7b44410809c6">
+
+  <a href="http://hondanews.com/en-US/honda-automobiles/releases/release-aa20ad9f0ac420f1adff7b44410809c6-honda-civic-si-production-to-pause-at-the-conclusion-of-the-2026-model-year-si-will-return-to-the-honda-lineup-in-the-coming-years">
+    <figure class="release-grid__photo release-photo " style="background-image: url(https://wieck-honda-production.s3.amazonaws.com/photos/18a0620c81489ef9fb469eea4956b3cf27126098/thumbnail-364x204.jpg);"></figure>
+    <img class="release-list__photo" src="https://wieck-honda-production.s3.amazonaws.com/photos/18a0620c81489ef9fb469eea4956b3cf27126098/thumbnail-364x204.jpg" style="width: 100%;">
+  </a>
+
+  <div class="release-information " 
+>
+
+    
+
+    <div class="row release-information-row">
+      <div class="col-xs-12 content-title-container">
+        <h5 class="content-title">
+          <a href="http://hondanews.com/en-US/honda-automobiles/releases/release-aa20ad9f0ac420f1adff7b44410809c6-honda-civic-si-production-to-pause-at-the-conclusion-of-the-2026-model-year-si-will-return-to-the-honda-lineup-in-the-coming-years">Honda Civic Si Production to Pause at the Conclusion of the 2026 Model Year; Si Will Return to the Honda Lineup in the Coming Years
+          </a>
+        </h5>
+      </div>
+
+      
+        <div class="col-xs-12 pub-date">
+          
+            <date class="published-at published">
+
+        <time class="pub-date" datetime="2026-07-23T19:07:22Z">
+          July 23, 2026
+        </time>
+      
+</date>
+          
+          <div class="release-grid__actions">
+            <a class="site-btn basket-action-visible"
+            href="javascript:void(0)"
+            title="Add to Saved Items"
+            data-basket-action="add"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+
+            <a class="site-btn basket-action-hidden saved-basket-item"
+            href="javascript:void(0)"
+            title="Remove from Saved Items"
+            data-basket-action="remove"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+
+            <a href="/en-US/honda-automobiles/releases/release-aa20ad9f0ac420f1adff7b44410809c6-honda-civic-si-production-to-pause-at-the-conclusion-of-the-2026-model-year-si-will-return-to-the-honda-lineup-in-the-coming-years/download" class="site-btn download-button license-check-download" title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      
+
+      
+
+      <div class="col-xs-12 summary-container">
+        <summary>
+          Honda today announced production of the current Honda Civic Si will pause at the conclusion of the 2026 model year due to evolving business conditions.
+          
+        </summary>
+      </div>
+
+      
+    </div>
+
+    <div class="row release-list-actions-container">
+      <div class="col-md-12 release-list-actions" >
+        <a class="site-btn basket-action-visible"
+           href="javascript:void(0)"
+           title="Add to Saved Items"
+           data-basket-action="add"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+
+        <a class="site-btn basket-action-hidden saved-basket-item"
+           href="javascript:void(0)"
+           title="Remove from Saved Items"
+           data-basket-action="remove"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+
+        <a href="/en-US/honda-automobiles/releases/release-aa20ad9f0ac420f1adff7b44410809c6-honda-civic-si-production-to-pause-at-the-conclusion-of-the-2026-model-year-si-will-return-to-the-honda-lineup-in-the-coming-years/download" class="site-btn download-button license-check-download"  title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+
+        
+
+        
+          
+            <a href="/en-US/honda-automobiles/releases/release-aa20ad9f0ac420f1adff7b44410809c6-honda-civic-si-production-to-pause-at-the-conclusion-of-the-2026-model-year-si-will-return-to-the-honda-lineup-in-the-coming-years?selectedTabId=release-aa20ad9f0ac420f1adff7b44410809c6-photos" class="site-btn download-button" title="Related Photos"><i class="fa fa-photo" aria-hidden="true"></i> 1</a>
+          
+        
+
+        
+          
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+              
+                
+
+
+
+
+
+
+<article class="release-item release-item--with-thumbnail row"
+         data-basket-item-type="Release"
+         data-basket-item-key="release-aa20ad9f0ac420f1adff7b444107b367">
+
+  <a href="http://hondanews.com/en-US/honda-automobiles/releases/release-aa20ad9f0ac420f1adff7b444107b367-honda-confirms-third-generation-ridgeline-midsize-pickup-with-more-rugged-design-arriving-within-two-years">
+    <figure class="release-grid__photo release-photo " style="background-image: url(https://wieck-honda-production.s3.amazonaws.com/photos/69f7494b7435260e02fc00345b2664c58b417233/thumbnail-364x204.jpg);"></figure>
+    <img class="release-list__photo" src="https://wieck-honda-production.s3.amazonaws.com/photos/69f7494b7435260e02fc00345b2664c58b417233/thumbnail-364x204.jpg" style="width: 100%;">
+  </a>
+
+  <div class="release-information " 
+>
+
+    
+
+    <div class="row release-information-row">
+      <div class="col-xs-12 content-title-container">
+        <h5 class="content-title">
+          <a href="http://hondanews.com/en-US/honda-automobiles/releases/release-aa20ad9f0ac420f1adff7b444107b367-honda-confirms-third-generation-ridgeline-midsize-pickup-with-more-rugged-design-arriving-within-two-years">Honda Confirms Third-Generation Ridgeline Midsize Pickup with More Rugged Design, Arriving Within Two Years
+          </a>
+        </h5>
+      </div>
+
+      
+        <div class="col-xs-12 pub-date">
+          
+            <date class="published-at published">
+
+        <time class="pub-date" datetime="2026-07-23T16:00:00Z">
+          July 23, 2026
+        </time>
+      
+</date>
+          
+          <div class="release-grid__actions">
+            <a class="site-btn basket-action-visible"
+            href="javascript:void(0)"
+            title="Add to Saved Items"
+            data-basket-action="add"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+
+            <a class="site-btn basket-action-hidden saved-basket-item"
+            href="javascript:void(0)"
+            title="Remove from Saved Items"
+            data-basket-action="remove"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+
+            <a href="/en-US/honda-automobiles/releases/release-aa20ad9f0ac420f1adff7b444107b367-honda-confirms-third-generation-ridgeline-midsize-pickup-with-more-rugged-design-arriving-within-two-years/download" class="site-btn download-button license-check-download" title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      
+
+      
+
+      <div class="col-xs-12 summary-container">
+        <summary>
+          Honda today confirmed development of the third-generation Honda Ridgeline, the next version of its midsize pickup, set to come to market within two years.
+          
+        </summary>
+      </div>
+
+      
+    </div>
+
+    <div class="row release-list-actions-container">
+      <div class="col-md-12 release-list-actions" >
+        <a class="site-btn basket-action-visible"
+           href="javascript:void(0)"
+           title="Add to Saved Items"
+           data-basket-action="add"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+
+        <a class="site-btn basket-action-hidden saved-basket-item"
+           href="javascript:void(0)"
+           title="Remove from Saved Items"
+           data-basket-action="remove"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+
+        <a href="/en-US/honda-automobiles/releases/release-aa20ad9f0ac420f1adff7b444107b367-honda-confirms-third-generation-ridgeline-midsize-pickup-with-more-rugged-design-arriving-within-two-years/download" class="site-btn download-button license-check-download"  title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+
+        
+
+        
+          
+            <a href="/en-US/honda-automobiles/releases/release-aa20ad9f0ac420f1adff7b444107b367-honda-confirms-third-generation-ridgeline-midsize-pickup-with-more-rugged-design-arriving-within-two-years?selectedTabId=release-aa20ad9f0ac420f1adff7b444107b367-photos" class="site-btn download-button" title="Related Photos"><i class="fa fa-photo" aria-hidden="true"></i> 1</a>
+          
+        
+
+        
+          
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+              
+                
+
+
+
+
+
+
+<article class="release-item release-item--with-thumbnail row"
+         data-basket-item-type="Release"
+         data-basket-item-key="release-197619b9ee3ec0adfccef0bd5f096c4f">
+
+  <a href="http://hondanews.com/en-US/honda-automobiles/releases/release-197619b9ee3ec0adfccef0bd5f096c4f-honda-adds-google-gemini-a-helpful-ai-assistant-to-civic-accord-cr-v-pilot-and-more-vehicles-with-google-built-in">
+    <figure class="release-grid__photo release-photo " style="background-image: url(https://wieck-honda-production.s3.amazonaws.com/photos/906d2c6a8f5121e1b4283d59edea7fbeaf3e26d2/thumbnail-364x204.jpg);"></figure>
+    <img class="release-list__photo" src="https://wieck-honda-production.s3.amazonaws.com/photos/906d2c6a8f5121e1b4283d59edea7fbeaf3e26d2/thumbnail-364x204.jpg" style="width: 100%;">
+  </a>
+
+  <div class="release-information " 
+>
+
+    
+
+    <div class="row release-information-row">
+      <div class="col-xs-12 content-title-container">
+        <h5 class="content-title">
+          <a href="http://hondanews.com/en-US/honda-automobiles/releases/release-197619b9ee3ec0adfccef0bd5f096c4f-honda-adds-google-gemini-a-helpful-ai-assistant-to-civic-accord-cr-v-pilot-and-more-vehicles-with-google-built-in">Honda Adds Google Gemini, a Helpful AI Assistant, to Civic, Accord, CR-V, Pilot and More Vehicles with Google built-in
+          </a>
+        </h5>
+      </div>
+
+      
+        <div class="col-xs-12 pub-date">
+          
+            <date class="published-at published">
+
+        <time class="pub-date" datetime="2026-07-15T13:00:00Z">
+          July 15, 2026
+        </time>
+      
+</date>
+          
+          <div class="release-grid__actions">
+            <a class="site-btn basket-action-visible"
+            href="javascript:void(0)"
+            title="Add to Saved Items"
+            data-basket-action="add"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+
+            <a class="site-btn basket-action-hidden saved-basket-item"
+            href="javascript:void(0)"
+            title="Remove from Saved Items"
+            data-basket-action="remove"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+
+            <a href="/en-US/honda-automobiles/releases/release-197619b9ee3ec0adfccef0bd5f096c4f-honda-adds-google-gemini-a-helpful-ai-assistant-to-civic-accord-cr-v-pilot-and-more-vehicles-with-google-built-in/download" class="site-btn download-button license-check-download" title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      
+
+      
+
+      <div class="col-xs-12 summary-container">
+        <summary>
+          Honda is adding Google Gemini, a helpful AI assistant, to Honda vehicles equipped with Google built-in, giving drivers a more conversational, hands-free voice experience across select Civic, Accord, Prelude, CR-V, Passport and Pilot models.
+          
+        </summary>
+      </div>
+
+      
+    </div>
+
+    <div class="row release-list-actions-container">
+      <div class="col-md-12 release-list-actions" >
+        <a class="site-btn basket-action-visible"
+           href="javascript:void(0)"
+           title="Add to Saved Items"
+           data-basket-action="add"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+
+        <a class="site-btn basket-action-hidden saved-basket-item"
+           href="javascript:void(0)"
+           title="Remove from Saved Items"
+           data-basket-action="remove"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+
+        <a href="/en-US/honda-automobiles/releases/release-197619b9ee3ec0adfccef0bd5f096c4f-honda-adds-google-gemini-a-helpful-ai-assistant-to-civic-accord-cr-v-pilot-and-more-vehicles-with-google-built-in/download" class="site-btn download-button license-check-download"  title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+
+        
+
+        
+          
+            <a href="/en-US/honda-automobiles/releases/release-197619b9ee3ec0adfccef0bd5f096c4f-honda-adds-google-gemini-a-helpful-ai-assistant-to-civic-accord-cr-v-pilot-and-more-vehicles-with-google-built-in?selectedTabId=release-197619b9ee3ec0adfccef0bd5f096c4f-photos" class="site-btn download-button" title="Related Photos"><i class="fa fa-photo" aria-hidden="true"></i> 1</a>
+          
+        
+
+        
+          
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+              
+                
+
+
+
+
+
+
+<article class="release-item release-item--with-thumbnail row"
+         data-basket-item-type="Release"
+         data-basket-item-key="release-197619b9ee3ec0adfccef0bd5f0014e1">
+
+  <a href="http://hondanews.com/en-US/honda-automobiles/releases/release-197619b9ee3ec0adfccef0bd5f0014e1-american-honda-sets-multiple-records-with-strong-june-q2-and-first-half-sales">
+    <figure class="release-grid__photo release-photo " style="background-image: url(https://wieck-honda-production.s3.amazonaws.com/photos/ae0ac1ebe2692c5709a9e2da0a1709e5370b229c/thumbnail-364x204.jpg);"></figure>
+    <img class="release-list__photo" src="https://wieck-honda-production.s3.amazonaws.com/photos/ae0ac1ebe2692c5709a9e2da0a1709e5370b229c/thumbnail-364x204.jpg" style="width: 100%;">
+  </a>
+
+  <div class="release-information " 
+>
+
+    
+
+    <div class="row release-information-row">
+      <div class="col-xs-12 content-title-container">
+        <h5 class="content-title">
+          <a href="http://hondanews.com/en-US/honda-automobiles/releases/release-197619b9ee3ec0adfccef0bd5f0014e1-american-honda-sets-multiple-records-with-strong-june-q2-and-first-half-sales">American Honda Sets Multiple Records with Strong June, Q2 and First Half Sales
+          </a>
+        </h5>
+      </div>
+
+      
+        <div class="col-xs-12 pub-date">
+          
+            <date class="published-at published">
+
+        <time class="pub-date" datetime="2026-07-01T16:44:34Z">
+          July 1, 2026
+        </time>
+      
+</date>
+          
+          <div class="release-grid__actions">
+            <a class="site-btn basket-action-visible"
+            href="javascript:void(0)"
+            title="Add to Saved Items"
+            data-basket-action="add"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+
+            <a class="site-btn basket-action-hidden saved-basket-item"
+            href="javascript:void(0)"
+            title="Remove from Saved Items"
+            data-basket-action="remove"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+
+            <a href="/en-US/honda-automobiles/releases/release-197619b9ee3ec0adfccef0bd5f0014e1-american-honda-sets-multiple-records-with-strong-june-q2-and-first-half-sales/download" class="site-btn download-button license-check-download" title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      
+
+      
+
+      <div class="col-xs-12 summary-container">
+        <summary>
+          American Honda Sets Multiple Records with Strong June, Q2 and First Half Sales
+          
+        </summary>
+      </div>
+
+      
+    </div>
+
+    <div class="row release-list-actions-container">
+      <div class="col-md-12 release-list-actions" >
+        <a class="site-btn basket-action-visible"
+           href="javascript:void(0)"
+           title="Add to Saved Items"
+           data-basket-action="add"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+
+        <a class="site-btn basket-action-hidden saved-basket-item"
+           href="javascript:void(0)"
+           title="Remove from Saved Items"
+           data-basket-action="remove"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+
+        <a href="/en-US/honda-automobiles/releases/release-197619b9ee3ec0adfccef0bd5f0014e1-american-honda-sets-multiple-records-with-strong-june-q2-and-first-half-sales/download" class="site-btn download-button license-check-download"  title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+
+        
+
+        
+          
+            <a href="/en-US/honda-automobiles/releases/release-197619b9ee3ec0adfccef0bd5f0014e1-american-honda-sets-multiple-records-with-strong-june-q2-and-first-half-sales?selectedTabId=release-197619b9ee3ec0adfccef0bd5f0014e1-photos" class="site-btn download-button" title="Related Photos"><i class="fa fa-photo" aria-hidden="true"></i> 2</a>
+          
+        
+
+        
+          
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+              
+                
+
+
+
+
+
+
+<article class="release-item release-item--with-thumbnail row"
+         data-basket-item-type="Release"
+         data-basket-item-key="release-3d8c96cdcae9c7682ad286918c0008a7">
+
+  <a href="http://hondanews.com/en-US/honda-automobiles/releases/release-3d8c96cdcae9c7682ad286918c0008a7-honda-celebrates-sale-of-15-millionth-honda-accord-in-america-buyers-sister-purchased-15000001st-accord-on-same-day">
+    <figure class="release-grid__photo release-photo " style="background-image: url(https://wieck-honda-production.s3.amazonaws.com/photos/cd4d103ca4e2e6cb31ad8f71050098dacc38eaa6/thumbnail-364x204.jpg);"></figure>
+    <img class="release-list__photo" src="https://wieck-honda-production.s3.amazonaws.com/photos/cd4d103ca4e2e6cb31ad8f71050098dacc38eaa6/thumbnail-364x204.jpg" style="width: 100%;">
+  </a>
+
+  <div class="release-information " 
+>
+
+    
+
+    <div class="row release-information-row">
+      <div class="col-xs-12 content-title-container">
+        <h5 class="content-title">
+          <a href="http://hondanews.com/en-US/honda-automobiles/releases/release-3d8c96cdcae9c7682ad286918c0008a7-honda-celebrates-sale-of-15-millionth-honda-accord-in-america-buyers-sister-purchased-15000001st-accord-on-same-day">Honda Celebrates Sale of 15 Millionth Honda Accord in America – Buyer’s Sister Purchased 15,000,001st Accord on Same Day
+          </a>
+        </h5>
+      </div>
+
+      
+        <div class="col-xs-12 pub-date">
+          
+            <date class="published-at published">
+
+        <time class="pub-date" datetime="2026-06-29T13:00:00Z">
+          June 29, 2026
+        </time>
+      
+</date>
+          
+          <div class="release-grid__actions">
+            <a class="site-btn basket-action-visible"
+            href="javascript:void(0)"
+            title="Add to Saved Items"
+            data-basket-action="add"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+
+            <a class="site-btn basket-action-hidden saved-basket-item"
+            href="javascript:void(0)"
+            title="Remove from Saved Items"
+            data-basket-action="remove"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+
+            <a href="/en-US/honda-automobiles/releases/release-3d8c96cdcae9c7682ad286918c0008a7-honda-celebrates-sale-of-15-millionth-honda-accord-in-america-buyers-sister-purchased-15000001st-accord-on-same-day/download" class="site-btn download-button license-check-download" title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      
+
+      
+
+      <div class="col-xs-12 summary-container">
+        <summary>
+          Honda today celebrated the sale of 15 million Honda Accords in America, marking a major milestone for the country’s best-selling car over the past 50 years.
+          
+        </summary>
+      </div>
+
+      
+    </div>
+
+    <div class="row release-list-actions-container">
+      <div class="col-md-12 release-list-actions" >
+        <a class="site-btn basket-action-visible"
+           href="javascript:void(0)"
+           title="Add to Saved Items"
+           data-basket-action="add"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+
+        <a class="site-btn basket-action-hidden saved-basket-item"
+           href="javascript:void(0)"
+           title="Remove from Saved Items"
+           data-basket-action="remove"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+
+        <a href="/en-US/honda-automobiles/releases/release-3d8c96cdcae9c7682ad286918c0008a7-honda-celebrates-sale-of-15-millionth-honda-accord-in-america-buyers-sister-purchased-15000001st-accord-on-same-day/download" class="site-btn download-button license-check-download"  title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+
+        
+
+        
+          
+            <a href="/en-US/honda-automobiles/releases/release-3d8c96cdcae9c7682ad286918c0008a7-honda-celebrates-sale-of-15-millionth-honda-accord-in-america-buyers-sister-purchased-15000001st-accord-on-same-day?selectedTabId=release-3d8c96cdcae9c7682ad286918c0008a7-photos" class="site-btn download-button" title="Related Photos"><i class="fa fa-photo" aria-hidden="true"></i> 4</a>
+          
+        
+
+        
+          
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+              
+                
+
+
+
+
+
+
+<article class="release-item release-item--with-thumbnail row"
+         data-basket-item-type="Release"
+         data-basket-item-key="release-856480ac451cc93c91977bd2fd00085e">
+
+  <a href="http://hondanews.com/en-US/honda-automobiles/releases/release-856480ac451cc93c91977bd2fd00085e-honda-tops-all-brands-with-five-vehicles-in-top-10-of-carscom-2026-american-made-index">
+    <figure class="release-grid__photo release-photo " style="background-image: url(https://wieck-honda-production.s3.amazonaws.com/photos/17069886ffd3fd7adefa55c570850ede082b5c35/thumbnail-364x204.jpg);"></figure>
+    <img class="release-list__photo" src="https://wieck-honda-production.s3.amazonaws.com/photos/17069886ffd3fd7adefa55c570850ede082b5c35/thumbnail-364x204.jpg" style="width: 100%;">
+  </a>
+
+  <div class="release-information " 
+>
+
+    
+
+    <div class="row release-information-row">
+      <div class="col-xs-12 content-title-container">
+        <h5 class="content-title">
+          <a href="http://hondanews.com/en-US/honda-automobiles/releases/release-856480ac451cc93c91977bd2fd00085e-honda-tops-all-brands-with-five-vehicles-in-top-10-of-carscom-2026-american-made-index">Honda Tops All Brands with Five Vehicles in Top 10 of Cars.com 2026 American-Made Index
+          </a>
+        </h5>
+      </div>
+
+      
+        <div class="col-xs-12 pub-date">
+          
+            <date class="published-at published">
+
+        <time class="pub-date" datetime="2026-06-23T11:50:00Z">
+          June 23, 2026
+        </time>
+      
+</date>
+          
+          <div class="release-grid__actions">
+            <a class="site-btn basket-action-visible"
+            href="javascript:void(0)"
+            title="Add to Saved Items"
+            data-basket-action="add"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+
+            <a class="site-btn basket-action-hidden saved-basket-item"
+            href="javascript:void(0)"
+            title="Remove from Saved Items"
+            data-basket-action="remove"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+
+            <a href="/en-US/honda-automobiles/releases/release-856480ac451cc93c91977bd2fd00085e-honda-tops-all-brands-with-five-vehicles-in-top-10-of-carscom-2026-american-made-index/download" class="site-btn download-button license-check-download" title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      
+
+      
+
+      <div class="col-xs-12 summary-container">
+        <summary>
+          Honda led all automakers in the Cars.com 2026 American-Made Index® with five Honda and Acura vehicles ranked in the top 10, including the Honda Passport SUV, Ridgeline pickup, Odyssey minivan, and Acura MDX SUV – with the Honda Accord, the first automobile
+          
+            <a href="http://hondanews.com/en-US/honda-automobiles/releases/release-856480ac451cc93c91977bd2fd00085e-honda-tops-all-brands-with-five-vehicles-in-top-10-of-carscom-2026-american-made-index" class="release-summary-continue">...</a>
+          
+        </summary>
+      </div>
+
+      
+    </div>
+
+    <div class="row release-list-actions-container">
+      <div class="col-md-12 release-list-actions" >
+        <a class="site-btn basket-action-visible"
+           href="javascript:void(0)"
+           title="Add to Saved Items"
+           data-basket-action="add"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+
+        <a class="site-btn basket-action-hidden saved-basket-item"
+           href="javascript:void(0)"
+           title="Remove from Saved Items"
+           data-basket-action="remove"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+
+        <a href="/en-US/honda-automobiles/releases/release-856480ac451cc93c91977bd2fd00085e-honda-tops-all-brands-with-five-vehicles-in-top-10-of-carscom-2026-american-made-index/download" class="site-btn download-button license-check-download"  title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+
+        
+
+        
+          
+            <a href="/en-US/honda-automobiles/releases/release-856480ac451cc93c91977bd2fd00085e-honda-tops-all-brands-with-five-vehicles-in-top-10-of-carscom-2026-american-made-index?selectedTabId=release-856480ac451cc93c91977bd2fd00085e-photos" class="site-btn download-button" title="Related Photos"><i class="fa fa-photo" aria-hidden="true"></i> 14</a>
+          
+        
+
+        
+          
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+              
+                
+
+
+
+
+
+
+<article class="release-item release-item--with-thumbnail row"
+         data-basket-item-type="Release"
+         data-basket-item-key="release-04eab96c3566791e3eb8708bcc042bce">
+
+  <a href="http://hondanews.com/en-US/honda-automobiles/releases/release-04eab96c3566791e3eb8708bcc042bce-hrc-formula-r-motorsports-grade-full-synthetic-protection-for-todays-honda-and-acura-engines-available-now">
+    <figure class="release-grid__photo release-photo " style="background-image: url(https://wieck-honda-production.s3.amazonaws.com/photos/bc561818e1aa4543f2d091e49c9ceb63114987d3/thumbnail-364x204.jpg);"></figure>
+    <img class="release-list__photo" src="https://wieck-honda-production.s3.amazonaws.com/photos/bc561818e1aa4543f2d091e49c9ceb63114987d3/thumbnail-364x204.jpg" style="width: 100%;">
+  </a>
+
+  <div class="release-information " 
+>
+
+    
+
+    <div class="row release-information-row">
+      <div class="col-xs-12 content-title-container">
+        <h5 class="content-title">
+          <a href="http://hondanews.com/en-US/honda-automobiles/releases/release-04eab96c3566791e3eb8708bcc042bce-hrc-formula-r-motorsports-grade-full-synthetic-protection-for-todays-honda-and-acura-engines-available-now">HRC Formula R: Motorsports-Grade Full Synthetic Protection for Today’s Honda and Acura Engines Available Now
+          </a>
+        </h5>
+      </div>
+
+      
+        <div class="col-xs-12 pub-date">
+          
+            <date class="published-at published">
+
+        <time class="pub-date" datetime="2026-06-16T13:00:00Z">
+          June 16, 2026
+        </time>
+      
+</date>
+          
+          <div class="release-grid__actions">
+            <a class="site-btn basket-action-visible"
+            href="javascript:void(0)"
+            title="Add to Saved Items"
+            data-basket-action="add"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+
+            <a class="site-btn basket-action-hidden saved-basket-item"
+            href="javascript:void(0)"
+            title="Remove from Saved Items"
+            data-basket-action="remove"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+
+            <a href="/en-US/honda-automobiles/releases/release-04eab96c3566791e3eb8708bcc042bce-hrc-formula-r-motorsports-grade-full-synthetic-protection-for-todays-honda-and-acura-engines-available-now/download" class="site-btn download-button license-check-download" title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      
+
+      
+
+      <div class="col-xs-12 summary-container">
+        <summary>
+          Honda Racing Corporation USA (HRC US), is releasing its first-ever consumer engine oil line available at Honda and Acura dealers starting June 15.
+          
+        </summary>
+      </div>
+
+      
+    </div>
+
+    <div class="row release-list-actions-container">
+      <div class="col-md-12 release-list-actions" >
+        <a class="site-btn basket-action-visible"
+           href="javascript:void(0)"
+           title="Add to Saved Items"
+           data-basket-action="add"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+
+        <a class="site-btn basket-action-hidden saved-basket-item"
+           href="javascript:void(0)"
+           title="Remove from Saved Items"
+           data-basket-action="remove"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+
+        <a href="/en-US/honda-automobiles/releases/release-04eab96c3566791e3eb8708bcc042bce-hrc-formula-r-motorsports-grade-full-synthetic-protection-for-todays-honda-and-acura-engines-available-now/download" class="site-btn download-button license-check-download"  title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+
+        
+
+        
+          
+            <a href="/en-US/honda-automobiles/releases/release-04eab96c3566791e3eb8708bcc042bce-hrc-formula-r-motorsports-grade-full-synthetic-protection-for-todays-honda-and-acura-engines-available-now?selectedTabId=release-04eab96c3566791e3eb8708bcc042bce-photos" class="site-btn download-button" title="Related Photos"><i class="fa fa-photo" aria-hidden="true"></i> 2</a>
+          
+        
+
+        
+          
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+              
+                
+
+
+
+
+
+
+<article class="release-item release-item--with-thumbnail row"
+         data-basket-item-type="Release"
+         data-basket-item-key="release-04eab96c3566791e3eb8708bcc00093c">
+
+  <a href="http://hondanews.com/en-US/honda-automobiles/releases/release-04eab96c3566791e3eb8708bcc00093c-honda-engineers-create-new-trail-experience-app-to-elevate-off-road-adventures-of-honda-trailsport-suv-owners">
+    <figure class="release-grid__photo release-photo " style="background-image: url(https://wieck-honda-production.s3.amazonaws.com/photos/91c6d45ecd414afab16f908d90658fab9da89712/thumbnail-364x204.jpg);"></figure>
+    <img class="release-list__photo" src="https://wieck-honda-production.s3.amazonaws.com/photos/91c6d45ecd414afab16f908d90658fab9da89712/thumbnail-364x204.jpg" style="width: 100%;">
+  </a>
+
+  <div class="release-information " 
+>
+
+    
+
+    <div class="row release-information-row">
+      <div class="col-xs-12 content-title-container">
+        <h5 class="content-title">
+          <a href="http://hondanews.com/en-US/honda-automobiles/releases/release-04eab96c3566791e3eb8708bcc00093c-honda-engineers-create-new-trail-experience-app-to-elevate-off-road-adventures-of-honda-trailsport-suv-owners">Honda Engineers Create New Trail Experience App to Elevate Off-Road Adventures of Honda TrailSport SUV Owners
+          </a>
+        </h5>
+      </div>
+
+      
+        <div class="col-xs-12 pub-date">
+          
+            <date class="published-at published">
+
+        <time class="pub-date" datetime="2026-06-15T13:30:00Z">
+          June 15, 2026
+        </time>
+      
+</date>
+          
+          <div class="release-grid__actions">
+            <a class="site-btn basket-action-visible"
+            href="javascript:void(0)"
+            title="Add to Saved Items"
+            data-basket-action="add"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+
+            <a class="site-btn basket-action-hidden saved-basket-item"
+            href="javascript:void(0)"
+            title="Remove from Saved Items"
+            data-basket-action="remove"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+
+            <a href="/en-US/honda-automobiles/releases/release-04eab96c3566791e3eb8708bcc00093c-honda-engineers-create-new-trail-experience-app-to-elevate-off-road-adventures-of-honda-trailsport-suv-owners/download" class="site-btn download-button license-check-download" title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      
+
+      
+
+      <div class="col-xs-12 summary-container">
+        <summary>
+          Honda is bringing high tech to the trail with today’s official launch of Honda Trail Experience (HTX), an innovative new off-road app created exclusively for Honda TrailSport owners looking to enhance off-roading adventures in the 2026 Passport TrailSport,
+          
+            <a href="http://hondanews.com/en-US/honda-automobiles/releases/release-04eab96c3566791e3eb8708bcc00093c-honda-engineers-create-new-trail-experience-app-to-elevate-off-road-adventures-of-honda-trailsport-suv-owners" class="release-summary-continue">...</a>
+          
+        </summary>
+      </div>
+
+      
+    </div>
+
+    <div class="row release-list-actions-container">
+      <div class="col-md-12 release-list-actions" >
+        <a class="site-btn basket-action-visible"
+           href="javascript:void(0)"
+           title="Add to Saved Items"
+           data-basket-action="add"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+
+        <a class="site-btn basket-action-hidden saved-basket-item"
+           href="javascript:void(0)"
+           title="Remove from Saved Items"
+           data-basket-action="remove"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+
+        <a href="/en-US/honda-automobiles/releases/release-04eab96c3566791e3eb8708bcc00093c-honda-engineers-create-new-trail-experience-app-to-elevate-off-road-adventures-of-honda-trailsport-suv-owners/download" class="site-btn download-button license-check-download"  title="Download"><i class="fa fa-cloud-download" aria-hidden="true"></i></a>
+
+        
+
+        
+          
+            <a href="/en-US/honda-automobiles/releases/release-04eab96c3566791e3eb8708bcc00093c-honda-engineers-create-new-trail-experience-app-to-elevate-off-road-adventures-of-honda-trailsport-suv-owners?selectedTabId=release-04eab96c3566791e3eb8708bcc00093c-photos" class="site-btn download-button" title="Related Photos"><i class="fa fa-photo" aria-hidden="true"></i> 3</a>
+          
+        
+
+        
+          
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+              
+              </div>
+
+              <div class="row">
+                <div class="more-btn-container col-xs-12">
+                  
+  
+
+                  
+                  
+                </div>
+              </div>
+              
+  
+    <a href="/en-US/honda-automobiles/channels/channel-3940" class="more-btn division-more-btn">All News &amp; Media <i class="fa fa-chevron-circle-right"></i></a>
+  
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    
+  
+
+  
+
+  
+
+  
+
+
+  
+  
+    
+      
+        
+      
+    
+  
+
+
+  
+  
+    
+      
+        
+
+        <style>
+	@media (max-width: 767px) {
+.homepage-media-contianer .homepage #homepage-photo-search, .homepage-media-contianer .homepage #homepage-video-search {
+	width: 100%;
+	padding-right: 0px;
+	padding-left: 0px;
+		}
+	.container-fluid {
+		padding: 0;
+	}
+	}	
+}
+</style>
+     
+
+     <div class="container-fluid homepage-media-contianer">
+      <div class="homepage container">
+        <div class="homepage-flex-row">
+          <div id="homepage-photo-search" class="homepage-section">
+            <div class="homepage-section-container">
+        <figure class="img-responsive" style="background-image: url(https://wieck-honda-production.s3-us-west-1.amazonaws.com/pagePartImages/8c6e073ed5af19019ccf14c10e7916eaf11a52e1);"></figure>
+        <div class="media-search-overlay">
+          <h2><i class="fa fa-camera" aria-hidden="true"></i> Photo Search</h2>
+          <form class="media-overlay-searchbox input-group" role="form" action="/en-US/honda-automobiles/search" method="get">
+            <input type="search" class="searchbox-input form-control" id="searchInput" name="query" title="Search Newsroom" placeholder="Type your photo search&hellip;" aria-describedby="search-addon">
+            <span class="input-group-btn" id="search-addon">
+              <button class="btn btn-secondary" type="submit"><i class="media-overlay-searchbox--button-icon fa fa-chevron-circle-right" aria-hidden="true"></i></button>
+            </span>
+            <input type="hidden" name="selectedTabId" value="photos">
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="homepage-video-search" class="homepage-section">
+      <div class="homepage-section-container">
+        <figure class="img-responsive" style="background-image: url(https://wieck-honda-production.s3-us-west-1.amazonaws.com/pagePartImages/3aec3253720f6b89d33285af220a62143eaaf4d9);"></figure>
+        <div class="media-search-overlay">
+          <h2><i class="fa fa-film" aria-hidden="true"></i> Video Search</h2>
+          <form class="media-overlay-searchbox input-group" role="form" action="/en-US/honda-automobiles/search" method="get">
+            <input type="search" class="searchbox-input form-control" id="searchInput" name="query" title="Search Newsroom" placeholder="Type your video search&hellip;" aria-describedby="search-addon">
+            <span class="input-group-btn" id="search-addon">
+              <button class="btn btn-secondary" type="submit"><i class="media-overlay-searchbox--button-icon fa fa-chevron-circle-right" aria-hidden="true"></i></button>
+            </span>
+            <input type="hidden" name="selectedTabId" value="videos">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+        
+      
+    
+  
+
+
+  <div class="homepage container">
+    <div class="row">
+      <div class="back-to-top-footer back-to-top-footer--homepage col-xs-12">
+        <a href="#" class="back-to-top">Back To Top <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </div>
+
+
+
+
+      <footer>
+      
+  
+    
+      
+        
+
+        <div class="site-footer-container site-footer-container--links">
+          <section class="site-footer-links">
+            <div class="container site-footer-links-container">
+              <div class="quick-links">
+                <a href="javascript: void(0);" id="quick-links" class="legal-links hidden-xs"><i class="fa fa-sitemap" aria-hidden="true"></i> Quick Links</a>
+                <a href="/en-US/contact" class="legal-links"><i class="fa fa-address-book" aria-hidden="true"></i> Contacts</a>
+                <a href="/en-US/subscribe" class="legal-links"><i class="fa fa-envelope" aria-hidden="true"></i> Subscribe</a>
+                <a href="javascript:void(0)" data-toggle="modal" data-target="#searchModal" data-placeholder="Type your search and hit enter..." title="Search" class="legal-links"><i class="fa fa-search" aria-hidden="true"></i> Search</a>
+              </div>
+              <div class="btn-group social-media" role="group">
+                <a type="button" class="btn btn-default social-btn facebook" href="https://www.facebook.com/Honda" target="_blank"><i class="fa fa-facebook"></i></a>
+                <a type="button" class="btn btn-default social-btn twitter" href="https://twitter.com/Honda" target="_blank"><i class="fa fa-twitter"></i></a>
+                <a type="button" class="btn btn-default social-btn youtube" href="https://www.youtube.com/honda" target="_blank"><i class="fa fa-youtube-play"></i></a>
+                <a type="button" class="btn btn-default social-btn linkedin" href="https://www.linkedin.com/company/american-honda-motor-company-inc-/" target="_blank"><i class="fa fa-linkedin"></i></a>
+                <a type="button" class="btn btn-default social-btn instagram" href="https://www.instagram.com/honda/" target="_blank"><i class="fa fa-instagram"></i></a>
+              </div>
+            </div>
+          </section>
+          <div id="footer-body" class="container">
+              <!-- CORPORATE -->
+            <div class="footer-col">
+              <ul>
+                <li><a class="channel-link" href="/honda-corporate/">Honda Corporate</a>
+                  <ul>
+                    <li><span class="heading"><a href="/honda-corporate/">Corporate</a></span>
+                      <ul>
+                        <li><a href="/en-US/honda-corporate/channels/company-facts">Company Facts</a></li>
+                        <li><a href="/pages/executives">Executives</a></li>
+                        <li><a href="/honda-corporate/channels/our-perspective">Our Perspective</a></li>
+                        <li><a href="/en-US/honda-corporate/channels/manufacturing">Manufacturing</a></li>
+                        <li><a href="/honda-corporate/channels/sales">Sales</a></li>
+                        <li><a href="/honda-corporate/channels/environmental-leadership">Environmental Leadership</a></li>
+                        <li><a href="/honda-corporate/channels/advanced-technology">Advanced Technology</a></li>
+                        <li><a href="/honda-corporate/channels/ces">CES</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <ul>
+                <li><a class="channel-link" href="/electrification/">Electrification </a>
+                  <ul>
+                    <li><span class="heading"><a href="/electrification/">Electrification</a></span>
+                      <ul>
+                        <li><a href="/electrification/channels/honda-autos">Honda Autos</a></li>
+                        <li><a href="/electrification/channels/acura">Acura</a></li>
+                        <li><a href="/electrification/channels/motorsports">Motorsports</a></li>
+                        <li><a href="/electrification/channels/investment">Investment</a></li>
+                        <li><a href="/electrification/channels/carbon-neutrality">Carbon Neutrality</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+                <!-- MARINE & JET -->
+              <ul>
+                  <!-- MARINE -->
+                <li><a class="channel-link" href="/honda-marine">Honda Marine</a>
+                  <ul>
+                    <li><a href="/honda-marine"><span class="heading">Marine</span></a>
+                      <ul>
+                        <li><a href="/honda-marine/channels/marine-portables">Portable Engines</a></li>
+                        <li><a href="/honda-marine/channels/marine-mid-range">Mid-Range Engines</a></li>
+                        <li><a href="/honda-marine/channels/marine-high-power">High-Power Engines</a></li>
+                        <li><a href="/honda-marine/channels/channel-5a5ddb882af3d7df640d387a530b66c1"><span class="heading">HondaLink® Marine</span></a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <ul>
+                  <!-- HONDAJET -->
+                <li><a class="channel-link" href="/hondajet">HondaJet</a>
+                </li>
+              </ul>
+            </div>
+              <!-- HONDA AUTOS -->
+            <div class="footer-col">
+              <ul>
+                <li><a class="channel-link" href="/honda-automobiles">Honda</a>
+                  <ul>
+                    <li><span class="heading"><a href="/honda-automobiles/">Honda Automobiles</a></span>
+                      <ul>
+                        <li><a href="/honda-automobiles/channels/honda-accord">Accord</a></li>
+                        <li><a href="/honda-automobiles/channels/honda-civic">Civic</a></li>
+                        <li><a href="/honda-automobiles/channels/honda-cr-v">CR-V</a></li>
+                        <li><a href="/honda-automobiles/channels/cr-v-e-fcev">CR-V e:FCEV</a></li>
+                        <li><a href="/honda-automobiles/channels/honda-hr-v">HR-V</a></li>
+                        <li><a href="/honda-automobiles/channels/motocompacto">Motocompacto</a></li>
+                        <li><a href="/honda-automobiles/channels/honda-odyssey">Odyssey</a></li>
+                        <li><a href="/honda-automobiles/channels/honda-passport">Passport</a></li>
+                        <li><a href="/honda-automobiles/channels/honda-pilot">Pilot</a></li>
+                        <li><a href="/honda-automobiles/channels/prologue">Prologue</a></li>
+                        <li><a href="/honda-automobiles/channels/honda-ridgeline">Ridgeline</a></li>
+                        <li><a href="/honda-automobiles/channels/technology"><span class="heading">Technology</span></a></li>
+                      </ul>
+                      <ul>
+                        <li><a href="/honda-automobiles/channels/honda-awards-recognition"><span class="heading">Awards &amp; Recognition</span></a></li>
+                        <li><a href="/honda-automobiles/channels/honda-auto-shows/"><span class="heading">Shows &amp; Events</span></a></li>
+                        <li><a href="/honda-automobiles/channels/honda-marketing" target="_blank"><span class="heading">Marketing</span></a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <ul>
+                <li><a class="channel-link" href="/safety/">Safety For Everyone</a>
+                  <ul>
+                    <li><span class="heading"><a href="/safety/">Safety For Everyone</a></span>
+                      <ul>
+                        <li><a href="https://www.honda.com/safety/" target="new">Corporate Safety Site</a></li>
+                        <li><a href="/safety/channels/hear-from-our-safety-engineers">Hear from our Safety Engineers</a></li>
+                        <li><a href="/honda-corporate/channels/recalls">Recalls</a></li>
+                        <li><a href="/takata-airbag-inflator-recall-information">Takata Airbag Recalls</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+              <!-- ACURA & RACING -->
+            <div class="footer-col">
+              <ul>
+                  <!-- ACURA -->
+                <li><a href="https://acuranews.com/en-US" target="_blank" class="channel-link">Acura</a>
+                  <ul>
+                    <li><span class="heading"><a href="https://acuranews.com/en-US" target="_blank">Acura Automobiles</a></span>
+                      <ul>
+                        <li><a href="https://acuranews.com/en-US/channels/integra" target="new">Integra</a></li>
+                        <li><a href="https://acuranews.com/en-US/channels/acura-mdx" target="_blank">MDX</a></li>
+                        <li><a href="https://acuranews.com/en-US/channels/acura-nsx" target="_blank">NSX</a></li>
+                        <li><a href="https://acuranews.com/en-US/channels/acura-rdx" target="_blank">RDX</a></li>
+                        <li><a href="https://acuranews.com/en-US/channels/acura-tlx" target="new">TLX</a></li>
+                        <li><a href="https://acuranews.com/en-US/channels/acura-zdx" target="new">ZDX</a></li>
+                      </ul>
+                    </li>
+                    <li><span class="heading"><a href="https://acuranews.com/en-US/channels/acura-motorsports" target="_blank">Motorsports</a></span></li>
+                    <li><span class="heading"><a href="https://acuranews.com/en-US/channels/acura-auto-shows" target="_blank">Shows &amp; Events</a></span></li>
+                    <li><a href="https://acuranews.com/en-US/channels/technology"><span class="heading">Technology</span>           </a></li>
+                  </ul>
+                </li>
+
+              </ul>
+              <ul>
+                  <!-- RACING      -->
+                <li><a class="channel-link" href="/honda-racing">Racing</a>
+                  <ul>
+                    <li><span class="heading"><a href="/honda-racing">Honda Racing</a></span>
+                      <ul>
+                        <li><a href="/honda-racing/channels/indycar-series">IndyCar </a></li>
+                        <li><a href="/honda-racing/channels/honda-imsa">IMSA</a></li>
+                        <li><a href="/honda-racing/channels/sro">SRO</a></li>
+                        <li><a href="/honda-racing/channels/off-road">Off-Road</a></li>
+                        <li><a href="/honda-racing/channels/hrc-us">HRS (US)</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+              <!-- POWERSPORTS -->
+            <div class="footer-col">
+              <ul>
+                <li><a class="channel-link" href="/powersports">Powersports</a>
+                  <ul>
+                    <li><span class="heading"><a href="/powersports/channels/powersports-atv">ATV</a></span>
+                      <ul>
+                        <li><a href="/powersports/channels/atv-rec-utility">Rec/Utility</a></li>
+                        <li><a href="/powersports/channels/atv-sport">Sport</a></li>
+                      </ul>
+                    </li>
+                    <li><span class="heading"><a href="/powersports/channels/powersports-motorcycle">Motorcycle</a></span>
+                      <ul>
+                        <li><a href="/powersports/channels/motorcycle-standard">Standard</a></li>
+                        <li><a href="/powersports/channels/motorcycle-touring">Touring</a></li>
+                        <li><a href="/powersports/channels/motorcycle-adventure">Adventure</a></li>
+                        <li><a href="/powersports/channels/motorcycle-cruiser">Cruiser</a></li>
+                        <li><a href="/powersports/channels/motorcycle-minimoto">MiniMOTO</a></li>
+                        <li><a href="/powersports/channels/motorcycle-sport">Sport</a></li>
+                        <li><a href="/powersports/channels/motorcycle-supersport">Supersport</a></li>
+                        <li><a href="/powersports/channels/motorcycle-dual-sport">Dual Sport</a></li>
+                        <li><a href="/powersports/channels/motorcycle-off-road-trail">Off-Road Trail</a></li>
+                        <li><a href="/powersports/channels/motorcycle-off-road-performance">Off-road Performance</a></li>
+                      </ul>
+                    </li>
+                    <li><span class="heading"><a href="/powersports/channels/powersports-side-by-side">Side-By-Side</a></span>
+                      <ul>
+                        <li><a href="/powersports/channels/side-by-side-sport">Sport</a></li>
+                        <li><a href="/powersports/channels/side-by-side-multipurpose">Multipurpose</a></li>
+                      </ul>
+                    </li>
+                    <li><span class="heading"><a href="/powersports/channels/powersports-scooters">Scooters</a></span>
+                      <ul>
+                        <li><a href="/powersports/channels/channel-3c7b0b0d9537d610c7796d97de011583">ADV160</a></li>
+                        <li><a href="/powersports/channels/scooters-metropolitan">Metropolitan</a></li>
+                        <li><a href="/powersports/channels/scooters-ruckus">Ruckus</a></li>
+                        <li><a href="/powersports/channels/scooters-pcx150">PCX</a></li>
+                      </ul>
+                    </li>
+                    <li><span class="heading"><a href="/powersports/channels/powersports-racing">Racing</a></span></li>
+                  </ul>
+                </li>
+              </ul>
+                <!-- ENGINES      -->
+              <ul>
+                <li><a class="channel-link" href="/honda-engines">Honda Engines</a>        </li>
+              </ul>
+            </div>
+              <!-- POWER EQUIPMENT -->
+            <div class="footer-col">
+              <ul>
+                <li><a class="channel-link" href="/power-equipment">Power Equipment</a>
+                  <ul>
+                    <li><span class="heading"><a href="/power-equipment">Generators</a></span>
+                      <ul>
+                        <li><a href="/power-equipment/channels/generators-super-quiet-series">Super Quiet Series</a></li>
+                        <li><a href="/power-equipment/channels/generators-deluxe-series">Deluxe Series</a></li>
+                        <li><a href="/power-equipment/channels/generators-economy-series">Economy Series</a></li>
+                        <li><a href="/power-equipment/channels/generators-industrial-series">Industrial Series</a></li>
+                      </ul>
+                    </li>
+                    <li><span class="heading"><a href="/power-equipment/channels/lawn-mowers">Lawn Mowers</a></span>
+                      <ul>
+                        <li><a href="/power-equipment/channels/lawnmowers-hrr-series">HRR Series</a></li>
+                        <li><a href="/power-equipment/channels/lawnmowers-hrx-series">HRX Series</a></li>
+                        <li><a href="/power-equipment/channels/lawnmowers-hrm-series">HRM Series (Miimo/Robotic)</a></li>
+                        <li><a href="/power-equipment/channels/lawnmowers-hrc-series">HRC Series</a></li>
+                        <li><a href="/power-equipment/channels/lawnmowers-hrn-series">HRN Series</a></li>
+                      </ul>
+                    </li>
+                    <li><span class="heading"><a href="/power-equipment">Pumps</a></span>
+                      <ul>
+                        <li><a href="/power-equipment/channels/pumps-de-watering">De-watering</a></li>
+                        <li><a href="/power-equipment/channels/pumps-construction">Construction</a></li>
+                        <li><a href="/power-equipment/channels/pumps-multipurpose">Multipurpose</a></li>
+                        <li><a href="/power-equipment/channels/pumps-submersible">Submersible</a></li>
+                      </ul>
+                    </li>
+                    <li><span class="heading"><a href="/power-equipment">Snow Blowers</a></span>
+                      <ul>
+                        <li><a href="/power-equipment/channels/snow-blowers-single-stage">Single Stage</a></li>
+                        <li><a href="/power-equipment/channels/snow-blowers-two-stage">Two Stage</a></li>
+                      </ul>
+                    </li>
+                    <li><span class="heading"><a href="/power-equipment">Tillers</a></span>
+                      <ul>
+                        <li><a href="/power-equipment/channels/tillers-mini">Mini</a></li>
+                        <li><a href="/power-equipment/channels/tillers-mid-tine">Mid-Tine</a></li>
+                        <li><a href="/power-equipment/channels/tillers-rear-tine">Rear-Tine</a></li>
+                      </ul>
+                    </li>
+                    <li><span class="heading"><a href="/power-equipment">Trimmers</a></span>
+                      <ul>
+                        <li><a href="/power-equipment/channels/trimmers-trimmers">Trimmers</a></li>
+                        <li><a href="/power-equipment/channels/trimmers-brushcutters">Brushcutters</a></li>
+                        <li><a href="/power-equipment/channels/trimmers-versattach">VersAttach</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="site-footer-container site-footer-container--legal">
+          <section class="site-footer-legal__outer-container">
+            <p style="text-align: center; color: #fff; padding-top: 20px;">© 2026 American Honda Motor Co., Inc. All information contained herein applies to U.S. products only.</p>
+
+            
+            <div class="container site-footer-legal">
+              <div class="footer-privacy-links">
+                <a href="https://www.honda.com/privacy/connected-product-privacy-notice" target="_blank" rel="noopener noreferrer">Vehicle Data Privacy</a> |
+                <a href="https://www.honda.com/privacy/sms-terms" target="_blank" rel="noopener noreferrer">SMS Terms and Conditions</a> |
+                <a href="https://www.honda.com/privacy/privacy-notice" target="_blank" rel="noopener noreferrer">Privacy Notice</a> |
+                <a href="https://www.honda.com/privacy/your-privacy-choices"
+   target="_blank" rel="noopener noreferrer">
+  Your Privacy Choices
+  <img
+    src="/assets/images/Privacy-Options.svg"
+    alt=""
+    class="privacy-choice-icon"
+    style="width:1.5em;height:1.5em;margin-left:.4ch;vertical-align:-0.45em;"
+  />
+</a> |
+
+                <a href="https://www.honda.com/privacy/terms-and-conditions" target="_blank" rel="noopener noreferrer">Legal Terms &amp; Conditions</a> |
+
+                
+
+                
+                <a href="https://www.honda.com/-/media/Honda-Homepage/PDF/Proposition-65-Consumer-Website-Statement-072518" download>Prop 65 Info</a> 
+                 |
+
+                 <a href="https://www.honda.com/privacy/disconnect-remote-vehicle-access" target="_blank" rel="noopener noreferrer">HOW TO DISCONNECT REMOTE VEHICLE ACCESS</a> 
+              </div>
+              <div>We and third parties use cookies and similar tools to enhance and track your experience on our Sites, conduct analytics, and personalize marketing to you. By using the Sites, you agree to our use of these technologies. For more information, visit the <a href="https://www.honda.com/privacy/privacy-notice#cookies" target="_blank">Cookies section</a> within our Privacy Notice. To manage your Cookie Preferences, <wk-onetrust-manage-consent style="text-decoration: underline; cursor: pointer;">click here</wk-onetrust-manage-consent>.</div>
+            </div>
+          </section>
+        </div>
+
+        
+      
+    
+  
+
+      </footer>
+
+      <script src="/assets/javascripts/wk-onetrust.js"
+      data-gtm-id="GTM-MLLRRMN">
+      </script>
+
+      <script src="/assets/app.js"></script>
+
+      
+
+      <div class="modal" id="licenseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          </div>
+        </div>
+      </div>
+    </body>
+
+  </html>
