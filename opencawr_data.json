@@ -294,6 +294,7 @@
    "pinned_buy_odo": 40000,
    "pinned_buy_year_est": 2023,
    "price_vs_odometer_usd": {
+    "0": 30050,
     "15000": 28000,
     "40000": 26000,
     "55000": 25000,
@@ -385,6 +386,7 @@
    "pinned_buy_odo": 90000,
    "pinned_buy_year_est": 2019,
    "price_vs_odometer_usd": {
+    "0": 35275,
     "15000": 30000,
     "30000": 24000,
     "60000": 19000,
@@ -473,6 +475,7 @@
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
+    "0": 24220,
     "12000": 24000,
     "25000": 20000,
     "50000": 18000,
@@ -651,6 +654,7 @@
    "pinned_buy_odo": 35000,
    "pinned_buy_year_est": 2023,
    "price_vs_odometer_usd": {
+    "0": 25790,
     "12000": 25000,
     "50000": 23000,
     "66000": 22000,
@@ -741,6 +745,7 @@
    "pinned_buy_odo": 45000,
    "pinned_buy_year_est": 2023,
    "price_vs_odometer_usd": {
+    "0": 31535,
     "12000": 19000,
     "35000": 12000,
     "65000": 11000,
@@ -833,6 +838,7 @@
    "pinned_buy_odo": 45000,
    "pinned_buy_year_est": 2023,
    "price_vs_odometer_usd": {
+    "0": 23870,
     "12000": 20000,
     "35000": 17000,
     "65000": 14000,
@@ -925,6 +931,7 @@
    "pinned_buy_odo": 70000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
+    "0": 29590,
     "12000": 28000,
     "40000": 19000,
     "65000": 16500,
@@ -1014,6 +1021,7 @@
    "pinned_buy_odo": 18000,
    "pinned_buy_year_est": 2025,
    "price_vs_odometer_usd": {
+    "0": 23535,
     "15000": 20500,
     "35000": 18000,
     "65000": 15000,
@@ -1100,6 +1108,7 @@
    "pinned_buy_odo": 65000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
+    "0": 25885,
     "12000": 24000,
     "40000": 16500,
     "65000": 15000,
@@ -1365,6 +1374,7 @@
    "pinned_buy_odo": 65000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
+    "0": 28885,
     "15000": 26000,
     "40000": 21000,
     "65000": 17000,
@@ -1548,6 +1558,7 @@
    "pinned_buy_odo": 60000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
+    "0": 28545,
     "15000": 22000,
     "40000": 18000,
     "70000": 14000,
@@ -1813,6 +1824,7 @@
    "pinned_buy_odo": 75000,
    "pinned_buy_year_est": 2020,
    "price_vs_odometer_usd": {
+    "0": 32315,
     "15000": 31000,
     "50000": 23000,
     "80000": 20000,
@@ -1983,6 +1995,7 @@
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
+    "0": 43095,
     "15000": 42000,
     "40000": 37000,
     "70000": 33000,
@@ -2331,6 +2344,7 @@
    "pinned_buy_odo": 65000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
+    "0": 27100,
     "15000": 24000,
     "40000": 19000,
     "65000": 15000,
@@ -2419,6 +2433,7 @@
    "pinned_buy_odo": 65000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
+    "0": 31485,
     "15000": 29000,
     "45000": 23000,
     "70000": 20000,
@@ -2501,6 +2516,7 @@
    "pinned_buy_odo": 65000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
+    "0": 49615,
     "15000": 43000,
     "40000": 37000,
     "65000": 32000,
@@ -2596,6 +2612,7 @@
    "pinned_buy_odo": 75000,
    "pinned_buy_year_est": 2020,
    "price_vs_odometer_usd": {
+    "0": 36445,
     "15000": 32000,
     "40000": 24500,
     "65000": 20000,
@@ -2681,6 +2698,7 @@
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
+    "0": 31445,
     "15000": 29000,
     "40000": 24000,
     "65000": 21000,
@@ -2940,6 +2958,7 @@
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
+    "0": 31035,
     "15000": 27000,
     "40000": 20000,
     "65000": 18000,
@@ -3028,6 +3047,7 @@
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
+    "0": 30995,
     "15000": 25000,
     "40000": 19000,
     "65000": 16000,
@@ -3447,6 +3467,7 @@
    "pinned_buy_odo": 60000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
+    "0": 35865,
     "15000": 29000,
     "40000": 23000,
     "65000": 18000,
@@ -3535,6 +3556,7 @@
    "pinned_buy_odo": 75000,
    "pinned_buy_year_est": 2020,
    "price_vs_odometer_usd": {
+    "0": 30285,
     "15000": 27000,
     "40000": 22000,
     "65000": 17000,
@@ -3713,6 +3735,7 @@
    "pinned_buy_odo": 85000,
    "pinned_buy_year_est": 2019,
    "price_vs_odometer_usd": {
+    "0": 47865,
     "15000": 40000,
     "40000": 34000,
     "65000": 29000,
@@ -3803,6 +3826,7 @@
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
+    "0": 30800,
     "15000": 28000,
     "40000": 21000,
     "77000": 17400,
@@ -3981,6 +4005,7 @@
    "pinned_buy_odo": 80000,
    "pinned_buy_year_est": 2020,
    "price_vs_odometer_usd": {
+    "0": 44290,
     "20000": 36000,
     "45000": 28000,
     "70000": 22000,
@@ -4073,6 +4098,7 @@
    "pinned_buy_odo": 75000,
    "pinned_buy_year_est": 2020,
    "price_vs_odometer_usd": {
+    "0": 33885,
     "20000": 30000,
     "45000": 24000,
     "70000": 19000,
@@ -4166,6 +4192,7 @@
    "pinned_buy_odo": 80000,
    "pinned_buy_year_est": 2020,
    "price_vs_odometer_usd": {
+    "0": 36400,
     "20000": 29000,
     "45000": 23000,
     "70000": 18000,
@@ -4257,6 +4284,7 @@
    "pinned_buy_odo": 60000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
+    "0": 32280,
     "15000": 26000,
     "40000": 20000,
     "65000": 16000,
@@ -4434,6 +4462,7 @@
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
+    "0": 42245,
     "20000": 30000,
     "45000": 25000,
     "70000": 21000,
@@ -4602,6 +4631,7 @@
    "pinned_buy_odo": 85000,
    "pinned_buy_year_est": 2019,
    "price_vs_odometer_usd": {
+    "0": 43890,
     "15000": 38000,
     "40000": 31000,
     "70000": 25000,
@@ -4775,6 +4805,7 @@
    "pinned_buy_odo": 80000,
    "pinned_buy_year_est": 2020,
    "price_vs_odometer_usd": {
+    "0": 67920,
     "30000": 42000,
     "70000": 34000,
     "110000": 27000,
@@ -4868,6 +4899,7 @@
    "pinned_buy_odo": 45000,
    "pinned_buy_year_est": 2023,
    "price_vs_odometer_usd": {
+    "0": 41035,
     "20000": 36000,
     "40000": 32000,
     "60000": 28000,
@@ -5121,6 +5153,7 @@
    "pinned_buy_odo": 45000,
    "pinned_buy_year_est": 2023,
    "price_vs_odometer_usd": {
+    "0": 40735,
     "20000": 38000,
     "40000": 34000,
     "60000": 30000,
@@ -5381,6 +5414,7 @@
    "pinned_buy_odo": 65000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
+    "0": 40785,
     "20000": 32000,
     "45000": 25000,
     "70000": 20000,
@@ -5724,6 +5758,7 @@
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
+    "0": 63495,
     "30000": 45000,
     "70000": 36000,
     "110000": 28000,
@@ -5976,6 +6011,7 @@
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
+    "0": 66495,
     "30000": 48000,
     "70000": 39000,
     "110000": 30000,
