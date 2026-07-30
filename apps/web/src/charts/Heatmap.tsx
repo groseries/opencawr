@@ -3,7 +3,7 @@ import { HEAT_RAMP_STEPS, heatColor, heatTextColor } from "./heatColor.js";
 
 /** Survey heatmap (spec §6.1): median $/mi across buy-odometer x hold-miles
  * combinations for one car, at reduced draws (see engine.worker.ts, ASSUMPTIONS.md
- * §I). Green ramp = cheaper; infeasible odo/year combinations (two-sided rule) are
+ * §I). Lighter green = cheaper; infeasible odo/year combinations (two-sided rule) are
  * hatched gray, never colored. */
 
 const CELL_W = 54;
