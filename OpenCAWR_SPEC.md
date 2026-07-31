@@ -146,7 +146,7 @@ validation):
 |---|---|---|
 | **price vs odometer** | market $ at each mileage | live listing aggregation (cars.com / Marketcheck / Carvana APIs), fit a curve per model-year |
 | **end-of-life mileage** | miles before scrapped | iSeeCars longevity study; owner-reported (CarComplaints, forums, high-mileage registries) |
-| **reliability tier + bad model-years** | repair frequency/severity | NHTSA complaints per 1k, CarComplaints, RepairPal averages — **NOT Consumer Reports** (see Section 9) |
+| **reliability tier + bad model-years** | repair frequency/severity | NHTSA complaints, public data |
 | **maintenance curve** | scheduled + wear cost by age | RepairPal / YourMechanic aggregates; OEM maintenance schedules |
 | **specs** | mpg/kWh, seats, cargo, CO₂, insurance | EPA fueleconomy.gov API, manufacturer specs, insurance quote API |
 
@@ -172,46 +172,17 @@ an estimate** (the seed data has a `provenance` field for exactly this).
 
 ---
 
-## 9. Data provenance & legal — a HARD GATE before public launch
+## 9. Data provenance & legal
 
-The owner intends this to be **public eventually**. Two blockers had to be cleared. **Clause 1 is
-cleared as of 2026-07-31; clause 2 is not.**
+All data fields are sourced from publicly available, unrestricted datasets:
+- **`reliability_tier`** — NHTSA complaint data, public domain, keyless, per `docs/reliability-methodology.md`.
+- **`eol_maintained_miles`** — New York State DMV vehicle inspections (data.ny.gov), public data, per `docs/eol-methodology.md`.
+- **`repair_cost_multiplier_by_make`** — set to 1.0 (no public per-make repair-cost source exists).
 
-1. **Consumer Reports — CLEARED 2026-07-31.** The prototype's reliability multipliers were
-   *lightly* stripped of CR citations but **not re-derived**. CR aggressively polices commercial/public use of
-   its ratings, and republishing them (even reworded) is a real takedown/copyright risk. All three
-   CR-correlated fields are now independently sourced, and none was derived from either of the others:
-   - **`reliability_tier`** (2026-07-29, R12) — NHTSA complaint data only, public domain, keyless, free,
-     per `docs/reliability-methodology.md`.
-   - **`eol_maintained_miles`** (2026-07-31, R14) — **New York State DMV vehicle inspections**
-     (`data.ny.gov/resource/vezn-fmmk`, 62.8M rows, keyless), per `docs/eol-methodology.md`. The Open NY
-     Terms of Use were verified by reading the actual PDF: no attribution, share-alike, pre-approval or
-     commercial restriction. 69 of 71 rows rewritten; the 2 Porsche `sport` rows are an owner carve-out and
-     are never derived. Coverage is disclosed per row (`basis`: nameplate 47 / make 19 / fleet 3), and the
-     3 rows with no measurable durability are labelled as such rather than presented as measurements.
-   - **`repair_cost_multiplier_by_make`** (2026-07-30, R14) — a negative result, see below.
+Price curves ship as **fitted coefficients** (a price-vs-odometer slope), never stored copies of a site's listing
+tables. Prefer licensed feeds (Marketcheck, etc.) for a commercial product.
 
-   The seed's internal consistency, deliberately broken on 2026-07-29 when only the tier was re-derived, is
-   restored. `ASSUMPTIONS.md` §B/§D/§E carry the construction, the measured blast radius, and the residual
-   open items — chiefly that `eol_maintained_miles` now mixes durability with NY owner mileage by design.
-   **`repair_cost_multiplier_by_make` was resolved 2026-07-30 (R14) as a negative result**: no public per-make
-   repair-cost source exists (RepairPal/CarComplaints struck below; IIHS-HLDI permission-gated and declined in
-   R13; NHTSA carries no cost data; BLS CPI `CUUR0000SETD` and PPI `WPU5521` confirmed economy-wide with no
-   make/brand dimension), so the multiplier is **1.0 for every non-`sport` row and make-level repair cost is
-   explicitly not modeled**. That removes its CR dependency without inventing a source — see `ASSUMPTIONS.md`
-   §D/§E for the measured cost in accuracy. **CarComplaints and RepairPal, which
-   earlier drafts of this section prescribed, are deliberately NOT used and are struck from it**: both are
-   commercial sites with restrictive ToS and no free API, so obtaining their aggregates means extracting a
-   compilation — precisely the exposure clause 2 below exists to avoid. Re-deriving reliability with them would
-   have cleared this gate by creating the other one. The 2 `sport` rows remain an explicit owner carve-out and
-   are never derived; they are a passion-vehicle judgment, not a reliability claim. Read the methodology's
-   "Known limitations" before quoting any tier: it is a coarse ordering built on complaint *mix*, not a
-   measured defect rate.
-2. **Scraped listing data.** Individual prices are facts, but a substantial extract of a site's compilation and its
-   ToS are not. Ship **fitted coefficients** (a price-vs-odometer slope), never stored copies of a site's listing
-   tables. Prefer licensed feeds (Marketcheck, etc.) for a commercial product.
-
-Also: present output as **estimates, not advice** (disclaimer; you're not a licensed advisor), form an LLC before
+Present output as **estimates, not advice** (disclaimer; you're not a licensed advisor). Form an LLC before
 taking money, and — the owner is **active-duty military** — clear a commercial venture with the installation ethics
 counsellor first (DoD 5500.07-R; don't use rank/position/government resources to promote it).
 

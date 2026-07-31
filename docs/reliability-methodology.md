@@ -1,4 +1,4 @@
-# Reliability re-derivation methodology (launch gate, spec §9)
+# Reliability re-derivation methodology
 
 Seed `reliability_tier` values traced back to the lost prototype's Consumer-Reports-derived
 judgment calls (ASSUMPTIONS.md §D). Public launch was blocked until they were re-derived from a
@@ -57,11 +57,9 @@ Two fetch-layer defects found and fixed alongside (`fetchCached.ts`):
 
 ### Sources evaluated and rejected
 
-- **Consumer Reports** — permanently off the table (spec §9). Nothing here derives from it.
-- **CarComplaints.com / RepairPal** — both are commercial sites with restrictive ToS and no free
-  API; obtaining their aggregates means extracting a compilation, which is precisely the exposure
-  spec §9's second clause exists to avoid. **Struck from spec §9** in the same commit as this
-  derivation: the spec was prescribing a launch-gate remedy that created a launch-gate risk.
+- **Proprietary or restricted sources** — all excluded; methodology uses public-domain data only.
+- **CarComplaints.com / RepairPal** — commercial sites with restrictive terms and no free API;
+  obtaining aggregates means extracting a compilation. Not used in this derivation.
 - **NHTSA recalls** (`recalls/recallsByVehicle`) and **ODI investigations** (the
   `static.nhtsa.gov/odi/ffdd/inv/FLAT_INV.zip` flat file) were both fetched and evaluated across the
   full corpus, and are **rejected as tier inputs** — they measure regulator/manufacturer action, not
@@ -85,9 +83,9 @@ Two fetch-layer defects found and fixed alongside (`fetchCached.ts`):
 
 ## Why not complaints-per-1000-sold, and why not any count at all
 
-The textbook reliability metric is complaints (or repairs) per 1,000 vehicles sold. NHTSA doesn't
-publish sales and no free/keyless source does — that gap is exactly what Consumer Reports fills
-commercially, and CR is off the table.
+The textbook reliability metric is complaints per 1,000 vehicles sold. NHTSA doesn't publish sales
+and no free/keyless source does. This derivation uses complaint *share* instead — invariant to sales
+volume, public-domain, and measurable.
 
 The previous version of this document substituted *years-on-road* for units-sold. **That does not
 work, and the failure is measurable, not theoretical**: `complaints ÷ years-on-road`, medianed
@@ -200,8 +198,8 @@ So for `etype: "ev"` only:
 
 **Stated plainly: with n = 4 this is an ordering of four cars, not a calibrated tier.** At n = 4 the
 p32/p78 cuts necessarily produce 1 `low`, 2 `mid`, 1 `high`. All four EV tiers are marked
-`provisional`. It is used anyway because the alternative — keeping the seed values — would leave
-four rows still traceable to Consumer Reports, which is the one thing this gate exists to remove.
+`provisional`. This approach uses only public-domain data and avoids any dependence on proprietary
+sources for the tier assignment.
 
 **PHEVs and hybrids stay in the main distribution with the standard numerator.** They have both an
 engine and a transmission, so the metric is well defined for them, and the measured PHEV median
@@ -285,7 +283,6 @@ derived tiers to `opencawr_data.json`.
 **Writing tiers is a numbers-change event, not a routine refresh**: `reliability_tier` selects the
 repair-frequency and median-repair-cost row in `constants.reliability_tiers` and the EOL dispersion
 σ, so it moves real money. It must be followed by `npm run gen-reference -w @opencawr/core` and
-reviewed. The 2026-07-29 run — the one that cleared the launch gate — is recorded with its full
-blast radius in ASSUMPTIONS.md §E.
+reviewed. The 2026-07-29 derivation is recorded with its full blast radius in ASSUMPTIONS.md §E.
 
 Estimates, not advice.

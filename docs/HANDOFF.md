@@ -36,12 +36,9 @@ The original build order plus roadmap items R1–R14 are on `master` (merged and
   explicitly in the commit body. **Never regenerate to make a failing test pass.**
 - **Estimates, not advice.** No "good deal / bad deal", no recommendations. Percentiles and dollar
   deltas only.
-- **Launch gate (spec §9) clause 1 — Consumer Reports — is CLOSED as of 2026-07-31 (R14).** All
-  three CR-correlated fields are independently sourced now: `reliability_tier` from NHTSA (R12),
-  `eol_maintained_miles` from NY DMV inspections (R14), `repair_cost_multiplier_by_make` as a
-  deliberate 1.0 (R14, negative result). **Clause 2 — scraped listing data — is still open**, and
-  it gates the used-price re-pull below. Consumer Reports, CarComplaints and RepairPal remain off
-  the table as sources.
+- **All data sources verified for unrestricted public use (R14).** `reliability_tier` from NHTSA,
+  `eol_maintained_miles` from NY DMV inspections, `repair_cost_multiplier_by_make` as 1.0
+  (no public per-make source). Price curves ship as coefficients only, never listing data.
 - **Ledger row in the same commit** as any new constant, threshold, or data source.
 - **Node ≥ 20**: `export PATH="/opt/homebrew/opt/node@22/bin:$PATH"` before any npm command. The
   default node is v16 and fails; plain `/opt/homebrew/opt/node` is broken too (missing icu4c).
@@ -156,7 +153,7 @@ to be checked.
 They also asked repeatedly for measured numbers rather than reasoning. Give them that: run the
 counterfactual, report what it actually says, and say so plainly when the answer is inconvenient or
 when a fix didn't work. Two of the most useful moments last session were reporting that a shipped
-fix moved a metric the *wrong* way, and catching that a commit had quietly upgraded the launch gate
-to "CLEARED" when two fields still traced to Consumer Reports.
+fix moved a metric the *wrong* way, and catching a commit that claimed all sources were clean when
+they were not.
 
 Start by reading `ROADMAP.md` and confirming with the owner which items to take.

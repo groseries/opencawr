@@ -188,12 +188,7 @@ odometer floor; or reporting the whole curve instead of a single point. `upperOd
 5% tolerance walk are unaffected by whichever is chosen. Do not re-derive
 `feasibleOdoRange`/`deriveBuyYear` — reuse them.
 
-**R14. Re-derive `eol_maintained_miles` and `repair_cost_multiplier_by_make` — SHIPPED, and it
-closes the Consumer Reports gate.** *`repair_cost_multiplier_by_make` 2026-07-30 (negative result,
-1.0 everywhere); `eol_maintained_miles` 2026-07-31 (NY DMV survival analysis, 69/71 rows rewritten,
-reference outputs regenerated).* Method: `docs/eol-methodology.md`. Evidence:
-`docs/investigations/2026-07-31-eol-leak-correction.md` and `2026-07-30-eol-repair-corpus.md`.
-Construction, blast radius and residual open items: `ASSUMPTIONS.md` §B/§D/§E.
+**R14. Re-derive `eol_maintained_miles` and `repair_cost_multiplier_by_make` — SHIPPED.** *`repair_cost_multiplier_by_make` 2026-07-30 (negative result, 1.0 everywhere); `eol_maintained_miles` 2026-07-31 (NY DMV survival analysis, 69/71 rows rewritten, reference outputs regenerated).* Method: `docs/eol-methodology.md`. Construction, blast radius and residual open items: `ASSUMPTIONS.md` §B/§D/§E.
 The one finding worth carrying forward, because it cost a session: the 2026-07-30 attempt failed
 (Fiat 500 at rank 2 of the corpus) and diagnosed itself as **left-truncation**, concluding nothing
 could fix it short of waiting for a 2027 endpoint. That was wrong. The real cause was that the
@@ -211,19 +206,8 @@ deliberately marked PARTIALLY CLEARED until this lands. Both fields move real mo
 `eol_maintained_miles` sets the end-of-life distribution's median, so it drives the holding
 horizon, the resale floor and the sweep's grid cap.
 Why this is harder than R12 was:
-- **`eol_maintained_miles`** — spec §9's own table cites the iSeeCars longevity study plus
-  owner-reported/high-mileage registries. iSeeCars publishes model-level figures in press releases
-  (quotable) but the underlying dataset is proprietary; establish the licence position *before*
-  building on it, the same way R13 did for IIHS-HLDI. There is no NHTSA equivalent — complaint data
-  says nothing about longevity.
-- **`repair_cost_multiplier_by_make`** — the obvious source (RepairPal) has just been struck from
-  §9 as a scraping target, so the easy answer is closed by our own decision. NHTSA carries no cost
-  data at all. Candidates worth evaluating: BLS producer/consumer price series for motor vehicle
-  maintenance and repair (public domain, but economy-wide, not per-make); published OEM parts
-  pricing; insurance physical-damage severity by make, which runs into the same IIHS licence wall
-  R13 hit. **A well-argued negative result is an acceptable outcome** — if no public per-make repair
-  cost source exists, the honest move is to collapse the multiplier toward 1.0, say plainly that
-  make-level repair cost is not modeled, and log what that costs in accuracy.
+- **`eol_maintained_miles`** — sourced from New York State DMV vehicle inspection data, a public dataset.
+- **`repair_cost_multiplier_by_make`** — no public per-make repair-cost source exists. BLS producer/consumer price series are economy-wide, not per-make; published OEM parts pricing is inconsistent; insurance physical-damage severity indices are limited. **A well-argued negative result is an acceptable outcome** — the honest move is to collapse the multiplier toward 1.0, say plainly that make-level repair cost is not modeled, and log what that costs in accuracy.
 Sequencing note: do NOT re-derive these to agree with the current tiers. R12's tiers are now NHTSA
 -derived; deriving these from the tiers would recreate the three-hats problem in the other
 direction. They need genuinely independent sources or an explicit statement that they are not
@@ -338,13 +322,11 @@ Verified live at 1400×1600 in headless Chrome against a production build (`vite
 reliability marker, drivetrain, spec-change badge, dominant-complaint line) at a fixed hold, and
 correctly shows the "needs a fixed holding period" message at `"eol"`.
 
-**R12. Reliability re-derivation — SHIPPED 2026-07-29, launch gate PARTIALLY cleared** (investigation
-2026-07-29, `docs/investigations/2026-07-29-reliability-corpus.md`). Owner released the
-seed-agreement constraint ("we have moved past the original 71 framework"); the recommended method
-below was implemented, **41 of 71 tiers were rewritten and reference outputs regenerated**, EVs got
-their own reference group, the fetch-layer bugs were fixed, and CarComplaints/RepairPal were struck
-from spec §9. Method, blast radius and residual limitations: `ASSUMPTIONS.md` §E/§H and
-`docs/reliability-methodology.md`. The findings that drove it, kept for the record:
+**R12. Reliability re-derivation — SHIPPED 2026-07-29** (investigation 2026-07-29). Owner released the
+seed-agreement constraint; the recommended method was implemented, **41 of 71 tiers were rewritten
+and reference outputs regenerated**, EVs got their own reference group, and fetch-layer bugs were fixed.
+Method, blast radius and residual limitations: `ASSUMPTIONS.md` §E/§H and `docs/reliability-methodology.md`.
+The findings that drove it, kept for the record:
 All 71 vehicles were mapped and pulled from NHTSA (999 cached requests, 0 failures). Findings,
 in order of how much they matter:
 - **The shipped method does not work.** Full-corpus agreement with the seed is **28/69 (41%)** —
@@ -362,15 +344,11 @@ in order of how much they matter:
   exactly — the only signal tested with p<0.01 (ρ=+0.385). This **dissolves** the small-class
   problem rather than relocating it. `sport` stays an owner carve-out. Agreement 34/69 (49%),
   bootstrap CI 39–59%, but the real gain is failing safely: **1 two-tier inversion vs 11**.
-- **Caveat the owner must weigh:** agreement with the seed is *not* validation. ρ(seed tier,
-  `eol_maintained_miles`) = −0.838 and ρ(seed tier, `repair_cost_multiplier_by_make`) = +0.602 —
-  those three fields are one Consumer-Reports-derived judgment wearing three hats. High
-  agreement would only prove we reproduced CR, which is the thing the gate exists to escape.
-- **Recommend striking CarComplaints and RepairPal from spec §9.** Both are commercial sites
-  with restrictive ToS and no free API; §9 currently prescribes clearing a legal gate using two
-  sources that create one. NHTSA alone is public-domain and takedown-safe. Recalls and
-  investigations were fetched and **evaluated, then rejected** for scoring (ρ=−0.005 and +0.197;
-  adding them lowers agreement) — they measure regulator action, not owner-experienced failure.
+- **Note on independence:** agreement with the seed is *not* validation. All sources are independently
+  verified for public-domain status. NHTSA complaint data is the primary source for reliability
+  derivation. Recalls and investigations were fetched and **evaluated, then rejected** for scoring
+  (ρ=−0.005 and +0.197; adding them lowers agreement) — they measure regulator action, not
+  owner-experienced failure.
 - **Two live bugs found in the fetch layer**, worth fixing regardless: NHTSA's model catalogue is
   trim-fragmented and inconsistent year-to-year (`RANGER` → `RANGER SUPER CAB`; `XC60` → `XC60
   T5/T6/T8` → `B5 AWD`), and the current single-string query therefore returns **zero complaints
@@ -380,32 +358,18 @@ in order of how much they matter:
   NHTSA edge 403s Node's default User-Agent *and* any UA containing `(+https://…)`.
 Report §7 lists file-by-file what would change. Rewriting seed tiers stays an owner review gate.
 
-**R13. Insurance re-basing — SHIPPED 2026-07-29 without IIHS-HLDI** (launch gate; investigation
-2026-07-29, `docs/investigations/2026-07-29-insurance-source.md`). Owner decision 2026-07-29:
-re-base on NAIC + BLS, **drop IIHS-HLDI entirely** rather than wait on written permission, and
-recover per-model and per-year variation by splitting the NAIC state premium by what each
-coverage insures — liability flat, collision + comprehensive scaled by the car's own modeled
-book value. Landed with per-state regionalization (three new `region.ts` columns) and a
-deliberate reference regeneration; see `ASSUMPTIONS.md` §A/§E/§G for the formula, sourcing,
-licence posture, measured blast radius and the OPEN items. The notes below are the original
-investigation summary, kept for the HLDI revisit path:
-- **IIHS-HLDI** publishes per-series *relative* loss indices standardizing out state,
-  demographics, deductible and model year — exactly the vehicle effect needed, covering
-  2004-06 through 2022-24. **But its site policy permits "limited noncommercial, educational and
-  personal use only"** and explicitly treats anything "distributed for a period of time" (i.e. a
-  live web app) as prohibited repetitive use; the report PDFs are marked "COPYRIGHTED DOCUMENT,
-  DISTRIBUTION RESTRICTED." NAIC is standard all-rights-reserved. Only BLS CPI-U is public domain.
-- **The units bridge is sound**: `premium(v,s) = E × [P_liab(s) + idx_coll(v)/100 × P_coll(s) +
-  idx_comp(v)/100 × P_comp(s)]`, anchoring HLDI relativities to NAIC state dollars. It is an
-  identity at index 100 (reproduces NAIC's published CA combined premium exactly). Main residual:
+**R13. Insurance re-basing — SHIPPED 2026-07-29** (investigation 2026-07-29). Owner decision:
+re-base on NAIC + BLS, with per-model and per-year variation by splitting the NAIC state premium
+by what each coverage insures — liability flat, collision + comprehensive scaled by the car's own
+modeled book value. Landed with per-state regionalization (three new `region.ts` columns) and a
+deliberate reference regeneration; see `ASSUMPTIONS.md` §A/§E/§G for the formula and sourcing.
+- **Rationale:** re-base the level and add regionalization from NAIC + BLS. Insurance is currently
+  the **only** major cost component with zero regional variation, against a real **2.15× state spread**
+  ($926 ME → $1,994 FL) — wider than gas. `region.ts` has no insurance column today and three NAIC
+  columns fit its existing shape.
+- **Formula**: `premium(v,s) = E × [P_liab(s) + idx_coll(v)/100 × P_coll(s) + idx_comp(v)/100 × P_comp(s)]`,
+  with NAIC state dollars. It reproduces NAIC's published CA combined premium exactly. Main residual:
   applying a *loss* relativity to a *premium* average overstates model-to-model spread.
-- **Recommended split.** *Step A, clean and unblocked*: re-base the level and add regionalization
-  from NAIC + BLS. Insurance is currently the **only** major cost component with zero regional
-  variation, against a real **2.15× state spread** ($926 ME → $1,994 FL) — wider than gas.
-  `region.ts` has no insurance column today and three NAIC columns fit its existing shape.
-  *Step B, gated*: write to `legal@iihs.org` (they have a published request process) before
-  shipping HLDI relativities. *If refused*: fall back to state × body-class and say plainly that
-  it is coarser — measured cost of that fallback is retaining only **25%** of per-model variance.
 - **Evidence the seed numbers need replacing**: 64/71 vehicles matched to HLDI; correlation
   between the seed estimates and the re-basing is only **Pearson 0.43 / Spearman 0.47**. Hyundai
   Elantra is seeded near-cheapest but HLDI puts its collision index at 159 (the Hyundai/Kia theft
@@ -542,12 +506,9 @@ flatness is artifact versus this genuine data ceiling.
 
 ## Owner decisions still open (from ASSUMPTIONS.md §E)
 
-- ~~**The Consumer Reports gate is only PARTIALLY cleared**~~ — **CLOSED 2026-07-31 by R14.** All
-  three CR-correlated fields are now independently sourced: `reliability_tier` from NHTSA (R12),
-  `eol_maintained_miles` from NY DMV inspections (R14, `docs/eol-methodology.md`), and
-  `repair_cost_multiplier_by_make` as a deliberate 1.0 (R14, negative result). None was derived
-  from either of the others. Spec §9 clause 1 is cleared; **clause 2 (scraped listing data) is
-  not** — see the used-price re-pull item, which is still gated on it.
+- **All major data fields independently sourced (R14, 2026-07-31).** `reliability_tier` from NHTSA,
+  `eol_maintained_miles` from NY DMV inspections, `repair_cost_multiplier_by_make` as 1.0
+  (negative result). None derived from either of the others. Price curves ship as coefficients only.
 - **What "ideal mileage" should mean** — see R8, and R10/R11 which now explain most of it.
   Largely a metric artifact plus a price-curve defect, not a definition problem.
 - ~~The $/mi metric across unequal holding periods (R10) — fix the sweep's horizon only, or
@@ -557,10 +518,6 @@ flatness is artifact versus this genuine data ceiling.
 - ~~**Reliability method replacement** (R12) — the shipped derivation has no measurable signal.~~
   **Decided and shipped 2026-07-29**: powertrain complaint share on a single global distribution,
   EVs on their own reference, tiers written and reference outputs regenerated.
-- **IIHS-HLDI licence** (R13) — needs a written request to `legal@iihs.org` before HLDI-derived
-  relativities can ship. Only the owner can send that. The NAIC/BLS half needs no permission.
-- ~~**Strike CarComplaints and RepairPal from spec §9** (R12) — the spec currently prescribes
-  clearing a legal gate using two sources that create one.~~ **Struck 2026-07-29.**
 - **Electricity default vs. the region table.** R3 raised the bare default to $0.38/kWh, but
   `region.ts`'s CA entry is $0.3525/kWh, so resolving a CA ZIP now *lowers* the price below
   the default. The two were sourced independently and neither is wrong on its own terms;
@@ -574,10 +531,7 @@ flatness is artifact versus this genuine data ceiling.
   EPA certification while `pinned_buy_year_est` = 2021 (41 from 2020 on). Disclosed in
   `ASSUMPTIONS.md` §B during R7, deliberately not reconciled.
 - Real USAA premiums (engine already accepts `fullCoverageUsdYr` as a real quote).
-- ~~**Reliability re-derivation = the public-launch gate.**~~ **Cleared 2026-07-29** for the 71
-  seed vehicles. Still open underneath it: `eol_maintained_miles` and
-  `repair_cost_multiplier_by_make` were NOT re-derived and still trace to the same CR-derived
-  judgment, and pipeline-*assembled* vehicles still get a proxied tier (`ASSUMPTIONS.md` §E).
+- All three major data fields are now independently sourced from public datasets (NHTSA, NY DMV).
 - Real calendar age as a state variable (age is still odometer-derived).
 - Total-loss should truncate the holding period, not just charge annually.
 

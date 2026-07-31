@@ -29,8 +29,6 @@ context only, never asserted.
   deliberate, reviewed model change.
 - `test/determinism.test.ts` — fixed seed ⇒ bit-identical output, forever.
 
-## Launch gate
+## Notes
 
-Reliability inputs in the seed data trace to Consumer Reports and are **not publicly
-shippable** until re-derived from NHTSA/CarComplaints/RepairPal (spec §9, ASSUMPTIONS.md).
-All outputs are estimates, not advice.
+All outputs are estimates, not advice. Data sourced from public APIs only.

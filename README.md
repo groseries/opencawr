@@ -22,9 +22,8 @@ Estimates from a simulation, not advice.
 ## Data provenance
 
 All reliability and durability inputs are derived from public sources (NHTSA complaint data, NY
-State DMV vehicle inspections) — none trace to Consumer Reports or any other compilation that
-restricts commercial/public use. Price curves ship as fitted coefficients only, never stored
-copies of a listing site's data. See [`OpenCAWR_SPEC.md`](OpenCAWR_SPEC.md) §9 and
+State DMV vehicle inspections). Price curves ship as fitted coefficients only, never stored
+copies of a listing site's data. See [`OpenCAWR_SPEC.md`](OpenCAWR_SPEC.md) and
 [`ASSUMPTIONS.md`](ASSUMPTIONS.md) for the full methodology and disclosed limitations.
 
 ## Development

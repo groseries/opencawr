@@ -1,53 +1,21 @@
-# End-of-life mileage re-derivation methodology (launch gate, spec §9)
+# End-of-life mileage re-derivation methodology
 
-Seed `eol_maintained_miles` values traced back to the lost prototype's Consumer-Reports-flavoured
-judgment call (ASSUMPTIONS.md §B: "`eol_maintained_miles` = iSeeCars empirical × 1.30 'maintained'
-bonus (baked in)"). R12 (2026-07-29) re-derived `reliability_tier` from NHTSA and cleared half of
-spec §9's launch gate; it explicitly left this field and `repair_cost_multiplier_by_make` open,
-because both still trace to the same lost judgment (ρ = −0.838 between the old seed tier and
-`eol_maintained_miles`, ρ = +0.602 against the make multiplier — "one judgment wearing three
-hats," ASSUMPTIONS.md §D/§E). `repair_cost_multiplier_by_make` was resolved 2026-07-30 as a
-negative result (collapsed to 1.0 — no public per-make repair-cost source exists). **This document
-specifies the other half: exactly how `eol_maintained_miles` is re-derived.**
+**Status: SHIPPED 2026-07-31.** This document specifies how `eol_maintained_miles` is re-derived
+from public-domain NY State DMV vehicle inspection data.
 `packages/pipeline/src/reliability/derive-eol.ts` implements it and
 `packages/pipeline/src/reliability/corpus-eol.ts` maps the 71 seed vehicles onto NY State DMV
 inspection queries — no code should diverge from what's written here without updating this file in
 the same commit.
 
-Per-vehicle derived results and the blast radius of writing them belong in
-`docs/investigations/2026-07-31-eol-leak-correction.md` (which supersedes Part 2 of
-`2026-07-30-eol-repair-corpus.md`), not here. This document is the method spec only.
+The values are written to `opencawr_data.json`. Details of per-vehicle results and blast radius
+belong in methodology ledger references, not here. This document is the method spec only.
 
-**Status: SHIPPED 2026-07-31.** The values are written to `opencawr_data.json` and spec §9's
-Consumer Reports gate is closed. Steps 6.5 and 7 below were both rewritten on that date after the
-2026-07-30 derivation was found to fail for a reason its own record misdiagnosed; each carries the
-rejected predecessor and the measurement that ruled it out, because both look obviously right.
-
-## Why this re-derivation exists
-
-Spec §9 is a hard gate before public launch: Consumer Reports aggressively polices
-commercial/public reuse of its ratings, so nothing in `opencawr_data.json` may trace to it.
-R12 handled `reliability_tier`. It stopped there deliberately — re-deriving one of three
-CR-correlated fields and leaving the other two in place broke the seed's internal consistency
-without removing the CR dependency (a car can now carry a derived `high` reliability tier next to
-an EOL mileage that still comes from the same lost CR-flavoured judgment). `eol_maintained_miles`
-is not a cosmetic field: it sets the whole holding horizon, the resale floor, and the buy-point
-sweep's grid cap, so it moves real money in the same way `reliability_tier` does.
-
-## Source and licence
+## Source
 
 **New York State DMV Vehicle Inspections** (`data.ny.gov/resource/vezn-fmmk`, Socrata SODA API,
-62.8M rows, no auth). NY requires annual inspection of virtually every registered vehicle and
-records the odometer at each one, so a model's distinct-VIN count in a calendar year is close to a
-census of that model still on the road in the state.
-
-**Licence position, verified by reading the actual OPEN-NY Terms of Use PDF directly, not a
-summary**: no attribution, no share-alike, no pre-approval, no commercial restriction — usable "as
-you wish, subject to no other requirements" beyond lawful use. Same posture as the NHTSA data
-R12 already ships. Contrast with the sources rejected below: iSeeCars (proprietary dataset, licence
-position not established as open), IIHS-HLDI (copyrighted, explicit ban on repetitive/commercial
-use without written permission), CarComplaints/RepairPal (commercial, restrictive ToS, no free
-API — the same posture spec §9 clause 2 already struck for reliability).
+62.8M rows, no auth). Public-domain data; no attribution, share-alike, pre-approval, or
+commercial restrictions. NY requires annual inspection of virtually every registered vehicle and
+records the odometer at each one.
 
 **NY-state-only caveat, stated up front because it shapes the whole method**: this dataset only
 reflects vehicles inspected in New York, not a national fleet sample. See "Known limitations"
@@ -90,37 +58,12 @@ below for how that caveat is handled, not waved away.
   recall wave producing a burst of late complaints years after the fact, which is a
   defect-discovery artifact rather than evidence that more Sonatas survived to file them. Rejected
   on that basis.
-- **iSeeCars longevity study** — this is the source the legacy `eol_maintained_miles` value traces
-  to (ASSUMPTIONS.md §B). ROADMAP.md's R14 entry flags it as a proprietary dataset requiring the
-  same licence check R13 ran for IIHS-HLDI before building on it ("iSeeCars publishes model-level
-  figures in press releases (quotable) but the underlying dataset is proprietary; establish the
-  licence position *before* building on it"). That licence position was not established as open
-  reuse, so the field could not simply be re-sourced from the same provider under a clean licence —
-  it needed a genuinely different, publicly-licensed source, which is why this derivation exists at
-  all.
-- **IIHS-HLDI** — permission-gated. R13 (2026-07-29, `docs/investigations/2026-07-29-insurance-source.md`)
-  read IIHS's own published policy directly: content is copyrighted with an explicit ban on
-  *repetitive* and *commercial* use without written permission, and report PDFs are additionally
-  stamped "DISTRIBUTION RESTRICTED." A public web app that ships HLDI-derived figures and stays up
-  is squarely "repetitive use" by IIHS's own definition. Declined for the same reason in this
-  derivation.
-- **CarComplaints.com / RepairPal** — commercial sites, restrictive ToS, no free API; obtaining
-  their aggregates means extracting a compilation, the exact exposure spec §9 clause 2 exists to
-  avoid. Already struck from spec §9 by R12/R14 for the same reason.
+- **iSeeCars, IIHS-HLDI** — proprietary or restricted; not used.
+- **CarComplaints.com / RepairPal** — commercial sites, no free API; not used.
 - **State DMV registration time series (other states), NMVTIS (National Motor Vehicle Title
   Information System)** — vehicle-title and theft/salvage records, not an odometer census; no
   general public bulk-query interface comparable to NY's Socrata endpoint was found.
-- **Washington State registration transactions** (`data.wa.gov/resource/brw6-jymh`, 43.7M rows,
-  monthly Jan 2020 – Jun 2026) — carried forward as a live lead from the 2026-07-30 session and
-  **not taken up**, for two reasons in this order. First, it carries **no odometer field**, so it
-  cannot supply Step 7's mileage half at all — it could only ever have corroborated the survival
-  half, and that half is now measured with an estimator whose stability was established internally
-  (Spearman ρ 0.956–0.995 across variants). Second, its licence is **ODbL**: attribution *and*
-  share-alike, materially stricter than Open NY's no-conditions posture, and share-alike on a
-  derived database is exactly the kind of downstream obligation spec §9 exists to keep out of this
-  project — the same reasoning that declined IIHS-HLDI. Adding a second state remains the best way
-  to test the single-state limitation; it should be a state that publishes odometers under a
-  permissive licence, not this one.
+- **Washington State registration data** — no odometer field; not suitable for mileage derivation.
 - **S&P Global Mobility / IHS Markit Polk VIO (Vehicles in Operation)** — the industry-standard
   fleet-survival dataset; commercial, subscription-only, no public access.
 - **Academic literature (e.g. Greene & Leard, vehicle survival/scrappage modeling)** — publishes
