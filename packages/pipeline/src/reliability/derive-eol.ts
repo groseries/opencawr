@@ -5,7 +5,11 @@
  *  free/keyless data layer as reliability re-derivation (`sources/ny-inspections.ts`
  *  — read its docstring first for the API traps this module relies on).
  *
- *  THE METHOD, validated empirically this session:
+ *  THE SHAPE OF THE METHOD: Steps 1-6 below build ONE absolute survival
+ *  curve — fleet-wide, pooled across every model in the batch — and fit a
+ *  Weibull to it (`deriveFleetContext`, computed once). The per-model path
+ *  does NOT repeat that recipe per nameplate/make; see "Step 6.5" below for
+ *  why, and for what it does instead.
  *
  *  Step 1 — raw 2-year retention. For a cohort at age `a` in calendar year
  *  2023 (model_year = 2023 - a), retention(a) = distinctVinCount(CY2025) /
@@ -67,42 +71,100 @@
  *
  *  Step 6 — age to miles: `medianOdometer` at the CY2025 cohort age nearest
  *  the fitted MECHANICAL median age, scaled linearly by (fittedMedianAge /
- *  nearestObservedAge).
+ *  nearestObservedAge). Steps 1-6 above run ONCE, fleet-wide, inside
+ *  `deriveFleetContext` — never per model.
+ *
+ *  Step 6.5 — the PER-MODEL path: ratio-based hazard scaling, not a second
+ *  absolute curve. An earlier version of this module repeated Steps 1-6 at
+ *  the nameplate/make level — build a per-model survival curve, leakage-
+ *  correct it, fit its own Weibull. That failed a full-corpus run three
+ *  ways, and shipping it was rejected: (1) `leakageCorrect` pins any model
+ *  with better-than-fleet retention to exactly `S=1.0` at young ages, and
+ *  `medianAgeFromWeibull`'s `0 < S < 1` filter then DISCARDS those points —
+ *  so the more durable a model is, the fewer points survive, the likelier it
+ *  falls through the coverage fallback to a coarse body-class constant; (2)
+ *  that bias hits hardest exactly where the measurement matters most —
+ *  Toyota Corolla, the highest-retention model measured anywhere in this
+ *  work, fell all the way to the fleet constant on a real full-corpus run,
+ *  landing on the identical number as Fiat 500 (0 usable points); (3) 24 of
+ *  69 vehicles collapsed to that constant on the same run — a coarse
+ *  body-class number is precisely what this whole re-derivation exists to
+ *  replace. The fix: borrow the curve SHAPE from the fleet-wide fit (already
+ *  well-determined, R^2 typically 0.93-0.99) and give each model only a
+ *  hazard SCALING relative to it. A retention RATIO is well-defined at every
+ *  age even when absolute survival is at/near 1, so this needs no capping
+ *  and no `<1` censoring:
+ *    1. rho(age) = retention_model(age) / retention_fleet(age), RAW (not
+ *       leakage-corrected) retention on both sides — the leakage term is
+ *       model-independent by assumption and cancels exactly in the ratio.
+ *       An age is dropped when the model side has fewer than
+ *       `MIN_VINS_PER_AGE` distinct 2023-cohort VINs (`computeHazardRatioPoints`).
+ *    2. Convert to a per-step hazard ratio, `h = -ln(S_step)`:
+ *         h_model(age) = h_fleet(age) - ln(rho(age))
+ *         c(age)       = h_model(age) / h_fleet(age)
+ *       aggregated across surviving ages with a mean weighted by the model's
+ *       2023-cohort VIN count at that age (`aggregateHazardRatio`).
+ *    3. Map the aggregate hazard ratio to a lifetime scale via the fleet's
+ *       fitted MECHANICAL Weibull shape `k`: scaling a Weibull hazard by `c`
+ *       scales its characteristic life (and median age) by `c^(-1/k)`:
+ *         medianAge_model = fleetMechanicalMedianAge x c^(-1/k)
+ *       (`scaleMedianAgeByHazardRatio`). A model with below-fleet hazard
+ *       (`c < 1`, e.g. Corolla) gets a LONGER life than the fleet median; a
+ *       model with above-fleet hazard (`c > 1`, e.g. Chevy Malibu) gets a
+ *       shorter one.
+ *    4. Convert `medianAge_model` to miles by scaling the FLEET's own
+ *       age-to-miles rate by the age ratio — deliberately NOT the model's
+ *       own `medianOdometer` data. See Step 7 for why.
+ *  `MIN_WEIBULL_POINTS` is reused as the minimum number of adequately-
+ *  sampled ages required to trust the aggregate — the level falls through
+ *  the Step 8 coverage hierarchy below `MIN_WEIBULL_POINTS` usable ages, or
+ *  when the aggregate `c` is non-positive/non-finite, exactly as before.
  *
  *  Step 7 — ratio to fleet, then anchor to a national number, corrected back
- *  up to crash-inclusive terms (the key design decision). NY vehicles
- *  accumulate fewer miles/year than the national average (measured: MY2013
- *  Camry median odometer 124,671 at age 12 ~= 10.4k/yr vs. the 13k national
- *  default), so NY supplies only the *relative* per-model spread; the
- *  absolute level comes from a national public-domain source that is itself
- *  crash-inclusive (fleet-observed), so a `maintainedBonus` factor lifts it
- *  to mechanical-only terms — this DERIVES the legacy 1.30 "maintained"
- *  judgment instead of inheriting it (measured this session: derived
- *  maintainedBonus = 1.165 on an age basis, vs. the legacy 1.30):
- *    ratio(model)     = modelMechanicalMedianMiles / fleetMechanicalMedianMiles   (NY-internal: NY's mileage deflation cancels exactly)
+ *  up to crash-inclusive terms (the key design decision). The ratio is
+ *  AGE-based, not miles-based — an earlier version of this module converted
+ *  each model's own median age to miles via that model's own NY
+ *  `medianOdometer` curve, and that was wrong: it imports the NY owner
+ *  population's ANNUAL MILEAGE for that nameplate (e.g. a Corolla buyer's
+ *  driving habits) into what's supposed to be a national DURABILITY
+ *  constant, and those are different things a model can differ on
+ *  independently of how long it lasts. Concretely, that mistake dragged
+ *  Toyota Corolla — the highest-retention model measured anywhere in this
+ *  work — below Camry Hybrid and several less-durable models in the derived
+ *  output, because Corolla owners in NY happen to drive fewer miles/year,
+ *  not because Corollas wear out faster. It also double-counts a variable
+ *  the cost engine already owns: `eol_maintained_miles` is an odometer
+ *  value the engine reaches by applying the USER's own annual-mileage input
+ *  (a separate field) to it, so baking a different implied annual mileage
+ *  into each model's EOL constant fights the engine's own input. Converting
+ *  every model at the FLEET's single mileage-vs-age rate removes annual
+ *  mileage from the per-model comparison entirely, leaving only measured
+ *  durability:
+ *    ratio(model)     = medianAge_model / fleetMechanicalMedianAge   (AGE-based: every model shares the fleet's mileage-vs-age rate, so no per-model annual-mileage assumption is smuggled in)
  *    maintainedBonus  = fleetMechanicalMedianAge / fleetObservedMedianAge        (computed once, fleet-wide, from the two Weibull fits)
  *    eol(model)       = nationalAnchor(bodyClass) x maintainedBonus x ratio(model)
  *  `nationalAnchor` is NHTSA/DOT "Vehicle Survivability and Travel Mileage
  *  Schedules," DOT HS 809 952 (Jan 2006), public domain, still cited by
  *  NHTSA's current CAFE rulemakings, and is fleet-OBSERVED (crash-inclusive):
  *  passenger car 152,137mi, light truck (pickup/SUV/van) 179,954mi. See
- *  `bodyClassFor` for the seed `body` -> class mapping.
+ *  `bodyClassFor` for the seed `body` -> class mapping. What this GIVES UP,
+ *  disclosed rather than compensated for: genuine CLASS-level
+ *  mileage-accumulation differences (a pickup really is driven more per
+ *  year than a compact) are no longer expressed in this field — every
+ *  vehicle in the corpus is converted at one shared national rate. No class
+ *  adjustment factor is invented to claw that back; `nationalAnchor`'s
+ *  car/light-truck split is the only accumulation-rate differentiation this
+ *  field carries.
  *
- *  Step 8 — coverage fallback (LOAD-BEARING). The age-4..20 survival fit
- *  needs cohort model years 2003-2019 (observed in 2023). Many seed
- *  vehicles are simply too new to have that history at all — e.g. Kia K4
- *  (first_year 2025), VW ID.4 / Toyota RAV4 Prime / Toyota Sienna Hybrid
- *  (2021), Hyundai Palisade / Kia Telluride (2020), Mazda CX-90 (2024),
- *  Jeep Grand Cherokee L (2021) have ZERO usable cohort points at the
- *  nameplate level: every too-old age bucket has 0 rows in both calendar
- *  years, so retention(a)=0, trueSurvival(a)=0, and the cumulative product
- *  collapses to 0 for that age and everything after it — mechanically
- *  excluded by the S<=0 guard in `medianAgeFromWeibull`, not a bug needing
- *  a special case. Fitting a Weibull to 1-2 young-age points would produce
- *  a wildly overconfident "lasts forever" extrapolation — that failure mode
- *  must not ship. So each model resolves through a three-level fallback
- *  (`chooseBasis` / `deriveEolForModel`), the level ALWAYS recorded on the
- *  result (`basis`), never silent:
+ *  Step 8 — coverage fallback (LOAD-BEARING). Even with ratio-based scaling,
+ *  a nameplate/make can still be too thin: too few ages clear
+ *  `MIN_VINS_PER_AGE`, or the too-new nameplates that have literally zero
+ *  cohort history at these ages at all — e.g. Kia K4 (first_year 2025), VW
+ *  ID.4 / Toyota RAV4 Prime / Toyota Sienna Hybrid (2021), Hyundai Palisade
+ *  / Kia Telluride (2020), Mazda CX-90 (2024), Jeep Grand Cherokee L (2021).
+ *  So each model resolves through a three-level fallback (`chooseBasis` /
+ *  `deriveEolForModel`), the level ALWAYS recorded on the result (`basis`),
+ *  never silent:
  *    Level 1 "nameplate" (preferred) — `EolQuery.nameplate`: the nameplate's
  *      model_name strings, queried across every model year it has actually
  *      existed (durability is substantially a nameplate/manufacturer
@@ -112,8 +174,10 @@
  *      strings pre-date their most recent generation (Volvo XC60 used since
  *      ~2010, Chevy Volt since 2011, Nissan Leaf since ~2011, Volvo XC90
  *      since ~2003) and a seed row's own generation window undercounts them.
- *      Requires >= `MIN_WEIBULL_POINTS` usable cohort points AND real
- *      (non-zero) odometer data at the nearest age; otherwise falls through.
+ *      Requires >= `MIN_WEIBULL_POINTS` usable ages (Step 6.5); otherwise
+ *      falls through. With ratio-based scaling this level should resolve
+ *      for the large majority of the corpus — it no longer needs 5 sub-1.0
+ *      absolute survival points, only 5 adequately-sampled ages.
  *    Level 2 "make" — `EolQuery.make` (optional): pools the make's models
  *      instead of one nameplate. The ideal query is `make_code` alone with
  *      NO `model_name` filter, but `ny-inspections.ts`'s adapter only
@@ -316,9 +380,13 @@ export function fitWeibull(points: WeibullPoint[]): WeibullFit {
   return { lambda, k, r2, n };
 }
 
-/** Below this many usable (0 < S < 1) points, a fit is too thin to trust —
- *  module docstring "Step 5"/"Step 8". Doubles as the Level 1/2 fallback
- *  acceptance threshold. */
+/** Below this many usable (0 < S < 1) points, a fleet-wide Weibull fit is too
+ *  thin to trust — module docstring "Step 5". Reused at the per-model level
+ *  as the minimum number of adequately-sampled ages required before the
+ *  ratio-based hazard scaling (module docstring "the fix") is trusted; both
+ *  are "need at least N data points to trust a statistic" thresholds, so one
+ *  constant covers both. Doubles as the Level 1/2 fallback acceptance
+ *  threshold. */
 export const MIN_WEIBULL_POINTS = 5;
 
 /** Below this R^2, a fit is flagged provisional rather than trusted silently
@@ -383,27 +451,156 @@ export function bodyClassFor(body: string): BodyClass {
 }
 
 // ---------------------------------------------------------------------------
+// Step 6.5 — per-model path: ratio-based hazard scaling
+//
+// Replaces building an absolute per-model survival curve (leakage-correct,
+// chain, remove crash attrition, fit a Weibull — the Step 1-6 recipe above)
+// at the nameplate/make level. That approach failed three ways on the real
+// full-corpus run (module docstring "the fix"): it needs `0 < S < 1` points,
+// but `leakageCorrect` pins high-retention models to exactly `S=1.0` at
+// young ages, and those points are then DISCARDED by the Weibull filter —
+// biased hardest against the MOST durable models (Corolla, the highest-
+// retention model measured anywhere in this work, fell all the way through
+// to the "fleet" body-class constant). 24 of 69 vehicles landed on "fleet"
+// this way.
+//
+// Instead, take the curve SHAPE from the fleet-wide fit (well-determined,
+// R^2 ~ 0.93-0.99) and give each model only a hazard SCALING relative to it.
+// A retention RATIO is well-defined at every age even when absolute
+// survival is at/near 1, so no capping and no `<1` filtering is needed:
+//   1. rho(age) = retention_model(age) / retention_fleet(age), using RAW
+//      (not leakage-corrected) retention on both sides — the leakage term is
+//      model-independent by assumption and cancels exactly in the ratio.
+//      An age is dropped when the model side has fewer than
+//      `MIN_VINS_PER_AGE` distinct 2023-cohort VINs (too thin to trust).
+//   2. Convert to a per-step hazard ratio, `h = -ln(S_step)`:
+//        h_model(age) = h_fleet(age) - ln(rho(age))
+//        c(age)       = h_model(age) / h_fleet(age)
+//      Aggregated across ages via a weighted mean, weighted by the model's
+//      2023-cohort VIN count at that age (`aggregateHazardRatio`).
+//   3. Map the aggregate hazard ratio to a lifetime scale using the fleet's
+//      fitted MECHANICAL Weibull shape `k`: scaling the hazard by `c` scales
+//      the characteristic life by `c^(-1/k)` (Weibull property), so
+//        medianAge_model = fleetMechanicalMedianAge * c^(-1/k)
+//      (`scaleMedianAgeByHazardRatio`).
+//   4. Continue exactly as before: age -> miles via the model's own
+//      odometer data at the nearest surveyed age, then ratio-to-fleet and
+//      the three-factor anchor (Step 7, unchanged).
+// ---------------------------------------------------------------------------
+
+/** Minimum distinct-VIN count (the 2023-cohort denominator of the raw
+ *  2-year retention) at a given age for a model's retention ratio at that
+ *  age to be trusted. Below this, a single noisy VIN count can swing the
+ *  ratio wildly, so the age is dropped rather than averaged in. */
+export const MIN_VINS_PER_AGE = 200;
+
+export interface AgeRetention {
+  age: number;
+  /** Distinct-VIN count of the 2023 cohort at this age — the retention
+   *  denominator, used both to compute `retention` and as the sample-size
+   *  threshold/weight for the hazard-ratio aggregation. */
+  n2023: number;
+  /** Raw (NOT leakage-corrected) 2-year retention: distinctVinCount(CY2025)
+   *  / distinctVinCount(CY2023) for this model_year cohort. */
+  retention: number;
+}
+
+export interface HazardRatioPoint {
+  age: number;
+  rho: number;
+  /** Weight for the aggregation step: the model's 2023-cohort VIN count at
+   *  this age. */
+  weight: number;
+}
+
+/** `rho(age) = retention_model(age) / retention_fleet(age)` at every age
+ *  where the model side clears `minVinsPerAge` and both sides have positive
+ *  raw retention — the ratio-based fix's core building block (module
+ *  docstring "Step 6.5"). No leakage correction, no capping, no `<1`
+ *  filtering: a ratio of raw retentions is well-defined even when a model's
+ *  retention is at/near 1. */
+export function computeHazardRatioPoints(
+  modelRetentions: AgeRetention[],
+  fleetRetentionByAge: ReadonlyMap<number, number>,
+  minVinsPerAge: number,
+): HazardRatioPoint[] {
+  const points: HazardRatioPoint[] = [];
+  for (const m of modelRetentions) {
+    if (m.n2023 < minVinsPerAge || m.retention <= 0) continue;
+    const fleetRetention = fleetRetentionByAge.get(m.age);
+    if (!fleetRetention || fleetRetention <= 0) continue;
+    points.push({ age: m.age, rho: m.retention / fleetRetention, weight: m.n2023 });
+  }
+  return points;
+}
+
+/** Converts each age's retention ratio to a per-step hazard ratio
+ *  `c(age) = h_model(age) / h_fleet(age)` (`h = -ln(retention)`), then
+ *  aggregates across ages with a VIN-count-weighted mean (module docstring
+ *  "Step 6.5"). Since `rho = retention_model / retention_fleet`,
+ *  `ln(rho) = h_fleet - h_model`, so `h_model = h_fleet - ln(rho)`. Returns
+ *  `null` when no point survives the per-age guards or the aggregate is
+ *  non-positive/non-finite — a model this scaling can't be trusted for. */
+export function aggregateHazardRatio(
+  points: HazardRatioPoint[],
+  fleetRetentionByAge: ReadonlyMap<number, number>,
+): number | null {
+  let weightedSum = 0;
+  let totalWeight = 0;
+  for (const p of points) {
+    const fleetRetention = fleetRetentionByAge.get(p.age);
+    if (!fleetRetention || fleetRetention <= 0) continue;
+    const hFleet = -Math.log(fleetRetention);
+    if (!Number.isFinite(hFleet) || hFleet <= 0) continue;
+    const hModel = hFleet - Math.log(p.rho);
+    const c = hModel / hFleet;
+    if (!Number.isFinite(c) || c <= 0) continue;
+    weightedSum += c * p.weight;
+    totalWeight += p.weight;
+  }
+  return totalWeight > 0 ? weightedSum / totalWeight : null;
+}
+
+/** Maps an aggregate hazard ratio `c` to a model median age via the fleet's
+ *  fitted MECHANICAL Weibull shape `k`: under a Weibull, scaling the hazard
+ *  by `c` scales the characteristic life (and therefore the median age) by
+ *  `c^(-1/k)` (module docstring "Step 6.5"). Guards against a
+ *  non-positive/non-finite `c` or `k`, or a resulting non-positive/non-finite
+ *  median age. */
+export function scaleMedianAgeByHazardRatio(
+  fleetMedianAge: number,
+  c: number,
+  k: number,
+): number | null {
+  if (!Number.isFinite(c) || c <= 0 || !Number.isFinite(k) || k <= 0) return null;
+  const medianAge = fleetMedianAge * Math.pow(c, -1 / k);
+  return Number.isFinite(medianAge) && medianAge > 0 ? medianAge : null;
+}
+
+// ---------------------------------------------------------------------------
 // Step 8 — three-level coverage fallback
 // ---------------------------------------------------------------------------
 
 export type EolBasis = "nameplate" | "make" | "fleet";
 
 /** One survival-analysis result at a given query granularity (nameplate or
- *  make) — module docstring "Step 8". */
+ *  make) — module docstring "Step 8". `r2` is the fleet-wide MECHANICAL
+ *  Weibull fit's R^2 (the shape used to scale this level's hazard ratio),
+ *  not a per-level fit — the ratio-based path (Step 6.5) doesn't fit its own
+ *  curve per model. No per-model miles/odometer field: age-to-miles now
+ *  happens once, at the fleet level, using the fleet's own mileage-vs-age
+ *  rate for every model (module docstring "Step 7"). */
 export interface LevelResult {
   medianAge: number | null;
   r2: number | null;
-  medianLifetimeMiles: number | null;
   usablePoints: number;
-  nearestOdometerAge: number | null;
 }
 
-/** A level is usable when it produced both a real (non-degenerate) median
- *  age AND real (non-zero) odometer data to convert it to miles — module
- *  docstring "Step 8"'s ">= MIN_WEIBULL_POINTS usable points AND adequate
- *  n" requirement, made concrete. */
+/** A level is usable when it produced a real (non-degenerate) median age —
+ *  module docstring "Step 8"'s ">= MIN_WEIBULL_POINTS usable ages with
+ *  adequate per-age sample size" requirement, made concrete. */
 export function isLevelUsable(level: LevelResult): boolean {
-  return level.medianAge !== null && level.medianLifetimeMiles !== null;
+  return level.medianAge !== null;
 }
 
 /** Picks the coverage level per the Step 8 fallback hierarchy: nameplate if
@@ -460,11 +657,19 @@ export interface FleetContext {
   fleetObservedR2: number;
   fleetMechanicalMedianAge: number;
   fleetMechanicalR2: number;
+  /** Shape parameter `k` of the fleet-wide MECHANICAL Weibull fit — the
+   *  curve SHAPE every per-model hazard-ratio scaling borrows (module
+   *  docstring "Step 6.5"). */
+  fleetMechanicalK: number;
   /** `fleetMechanicalMedianAge / fleetObservedMedianAge` — module docstring
    *  "Step 7". Derives the legacy 1.30 "maintained" judgment instead of
    *  inheriting it (measured this session: 1.165). */
   maintainedBonus: number;
   fleetMechanicalMedianLifetimeMiles: number;
+  /** Fleet-wide RAW (not leakage-corrected) 2-year retention at each
+   *  `SURVIVAL_AGES` age, keyed by age — the denominator side of `rho(age)`
+   *  in the per-model hazard-ratio scaling (module docstring "Step 6.5"). */
+  rawRetentionByAge: ReadonlyMap<number, number>;
   /** True when either fleet-level Weibull fit is below `MIN_ACCEPTABLE_R2` —
    *  surfaced rather than silently trusted (module docstring "Step 5"). */
   fleetProvisional: boolean;
@@ -478,14 +683,17 @@ export interface EolDerivation {
   /** Which coverage level produced this result — module docstring "Step 8".
    *  Always populated, never silent. */
   basis: EolBasis;
-  /** Mechanical-only Weibull-fitted median survival age in years; `null`
-   *  for the `"fleet"` basis (no per-model curve was usable). */
+  /** Median survival age in years, from scaling the fleet's mechanical
+   *  Weibull median by this model's hazard ratio (module docstring "Step
+   *  6.5"); `null` for the `"fleet"` basis (no per-model ratio was usable). */
   medianAge: number | null;
-  /** R^2 of the mechanical Weibull fit that produced `medianAge`, or of the
-   *  best level attempted when every level fell through to `"fleet"`. */
+  /** R^2 of the fleet-wide mechanical Weibull fit whose shape underlies
+   *  `medianAge` (module docstring "Step 6.5") — `null` for the `"fleet"`
+   *  basis, where no per-model ratio was usable. */
   r2: number | null;
-  medianLifetimeMiles: number | null;
-  /** 1 exactly for the `"fleet"` basis (module docstring "Step 8"). */
+  /** `medianAge / fleetContext.fleetMechanicalMedianAge` — AGE-based, not
+   *  miles-based (module docstring "Step 7"). 1 exactly for the `"fleet"`
+   *  basis. */
   ratioToFleet: number | null;
   eolMiles: number | null;
   /** True whenever `basis !== "nameplate"`, or the winning fit's R^2 is
@@ -493,7 +701,6 @@ export interface EolDerivation {
   provisional: boolean;
   evidence: {
     usableSurvivalPoints: number;
-    nearestOdometerAge: number | null;
   };
 }
 
@@ -531,47 +738,41 @@ function nearestAgeIndex(ages: readonly number[], target: number): number {
   return bestIdx;
 }
 
-/** Runs Steps 1/2/4/4.5/5/6 for one query granularity (nameplate or make
- *  level) against an already-computed `fleetContext`. */
+/** Runs Step 1 plus the Step 6.5 ratio-based hazard scaling for one query
+ *  granularity (nameplate or make level) against an already-computed
+ *  `fleetContext`. No per-model Weibull fit and no per-model
+ *  `medianOdometer` call: the curve shape is borrowed from
+ *  `fleetContext.fleetMechanicalK`, and age-to-miles happens once at the
+ *  fleet level (module docstring "Step 7") — this only needs enough
+ *  adequately-sampled ages to trust the aggregate hazard ratio. */
 async function deriveLevelMedian(
   level: EolLevelQuery,
   fleetContext: FleetContext,
 ): Promise<LevelResult> {
-  const retentions = await Promise.all(
-    SURVIVAL_AGES.map((age) => retentionAtAge(level.makeCode, level.modelNames, age)),
+  const modelRetentions: AgeRetention[] = await Promise.all(
+    SURVIVAL_AGES.map(async (age) => {
+      const { n2023, retention } = await retentionAtAge(level.makeCode, level.modelNames, age);
+      return { age, n2023, retention };
+    }),
   );
-  const trueSurvivalByAge = SURVIVAL_AGES.map((age, i) => ({
-    age,
-    trueSurvival: leakageCorrect(retentions[i]!.retention, fleetContext.leakageCeiling),
-  }));
-  const observedCurve = cumulativeSurvival(trueSurvivalByAge);
-  const mechanicalCurve = removeCrashAttrition(observedCurve, fleetContext.totalLossRatePerYr);
-  const { medianAge, fit, usablePoints } = medianAgeFromWeibull(mechanicalCurve);
-
-  if (medianAge === null) {
-    return {
-      medianAge: null,
-      r2: fit?.r2 ?? null,
-      medianLifetimeMiles: null,
-      usablePoints,
-      nearestOdometerAge: null,
-    };
-  }
-
-  const odometers = await Promise.all(
-    SURVIVAL_AGES.map((age) => odometerAtAge(level.makeCode, level.modelNames, age)),
+  const ratioPoints = computeHazardRatioPoints(
+    modelRetentions,
+    fleetContext.rawRetentionByAge,
+    MIN_VINS_PER_AGE,
   );
-  const nearestIdx = nearestAgeIndex(SURVIVAL_AGES, medianAge);
-  const nearestAge = SURVIVAL_AGES[nearestIdx]!;
-  const nearestOdometer = odometers[nearestIdx]!;
-  const medianLifetimeMiles = nearestOdometer > 0 ? nearestOdometer * (medianAge / nearestAge) : null;
+  const c =
+    ratioPoints.length >= MIN_WEIBULL_POINTS
+      ? aggregateHazardRatio(ratioPoints, fleetContext.rawRetentionByAge)
+      : null;
+  const medianAge =
+    c === null
+      ? null
+      : scaleMedianAgeByHazardRatio(fleetContext.fleetMechanicalMedianAge, c, fleetContext.fleetMechanicalK);
 
   return {
     medianAge,
-    r2: fit?.r2 ?? null,
-    medianLifetimeMiles,
-    usablePoints,
-    nearestOdometerAge: nearestAge,
+    r2: medianAge === null ? null : fleetContext.fleetMechanicalR2,
+    usablePoints: ratioPoints.length,
   };
 }
 
@@ -663,6 +864,10 @@ export async function deriveFleetContext(queries: EolQuery[]): Promise<FleetCont
   const fleetMechanicalMedianLifetimeMiles =
     odometers[nearestIdx]! * (mechanicalFit.medianAge / nearestAge);
 
+  const rawRetentionByAge = new Map<number, number>(
+    SURVIVAL_AGES.map((age, i) => [age, survivalRetentions[i]!]),
+  );
+
   return {
     leakageCeiling,
     totalLossRatePerYr,
@@ -670,8 +875,10 @@ export async function deriveFleetContext(queries: EolQuery[]): Promise<FleetCont
     fleetObservedR2: observedFit.fit!.r2,
     fleetMechanicalMedianAge: mechanicalFit.medianAge,
     fleetMechanicalR2: mechanicalFit.fit!.r2,
+    fleetMechanicalK: mechanicalFit.fit!.k,
     maintainedBonus,
     fleetMechanicalMedianLifetimeMiles,
+    rawRetentionByAge,
     fleetProvisional:
       observedFit.fit!.r2 < MIN_ACCEPTABLE_R2 || mechanicalFit.fit!.r2 < MIN_ACCEPTABLE_R2,
     fleetQueryCount: queries.length,
@@ -702,15 +909,18 @@ export async function deriveEolForModel(
       basis,
       medianAge: null,
       r2: level.r2,
-      medianLifetimeMiles: null,
       ratioToFleet: 1,
       eolMiles: NATIONAL_ANCHOR_MILES[bodyClass] * fleetContext.maintainedBonus,
       provisional: true,
-      evidence: { usableSurvivalPoints: level.usablePoints, nearestOdometerAge: null },
+      evidence: { usableSurvivalPoints: level.usablePoints },
     };
   }
 
-  const ratioToFleet = level.medianLifetimeMiles! / fleetContext.fleetMechanicalMedianLifetimeMiles;
+  // AGE-based ratio, not miles-based — module docstring "Step 7". Every
+  // model is converted to miles at the FLEET's own mileage-vs-age rate, so
+  // no per-model annual-mileage assumption (owner demographics) leaks into
+  // a field meant to measure durability.
+  const ratioToFleet = level.medianAge! / fleetContext.fleetMechanicalMedianAge;
   const eolMiles = NATIONAL_ANCHOR_MILES[bodyClass] * fleetContext.maintainedBonus * ratioToFleet;
   const lowR2 = level.r2 !== null && level.r2 < MIN_ACCEPTABLE_R2;
 
@@ -721,10 +931,9 @@ export async function deriveEolForModel(
     basis,
     medianAge: level.medianAge,
     r2: level.r2,
-    medianLifetimeMiles: level.medianLifetimeMiles,
     ratioToFleet,
     eolMiles,
     provisional: basis !== "nameplate" || lowR2,
-    evidence: { usableSurvivalPoints: level.usablePoints, nearestOdometerAge: level.nearestOdometerAge },
+    evidence: { usableSurvivalPoints: level.usablePoints },
   };
 }

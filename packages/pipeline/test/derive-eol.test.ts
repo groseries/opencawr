@@ -1,10 +1,13 @@
 import { describe, expect, it } from "vitest";
 import {
   EXPECTED_LEAKAGE_CEILING,
+  MIN_VINS_PER_AGE,
   MIN_WEIBULL_POINTS,
   NATIONAL_ANCHOR_MILES,
+  aggregateHazardRatio,
   bodyClassFor,
   chooseBasis,
+  computeHazardRatioPoints,
   computeLeakageCeiling,
   cumulativeSurvival,
   fitWeibull,
@@ -12,6 +15,8 @@ import {
   leakageCorrect,
   medianAgeFromWeibull,
   removeCrashAttrition,
+  scaleMedianAgeByHazardRatio,
+  type AgeRetention,
   type LevelResult,
   type WeibullPoint,
 } from "../src/reliability/derive-eol.js";
@@ -269,20 +274,158 @@ describe("bodyClassFor (Step 7 body -> national anchor mapping)", () => {
   });
 });
 
+describe("Step 6.5 ratio-based hazard scaling (the per-model fix)", () => {
+  // Real fleet fit from the full-corpus run this fix was validated against:
+  // k~4.2, and a representative mid-life fleet 2-year retention ~0.86
+  // (h_fleet = -ln(0.86) ~= 0.1508). Reference per-model retention ratios
+  // measured directly against fleet at matched ages (model retention /
+  // fleet retention): Toyota Corolla 1.039 (most durable end of the
+  // spread), Chevy Malibu 0.859 (least durable end).
+  const FLEET_K = 4.2;
+  const FLEET_RETENTION_MID_LIFE = 0.86;
+  const FLEET_MEDIAN_AGE = 18;
+
+  describe("computeHazardRatioPoints", () => {
+    const fleetRetentionByAge = new Map<number, number>([
+      [6, 0.9],
+      [10, 0.86],
+      [14, 0.8],
+    ]);
+
+    it("keeps an age when the model clears MIN_VINS_PER_AGE and both sides are positive", () => {
+      const modelRetentions: AgeRetention[] = [{ age: 10, n2023: 500, retention: 0.9 }];
+      const points = computeHazardRatioPoints(modelRetentions, fleetRetentionByAge, MIN_VINS_PER_AGE);
+      expect(points).toEqual([{ age: 10, rho: 0.9 / 0.86, weight: 500 }]);
+    });
+
+    it("drops an age when the model's 2023-cohort VIN count is below the threshold", () => {
+      const modelRetentions: AgeRetention[] = [{ age: 10, n2023: 199, retention: 0.9 }];
+      expect(computeHazardRatioPoints(modelRetentions, fleetRetentionByAge, 200)).toEqual([]);
+    });
+
+    it("drops an age when the model's retention is non-positive (a collapsed/degenerate age)", () => {
+      const modelRetentions: AgeRetention[] = [{ age: 10, n2023: 500, retention: 0 }];
+      expect(computeHazardRatioPoints(modelRetentions, fleetRetentionByAge, MIN_VINS_PER_AGE)).toEqual([]);
+    });
+
+    it("drops an age the fleet map has no entry for", () => {
+      const modelRetentions: AgeRetention[] = [{ age: 99, n2023: 500, retention: 0.9 }];
+      expect(computeHazardRatioPoints(modelRetentions, fleetRetentionByAge, MIN_VINS_PER_AGE)).toEqual([]);
+    });
+
+    it("keeps only the ages that pass, from a mixed batch", () => {
+      const modelRetentions: AgeRetention[] = [
+        { age: 6, n2023: 500, retention: 0.92 },
+        { age: 10, n2023: 50, retention: 0.9 }, // too thin
+        { age: 14, n2023: 500, retention: 0.7 },
+      ];
+      const points = computeHazardRatioPoints(modelRetentions, fleetRetentionByAge, MIN_VINS_PER_AGE);
+      expect(points.map((p) => p.age)).toEqual([6, 14]);
+    });
+  });
+
+  describe("aggregateHazardRatio", () => {
+    it("Corolla worked example: rho~1.039 -> c~0.746 (below-fleet hazard, longer life)", () => {
+      const fleetRetentionByAge = new Map([[10, FLEET_RETENTION_MID_LIFE]]);
+      const points = [{ age: 10, rho: 1.039, weight: 1000 }];
+      const c = aggregateHazardRatio(points, fleetRetentionByAge);
+      expect(c).not.toBeNull();
+      expect(c!).toBeCloseTo(0.7463, 3);
+    });
+
+    it("Malibu worked example: rho~0.859 -> c~2.007 (above-fleet hazard, shorter life)", () => {
+      const fleetRetentionByAge = new Map([[10, FLEET_RETENTION_MID_LIFE]]);
+      const points = [{ age: 10, rho: 0.859, weight: 1000 }];
+      const c = aggregateHazardRatio(points, fleetRetentionByAge);
+      expect(c).not.toBeNull();
+      expect(c!).toBeCloseTo(2.0077, 3);
+    });
+
+    it("weights the aggregate by each age's sample size", () => {
+      const fleetRetentionByAge = new Map([
+        [6, FLEET_RETENTION_MID_LIFE],
+        [10, FLEET_RETENTION_MID_LIFE],
+      ]);
+      // Two ages with the same rho -> the aggregate should equal that age's c
+      // regardless of weight split (sanity: weighting doesn't distort an
+      // already-uniform ratio).
+      const points = [
+        { age: 6, rho: 1.039, weight: 100 },
+        { age: 10, rho: 1.039, weight: 9000 },
+      ];
+      const c = aggregateHazardRatio(points, fleetRetentionByAge);
+      expect(c!).toBeCloseTo(0.7463, 3);
+    });
+
+    it("returns null when no points are supplied", () => {
+      expect(aggregateHazardRatio([], new Map())).toBeNull();
+    });
+
+    it("returns null when every point's fleet retention is missing", () => {
+      const points = [{ age: 10, rho: 1.0, weight: 500 }];
+      expect(aggregateHazardRatio(points, new Map())).toBeNull();
+    });
+  });
+
+  describe("scaleMedianAgeByHazardRatio", () => {
+    it("Corolla worked example: c~0.746, k~4.2 -> ~1.072x the fleet median age", () => {
+      const medianAge = scaleMedianAgeByHazardRatio(FLEET_MEDIAN_AGE, 0.7463, FLEET_K);
+      expect(medianAge).not.toBeNull();
+      expect(medianAge! / FLEET_MEDIAN_AGE).toBeCloseTo(1.072, 2);
+    });
+
+    it("Malibu worked example: c~2.007, k~4.2 -> ~0.848x the fleet median age", () => {
+      const medianAge = scaleMedianAgeByHazardRatio(FLEET_MEDIAN_AGE, 2.0077, FLEET_K);
+      expect(medianAge).not.toBeNull();
+      expect(medianAge! / FLEET_MEDIAN_AGE).toBeCloseTo(0.848, 2);
+    });
+
+    it("c=1 (identical hazard to fleet) is a no-op", () => {
+      expect(scaleMedianAgeByHazardRatio(FLEET_MEDIAN_AGE, 1, FLEET_K)).toBeCloseTo(FLEET_MEDIAN_AGE, 10);
+    });
+
+    it("returns null for a non-positive or non-finite c or k", () => {
+      expect(scaleMedianAgeByHazardRatio(FLEET_MEDIAN_AGE, 0, FLEET_K)).toBeNull();
+      expect(scaleMedianAgeByHazardRatio(FLEET_MEDIAN_AGE, -1, FLEET_K)).toBeNull();
+      expect(scaleMedianAgeByHazardRatio(FLEET_MEDIAN_AGE, Infinity, FLEET_K)).toBeNull();
+      expect(scaleMedianAgeByHazardRatio(FLEET_MEDIAN_AGE, 0.75, 0)).toBeNull();
+      expect(scaleMedianAgeByHazardRatio(FLEET_MEDIAN_AGE, 0.75, -1)).toBeNull();
+    });
+  });
+
+  it("no capping, no <1 censoring needed: a model at S~1.0 raw retention still yields a finite, usable c", () => {
+    // The defect this fix addresses: the OLD absolute-curve path pinned
+    // leakage-corrected survival to exactly 1.0 for a model retaining better
+    // than the fleet ceiling, and medianAgeFromWeibull's `0 < S < 1` filter
+    // then discarded that point outright. The ratio-based path never
+    // constructs a capped survival value in the first place — a retention
+    // at/above the fleet's is just a rho slightly above 1, not an undefined
+    // boundary case.
+    const fleetRetentionByAge = new Map([[10, 0.86]]);
+    const points = computeHazardRatioPoints(
+      [{ age: 10, n2023: 1000, retention: 0.9 }], // model retention > fleet retention
+      fleetRetentionByAge,
+      MIN_VINS_PER_AGE,
+    );
+    expect(points).toHaveLength(1);
+    const c = aggregateHazardRatio(points, fleetRetentionByAge);
+    expect(c).not.toBeNull();
+    expect(Number.isFinite(c!)).toBe(true);
+    expect(c!).toBeGreaterThan(0);
+    expect(c!).toBeLessThan(1); // better-than-fleet retention -> below-fleet hazard
+  });
+});
+
 describe("Step 8 coverage fallback (chooseBasis / isLevelUsable)", () => {
   const usable: LevelResult = {
     medianAge: 18,
     r2: 0.95,
-    medianLifetimeMiles: 150_000,
     usablePoints: 9,
-    nearestOdometerAge: 18,
   };
   const unusable: LevelResult = {
     medianAge: null,
     r2: null,
-    medianLifetimeMiles: null,
     usablePoints: 0,
-    nearestOdometerAge: null,
   };
 
   it("prefers the nameplate level when it's usable", () => {
@@ -302,9 +445,8 @@ describe("Step 8 coverage fallback (chooseBasis / isLevelUsable)", () => {
     expect(chooseBasis(unusable, null)).toBe("fleet");
   });
 
-  it("isLevelUsable requires both a median age and real odometer-derived miles", () => {
+  it("isLevelUsable requires a real (non-degenerate) median age", () => {
     expect(isLevelUsable(usable)).toBe(true);
-    expect(isLevelUsable({ ...usable, medianLifetimeMiles: null })).toBe(false);
     expect(isLevelUsable({ ...usable, medianAge: null })).toBe(false);
   });
 });
