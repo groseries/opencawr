@@ -6,10 +6,16 @@
  *  — read its docstring first for the API traps this module relies on).
  *
  *  THE SHAPE OF THE METHOD: Steps 1-6 below build ONE absolute survival
- *  curve — fleet-wide, pooled across every model in the batch — and fit a
- *  Weibull to it (`deriveFleetContext`, computed once). The per-model path
- *  does NOT repeat that recipe per nameplate/make; see "Step 6.5" below for
- *  why, and for what it does instead.
+ *  curve — the WHOLE NY DMV fleet, no make filter and no model filter — and
+ *  fit a Weibull to it (`deriveFleetContext`, computed once). It is
+ *  deliberately NOT pooled from just the batch's own nameplates: the
+ *  national anchor this curve gets multiplied against in Step 7
+ *  (`NATIONAL_ANCHOR_MILES`, NHTSA DOT HS 809 952) describes the entire US
+ *  light-vehicle fleet, and pooling ~70 mainstream seed nameplates instead
+ *  measures a different, mainstream-skewed population — see
+ *  `wholeFleetRetentionAtAge` for the measured damage that mismatch does.
+ *  The per-model path does NOT repeat that recipe per nameplate/make; see
+ *  "Step 6.5" below for why, and for what it does instead.
  *
  *  Step 1 — raw 2-year retention. For a cohort at age `a` in calendar year
  *  2023 (model_year = 2023 - a), retention(a) = distinctVinCount(CY2025) /
@@ -776,50 +782,35 @@ async function deriveLevelMedian(
   };
 }
 
-async function pooledRetentionAtAge(queries: EolQuery[], age: number): Promise<number> {
-  const results = await Promise.all(
-    queries.map((q) => retentionAtAge(q.nameplate.makeCode, q.nameplate.modelNames, age)),
-  );
-  let n2023 = 0;
-  let n2025 = 0;
-  for (const r of results) {
-    n2023 += r.n2023;
-    n2025 += r.n2025;
-  }
-  return n2023 > 0 ? n2025 / n2023 : 0;
+/** Whole-NY-fleet raw 2-year retention at `age` — NO make filter, NO model
+ *  filter (`ny-inspections.ts`'s `distinctVinCount("", [], ...)`). This is
+ *  the fleet baseline `deriveFleetContext` anchors against: the national
+ *  anchor it's multiplied against (`NATIONAL_ANCHOR_MILES`, NHTSA DOT HS 809
+ *  952) describes the ENTIRE US light-vehicle fleet, not a basket of the
+ *  batch's own nameplates, so the denominator of every per-model ratio
+ *  (module docstring "Step 7") must refer to that same whole-fleet
+ *  population — pooling only the batch's own nameplates measures a
+ *  different, mainstream-skewed population instead. */
+async function wholeFleetRetentionAtAge(age: number): Promise<number> {
+  const { retention } = await retentionAtAge("", [], age);
+  return retention;
 }
 
-/** Fleet odometer at `age`, weighted by each model's CY2025 distinct-VIN
- *  count — the closest available approximation to a true pooled median
- *  given that `ny-inspections.ts` only exposes per-model medians, not raw
- *  rows (module docstring "Step 7" needs a fleet-wide `medianOdometer`
- *  analogue to normalize against). */
-async function pooledOdometerAtAge(queries: EolQuery[], age: number): Promise<number> {
-  const [odometers, counts] = await Promise.all([
-    Promise.all(queries.map((q) => odometerAtAge(q.nameplate.makeCode, q.nameplate.modelNames, age))),
-    Promise.all(
-      queries.map((q) => distinctVinCount(q.nameplate.makeCode, q.nameplate.modelNames, 2025 - age, 2025)),
-    ),
-  ]);
-  let weightedSum = 0;
-  let totalWeight = 0;
-  odometers.forEach((med, i) => {
-    const w = counts[i]!;
-    if (med > 0 && w > 0) {
-      weightedSum += med * w;
-      totalWeight += w;
-    }
-  });
-  return totalWeight > 0 ? weightedSum / totalWeight : 0;
+/** Whole-NY-fleet median odometer at `age` — same whole-fleet basis as
+ *  `wholeFleetRetentionAtAge` (module docstring "Step 7" needs a fleet-wide
+ *  `medianOdometer` to anchor the age-to-miles step against). */
+async function wholeFleetOdometerAtAge(age: number): Promise<number> {
+  return odometerAtAge("", [], age);
 }
 
 /** Computes the shared `FleetContext` (leakage ceiling, crash-removal rate,
- *  derived maintained bonus, mechanical-miles anchor) from a batch of
- *  models, pooling their raw NY DMV counts into fleet-wide aggregates at
- *  each age using each query's `nameplate` level. `queries` should be the
- *  whole model set being derived (mirrors `deriveReliability`'s percentile
- *  cuts, also computed once per batch) — NOT invoked against all 71 seed
- *  vehicles by this module; that's a later step's job. */
+ *  derived maintained bonus, mechanical-miles anchor) from the WHOLE NY DMV
+ *  fleet — no make filter, no model filter — not from the batch's own
+ *  nameplates (see `wholeFleetRetentionAtAge`). `queries` is still the batch
+ *  being derived (mirrors `deriveReliability`'s percentile cuts, also
+ *  computed once per batch) but is no longer the source of the fleet
+ *  baseline itself — NOT invoked against all 71 seed vehicles by this
+ *  module; that's a later step's job. */
 export async function deriveFleetContext(queries: EolQuery[]): Promise<FleetContext> {
   if (queries.length === 0) {
     throw new Error("deriveFleetContext: need at least one query");
@@ -829,12 +820,12 @@ export async function deriveFleetContext(queries: EolQuery[]): Promise<FleetCont
   const totalLossRatePerYr = constants.total_loss_rate_per_yr;
 
   const ceilingRetentions = await Promise.all(
-    LEAKAGE_CEILING_AGES.map((age) => pooledRetentionAtAge(queries, age)),
+    LEAKAGE_CEILING_AGES.map((age) => wholeFleetRetentionAtAge(age)),
   );
   const leakageCeiling = computeLeakageCeiling(ceilingRetentions, totalLossRatePerYr);
 
   const survivalRetentions = await Promise.all(
-    SURVIVAL_AGES.map((age) => pooledRetentionAtAge(queries, age)),
+    SURVIVAL_AGES.map((age) => wholeFleetRetentionAtAge(age)),
   );
   const trueSurvivalByAge = SURVIVAL_AGES.map((age, i) => ({
     age,
@@ -858,7 +849,7 @@ export async function deriveFleetContext(queries: EolQuery[]): Promise<FleetCont
 
   const maintainedBonus = mechanicalFit.medianAge / observedFit.medianAge;
 
-  const odometers = await Promise.all(SURVIVAL_AGES.map((age) => pooledOdometerAtAge(queries, age)));
+  const odometers = await Promise.all(SURVIVAL_AGES.map((age) => wholeFleetOdometerAtAge(age)));
   const nearestIdx = nearestAgeIndex(SURVIVAL_AGES, mechanicalFit.medianAge);
   const nearestAge = SURVIVAL_AGES[nearestIdx]!;
   const fleetMechanicalMedianLifetimeMiles =

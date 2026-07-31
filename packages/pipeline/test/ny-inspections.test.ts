@@ -38,4 +38,17 @@ describe("ny-inspections adapter (Socrata SODA, vezn-fmmk fixtures)", () => {
     const med = await medianOdometer("ZZZZZ", ["NONE"], 2013, 2023);
     expect(med).toBe(0);
   });
+
+  it("omits the model_name filter for an empty modelNames array (every model of a make, model_year=2013, CY2023)", async () => {
+    const n = await distinctVinCount("TOYOT", [], 2013, 2023);
+    // Every Toyota model_name, not just CAMRY (56479 > the 6747 CAMRY-only slice above).
+    expect(n).toBe(56479);
+  });
+
+  it("omits the make_code filter for an empty makeCode (every make, model_year=2013, CY2023) — the whole NY fleet slice deriveFleetContext needs", async () => {
+    const n = await distinctVinCount("", [], 2013, 2023);
+    expect(n).toBe(441932);
+    const med = await medianOdometer("", [], 2013, 2023);
+    expect(med).toBe(103702);
+  });
 });

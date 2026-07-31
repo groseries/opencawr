@@ -87,15 +87,24 @@ function sliceWhere(
   // which is a SoQL syntax error. This is what the derivation's make-level
   // fallback (Level 2) needs for vehicles whose own nameplate has too little
   // history to fit a survival curve; see derive-eol.ts's module docstring.
-  const modelFilter =
-    modelNames.length === 0
-      ? ""
-      : ` AND model_name in(${modelNames.map((m) => soqlString(m.toUpperCase())).join(",")})`;
-  return (
-    `make_code=${soqlString(makeCode.toUpperCase())}${modelFilter}` +
-    ` AND model_year=${modelYear} AND inspection_date between ` +
-    `'${calendarYear}-01-01T00:00:00' and '${calendarYear}-12-31T23:59:59'`
+  //
+  // An EMPTY/falsy `makeCode` likewise means "every make" — the whole NY
+  // fleet, no `make_code` filter at all — which the fleet-context derivation
+  // needs since its national anchor (NHTSA DOT HS 809 952) describes the
+  // entire US light-vehicle fleet, not a basket of seed nameplates; see
+  // derive-eol.ts's `deriveFleetContext`. Both filters are built into a list
+  // and joined so omitting either (or both) never leaves a stray leading
+  // `AND` in the resulting `$where`.
+  const clauses: string[] = [];
+  if (makeCode) clauses.push(`make_code=${soqlString(makeCode.toUpperCase())}`);
+  if (modelNames.length > 0) {
+    clauses.push(`model_name in(${modelNames.map((m) => soqlString(m.toUpperCase())).join(",")})`);
+  }
+  clauses.push(`model_year=${modelYear}`);
+  clauses.push(
+    `inspection_date between '${calendarYear}-01-01T00:00:00' and '${calendarYear}-12-31T23:59:59'`,
   );
+  return clauses.join(" AND ");
 }
 
 function soqlUrl(select: string, where: string): string {
@@ -138,7 +147,9 @@ function medianOdometerUrl(
 /** Count of distinct VINs inspected in `calendarYear`, for `makeCode` +
  *  `modelYear`, across every one of `modelNames` (a nameplate is
  *  trim-fragmented across several `model_name` strings, so callers should
- *  pass all of them). */
+ *  pass all of them). An empty `makeCode` means "every make" and an empty
+ *  `modelNames` means "every model" (see `sliceWhere`) — passing both empty
+ *  queries the whole NY fleet at `modelYear`. */
 export async function distinctVinCount(
   makeCode: string,
   modelNames: string[],
