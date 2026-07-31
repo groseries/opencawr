@@ -211,6 +211,62 @@ Sequencing note: do NOT re-derive these to agree with the current tiers. R12's t
 direction. They need genuinely independent sources or an explicit statement that they are not
 derived.
 
+**R20. Resale value is a hard cliff at sampled EOL, not a smooth approach to scrap** (found
+2026-07-30, owner question: "why are vehicles cheaper at 150k hold vice keeping until it
+dies"; filed as R15 originally, renumbered — R15 was already taken on master by the
+model-year panel work). `packages/core/src/engine.ts:129`:
+```ts
+const resale = sell >= eol ? scrap : Math.max(curveAt(priceCurve, sell, scrap), scrap);
+```
+`holdMiles: "eol"` sets `sell = eol` by construction (engine.ts:122), so `sell >= eol` is
+**always true** for that mode — resale is always the flat `scrap_usd_by_body` figure
+(Car $400 / SUV $450-500 / Truck $800 / EV $600-700 / PHEV $600-800 / Van $500 / Sport
+$3,000), never the market curve, no matter how close the sampled EOL odometer is to any
+fixed hold odometer one mile short of it. A fixed hold below the sampled EOL always gets
+full `curveAt` market value instead. On the Corolla seed vehicle this is the difference
+between resale ≈ $7,550 (150k fixed hold, sell odo 205,000) and resale = $400
+(drive-to-death), a **~$7,150 step** with no transition — this single line is the largest
+identified contributor to "fixed hold reads cheaper than drive to death." Compounds with
+the existing quadratic major-repair hazard ramp past 120,000 mi
+(`repairOdoThreshold`/`repairRampScaleMiles`, engine.ts:159-164) and the linear age
+escalator past age 8 (`calAgeEscPerYr`, engine.ts:81-82), both of which are steepest in
+exactly the extra miles a drive-to-death hold adds beyond a shorter fixed hold.
+Fix candidates, cheapest first:
+1. Blend resale toward `scrap` over the last stretch of a vehicle's modeled life instead of
+   switching at `sell >= eol` — e.g. linearly interpolate between `curveAt(sell)` and
+   `scrap` as `sell` crosses some fraction of `eol` (mirrors how `curves.ts` already handles
+   edge extrapolation elsewhere). Smallest change, one function.
+2. Make the EOL condition itself probabilistic/gradual (a hazard-rate "car dies" draw per
+   mile past some threshold, with resale conditioned on which outcome occurred) rather than
+   a single sampled odometer. Bigger change to the Monte Carlo structure.
+Not taken: leaving the cliff as-is and only documenting it — the request that produced this
+entry is asking to fix it, not just note it.
+Sequencing note: R16 (common random numbers) touches the same Poisson/insurance draw
+machinery this entry's option 2 would extend — read R16 first if picking that option.
+
+**R21. No replacement-vehicle cost is charged when a fixed hold ends — unequal-lives gap on
+hold-length choice** (found 2026-07-30, same investigation as R20; filed as R16 originally,
+renumbered — R16 was already taken on master by the common-random-numbers finding). Distinct
+from R10: R10 fixed the *buy-point* sweep so different buy odometers are compared at the
+same fixed hold. This is the *hold-length* axis for a single vehicle — comparing a fixed
+hold (e.g. 150k mi, which cashes out resale and stops) against `"eol"` (which cashes out
+scrap and stops) never charges either side for the car the owner has to buy next. The
+fixed-hold owner is credited full resale as if their need for a vehicle ends there, which
+understates its true cost relative to a full-life hold. Same unequal-lives problem R10 named
+for buy-point comparisons, unaddressed on this axis.
+Fix candidates, cheapest first:
+1. When comparing a fixed hold against a longer hold (or `"eol"`), annuitize each option to a
+   common horizon (equivalent-annual-cost style, same construction R10 option 2 proposed and
+   declined for the denominator) so a short hold's cost includes its share of the next
+   vehicle's depreciation. Requires picking a common comparison horizon and a stand-in cost
+   for "the next car," which is a real design decision, not just an engine change.
+2. Restrict "compare hold lengths" UI/copy to same-horizon comparisons only (mirrors R10's
+   shipped fix: refuse to run the comparison rather than silently answer a different
+   question), and document that a 150k-mile hold and a drive-to-death hold are not
+   comparable on raw $/mi without a replacement-cost adjustment.
+Not taken: silently comparing raw $/mi across different implied horizons, which is the
+status quo this entry exists to flag.
+
 **R2. Model year as a designed surface, not an axis label — SHIPPED 2026-07-29** (rewritten
 and re-queued 2026-07-28 at the owner's direction; the original framing — "put implied model
 year on the heatmap axis" — was rejected as too small for the problem; combined with R9
