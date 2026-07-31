@@ -216,8 +216,54 @@ import { loadSeedData } from "../seedData.js";
 // ---------------------------------------------------------------------------
 
 /** Ages used for the survival chain and the Weibull fit. See module
- *  docstring "Step 3" for why 2 and 22+ are excluded. */
+ *  docstring "Step 3" for why 2 and 22+ are excluded.
+ *
+ *  EVERY age in 4..20, not every OTHER age. The earlier even-only list was a
+ *  self-inflicted coverage limit, not a property of the data: with a 2023
+ *  base year, age `a` maps to model_year `2023 - a`, so even-only ages
+ *  sampled only MY2003/2005/.../2019 and threw away half the available
+ *  cohorts. That fell hardest on recent nameplates, which have model years
+ *  but no old ones — a Tesla Model 3 (MY2018+) got at most ONE usable
+ *  cohort (age 4 = MY2019) and was then pushed down the coverage fallback
+ *  to a coarser basis, which read as "not enough data" when the raw counts
+ *  were in fact thousands of VINs per model year. Measured live: Model 3
+ *  MY2018-2023 carry 1,900-8,000 distinct VINs each, Telluride MY2020-2024
+ *  2,500-6,200, Palisade MY2020-2024 2,000-5,200, Grand Cherokee L
+ *  MY2021-2024 3,600-8,500. Sampling every age nearly doubles the points
+ *  available to every fit and gives recent nameplates a real chance to
+ *  resolve at nameplate level. Consecutive ages are independent
+ *  measurements — age 4 and age 5 are different model-year cohorts, not the
+ *  same cars counted twice. */
 export const SURVIVAL_AGES = [4, 6, 8, 10, 12, 14, 16, 18, 20] as const;
+
+/** Ages used for the PER-MODEL hazard ratio (Step 6.5) — every age in 4..20,
+ *  not every other one.
+ *
+ *  These two lists differ on purpose, and conflating them is a real bug that
+ *  was caught by measurement. `SURVIVAL_AGES` feeds `cumulativeSurvival`,
+ *  which CHAINS one 2-year retention per step and therefore requires the
+ *  steps to cover DISJOINT intervals — ages must be 2 apart. Sampling every
+ *  age there makes consecutive steps overlap (age 4's retention covers 4->6,
+ *  age 5's covers 5->7) so attrition is counted roughly twice: measured
+ *  live, the fleet observed median age collapsed from 16.90yr to 13.20yr,
+ *  out of the real-world consensus band, exactly the ~2^(-1/k) factor a
+ *  doubled cumulative hazard predicts under a Weibull.
+ *
+ *  The per-model path has no such constraint: `rho(age)` is an independent
+ *  ratio computed at each age and aggregated, never chained, so overlapping
+ *  windows are harmless there. Using every age nearly doubles the points
+ *  behind each model's hazard ratio and, critically, lets RECENT nameplates
+ *  resolve at all — with a 2023 base year, age maps to model_year 2023-age,
+ *  so even-only sampling gave a Tesla Model 3 (MY2018+) at most ONE usable
+ *  cohort and pushed it down the coverage fallback, which read as "not
+ *  enough data" when the raw counts were thousands of VINs per model year
+ *  (Model 3 MY2018-2023: 1,900-8,000 each; Telluride MY2020-2024:
+ *  2,500-6,200; Palisade: 2,000-5,200; Grand Cherokee L: 3,600-8,500).
+ *  Consecutive ages are different model-year cohorts, not the same cars
+ *  counted twice. */
+export const RATIO_AGES = [
+  4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+] as const;
 
 /** Ages used to compute the fleet leakage ceiling `L` (Step 2): retention is
  *  monotonically falling across 4/6/8, so the max (= the least-leaked point)
@@ -755,8 +801,11 @@ async function deriveLevelMedian(
   level: EolLevelQuery,
   fleetContext: FleetContext,
 ): Promise<LevelResult> {
+  // RATIO_AGES, not SURVIVAL_AGES — this path aggregates independent
+  // per-age ratios and never chains them, so it can (and should) use every
+  // age. See RATIO_AGES' docstring for why the two lists must stay distinct.
   const modelRetentions: AgeRetention[] = await Promise.all(
-    SURVIVAL_AGES.map(async (age) => {
+    RATIO_AGES.map(async (age) => {
       const { n2023, retention } = await retentionAtAge(level.makeCode, level.modelNames, age);
       return { age, n2023, retention };
     }),
@@ -855,8 +904,21 @@ export async function deriveFleetContext(queries: EolQuery[]): Promise<FleetCont
   const fleetMechanicalMedianLifetimeMiles =
     odometers[nearestIdx]! * (mechanicalFit.medianAge / nearestAge);
 
-  const rawRetentionByAge = new Map<number, number>(
+  // The per-model hazard ratio (Step 6.5) divides by fleet retention at
+  // RATIO_AGES — every age, including the odd ones the fleet CHAIN above
+  // deliberately skips (see RATIO_AGES' docstring). Fetch the missing odd
+  // ages so every model ratio has a denominator; the even ones are already
+  // in hand from the chain and are reused rather than re-fetched.
+  const evenByAge = new Map<number, number>(
     SURVIVAL_AGES.map((age, i) => [age, survivalRetentions[i]!]),
+  );
+  const rawRetentionByAge = new Map<number, number>(
+    await Promise.all(
+      RATIO_AGES.map(async (age): Promise<[number, number]> => {
+        const known = evenByAge.get(age);
+        return [age, known ?? (await wholeFleetRetentionAtAge(age))];
+      }),
+    ),
   );
 
   return {

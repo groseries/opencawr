@@ -3,6 +3,8 @@ import {
   EXPECTED_LEAKAGE_CEILING,
   MIN_VINS_PER_AGE,
   MIN_WEIBULL_POINTS,
+  RATIO_AGES,
+  SURVIVAL_AGES,
   NATIONAL_ANCHOR_MILES,
   aggregateHazardRatio,
   bodyClassFor,
@@ -448,5 +450,39 @@ describe("Step 8 coverage fallback (chooseBasis / isLevelUsable)", () => {
   it("isLevelUsable requires a real (non-degenerate) median age", () => {
     expect(isLevelUsable(usable)).toBe(true);
     expect(isLevelUsable({ ...usable, medianAge: null })).toBe(false);
+  });
+});
+
+describe("SURVIVAL_AGES vs RATIO_AGES — the chaining-interval regression", () => {
+  it("SURVIVAL_AGES steps are 2 apart, because cumulativeSurvival chains one 2-year retention per step", () => {
+    // Each step contributes one 2-year retention, so the steps must cover
+    // DISJOINT intervals. Any two consecutive ages 1 apart would overlap
+    // (age 4 covers 4->6 while age 5 covers 5->7) and attrition would be
+    // counted roughly twice.
+    const gaps = SURVIVAL_AGES.slice(1).map((age, i) => age - SURVIVAL_AGES[i]!);
+    expect(gaps.every((g) => g === 2)).toBe(true);
+  });
+
+  it("RATIO_AGES samples every age — it aggregates independent ratios and never chains", () => {
+    const gaps = RATIO_AGES.slice(1).map((age, i) => age - RATIO_AGES[i]!);
+    expect(gaps.every((g) => g === 1)).toBe(true);
+    expect(RATIO_AGES.length).toBeGreaterThan(SURVIVAL_AGES.length);
+  });
+
+  it("chaining at 1-year spacing double-counts attrition and collapses the fleet median (the measured bug)", () => {
+    // Reproduces what shipped briefly: feeding 1-year-spaced ages into the
+    // 2-year-retention chain drove the real fleet observed median from
+    // 16.90yr to 13.20yr, outside the real-world consensus band that is this
+    // method's main external validation.
+    const perStepRetention = 0.93;
+    const correct = cumulativeSurvival(
+      SURVIVAL_AGES.map((age) => ({ age, trueSurvival: perStepRetention })),
+    );
+    const doubleCounted = cumulativeSurvival(
+      RATIO_AGES.map((age) => ({ age, trueSurvival: perStepRetention })),
+    );
+    const correctMedian = medianAgeFromWeibull(correct).medianAge!;
+    const brokenMedian = medianAgeFromWeibull(doubleCounted).medianAge!;
+    expect(brokenMedian).toBeLessThan(correctMedian);
   });
 });
