@@ -317,3 +317,47 @@ describe("live inputs re-run the engine (spec §4)", () => {
     expect(e1.p50).toBe(e2.p50);
   });
 });
+
+/** R20: resale blends toward scrap over the last stretch of modeled life instead of
+ *  cliffing to scrap only exactly at EOL. σ_eol = 0 so every draw's EOL is exactly
+ *  `eol_maintained_miles`, and r = 0 so dep = buyPrice - resale exactly (dfT = 1),
+ *  which is what lets `resaleFromDep` back out the modeled resale from the reported
+ *  depreciation column with no Monte Carlo noise. */
+describe("resale blends toward scrap near EOL (R20)", () => {
+  const priceCurve = { "0": 30_000, "500000": 5_000 }; // linear, slope -0.05 $/mi
+  const eolMiles = 500_000;
+  const vehicle = makeVehicle({
+    price_vs_odometer_usd: priceCurve,
+    eol_maintained_miles: eolMiles,
+    pinned_buy_odo: 10_000,
+  });
+  const constants = makeConstants({ scrap_usd_by_body: { sedan: 1_000 } });
+
+  function resaleFromDep(holdMiles: number | "eol") {
+    const res = costPerMile(vehicle, constants, { holdMiles, seed: 1 });
+    const miles = res.medianSellOdo - vehicle.pinned_buy_odo;
+    const dep = res.breakdown.depreciation * miles;
+    return res.buyPrice - dep;
+  }
+
+  it("well outside the blend window: full curve value, unchanged from today", () => {
+    // sell = 300,000 is 200,000 mi short of EOL — outside the (0.25 × 500,000 =
+    // 125,000 mi) blend window, so this must equal the raw curve value.
+    const resale = resaleFromDep(300_000 - 10_000);
+    expect(resale).toBeCloseTo(30_000 - 0.05 * 300_000, 6); // = 15,000
+  });
+
+  it("inside the blend window: interpolated between curve value and scrap", () => {
+    // sell = 450,000 is 50,000 mi short of EOL, 40% of the way through the 125,000 mi
+    // window (measured from its far edge) -> 40% of the way from curve value to scrap.
+    const resale = resaleFromDep(450_000 - 10_000);
+    const curveVal = 30_000 - 0.05 * 450_000; // 7,500
+    const expected = 1_000 + 0.4 * (curveVal - 1_000); // 3,600
+    expect(resale).toBeCloseTo(expected, 6);
+  });
+
+  it('at EOL ("eol" mode or a fixed hold truncated to it): flat scrap, same as today', () => {
+    expect(resaleFromDep("eol")).toBeCloseTo(1_000, 6);
+    expect(resaleFromDep(600_000 - 10_000)).toBeCloseTo(1_000, 6); // truncates to eolMiles
+  });
+});

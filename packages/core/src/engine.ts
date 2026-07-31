@@ -131,8 +131,16 @@ export function costPerMile(
     const T = miles / am;
     const dfT = Math.pow(1 + r, -T);
 
-    // resale: market curve at the sell odometer, floored at scrap; scrap if driven to death
-    const resale = sell >= eol ? scrap : Math.max(curveAt(priceCurve, sell, scrap), scrap);
+    // resale: market curve at the sell odometer, blended down to scrap over the last
+    // `resaleBlendWindowFraction` of this draw's modeled life instead of a hard cliff
+    // at `sell >= eol` (R20, ROADMAP.md) — a car winding down still has some value.
+    const curveResale = Math.max(curveAt(priceCurve, sell, scrap), scrap);
+    const milesToEol = eol - sell;
+    const blendMiles = CAL.resaleBlendWindowFraction * eol;
+    const resale =
+      milesToEol >= blendMiles
+        ? curveResale
+        : scrap + (milesToEol / blendMiles) * (curveResale - scrap);
     const dep = buyPrice - resale * dfT;
 
     // yearly operating costs, discounted at end of each (possibly partial) year

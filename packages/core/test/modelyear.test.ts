@@ -184,8 +184,11 @@ describe("modelYearRank", () => {
       eol_sigma_by_tier: { low: sigma, mid: sigma, high: sigma, sport: sigma },
     });
     // Prices fall smoothly with odometer EXCEPT at 30,000 mi, where a deep dip
-    // makes 2022 unambiguously the cheapest year; 2020 and 2021 sit within 2% of
-    // each other on the smooth part of the curve.
+    // makes 2022 unambiguously the cheapest year; 2019 and 2020 sit within 2% of
+    // each other — both near enough to this vehicle's 150k EOL at this 100k hold
+    // to land in the R20 resale-blend window, which is what ties them (moved from
+    // 2020/2021 when R20 shipped: blending resale removed the extra dispersion the
+    // old hard cliff added right at this boundary).
     const vehicle = makeVehicle({
       first_year: 2019,
       last_year: 2025,
@@ -207,7 +210,7 @@ describe("modelYearRank", () => {
       const result = modelYearRank(vehicle, constants, inputs, { step: 10_000 });
       const byYear = new Map(result.points.map((p) => [p.year, p]));
       const a = byYear.get(2020)!;
-      const b = byYear.get(2021)!;
+      const b = byYear.get(2019)!;
 
       // Genuinely different points at genuinely different prices — this is not
       // the trivial case of two years sharing one grid point.
