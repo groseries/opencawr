@@ -52,6 +52,40 @@ buy-point sweep's argmin between adjacent grid points, `upperOdo`'s tolerance wa
 accurate to about one grid step" caveat in `ASSUMPTIONS.md` §B is likely the same root cause),
 and the Rankings tie tiers.
 
+**R20. Resale is a hard cliff at EOL, not a smooth approach to scrap — SHIPPED 2026-07-31,
+`acab1d2`.**
+*(Found 2026-07-30, owner question: "why are vehicles cheaper at 150k hold vice keeping until
+it dies"; filed as R15 originally, renumbered R20 — same investigation thread as R16.)*
+`packages/core/src/engine.ts`:
+`const resale = sell >= eol ? scrap : Math.max(curveAt(priceCurve, sell, scrap), scrap);` was a
+step function: `holdMiles: "eol"` sets `sell = eol` **by construction** on every draw, so that
+mode always landed on the cliff's scrap side, while a fixed-mileage hold one mile short of the
+same odometer kept full market-curve value. This was the dominant reason a fixed-mileage hold
+priced cheaper than "drive until it dies."
+Fix (candidate 1 of the options this diagnosis logged): resale now interpolates linearly from
+the curve value down to scrap over the last `CALIBRATION.resaleBlendWindowFraction` (0.25) of
+that draw's own sampled `eol`, instead of stepping at `sell >= eol`. Outside the window,
+behavior is byte-identical to before. `holdMiles: "eol"` itself is unaffected by design — `sell`
+still equals `eol` exactly, so a car driven to literal death is still worth scrap; what changes
+is every fixed-mileage hold that lands within a quarter-life of a plausible EOL, which is where
+the old cliff quietly handed a resale bonus the `"eol"` comparison never got. New `CALIBRATION`
+constant, 0.25 chosen against `constants.eol_sigma_by_tier` (0.10-0.15) — see `ASSUMPTIONS.md`
+§B for the sizing argument. **Measured** on the seed field's Toyota Corolla (55k buy odo, 249.6k
+median `eol_maintained_miles`) at a 205k-mile fixed hold vs. `"eol"` mode: the resale gap
+narrows from **$7,150 to $5,110 (-28.5%)**. `reference.test.ts` (runs at the default
+`holdMiles: "eol"`) is **byte-identical, 74/74** — not a numbers-change event for the reference
+set, because `"eol"` mode's own resale was already always scrap and still is. Only fixed-hold
+callers (buy-point sweep, model-year panel, Rankings at a numeric hold) see different numbers.
+`npm test -w @opencawr/core` 133/133 green, after updating one `modelyear.test.ts` fixture whose
+synthetic "two tied years" example moved to a different pair for the same reason (the old
+fixture's near-EOL pair owed its tie to the cliff's extra dispersion, not the underlying
+closeness the test meant to demonstrate).
+Compounds with (not fixed by this entry): the existing quadratic major-repair hazard ramp past
+120,000 mi (`repairOdoThreshold`/`repairRampScaleMiles`, engine.ts) and the linear age escalator
+past age 8 (`calAgeEscPerYr`, engine.ts), both steepest in exactly the extra miles a
+drive-to-death hold adds beyond a shorter fixed hold — a second, independent reason "drive to
+death" reads as expensive that this fix does not touch.
+
 **R9. Heatmap should be years × miles, not hold-miles × buy-miles — SHIPPED 2026-07-29,
 folded into R2 (see below), heatmap left untouched.** Original framing (owner, 2026-07-29:
 *"Our heat map was a map of years and miles originally but it morphed into a map of hold vs
@@ -195,38 +229,8 @@ Sequencing note: do NOT re-derive these to agree with the current tiers. R12's t
 direction. They need genuinely independent sources or an explicit statement that they are not
 derived.
 
-**R20. Resale value is a hard cliff at sampled EOL, not a smooth approach to scrap** (found
-2026-07-30, owner question: "why are vehicles cheaper at 150k hold vice keeping until it
-dies"; filed as R15 originally, renumbered — R15 was already taken on master by the
-model-year panel work). `packages/core/src/engine.ts:129`:
-```ts
-const resale = sell >= eol ? scrap : Math.max(curveAt(priceCurve, sell, scrap), scrap);
-```
-`holdMiles: "eol"` sets `sell = eol` by construction (engine.ts:122), so `sell >= eol` is
-**always true** for that mode — resale is always the flat `scrap_usd_by_body` figure
-(Car $400 / SUV $450-500 / Truck $800 / EV $600-700 / PHEV $600-800 / Van $500 / Sport
-$3,000), never the market curve, no matter how close the sampled EOL odometer is to any
-fixed hold odometer one mile short of it. A fixed hold below the sampled EOL always gets
-full `curveAt` market value instead. On the Corolla seed vehicle this is the difference
-between resale ≈ $7,550 (150k fixed hold, sell odo 205,000) and resale = $400
-(drive-to-death), a **~$7,150 step** with no transition — this single line is the largest
-identified contributor to "fixed hold reads cheaper than drive to death." Compounds with
-the existing quadratic major-repair hazard ramp past 120,000 mi
-(`repairOdoThreshold`/`repairRampScaleMiles`, engine.ts:159-164) and the linear age
-escalator past age 8 (`calAgeEscPerYr`, engine.ts:81-82), both of which are steepest in
-exactly the extra miles a drive-to-death hold adds beyond a shorter fixed hold.
-Fix candidates, cheapest first:
-1. Blend resale toward `scrap` over the last stretch of a vehicle's modeled life instead of
-   switching at `sell >= eol` — e.g. linearly interpolate between `curveAt(sell)` and
-   `scrap` as `sell` crosses some fraction of `eol` (mirrors how `curves.ts` already handles
-   edge extrapolation elsewhere). Smallest change, one function.
-2. Make the EOL condition itself probabilistic/gradual (a hazard-rate "car dies" draw per
-   mile past some threshold, with resale conditioned on which outcome occurred) rather than
-   a single sampled odometer. Bigger change to the Monte Carlo structure.
-Not taken: leaving the cliff as-is and only documenting it — the request that produced this
-entry is asking to fix it, not just note it.
-Sequencing note: R16 (common random numbers) touches the same Poisson/insurance draw
-machinery this entry's option 2 would extend — read R16 first if picking that option.
+*(R20 was filed here as an open item — see the P0 section above, right after R16: SHIPPED
+2026-07-31, `acab1d2`.)*
 
 **R21. No replacement-vehicle cost is charged when a fixed hold ends — unequal-lives gap on
 hold-length choice** (found 2026-07-30, same investigation as R20; filed as R16 originally,

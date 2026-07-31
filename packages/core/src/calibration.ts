@@ -64,4 +64,21 @@ export const CALIBRATION = {
    *  100k and 46/71 at 150k, vs. 48/63/67 if any non-zero share qualified.
    *  See ASSUMPTIONS.md §I. */
   truncatedDrawDisclosureFraction: 0.25,
+
+  /** JUDGMENT (see R20, ROADMAP.md): resale used to switch discontinuously from the
+   *  full market curve to a flat scrap value the instant `sell >= eol`, so a fixed-
+   *  mileage hold one mile short of the same odometer kept full curve value while
+   *  driving to death collapsed straight to scrap — a hard cliff, not a car winding
+   *  down. Over this fraction of the vehicle's modeled life (measured back from EOL,
+   *  per draw), resale now interpolates linearly from the curve value down to scrap
+   *  instead of stepping. 0.25 (last quarter of `eol_maintained_miles`) is sized
+   *  against `eol_sigma_by_tier` (0.10-0.15): even at the widest tier's dispersion,
+   *  a car a quarter of its life short of median EOL is already in the tail of that
+   *  cohort's failure distribution, so the market should already be pricing in a
+   *  real, if partial, haircut rather than none at all. Measured on the seed field's
+   *  Toyota Corolla (55k buy odo, 249.6k median EOL) at a 205k-mile fixed hold: the
+   *  resale gap against `"eol"` mode narrows from $7,150 to $5,110 (~29%) — see
+   *  ASSUMPTIONS.md.
+   */
+  resaleBlendWindowFraction: 0.25,
 } as const;
