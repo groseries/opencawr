@@ -18,6 +18,11 @@ function detailUrl(id: string): string {
   return `https://www.fueleconomy.gov/ws/rest/vehicle/${id}`;
 }
 
+function modelMenuUrl(year: number, make: string): string {
+  const params = new URLSearchParams({ year: String(year), make });
+  return `https://www.fueleconomy.gov/ws/rest/vehicle/menu/model?${params.toString()}`;
+}
+
 interface MenuItem {
   text: string;
   value: string;
@@ -44,6 +49,21 @@ export async function epaVehicleIdsForYear(
   return asArray(res.menuItem).map((item) => item.value);
 }
 
+/** EPA's own list of model strings queryable for `make` in `year`. Like NHTSA's
+ *  complaint catalogue (`modelsForYear`, `sources/nhtsa.ts`), this catalogue is
+ *  **drivetrain/trim-fragmented**: MY2022 Honda lists `CR-V AWD`, `CR-V FWD`,
+ *  `CR-V Hybrid AWD` and **no bare `CR-V`**, so a single hard-coded model string
+ *  returns an empty menu for whole model years. Resolve per year against this
+ *  list instead (`modelyear/epaCorpus.ts`). Cheap: one request per make-year,
+ *  cached like everything else. */
+export async function epaModelsForYear(make: string, year: number): Promise<string[]> {
+  // Same two response quirks as the options menu: a bare object when exactly
+  // one model matches, a bare JSON `null` when nothing matches the year/make.
+  const res = (await fetchCached(modelMenuUrl(year, make), JSON_HEADERS)) as MenuResponse | null;
+  if (!res) return [];
+  return asArray(res.menuItem).map((item) => item.value);
+}
+
 export interface EpaVehicleDetail {
   id: string;
   year: string;
@@ -55,10 +75,35 @@ export interface EpaVehicleDetail {
   fuelType1: string;
   atvType: string;
   drive: string;
+  /** Engine displacement, liters (e.g. "2.5"). Already on the wire in EPA's
+   *  vehicle-detail response; unused until R2's `model_year_detail`. */
+  displ: string;
+  /** Cylinder count (e.g. "4"). Already on the wire; see `displ` above. */
+  cylinders: string;
+  /** Transmission descriptor (e.g. "Automatic (AM-S8)"). Already on the wire; see `displ` above. */
+  trany: string;
 }
 
 export async function epaVehicleDetail(id: string): Promise<EpaVehicleDetail> {
   return (await fetchCached(detailUrl(id), JSON_HEADERS)) as EpaVehicleDetail;
+}
+
+/** Best-effort "2.5L I4, Automatic (AM-S8), Front-Wheel Drive" style descriptor
+ *  from EPA's own displ/cylinders/trany/drive strings (R2, `model_year_detail`).
+ *  Never throws: any missing/blank field is simply omitted from the joined
+ *  string rather than producing "undefined" or a stray separator. */
+export function drivetrainDescriptor(detail: EpaVehicleDetail): string {
+  const parts: string[] = [];
+  if (detail.displ && detail.cylinders) {
+    parts.push(`${detail.displ}L I${detail.cylinders}`);
+  } else if (detail.displ) {
+    parts.push(`${detail.displ}L`);
+  } else if (detail.cylinders) {
+    parts.push(`I${detail.cylinders}`);
+  }
+  if (detail.trany) parts.push(detail.trany);
+  if (detail.drive) parts.push(detail.drive);
+  return parts.join(", ");
 }
 
 function classifyEtype(atvType: string, fuelType1: string): EType {
