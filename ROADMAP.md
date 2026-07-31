@@ -12,6 +12,46 @@ assumption, estimates-not-advice copy, Node ≥ 20.
 
 ## P0 — Correctness and honesty (do first)
 
+**R16. Common random numbers are broken — every paired comparison is far noisier than it should
+be.** *(Found 2026-07-31 diagnosing why R15's tie tiers are so wide. Measured, not inferred.
+Next item.)*
+Two buy points of the SAME vehicle at the SAME seed should share nearly all their randomness, so
+the *difference* between them is far tighter than either level — that is the whole point of
+common random numbers, and it is what the tie test, the buy-point sweep and the model-year panel
+all implicitly rely on. It does not hold. Toyota Corolla, 2020 (78k mi) vs 2022 (52k mi) at a
+100k hold, 1,100 paired draws:
+```
+level sd             $0.0331/mi
+PAIRED difference sd $0.0374/mi   <- LARGER than the level
+noise cancelled      -13%          <- pairing makes it worse, not better
+```
+The two runs are effectively independent samples. **Cause, confirmed by reading the code:
+per-draw random consumption is variable, so the substreams desynchronize.**
+- `Rng.poisson` (`packages/core/src/rng.ts`) consumes `k + 1` uniforms for a sampled count `k`.
+  Repair hazard `lambda` differs between buy points, so the two runs draw a different number of
+  values and **every stream position after that point diverges**.
+- The insurance loop in `costPerMile` runs `ny = ceil(T)` times, and `T` differs by buy point, so
+  `rngIns` desynchronizes the same way — before the Poisson even runs.
+**The codebase already knows the discipline and applies it in exactly one place**: the battery
+block draws its normal even when the failure branch is not taken, commented *"always consume —
+keeps the stream aligned."* That is the fix, generalized.
+Fix: make per-draw consumption fixed-length — a constant-consumption Poisson (inverse-CDF from a
+single uniform, or a fixed-size pre-draw with a documented cap), and a fixed number of insurance
+normals with only the first `ny` used. **This is a deliberate NUMBERS-CHANGE EVENT**: random
+consumption changes, so every `model_output` moves and `gen-reference` must be re-run with owner
+sign-off — it is exactly the kind of change `reference.test.ts` exists to gate, and must never be
+regenerated to green a failing test.
+Sequencing: **measure the pairing cancellation before and after** (the script behind the numbers
+above is in `.tmpcse/`) and report it, then re-measure R15's tie counts — a large part of "67 of
+71 cars have tied model years" is expected to be this artifact rather than a real property of the
+field. Do not re-tune `tieTierBeatProb` to compensate; fix the variance reduction first. Raising
+the panel's 300 draws is NOT a substitute — it sharpens the estimate of a comparison that is
+broken at the source.
+Blast radius beyond the panel: this affects **every** paired comparison in the app — the
+buy-point sweep's argmin between adjacent grid points, `upperOdo`'s tolerance walk (whose "%
+accurate to about one grid step" caveat in `ASSUMPTIONS.md` §B is likely the same root cause),
+and the Rankings tie tiers.
+
 **R9. Heatmap should be years × miles, not hold-miles × buy-miles — SHIPPED 2026-07-29,
 folded into R2 (see below), heatmap left untouched.** Original framing (owner, 2026-07-29:
 *"Our heat map was a map of years and miles originally but it morphed into a map of hold vs
@@ -313,8 +353,20 @@ investigation summary, kept for the HLDI revisit path:
 
 *(R4's line shipped; R8 above tracks the one substantive problem found with it.)*
 
-**R15. The model-year panel declares a winner among statistically tied years.** *(Found
-2026-07-30 while verifying R2's unification; filed, not fixed.)* The panel ranks a car's model
+**R15. The model-year panel declares a winner among statistically tied years — SHIPPED
+2026-07-30.** Fixed with the existing `rankWithTiers`/`beatProb` machinery and **no new
+threshold constant**: `buyPointSweep` grew an opt-in `keepRowDraws` that retains draws for each
+year-band's winning point only (peak `years + 2` arrays, never one per grid point), and
+`modelYearRank` annotates each year with a tie `tier`. `rank`/`bestYear`/`bestOdo`/`bestP50` are
+untouched, so the 71/71 sweet-spot invariant is undisturbed. Corolla now reads *"no single
+cheapest year — 13 of 18 years tied"* where it read *"0.0% cheaper than 2022"*.
+**The finding matters more than the fix, and is the reason R16 exists**: tied top groups turned
+out to be the norm — **67 of 71 cars at a 100k hold** (56/71 at 50k, 68/71 at 150k), mean
+top-tier size **7.4 model years**, and for 6 cars *every* year ties. Read at face value that
+says the model usually cannot pick a model year for you. **R16 shows a large part of that is an
+artifact of broken variance reduction, not a real property of the field** — revisit these counts
+after R16 lands. Ledger: `ASSUMPTIONS.md` §I.
+*(Original entry, kept for the record.)* The panel ranks a car's model
 years 1..N by P50 and names a "cheapest year" even when the separation is pure Monte Carlo
 noise. Live examples at defaults: Toyota Corolla at a 100k hold reports *"2020 · 73k mi — 0.0%
 cheaper than 2022"*, and 4Runner reports 0.1% margins at both 100k and 150k. A 0.0% margin is
@@ -333,9 +385,56 @@ constant and needs a ledger row** — using the existing `beatProb` is the princ
 Note this is a *presentation* bug: the underlying (year, mileage) sweet spot is unaffected, and
 `upperOdo`'s own "accurate to about one grid step" caveat (§B) is the same class of issue.
 
+**R17. Rank model-year GENERATIONS, not individual years.** *(Filed 2026-07-31.)*
+Closest thing to what the owner originally asked for, in their own words (2026-07-30): *"allowing
+perhaps a user to see that the 2020-2023 model years of the prius are all better than the next
+model year in the ranking."* Ranking years individually produces 7-8-way ties (R15) that are hard
+to act on; ranking a handful of generations produces fewer, better-separated groups, and is
+*honest* rather than a workaround — within a generation the years genuinely are alike.
+The data now exists: R2's `model_year_detail.specChangeFromPriorYear` marks where the EPA
+drivetrain descriptor or VClass changes, so contiguous years sharing a drivetrain can be grouped
+into eras without inventing a new source. Two cautions: that flag is a **spec-discontinuity
+proxy, not a confirmed facelift** (`docs/model-year-detail-methodology.md`) so a generation
+boundary drawn from it is a modelled boundary, not a manufacturer's; and it is `null` for the 10
+model-years with genuine EPA gaps, which must be handled as unknown rather than "no change".
+Do R16 first — it may separate individual years well enough to change how much grouping is worth.
+
+**R18. Report the effect and its uncertainty, not just a rank.** *(Filed 2026-07-31.)*
+*"2020 is $0.013/mi cheaper than 2022, but the sign flips in 40% of simulations"* carries more
+than either a rank or a tie chip: it states the size of the difference AND how confident the
+model is, in one line, and it degrades gracefully when years are indistinguishable (the honest
+answer becomes visible rather than hidden behind a tie badge). The paired difference distribution
+is already computable — R16 is what makes it *tight enough to be worth showing*, so sequence this
+after it. Applies to the model-year panel first, and to the Rankings' `beatsNext` column by the
+same argument. Estimates, not advice: a signed dollar delta with its flip rate is a fact.
+
 ## P2 — New surface
 
 *(R6 shipped — see Shipped below.)*
+
+**R19. The price curve has no year dimension — "ranking model years" is largely ranking
+odometers.** *(Filed 2026-07-31, measured while diagnosing R15.)*
+`price_vs_odometer_usd` is keyed by odometer alone. The ONLY year-specific input anywhere in
+`costPerMile` is `model_year_reliability`'s repair multiplier (landmine ×1.40 / caution ×1.15 /
+sweet-spot ×0.95), and it barely moves anything. Measured across 40 seed vehicles, spread from a
+car's cheapest to priciest model year:
+```
+with model_year_reliability active:      53.8%
+with it neutralized (odometer only):     52.7%
+```
+**~1 point of 53.** So model years differ from each other almost entirely because they sit at
+different odometers on a smooth curve — a real-world year effect (a redesign year commanding a
+market premium, a known-bad year trading at a discount) is *structurally invisible* to the model.
+Until the curve knows about years, the model-year panel is the buy-point sweep wearing a
+different label, and no amount of ranking work changes that.
+What would fix it is year-level price observations, which runs straight into the **used-price
+re-pull** already logged OPEN in `ASSUMPTIONS.md` (20 of 36 MSRP-anchored vehicles fail the
+0.80–0.90 retention band; with the 7 rejected anchors that is 27 of 43 priced rows wanting fresh
+listing data). Bundle the two: the same pull that fixes the low-mileage end of the curves is the
+one that could carry a year dimension. Spec §9 governs — ship **fitted coefficients**, never
+stored copies of a site's listing tables.
+Do R16 first regardless: it is free, and it determines how much of the current year-to-year
+flatness is artifact versus this genuine data ceiling.
 
 ## P3 — Deferred (previously planned)
 
