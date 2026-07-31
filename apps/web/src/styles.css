@@ -33,7 +33,12 @@ body {
 }
 
 .shell {
-  max-width: 1200px;
+  /* 1330, not 1200, since the Rankings table gained the total-lifetime-cost
+     column: at 1200 the widest cell ("$125,585 over 189k mi") squeezed the
+     vehicle column 317px -> 192px and wrapped the two longest car names
+     ("Ford Ranger (old compact)", "Ford Ranger (2019+ midsize)") onto a second
+     line. Nothing overflowed — this buys back the ~130px the new column took. */
+  max-width: 1330px;
   margin: 0 auto;
   padding: 0 20px 48px;
 }
@@ -254,6 +259,13 @@ body {
 .results-note {
   font-size: 12.5px;
   color: var(--muted);
+}
+
+/* Shown only while a rank pass is in flight — at a fixed hold that pass now
+   includes the buy-point sweep and takes ~1.7s, long enough that the table must
+   say out loud that it is still the previous inputs' answer. */
+.results-stale {
+  font-style: italic;
 }
 
 /* ── results controls: rank basis + view switcher ────────── */
@@ -833,6 +845,112 @@ th.num {
   margin-top: 4px;
   font-size: 10.5px;
   color: var(--muted);
+}
+
+/* ── model-year ranking (R2) ──────────────────────────────── */
+.myr-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.myr-table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--ink);
+}
+
+.myr-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+/* Tie-tier boundary, same rule the Rankings table draws (R15) — years above and
+   below this line ARE separable; years between two lines are not. */
+.myr-table tr.tier-start td {
+  border-top: 2px solid var(--ink);
+}
+
+/* border style/fill differ by tier, not hue — matches .status-badge's
+   one-accent-color idiom rather than inventing a red/yellow/green ramp. */
+.myr-mark {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.myr-mark-bad {
+  display: inline-block;
+  border: 1px solid var(--needle);
+  color: var(--needle);
+  padding: 1px 5px;
+}
+
+.myr-mark-caution {
+  display: inline-block;
+  border: 1px dashed var(--rule);
+  color: var(--muted);
+  padding: 1px 5px;
+}
+
+.myr-mark-good {
+  display: inline-block;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  padding: 1px 5px;
+}
+
+.myr-mark-normal {
+  color: var(--muted);
+}
+
+.myr-detail {
+  color: var(--muted);
+}
+
+.myr-badge {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 10.5px;
+  border: 1px dashed var(--rule);
+  color: var(--muted);
+  padding: 0 5px;
+}
+
+.myr-complaint {
+  display: block;
+  margin-top: 2px;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+/* Best-year-per-hold summary: shown above the full ranking, and the only
+   answer available when the rail's holding period is open-ended. */
+.myr-byhold {
+  margin-bottom: 6px;
+}
+
+.myr-caption {
+  margin: 6px 0 14px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* Clamped-odometer marker: that year isn't priced at its own typical mileage. */
+.myr-clamped {
+  margin-left: 2px;
+  color: var(--needle);
+  text-decoration: none;
+  cursor: help;
 }
 
 /* ── sensitivity lines ────────────────────────────────────── */

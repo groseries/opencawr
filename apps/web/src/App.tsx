@@ -2,7 +2,6 @@ import { lazy, Suspense, useMemo, useState } from "react";
 import type { EngineInputs } from "@opencawr/core";
 import { Inputs, DEFAULTS, RankBasisToggle, type RankBasis } from "./controls.js";
 import { useEngine } from "./useEngine.js";
-import { useBuyPoints } from "./useBuyPoints.js";
 import { Ladder } from "./charts/Ladder.js";
 import { tierColor, tierTextColor } from "./charts/tierColors.js";
 import { DealAnalyzer } from "./deal/DealAnalyzer.js";
@@ -16,6 +15,7 @@ const AssumptionsTab = lazy(() =>
 );
 
 const fmt = (x: number) => `$${x.toFixed(3)}`;
+const fmtUsd = (x: number) => `$${Math.round(x).toLocaleString()}`;
 
 const INTAKE_SEEN_KEY = "opencawr:intake-seen";
 
@@ -47,10 +47,6 @@ export function App() {
   const [drawerCar, setDrawerCar] = useState<string | null>(null);
   const { byP50, byP75, ms, computing } = useEngine(inputs);
   const rows = rankBasis === "p50" ? byP50 : byP75;
-  // Decoupled from the rank request (R4 review fixup) so re-ranking stays live
-  // while dragging the rail — see useBuyPoints.ts. `computing: true` here must
-  // never be papered over with the previous inputs' figures.
-  const { points: buyPoints, computing: buyPointsComputing } = useBuyPoints(inputs);
 
   const dismissIntake = () => {
     safeLocalSet(INTAKE_SEEN_KEY, "1");
@@ -74,9 +70,11 @@ export function App() {
   const secondaryValue = (r: { p50: number; p75: number; p90: number }) =>
     rankBasis === "p75" ? r.p50 : r.p90;
   const primaryLabel = rankBasis === "p75" ? "bad-luck cost" : "$/mi";
-  // Disclose the pricing odometer here because the row's "ideal mileage" (buy-point
-  // sweep argmin) can land on a different odometer than this column's own price.
-  const primarySub = rankBasis === "p75" ? "P75 · at buy odo" : "median · at buy odo";
+  // Names the pricing odometer in the header itself, so the disclosure survives
+  // without reading the note above the table. Since 2026-07-30 that odometer IS
+  // the one on the row's own meta line, at either holding basis.
+  const primarySub =
+    rankBasis === "p75" ? "P75 · at the mileage shown" : "median · at the mileage shown";
   const secondaryLabel = rankBasis === "p75" ? "typical cost" : "bad luck";
   const secondarySub = rankBasis === "p75" ? "P50" : "P90";
 
@@ -180,21 +178,27 @@ export function App() {
                 <p className="results-note">
                   {inputs.holdMiles === "eol" ? (
                     <>
-                      Ideal buy mileage isn't shown at "until it dies" — the holding period would
-                      itself depend on the buy odometer, so buy points aren't on equal footing to
-                      compare. Pick a fixed holding period on the left to reveal each car's
-                      cost-minimizing buy point. Meanwhile, each row's mileage shows the odometer
-                      its $/mi is actually priced at.
+                      Every row is priced at that car's default buy odometer, shown on the row.
+                      At "until it dies" the holding period would itself depend on the buy
+                      odometer, so buy points aren't on equal footing to compare and no
+                      cost-minimizing mileage is computed. Pick a fixed holding period on the
+                      left to price each car at its own cheapest buy point instead.
                     </>
                   ) : (
                     <>
-                      Each row's ideal mileage marks that car's own cost-minimizing buy point, not
-                      a recommendation — the $/mi columns are still priced at that car's default
-                      buy odometer, so the two figures can disagree. Open a row to see which
-                      odometer its $/mi was priced at.
+                      Every row is priced at that car's own cost-minimizing buy point — the year
+                      and mileage shown are the ones the $/mi, band and total are computed at,
+                      not a separate recommendation. "up to" marks how far the mileage can rise
+                      before that cost climbs more than 5%.
                     </>
                   )}
                 </p>
+                {computing && rows && (
+                  <p className="results-note results-stale" role="status">
+                    Recomputing at your new assumptions — the table below still shows the
+                    previous ones.
+                  </p>
+                )}
               </div>
               <div className="results-controls">
                 <RankBasisToggle value={rankBasis} onChange={setRankBasis} />
@@ -266,6 +270,9 @@ export function App() {
                     {secondaryLabel} <span className="th-sub">{secondarySub}</span>
                   </th>
                   <th className="num">
+                    total <span className="th-sub">median · miles it spans</span>
+                  </th>
+                  <th className="num">
                     beats next <span className="th-sub">prob.</span>
                   </th>
                 </tr>
@@ -279,7 +286,6 @@ export function App() {
                       .filter(Boolean)
                       .join(" ");
                   const openDrawer = () => setDrawerCar(r.name);
-                  const bp = buyPoints?.[r.name];
                   return (
                     <tr
                       key={r.name}
@@ -315,31 +321,28 @@ export function App() {
                       </td>
                       <td>
                         <span className="car-name">{r.name}</span>
+                        {/* The buy point comes off the SAME response fields the money
+                            does (`res.buyOdo`/`res.impliedBuyYear` — see handleRank), so
+                            this line and the columns beside it cannot describe two
+                            different cars. At a fixed hold that point is the car's own
+                            cheapest; at "eol" it is its default buy odometer, and the
+                            wording says which. */}
                         <span className="car-meta">
-                          {buyPointsComputing ? (
-                            <span className="mono">…</span>
-                          ) : bp ? (
+                          <span className="mono">{r.impliedBuyYear}</span> ·{" "}
+                          {r.atSweetSpot ? "" : "priced at "}
+                          <span className="mono">{Math.round(r.buyOdo / 1000)}k mi</span>
+                          {r.atSweetSpot && r.upperOdo !== null ? (
                             <>
-                              <span className="mono">{bp.idealYear}</span> ·{" "}
-                              <span className="mono">{Math.round(bp.idealOdo / 1000)}k mi</span>
-                              {bp.upperOdo !== null ? (
-                                <>
-                                  {" "}
-                                  · up to{" "}
-                                  <span className="mono">{Math.round(bp.upperOdo / 1000)}k mi</span>
-                                </>
-                              ) : null}
+                              {" "}
+                              · up to{" "}
+                              <span className="mono">{Math.round(r.upperOdo / 1000)}k mi</span>
                             </>
-                          ) : (
-                            // No sweep result (rail hold is "eol" — see ASSUMPTIONS.md §B/R10):
-                            // show the odometer this row's $/mi is actually priced at instead of
-                            // leaving the line empty.
-                            <>
-                              <span className="mono">{r.impliedBuyYear}</span> · priced at{" "}
-                              <span className="mono">{Math.round(r.buyOdo / 1000)}k mi</span>
-                            </>
-                          )}
+                          ) : null}
                           {r.feasNote ? ` · ${r.feasNote}` : ""}
+                          {/* Why the lifetime-total column's miles can fall short of
+                              the hold on the rail — the row's own end of life, stated
+                              as fact. */}
+                          {r.truncNote ? ` · ${r.truncNote}` : ""}
                           {isDimmed ? " · misses 1 filter" : ""}
                         </span>
                       </td>
@@ -353,6 +356,13 @@ export function App() {
                         {fmt(r.p05)}–{fmt(r.p95)}
                       </td>
                       <td className="num band mono">{fmt(secondaryValue(r))}</td>
+                      {/* The miles are always shown: at "until it dies" each row's total
+                          spans that car's own lifespan, so the denominator is what keeps a
+                          big total on a long life from reading as "expensive". */}
+                      <td className="num band mono">
+                        {fmtUsd(r.lifetimeCostUsdP50)} over{" "}
+                        {Math.round(r.lifetimeMilesP50 / 1000)}k mi
+                      </td>
                       <td className="num band mono">
                         {r.beatsNext === null ? "—" : `${Math.round(r.beatsNext * 100)}%`}
                       </td>
