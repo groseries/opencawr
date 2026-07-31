@@ -174,18 +174,26 @@ an estimate** (the seed data has a `provenance` field for exactly this).
 
 ## 9. Data provenance & legal — a HARD GATE before public launch
 
-The owner intends this to be **public eventually**. Two blockers had to be cleared:
+The owner intends this to be **public eventually**. Two blockers had to be cleared. **Clause 1 is
+cleared as of 2026-07-31; clause 2 is not.**
 
-1. **Consumer Reports — PARTIALLY CLEARED 2026-07-29.** The prototype's reliability multipliers were
+1. **Consumer Reports — CLEARED 2026-07-31.** The prototype's reliability multipliers were
    *lightly* stripped of CR citations but **not re-derived**. CR aggressively polices commercial/public use of
-   its ratings, and republishing them (even reworded) is a real takedown/copyright risk. Every non-`sport`
-   `reliability_tier` in `opencawr_data.json` is now derived from **NHTSA complaint data only** — public
-   domain, keyless, free — per `docs/reliability-methodology.md`.
-   **One field still traces to the same CR-derived judgment and this gate is therefore NOT fully cleared:
-   `eol_maintained_miles`.** It correlates with the old seed tier at −0.838 — one judgment wearing several
-   hats — so re-deriving only the tier broke the seed's internal consistency deliberately rather than
-   removing the dependency. Do not describe this gate as closed until it is re-derived or independently
-   sourced; the open rows in `ASSUMPTIONS.md` §D/§E track it.
+   its ratings, and republishing them (even reworded) is a real takedown/copyright risk. All three
+   CR-correlated fields are now independently sourced, and none was derived from either of the others:
+   - **`reliability_tier`** (2026-07-29, R12) — NHTSA complaint data only, public domain, keyless, free,
+     per `docs/reliability-methodology.md`.
+   - **`eol_maintained_miles`** (2026-07-31, R14) — **New York State DMV vehicle inspections**
+     (`data.ny.gov/resource/vezn-fmmk`, 62.8M rows, keyless), per `docs/eol-methodology.md`. The Open NY
+     Terms of Use were verified by reading the actual PDF: no attribution, share-alike, pre-approval or
+     commercial restriction. 69 of 71 rows rewritten; the 2 Porsche `sport` rows are an owner carve-out and
+     are never derived. Coverage is disclosed per row (`basis`: nameplate 47 / make 19 / fleet 3), and the
+     3 rows with no measurable durability are labelled as such rather than presented as measurements.
+   - **`repair_cost_multiplier_by_make`** (2026-07-30, R14) — a negative result, see below.
+
+   The seed's internal consistency, deliberately broken on 2026-07-29 when only the tier was re-derived, is
+   restored. `ASSUMPTIONS.md` §B/§D/§E carry the construction, the measured blast radius, and the residual
+   open items — chiefly that `eol_maintained_miles` now mixes durability with NY owner mileage by design.
    **`repair_cost_multiplier_by_make` was resolved 2026-07-30 (R14) as a negative result**: no public per-make
    repair-cost source exists (RepairPal/CarComplaints struck below; IIHS-HLDI permission-gated and declined in
    R13; NHTSA carries no cost data; BLS CPI `CUUR0000SETD` and PPI `WPU5521` confirmed economy-wide with no

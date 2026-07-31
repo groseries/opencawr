@@ -66,7 +66,7 @@ data.meta.reference_engine = {
   note:
     "model_output regenerated from @opencawr/core (v2b model per ASSUMPTIONS.md); " +
     "prototype's original numbers preserved in model_output_prototype",
-  generated: "2026-07-27",
+  generated: new Date().toISOString().slice(0, 10),
   draws: DRAWS,
   seed: SEED,
 };

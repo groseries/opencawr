@@ -8,6 +8,7 @@ import { Markdown, MarkdownInline, findOpenRows, findRow, sliceSection } from ".
 // editing any of them and rebuilding changes this tab, with no copy to drift.
 import ASSUMPTIONS_MD from "../../../../ASSUMPTIONS.md?raw";
 import RELIABILITY_MD from "../../../../docs/reliability-methodology.md?raw";
+import EOL_MD from "../../../../docs/eol-methodology.md?raw";
 import SPEC_MD from "../../../../OpenCAWR_SPEC.md?raw";
 // Same live-data property, for the one rail default (registration) that isn't
 // in DEFAULTS and instead falls back to the engine's `constants` (see
@@ -301,6 +302,12 @@ export function AssumptionsTab() {
         <h3>Reliability re-derivation methodology</h3>
         <p className="md-source">Source: docs/reliability-methodology.md</p>
         <Markdown source={RELIABILITY_MD} />
+      </section>
+
+      <section className="at-section">
+        <h3>End-of-life mileage methodology</h3>
+        <p className="md-source">Source: docs/eol-methodology.md</p>
+        <Markdown source={EOL_MD} />
       </section>
     </div>
   );

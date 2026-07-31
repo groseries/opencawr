@@ -154,8 +154,20 @@ odometer floor; or reporting the whole curve instead of a single point. `upperOd
 5% tolerance walk are unaffected by whichever is chosen. Do not re-derive
 `feasibleOdoRange`/`deriveBuyYear` — reuse them.
 
-**R14. Re-derive `eol_maintained_miles` and `repair_cost_multiplier_by_make` — what actually
-closes the Consumer Reports gate.** *Next item (owner, 2026-07-29).*
+**R14. Re-derive `eol_maintained_miles` and `repair_cost_multiplier_by_make` — SHIPPED, and it
+closes the Consumer Reports gate.** *`repair_cost_multiplier_by_make` 2026-07-30 (negative result,
+1.0 everywhere); `eol_maintained_miles` 2026-07-31 (NY DMV survival analysis, 69/71 rows rewritten,
+reference outputs regenerated).* Method: `docs/eol-methodology.md`. Evidence:
+`docs/investigations/2026-07-31-eol-leak-correction.md` and `2026-07-30-eol-repair-corpus.md`.
+Construction, blast radius and residual open items: `ASSUMPTIONS.md` §B/§D/§E.
+The one finding worth carrying forward, because it cost a session: the 2026-07-30 attempt failed
+(Fiat 500 at rank 2 of the corpus) and diagnosed itself as **left-truncation**, concluding nothing
+could fix it short of waiting for a 2027 endpoint. That was wrong. The real cause was that the
+estimator assumed the NY out-of-state leakage term was model-independent and cancelled in a ratio;
+measured, per-model leak spans ~27× and is 70.8% of total hazard at age 4 against 27.0% at age 20,
+so young-age hazard ratios measure the used-car market rather than the car. **When a derivation
+rests on a stated "by assumption" premise, measure the premise before blaming the data.**
+The original problem statement, kept for the record:
 R12 re-derived `reliability_tier` from NHTSA and stopped there. These two fields still trace to
 the same lost-prototype CR judgment, and they are not incidental: they correlate with the old seed
 tier at **−0.838** and **+0.602** — one judgment wearing three hats. So R12 broke the seed's
@@ -526,10 +538,12 @@ flatness is artifact versus this genuine data ceiling.
 
 ## Owner decisions still open (from ASSUMPTIONS.md §E)
 
-- **The Consumer Reports gate is only PARTIALLY cleared** — `reliability_tier` is NHTSA-derived as
-  of R12, but `repair_cost_multiplier_by_make` and `eol_maintained_miles` still trace to the same
-  CR judgment. **R14 is the next item and is what actually closes it.** Do not describe the gate as
-  closed until then.
+- ~~**The Consumer Reports gate is only PARTIALLY cleared**~~ — **CLOSED 2026-07-31 by R14.** All
+  three CR-correlated fields are now independently sourced: `reliability_tier` from NHTSA (R12),
+  `eol_maintained_miles` from NY DMV inspections (R14, `docs/eol-methodology.md`), and
+  `repair_cost_multiplier_by_make` as a deliberate 1.0 (R14, negative result). None was derived
+  from either of the others. Spec §9 clause 1 is cleared; **clause 2 (scraped listing data) is
+  not** — see the used-price re-pull item, which is still gated on it.
 - **What "ideal mileage" should mean** — see R8, and R10/R11 which now explain most of it.
   Largely a metric artifact plus a price-curve defect, not a definition problem.
 - ~~The $/mi metric across unequal holding periods (R10) — fix the sweep's horizon only, or

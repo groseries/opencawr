@@ -4,10 +4,10 @@
   "generated": "2026-07",
   "seed_vehicles": 71,
   "basis": "drive-to-death lifetime cost per mile; user profile: 13k mi/yr, USAA active-duty, Florida reg, Fresno CA garaging",
-  "provenance_note": "Established vehicles use hand-curated curves anchored to real cars.com/iSeeCars pulls + owner-reported longevity. Reliability tiers were RE-DERIVED 2026-07-29 from NHTSA complaint data alone (public domain, keyless) per docs/reliability-methodology.md — spec §9's Consumer Reports launch gate is cleared for the seed set; no CR, CarComplaints or RepairPal data is used. The 2 'sport' rows are an owner carve-out and are never derived. The derivation is a coarse ordering built on complaint mix, not a measured defect rate — read the methodology's 'Known limitations'. Vehicles in 'proxied' were estimated from segment peers (no used history).",
+  "provenance_note": "Established vehicles use hand-curated price-vs-odometer curves anchored to real cars.com/iSeeCars pulls. Reliability tiers were RE-DERIVED 2026-07-29 from NHTSA complaint data alone (public domain, keyless) per docs/reliability-methodology.md. eol_maintained_miles was RE-DERIVED 2026-07-31 from New York State DMV vehicle-inspection data (public, keyless, no licence conditions) per docs/eol-methodology.md, replacing the lost prototype's 'iSeeCars empirical × 1.30 maintained bonus' longevity judgment — no field here derives from iSeeCars any more. repair_cost_multiplier_by_make is 1.0 for every non-'sport' row, a deliberate negative result: no public per-make repair-cost source exists. With all three re-derived, spec §9 clause 1 (Consumer Reports) is CLOSED for the seed set and no CR, CarComplaints or RepairPal data is used anywhere; clause 2 (scraped listing data) still governs the price curves above and remains OPEN. The 2 'sport' rows are an owner carve-out and are never derived. Both derivations are coarse and carry real limitations — the reliability tier is complaint MIX, not a measured defect rate, and eol_maintained_miles mixes durability with NY owner mileage by design and is a single-state sample; read each methodology's 'Known limitations' before quoting a number. Vehicles in 'proxied' were estimated from segment peers (no used history).",
   "reference_engine": {
    "note": "model_output regenerated from @opencawr/core (v2b model per ASSUMPTIONS.md); prototype's original numbers preserved in model_output_prototype",
-   "generated": "2026-07-27",
+   "generated": "2026-07-31",
    "draws": 1100,
    "seed": 42
   }
@@ -112,7 +112,7 @@
     "co2_g_per_mi": 76,
     "full_coverage_ins_usd_yr": 2075
    },
-   "eol_maintained_miles": 200200,
+   "eol_maintained_miles": 141988,
    "pinned_buy_odo": 45000,
    "pinned_buy_year_est": 2023,
    "price_vs_odometer_usd": {
@@ -152,15 +152,15 @@
    },
    "verify_slug_carscom": "chevrolet-bolt_ev",
    "model_output": {
-    "cost_per_mile_p50": 0.3278,
-    "p75": 0.3542,
-    "p90_badluck": 0.3845,
-    "band_p05": 0.2882,
-    "band_p95": 0.4068,
-    "stat_tier": 1,
-    "beats_next_prob": 0.564,
-    "opp_cost_lifetime_usd": 19441,
-    "opp_cost_per_mi": 0.1253
+    "cost_per_mile_p50": 0.412,
+    "p75": 0.4553,
+    "p90_badluck": 0.517,
+    "band_p05": 0.3539,
+    "band_p95": 0.5527,
+    "stat_tier": 2,
+    "beats_next_prob": 0.5,
+    "opp_cost_lifetime_usd": 10271,
+    "opp_cost_per_mi": 0.1059
    },
    "battery": {
     "failure_prob": 0.3,
@@ -244,7 +244,7 @@
     "co2_g_per_mi": 107,
     "full_coverage_ins_usd_yr": 1800
    },
-   "eol_maintained_miles": 200200,
+   "eol_maintained_miles": 130181,
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2019,
    "price_vs_odometer_usd": {
@@ -287,15 +287,15 @@
    },
    "verify_slug_carscom": "chevrolet-volt",
    "model_output": {
-    "cost_per_mile_p50": 0.3559,
-    "p75": 0.3844,
-    "p90_badluck": 0.4121,
-    "band_p05": 0.309,
-    "band_p95": 0.4335,
-    "stat_tier": 1,
-    "beats_next_prob": 0.548,
-    "opp_cost_lifetime_usd": 17098,
-    "opp_cost_per_mi": 0.1178
+    "cost_per_mile_p50": 0.4737,
+    "p75": 0.5232,
+    "p90_badluck": 0.5791,
+    "band_p05": 0.394,
+    "band_p95": 0.6322,
+    "stat_tier": 3,
+    "beats_next_prob": 0.503,
+    "opp_cost_lifetime_usd": 7252,
+    "opp_cost_per_mi": 0.0965
    },
    "battery": {
     "failure_prob": 0.22,
@@ -360,7 +360,7 @@
     "co2_g_per_mi": 178,
     "full_coverage_ins_usd_yr": 2250
    },
-   "eol_maintained_miles": 249600,
+   "eol_maintained_miles": 186701,
    "pinned_buy_odo": 40000,
    "pinned_buy_year_est": 2023,
    "price_vs_odometer_usd": {
@@ -404,15 +404,15 @@
    },
    "verify_slug_carscom": "toyota-prius",
    "model_output": {
-    "cost_per_mile_p50": 0.3377,
-    "p75": 0.3521,
-    "p90_badluck": 0.3665,
-    "band_p05": 0.3039,
-    "band_p95": 0.3768,
-    "stat_tier": 1,
-    "beats_next_prob": 0.541,
-    "opp_cost_lifetime_usd": 51398,
-    "opp_cost_per_mi": 0.2452
+    "cost_per_mile_p50": 0.4158,
+    "p75": 0.4351,
+    "p90_badluck": 0.4552,
+    "band_p05": 0.3737,
+    "band_p95": 0.4699,
+    "stat_tier": 2,
+    "beats_next_prob": 0.51,
+    "opp_cost_lifetime_usd": 29790,
+    "opp_cost_per_mi": 0.2031
    },
    "battery": {
     "failure_prob": 0.15,
@@ -556,7 +556,7 @@
     "co2_g_per_mi": 110,
     "full_coverage_ins_usd_yr": 2400
    },
-   "eol_maintained_miles": 235300,
+   "eol_maintained_miles": 220623,
    "pinned_buy_odo": 90000,
    "pinned_buy_year_est": 2019,
    "price_vs_odometer_usd": {
@@ -598,15 +598,15 @@
    },
    "verify_slug_carscom": "toyota-prius_prime",
    "model_output": {
-    "cost_per_mile_p50": 0.34,
-    "p75": 0.361,
-    "p90_badluck": 0.3847,
-    "band_p05": 0.3014,
-    "band_p95": 0.4012,
+    "cost_per_mile_p50": 0.3601,
+    "p75": 0.3822,
+    "p90_badluck": 0.4043,
+    "band_p05": 0.316,
+    "band_p95": 0.42,
     "stat_tier": 1,
-    "beats_next_prob": 0.498,
-    "opp_cost_lifetime_usd": 16953,
-    "opp_cost_per_mi": 0.1167
+    "beats_next_prob": 0.861,
+    "opp_cost_lifetime_usd": 14603,
+    "opp_cost_per_mi": 0.1118
    },
    "battery": {
     "failure_prob": 0.22,
@@ -707,7 +707,7 @@
     "co2_g_per_mi": 287,
     "full_coverage_ins_usd_yr": 2400
    },
-   "eol_maintained_miles": 249600,
+   "eol_maintained_miles": 181624,
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
@@ -754,15 +754,15 @@
    },
    "verify_slug_carscom": "toyota-corolla",
    "model_output": {
-    "cost_per_mile_p50": 0.3494,
-    "p75": 0.3656,
-    "p90_badluck": 0.3821,
-    "band_p05": 0.313,
-    "band_p95": 0.3927,
-    "stat_tier": 1,
-    "beats_next_prob": 0.586,
-    "opp_cost_lifetime_usd": 30962,
-    "opp_cost_per_mi": 0.1591
+    "cost_per_mile_p50": 0.4264,
+    "p75": 0.4495,
+    "p90_badluck": 0.4697,
+    "band_p05": 0.38,
+    "band_p95": 0.4859,
+    "stat_tier": 2,
+    "beats_next_prob": 0.563,
+    "opp_cost_lifetime_usd": 16474,
+    "opp_cost_per_mi": 0.1301
    },
    "model_output_prototype": {
     "cost_per_mile_p50": 0.3683,
@@ -905,7 +905,7 @@
     "co2_g_per_mi": 212,
     "full_coverage_ins_usd_yr": 2400
    },
-   "eol_maintained_miles": 249600,
+   "eol_maintained_miles": 242380,
    "pinned_buy_odo": 80000,
    "pinned_buy_year_est": 2020,
    "price_vs_odometer_usd": {
@@ -949,15 +949,15 @@
    },
    "verify_slug_carscom": "toyota-camry_hybrid",
    "model_output": {
-    "cost_per_mile_p50": 0.3414,
-    "p75": 0.3589,
-    "p90_badluck": 0.3755,
-    "band_p05": 0.3053,
-    "band_p95": 0.3877,
+    "cost_per_mile_p50": 0.3481,
+    "p75": 0.3678,
+    "p90_badluck": 0.3865,
+    "band_p05": 0.3116,
+    "band_p95": 0.3983,
     "stat_tier": 1,
-    "beats_next_prob": 0.575,
-    "opp_cost_lifetime_usd": 23387,
-    "opp_cost_per_mi": 0.1379
+    "beats_next_prob": 0.617,
+    "opp_cost_lifetime_usd": 21916,
+    "opp_cost_per_mi": 0.135
    },
    "battery": {
     "failure_prob": 0.15,
@@ -1106,7 +1106,7 @@
     "co2_g_per_mi": 278,
     "full_coverage_ins_usd_yr": 2300
    },
-   "eol_maintained_miles": 235300,
+   "eol_maintained_miles": 178102,
    "pinned_buy_odo": 35000,
    "pinned_buy_year_est": 2023,
    "price_vs_odometer_usd": {
@@ -1156,15 +1156,15 @@
    },
    "verify_slug_carscom": "honda-civic",
    "model_output": {
-    "cost_per_mile_p50": 0.3627,
-    "p75": 0.3781,
-    "p90_badluck": 0.3916,
-    "band_p05": 0.3297,
-    "band_p95": 0.4,
-    "stat_tier": 1,
-    "beats_next_prob": 0.562,
-    "opp_cost_lifetime_usd": 43682,
-    "opp_cost_per_mi": 0.2181
+    "cost_per_mile_p50": 0.4379,
+    "p75": 0.4577,
+    "p90_badluck": 0.476,
+    "band_p05": 0.3968,
+    "band_p95": 0.4861,
+    "stat_tier": 2,
+    "beats_next_prob": 0.629,
+    "opp_cost_lifetime_usd": 26310,
+    "opp_cost_per_mi": 0.1839
    },
    "model_output_prototype": {
     "cost_per_mile_p50": 0.3851,
@@ -1307,7 +1307,7 @@
     "co2_g_per_mi": 81,
     "full_coverage_ins_usd_yr": 2200
    },
-   "eol_maintained_miles": 140400,
+   "eol_maintained_miles": 99230,
    "pinned_buy_odo": 45000,
    "pinned_buy_year_est": 2023,
    "price_vs_odometer_usd": {
@@ -1353,15 +1353,15 @@
    },
    "verify_slug_carscom": "nissan-leaf",
    "model_output": {
-    "cost_per_mile_p50": 0.3858,
-    "p75": 0.4314,
-    "p90_badluck": 0.4761,
-    "band_p05": 0.3193,
-    "band_p95": 0.5075,
-    "stat_tier": 2,
-    "beats_next_prob": 0.499,
-    "opp_cost_lifetime_usd": 7501,
-    "opp_cost_per_mi": 0.0786
+    "cost_per_mile_p50": 0.5224,
+    "p75": 0.6171,
+    "p90_badluck": 0.721,
+    "band_p05": 0.3977,
+    "band_p95": 0.8064,
+    "stat_tier": 4,
+    "beats_next_prob": 0.511,
+    "opp_cost_lifetime_usd": 3804,
+    "opp_cost_per_mi": 0.0702
    },
    "battery": {
     "failure_prob": 0.55,
@@ -1456,7 +1456,7 @@
     "co2_g_per_mi": 254,
     "full_coverage_ins_usd_yr": 2050
    },
-   "eol_maintained_miles": 200200,
+   "eol_maintained_miles": 155984,
    "pinned_buy_odo": 45000,
    "pinned_buy_year_est": 2023,
    "price_vs_odometer_usd": {
@@ -1498,15 +1498,15 @@
    },
    "verify_slug_carscom": "hyundai-elantra",
    "model_output": {
-    "cost_per_mile_p50": 0.3672,
-    "p75": 0.3843,
-    "p90_badluck": 0.4056,
-    "band_p05": 0.3309,
-    "band_p95": 0.418,
-    "stat_tier": 1,
-    "beats_next_prob": 0.552,
-    "opp_cost_lifetime_usd": 19885,
-    "opp_cost_per_mi": 0.1281
+    "cost_per_mile_p50": 0.4253,
+    "p75": 0.4485,
+    "p90_badluck": 0.4696,
+    "band_p05": 0.3787,
+    "band_p95": 0.4844,
+    "stat_tier": 2,
+    "beats_next_prob": 0.498,
+    "opp_cost_lifetime_usd": 12509,
+    "opp_cost_per_mi": 0.1127
    },
    "maintenance_curve_shared_with": [
     "Kia K4",
@@ -1647,7 +1647,7 @@
     "co2_g_per_mi": 287,
     "full_coverage_ins_usd_yr": 2300
    },
-   "eol_maintained_miles": 240500,
+   "eol_maintained_miles": 193128,
    "pinned_buy_odo": 70000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -1696,15 +1696,15 @@
    },
    "verify_slug_carscom": "honda-accord",
    "model_output": {
-    "cost_per_mile_p50": 0.3754,
-    "p75": 0.3982,
-    "p90_badluck": 0.4185,
-    "band_p05": 0.3356,
-    "band_p95": 0.4371,
-    "stat_tier": 1,
-    "beats_next_prob": 0.505,
-    "opp_cost_lifetime_usd": 23064,
-    "opp_cost_per_mi": 0.1353
+    "cost_per_mile_p50": 0.4351,
+    "p75": 0.4616,
+    "p90_badluck": 0.4898,
+    "band_p05": 0.3835,
+    "band_p95": 0.5087,
+    "stat_tier": 2,
+    "beats_next_prob": 0.54,
+    "opp_cost_lifetime_usd": 14497,
+    "opp_cost_per_mi": 0.1177
    },
    "model_output_prototype": {
     "cost_per_mile_p50": 0.3899,
@@ -1847,7 +1847,7 @@
     "co2_g_per_mi": 261,
     "full_coverage_ins_usd_yr": 2050
    },
-   "eol_maintained_miles": 189800,
+   "eol_maintained_miles": 151673,
    "pinned_buy_odo": 18000,
    "pinned_buy_year_est": 2025,
    "price_vs_odometer_usd": {
@@ -1883,15 +1883,15 @@
    },
    "verify_slug_carscom": "kia-k4",
    "model_output": {
-    "cost_per_mile_p50": 0.3706,
-    "p75": 0.3875,
-    "p90_badluck": 0.404,
-    "band_p05": 0.3363,
-    "band_p95": 0.4142,
-    "stat_tier": 1,
-    "beats_next_prob": 0.565,
-    "opp_cost_lifetime_usd": 29085,
-    "opp_cost_per_mi": 0.1693
+    "cost_per_mile_p50": 0.4186,
+    "p75": 0.4371,
+    "p90_badluck": 0.4541,
+    "band_p05": 0.3815,
+    "band_p95": 0.4657,
+    "stat_tier": 2,
+    "beats_next_prob": 0.559,
+    "opp_cost_lifetime_usd": 20228,
+    "opp_cost_per_mi": 0.1513
    },
    "maintenance_curve_shared_with": [
     "Hyundai Elantra",
@@ -1948,7 +1948,7 @@
     "co2_g_per_mi": 296,
     "full_coverage_ins_usd_yr": 2150
    },
-   "eol_maintained_miles": 210600,
+   "eol_maintained_miles": 150980,
    "pinned_buy_odo": 65000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -1997,15 +1997,15 @@
    },
    "verify_slug_carscom": "mazda-mazda3",
    "model_output": {
-    "cost_per_mile_p50": 0.3769,
-    "p75": 0.3929,
-    "p90_badluck": 0.4128,
-    "band_p05": 0.3428,
-    "band_p95": 0.4255,
-    "stat_tier": 2,
-    "beats_next_prob": 0.549,
-    "opp_cost_lifetime_usd": 17003,
-    "opp_cost_per_mi": 0.1168
+    "cost_per_mile_p50": 0.4807,
+    "p75": 0.5088,
+    "p90_badluck": 0.539,
+    "band_p05": 0.4279,
+    "band_p95": 0.5583,
+    "stat_tier": 3,
+    "beats_next_prob": 0.521,
+    "opp_cost_lifetime_usd": 8466,
+    "opp_cost_per_mi": 0.0985
    },
    "model_output_prototype": {
     "cost_per_mile_p50": 0.3962,
@@ -2142,7 +2142,7 @@
     "co2_g_per_mi": 296,
     "full_coverage_ins_usd_yr": 2300
    },
-   "eol_maintained_miles": 254800,
+   "eol_maintained_miles": 230414,
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
@@ -2187,15 +2187,15 @@
    },
    "verify_slug_carscom": "toyota-camry",
    "model_output": {
-    "cost_per_mile_p50": 0.3816,
-    "p75": 0.4016,
-    "p90_badluck": 0.4232,
-    "band_p05": 0.339,
-    "band_p95": 0.4349,
+    "cost_per_mile_p50": 0.407,
+    "p75": 0.4269,
+    "p90_badluck": 0.4495,
+    "band_p05": 0.3596,
+    "band_p95": 0.4618,
     "stat_tier": 2,
-    "beats_next_prob": 0.525,
-    "opp_cost_lifetime_usd": 40966,
-    "opp_cost_per_mi": 0.205
+    "beats_next_prob": 0.539,
+    "opp_cost_lifetime_usd": 33413,
+    "opp_cost_per_mi": 0.1905
    },
    "model_output_prototype": {
     "cost_per_mile_p50": 0.3971,
@@ -2338,7 +2338,7 @@
     "co2_g_per_mi": 222,
     "full_coverage_ins_usd_yr": 2250
    },
-   "eol_maintained_miles": 244400,
+   "eol_maintained_miles": 224144,
    "pinned_buy_odo": 40000,
    "pinned_buy_year_est": 2023,
    "price_vs_odometer_usd": {
@@ -2378,15 +2378,15 @@
    },
    "verify_slug_carscom": "toyota-rav4_hybrid",
    "model_output": {
-    "cost_per_mile_p50": 0.3912,
-    "p75": 0.4102,
-    "p90_badluck": 0.4286,
-    "band_p05": 0.3538,
-    "band_p95": 0.4397,
+    "cost_per_mile_p50": 0.4175,
+    "p75": 0.4374,
+    "p90_badluck": 0.4555,
+    "band_p05": 0.3777,
+    "band_p95": 0.4675,
     "stat_tier": 2,
-    "beats_next_prob": 0.687,
-    "opp_cost_lifetime_usd": 57764,
-    "opp_cost_per_mi": 0.2826
+    "beats_next_prob": 0.515,
+    "opp_cost_lifetime_usd": 48938,
+    "opp_cost_per_mi": 0.2658
    },
    "battery": {
     "failure_prob": 0.15,
@@ -2496,7 +2496,7 @@
     "co2_g_per_mi": 181,
     "full_coverage_ins_usd_yr": 2100
    },
-   "eol_maintained_miles": 205400,
+   "eol_maintained_miles": 186978,
    "pinned_buy_odo": 65000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -2535,15 +2535,15 @@
    },
    "verify_slug_carscom": "kia-niro",
    "model_output": {
-    "cost_per_mile_p50": 0.3867,
-    "p75": 0.4175,
-    "p90_badluck": 0.4497,
-    "band_p05": 0.3335,
-    "band_p95": 0.4691,
+    "cost_per_mile_p50": 0.413,
+    "p75": 0.4455,
+    "p90_badluck": 0.4777,
+    "band_p05": 0.3521,
+    "band_p95": 0.5082,
     "stat_tier": 2,
-    "beats_next_prob": 0.533,
-    "opp_cost_lifetime_usd": 18302,
-    "opp_cost_per_mi": 0.1304
+    "beats_next_prob": 0.517,
+    "opp_cost_lifetime_usd": 15074,
+    "opp_cost_per_mi": 0.1236
    },
    "battery": {
     "failure_prob": 0.15,
@@ -2654,7 +2654,7 @@
     "co2_g_per_mi": 65,
     "full_coverage_ins_usd_yr": 3100
    },
-   "eol_maintained_miles": 230100,
+   "eol_maintained_miles": 169294,
    "pinned_buy_odo": 60000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -2695,15 +2695,15 @@
    },
    "verify_slug_carscom": "tesla-model_3",
    "model_output": {
-    "cost_per_mile_p50": 0.3554,
-    "p75": 0.3807,
-    "p90_badluck": 0.408,
-    "band_p05": 0.3144,
-    "band_p95": 0.4288,
-    "stat_tier": 1,
-    "beats_next_prob": 0.49,
-    "opp_cost_lifetime_usd": 30609,
-    "opp_cost_per_mi": 0.1799
+    "cost_per_mile_p50": 0.4561,
+    "p75": 0.4993,
+    "p90_badluck": 0.5453,
+    "band_p05": 0.391,
+    "band_p95": 0.5883,
+    "stat_tier": 2,
+    "beats_next_prob": 0.514,
+    "opp_cost_lifetime_usd": 16473,
+    "opp_cost_per_mi": 0.1507
    },
    "battery": {
     "failure_prob": 0.3,
@@ -2798,7 +2798,7 @@
     "co2_g_per_mi": 278,
     "full_coverage_ins_usd_yr": 2150
    },
-   "eol_maintained_miles": 195000,
+   "eol_maintained_miles": 153242,
    "pinned_buy_odo": 60000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -2841,15 +2841,15 @@
    },
    "verify_slug_carscom": "hyundai-sonata",
    "model_output": {
-    "cost_per_mile_p50": 0.4119,
-    "p75": 0.4388,
-    "p90_badluck": 0.4677,
-    "band_p05": 0.3601,
-    "band_p95": 0.4864,
-    "stat_tier": 2,
-    "beats_next_prob": 0.544,
-    "opp_cost_lifetime_usd": 15625,
-    "opp_cost_per_mi": 0.1157
+    "cost_per_mile_p50": 0.4778,
+    "p75": 0.5147,
+    "p90_badluck": 0.5552,
+    "band_p05": 0.4117,
+    "band_p95": 0.5799,
+    "stat_tier": 3,
+    "beats_next_prob": 0.515,
+    "opp_cost_lifetime_usd": 9578,
+    "opp_cost_per_mi": 0.1027
    },
    "maintenance_curve_shared_with": [
     "Hyundai Elantra",
@@ -2990,7 +2990,7 @@
     "co2_g_per_mi": 317,
     "full_coverage_ins_usd_yr": 2150
    },
-   "eol_maintained_miles": 240500,
+   "eol_maintained_miles": 200213,
    "pinned_buy_odo": 80000,
    "pinned_buy_year_est": 2020,
    "price_vs_odometer_usd": {
@@ -3036,15 +3036,15 @@
    },
    "verify_slug_carscom": "toyota-rav4",
    "model_output": {
-    "cost_per_mile_p50": 0.4338,
-    "p75": 0.4605,
-    "p90_badluck": 0.4891,
-    "band_p05": 0.377,
-    "band_p95": 0.5075,
+    "cost_per_mile_p50": 0.4967,
+    "p75": 0.5325,
+    "p90_badluck": 0.5685,
+    "band_p05": 0.432,
+    "band_p95": 0.5952,
     "stat_tier": 3,
-    "beats_next_prob": 0.525,
-    "opp_cost_lifetime_usd": 26895,
-    "opp_cost_per_mi": 0.1676
+    "beats_next_prob": 0.523,
+    "opp_cost_lifetime_usd": 17911,
+    "opp_cost_per_mi": 0.149
    },
    "model_output_prototype": {
     "cost_per_mile_p50": 0.4312,
@@ -3163,7 +3163,7 @@
     "co2_g_per_mi": 269,
     "full_coverage_ins_usd_yr": 2000
    },
-   "eol_maintained_miles": 159900,
+   "eol_maintained_miles": 110135,
    "pinned_buy_odo": 40000,
    "pinned_buy_year_est": 2019,
    "price_vs_odometer_usd": {
@@ -3204,15 +3204,15 @@
    },
    "verify_slug_carscom": "fiat-500",
    "model_output": {
-    "cost_per_mile_p50": 0.3832,
-    "p75": 0.4026,
-    "p90_badluck": 0.4242,
-    "band_p05": 0.3463,
-    "band_p95": 0.4398,
-    "stat_tier": 2,
-    "beats_next_prob": 0.523,
-    "opp_cost_lifetime_usd": 8837,
-    "opp_cost_per_mi": 0.0737
+    "cost_per_mile_p50": 0.4565,
+    "p75": 0.4866,
+    "p90_badluck": 0.5182,
+    "band_p05": 0.4064,
+    "band_p95": 0.5371,
+    "stat_tier": 3,
+    "beats_next_prob": 0.507,
+    "opp_cost_lifetime_usd": 4494,
+    "opp_cost_per_mi": 0.0641
    },
    "maintenance_curve_shared_with": [
     "Fiat 500X"
@@ -3298,7 +3298,7 @@
     "co2_g_per_mi": 317,
     "full_coverage_ins_usd_yr": 2100
    },
-   "eol_maintained_miles": 240500,
+   "eol_maintained_miles": 222690,
    "pinned_buy_odo": 75000,
    "pinned_buy_year_est": 2020,
    "price_vs_odometer_usd": {
@@ -3342,15 +3342,15 @@
    },
    "verify_slug_carscom": "honda-cr_v",
    "model_output": {
-    "cost_per_mile_p50": 0.4364,
-    "p75": 0.4618,
-    "p90_badluck": 0.4883,
-    "band_p05": 0.385,
-    "band_p95": 0.5038,
+    "cost_per_mile_p50": 0.4587,
+    "p75": 0.4889,
+    "p90_badluck": 0.5164,
+    "band_p05": 0.4074,
+    "band_p95": 0.5367,
     "stat_tier": 3,
-    "beats_next_prob": 0.502,
-    "opp_cost_lifetime_usd": 28010,
-    "opp_cost_per_mi": 0.1692
+    "beats_next_prob": 0.505,
+    "opp_cost_lifetime_usd": 23716,
+    "opp_cost_per_mi": 0.1606
    },
    "model_output_prototype": {
     "cost_per_mile_p50": 0.4375,
@@ -3475,7 +3475,7 @@
     "co2_g_per_mi": 92,
     "full_coverage_ins_usd_yr": 2400
    },
-   "eol_maintained_miles": 195000,
+   "eol_maintained_miles": 162635,
    "pinned_buy_odo": 45000,
    "pinned_buy_year_est": 2023,
    "price_vs_odometer_usd": {
@@ -3513,15 +3513,15 @@
    },
    "verify_slug_carscom": "volkswagen-id4",
    "model_output": {
-    "cost_per_mile_p50": 0.4269,
-    "p75": 0.458,
-    "p90_badluck": 0.4939,
-    "band_p05": 0.3717,
-    "band_p95": 0.5204,
+    "cost_per_mile_p50": 0.4849,
+    "p75": 0.5233,
+    "p90_badluck": 0.5733,
+    "band_p05": 0.4153,
+    "band_p95": 0.6052,
     "stat_tier": 3,
-    "beats_next_prob": 0.535,
-    "opp_cost_lifetime_usd": 26616,
-    "opp_cost_per_mi": 0.1774
+    "beats_next_prob": 0.536,
+    "opp_cost_lifetime_usd": 19002,
+    "opp_cost_per_mi": 0.1615
    },
    "battery": {
     "failure_prob": 0.3,
@@ -3599,7 +3599,7 @@
     "co2_g_per_mi": 129,
     "full_coverage_ins_usd_yr": 2200
    },
-   "eol_maintained_miles": 235300,
+   "eol_maintained_miles": 215052,
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
@@ -3637,15 +3637,15 @@
    },
    "verify_slug_carscom": "toyota-rav4_prime",
    "model_output": {
-    "cost_per_mile_p50": 0.4675,
-    "p75": 0.4902,
-    "p90_badluck": 0.5132,
-    "band_p05": 0.4176,
-    "band_p95": 0.5313,
-    "stat_tier": 4,
-    "beats_next_prob": 0.521,
-    "opp_cost_lifetime_usd": 54454,
-    "opp_cost_per_mi": 0.302
+    "cost_per_mile_p50": 0.5034,
+    "p75": 0.5296,
+    "p90_badluck": 0.5569,
+    "band_p05": 0.4449,
+    "band_p95": 0.5814,
+    "stat_tier": 3,
+    "beats_next_prob": 0.59,
+    "opp_cost_lifetime_usd": 45507,
+    "opp_cost_per_mi": 0.2843
    },
    "battery": {
     "failure_prob": 0.22,
@@ -3725,7 +3725,7 @@
     "co2_g_per_mi": 306,
     "full_coverage_ins_usd_yr": 2050
    },
-   "eol_maintained_miles": 184600,
+   "eol_maintained_miles": 166843,
    "pinned_buy_odo": 60000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -3768,15 +3768,15 @@
    },
    "verify_slug_carscom": "kia-soul",
    "model_output": {
-    "cost_per_mile_p50": 0.4371,
-    "p75": 0.4649,
-    "p90_badluck": 0.4914,
-    "band_p05": 0.3852,
-    "band_p95": 0.5166,
+    "cost_per_mile_p50": 0.4614,
+    "p75": 0.4908,
+    "p90_badluck": 0.5239,
+    "band_p05": 0.4029,
+    "band_p95": 0.5512,
     "stat_tier": 3,
-    "beats_next_prob": 0.571,
-    "opp_cost_lifetime_usd": 13233,
-    "opp_cost_per_mi": 0.1062
+    "beats_next_prob": 0.573,
+    "opp_cost_lifetime_usd": 10785,
+    "opp_cost_per_mi": 0.1009
    },
    "maintenance_curve_shared_with": [
     "Hyundai Elantra",
@@ -3923,7 +3923,7 @@
     "co2_g_per_mi": 317,
     "full_coverage_ins_usd_yr": 2150
    },
-   "eol_maintained_miles": 189800,
+   "eol_maintained_miles": 141193,
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
@@ -3961,15 +3961,15 @@
    },
    "verify_slug_carscom": "volkswagen-passat",
    "model_output": {
-    "cost_per_mile_p50": 0.4145,
-    "p75": 0.4311,
-    "p90_badluck": 0.4492,
-    "band_p05": 0.3837,
-    "band_p95": 0.4611,
+    "cost_per_mile_p50": 0.5019,
+    "p75": 0.5276,
+    "p90_badluck": 0.5534,
+    "band_p05": 0.4571,
+    "band_p95": 0.5688,
     "stat_tier": 3,
-    "beats_next_prob": 0.615,
-    "opp_cost_lifetime_usd": 14440,
-    "opp_cost_per_mi": 0.1071
+    "beats_next_prob": 0.502,
+    "opp_cost_lifetime_usd": 8039,
+    "opp_cost_per_mi": 0.0933
    },
    "maintenance_curve_shared_with": [
     "VW GTI",
@@ -4075,7 +4075,7 @@
     "co2_g_per_mi": 317,
     "full_coverage_ins_usd_yr": 2100
    },
-   "eol_maintained_miles": 175500,
+   "eol_maintained_miles": 125575,
    "pinned_buy_odo": 50000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
@@ -4114,15 +4114,15 @@
    },
    "verify_slug_carscom": "buick-encore",
    "model_output": {
-    "cost_per_mile_p50": 0.4302,
-    "p75": 0.451,
-    "p90_badluck": 0.4718,
-    "band_p05": 0.3945,
-    "band_p95": 0.4859,
-    "stat_tier": 3,
-    "beats_next_prob": 0.518,
-    "opp_cost_lifetime_usd": 13640,
-    "opp_cost_per_mi": 0.1087
+    "cost_per_mile_p50": 0.5352,
+    "p75": 0.5664,
+    "p90_badluck": 0.5992,
+    "band_p05": 0.4769,
+    "band_p95": 0.6204,
+    "stat_tier": 4,
+    "beats_next_prob": 0.556,
+    "opp_cost_lifetime_usd": 7132,
+    "opp_cost_per_mi": 0.0944
    },
    "maintenance_curve_shared_with": [
     "Buick Enclave"
@@ -4244,7 +4244,7 @@
     "co2_g_per_mi": 296,
     "full_coverage_ins_usd_yr": 2050
    },
-   "eol_maintained_miles": 184600,
+   "eol_maintained_miles": 166978,
    "pinned_buy_odo": 65000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -4282,15 +4282,15 @@
    },
    "verify_slug_carscom": "hyundai-kona",
    "model_output": {
-    "cost_per_mile_p50": 0.447,
-    "p75": 0.4794,
-    "p90_badluck": 0.5145,
-    "band_p05": 0.3913,
-    "band_p95": 0.5356,
+    "cost_per_mile_p50": 0.4752,
+    "p75": 0.5114,
+    "p90_badluck": 0.5516,
+    "band_p05": 0.4127,
+    "band_p95": 0.5723,
     "stat_tier": 3,
-    "beats_next_prob": 0.521,
-    "opp_cost_lifetime_usd": 12953,
-    "opp_cost_per_mi": 0.1083
+    "beats_next_prob": 0.485,
+    "opp_cost_lifetime_usd": 10503,
+    "opp_cost_per_mi": 0.103
    },
    "maintenance_curve_shared_with": [
     "Hyundai Elantra",
@@ -4389,7 +4389,7 @@
     "co2_g_per_mi": 342,
     "full_coverage_ins_usd_yr": 2100
    },
-   "eol_maintained_miles": 214500,
+   "eol_maintained_miles": 198513,
    "pinned_buy_odo": 65000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -4431,15 +4431,15 @@
    },
    "verify_slug_carscom": "mazda-cx_5",
    "model_output": {
-    "cost_per_mile_p50": 0.4691,
-    "p75": 0.4936,
-    "p90_badluck": 0.5192,
-    "band_p05": 0.4215,
-    "band_p95": 0.5361,
-    "stat_tier": 4,
-    "beats_next_prob": 0.544,
-    "opp_cost_lifetime_usd": 24252,
-    "opp_cost_per_mi": 0.1622
+    "cost_per_mile_p50": 0.4912,
+    "p75": 0.5213,
+    "p90_badluck": 0.5487,
+    "band_p05": 0.4389,
+    "band_p95": 0.5678,
+    "stat_tier": 3,
+    "beats_next_prob": 0.52,
+    "opp_cost_lifetime_usd": 20671,
+    "opp_cost_per_mi": 0.1548
    },
    "model_output_prototype": {
     "cost_per_mile_p50": 0.4606,
@@ -4558,7 +4558,7 @@
     "co2_g_per_mi": 254,
     "full_coverage_ins_usd_yr": 2300
    },
-   "eol_maintained_miles": 244400,
+   "eol_maintained_miles": 275085,
    "pinned_buy_odo": 65000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -4602,15 +4602,15 @@
    },
    "verify_slug_carscom": "toyota-highlander_hybrid",
    "model_output": {
-    "cost_per_mile_p50": 0.4735,
-    "p75": 0.5036,
-    "p90_badluck": 0.5348,
-    "band_p05": 0.4109,
-    "band_p95": 0.5542,
-    "stat_tier": 4,
-    "beats_next_prob": 0.523,
-    "opp_cost_lifetime_usd": 49404,
-    "opp_cost_per_mi": 0.2754
+    "cost_per_mile_p50": 0.4335,
+    "p75": 0.4595,
+    "p90_badluck": 0.4873,
+    "band_p05": 0.3798,
+    "band_p95": 0.5027,
+    "stat_tier": 2,
+    "beats_next_prob": 0.495,
+    "opp_cost_lifetime_usd": 63500,
+    "opp_cost_per_mi": 0.3023
    },
    "battery": {
     "failure_prob": 0.15,
@@ -4770,7 +4770,7 @@
     "co2_g_per_mi": 306,
     "full_coverage_ins_usd_yr": 2050
    },
-   "eol_maintained_miles": 210600,
+   "eol_maintained_miles": 180877,
    "pinned_buy_odo": 75000,
    "pinned_buy_year_est": 2020,
    "price_vs_odometer_usd": {
@@ -4815,15 +4815,15 @@
    },
    "verify_slug_carscom": "subaru-outback",
    "model_output": {
-    "cost_per_mile_p50": 0.4546,
-    "p75": 0.4783,
-    "p90_badluck": 0.5006,
-    "band_p05": 0.4124,
-    "band_p95": 0.513,
-    "stat_tier": 4,
-    "beats_next_prob": 0.57,
-    "opp_cost_lifetime_usd": 19276,
-    "opp_cost_per_mi": 0.1422
+    "cost_per_mile_p50": 0.5115,
+    "p75": 0.5425,
+    "p90_badluck": 0.5717,
+    "band_p05": 0.4581,
+    "band_p95": 0.5934,
+    "stat_tier": 3,
+    "beats_next_prob": 0.486,
+    "opp_cost_lifetime_usd": 13819,
+    "opp_cost_per_mi": 0.1305
    },
    "model_output_prototype": {
     "cost_per_mile_p50": 0.4706,
@@ -4960,7 +4960,7 @@
     "co2_g_per_mi": 306,
     "full_coverage_ins_usd_yr": 2100
    },
-   "eol_maintained_miles": 200200,
+   "eol_maintained_miles": 174383,
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
@@ -5006,15 +5006,15 @@
    },
    "verify_slug_carscom": "subaru-forester",
    "model_output": {
-    "cost_per_mile_p50": 0.4656,
-    "p75": 0.4848,
-    "p90_badluck": 0.504,
-    "band_p05": 0.4255,
-    "band_p95": 0.5169,
+    "cost_per_mile_p50": 0.5131,
+    "p75": 0.5365,
+    "p90_badluck": 0.5607,
+    "band_p05": 0.4634,
+    "band_p95": 0.5736,
     "stat_tier": 4,
-    "beats_next_prob": 0.507,
-    "opp_cost_lifetime_usd": 25066,
-    "opp_cost_per_mi": 0.1726
+    "beats_next_prob": 0.51,
+    "opp_cost_lifetime_usd": 19123,
+    "opp_cost_per_mi": 0.1602
    },
    "model_output_prototype": {
     "cost_per_mile_p50": 0.4713,
@@ -5145,7 +5145,7 @@
     "co2_g_per_mi": 247,
     "full_coverage_ins_usd_yr": 2300
    },
-   "eol_maintained_miles": 244400,
+   "eol_maintained_miles": 209580,
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
@@ -5181,15 +5181,15 @@
    },
    "verify_slug_carscom": "toyota-sienna",
    "model_output": {
-    "cost_per_mile_p50": 0.4519,
-    "p75": 0.4775,
-    "p90_badluck": 0.5024,
-    "band_p05": 0.4026,
-    "band_p95": 0.518,
-    "stat_tier": 3,
-    "beats_next_prob": 0.55,
-    "opp_cost_lifetime_usd": 58792,
-    "opp_cost_per_mi": 0.3104
+    "cost_per_mile_p50": 0.5153,
+    "p75": 0.5451,
+    "p90_badluck": 0.5755,
+    "band_p05": 0.4518,
+    "band_p95": 0.5976,
+    "stat_tier": 4,
+    "beats_next_prob": 0.507,
+    "opp_cost_lifetime_usd": 43246,
+    "opp_cost_per_mi": 0.2798
    },
    "battery": {
     "failure_prob": 0.15,
@@ -5269,7 +5269,7 @@
     "co2_g_per_mi": 444,
     "full_coverage_ins_usd_yr": 2250
    },
-   "eol_maintained_miles": 289900,
+   "eol_maintained_miles": 224660,
    "pinned_buy_odo": 75000,
    "pinned_buy_year_est": 2020,
    "price_vs_odometer_usd": {
@@ -5315,15 +5315,15 @@
    },
    "verify_slug_carscom": "toyota-tacoma",
    "model_output": {
-    "cost_per_mile_p50": 0.4915,
-    "p75": 0.5154,
-    "p90_badluck": 0.5422,
-    "band_p05": 0.4383,
-    "band_p95": 0.562,
-    "stat_tier": 4,
-    "beats_next_prob": 0.498,
-    "opp_cost_lifetime_usd": 60430,
-    "opp_cost_per_mi": 0.2812
+    "cost_per_mile_p50": 0.5908,
+    "p75": 0.6269,
+    "p90_badluck": 0.6626,
+    "band_p05": 0.5201,
+    "band_p95": 0.6908,
+    "stat_tier": 5,
+    "beats_next_prob": 0.56,
+    "opp_cost_lifetime_usd": 34587,
+    "opp_cost_per_mi": 0.2311
    },
    "model_output_prototype": {
     "cost_per_mile_p50": 0.4811,
@@ -5490,7 +5490,7 @@
     "co2_g_per_mi": 306,
     "full_coverage_ins_usd_yr": 2080
    },
-   "eol_maintained_miles": 170300,
+   "eol_maintained_miles": 172955,
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
@@ -5538,15 +5538,15 @@
    },
    "verify_slug_carscom": "nissan-rogue",
    "model_output": {
-    "cost_per_mile_p50": 0.479,
-    "p75": 0.5064,
-    "p90_badluck": 0.5354,
-    "band_p05": 0.4219,
-    "band_p95": 0.5517,
-    "stat_tier": 4,
-    "beats_next_prob": 0.542,
-    "opp_cost_lifetime_usd": 15459,
-    "opp_cost_per_mi": 0.1341
+    "cost_per_mile_p50": 0.4762,
+    "p75": 0.5009,
+    "p90_badluck": 0.5268,
+    "band_p05": 0.4222,
+    "band_p95": 0.5416,
+    "stat_tier": 3,
+    "beats_next_prob": 0.508,
+    "opp_cost_lifetime_usd": 15935,
+    "opp_cost_per_mi": 0.1351
    },
    "model_output_prototype": {
     "cost_per_mile_p50": 0.4858,
@@ -5677,7 +5677,7 @@
     "co2_g_per_mi": 329,
     "full_coverage_ins_usd_yr": 2150
    },
-   "eol_maintained_miles": 175500,
+   "eol_maintained_miles": 141678,
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
@@ -5724,15 +5724,15 @@
    },
    "verify_slug_carscom": "chevrolet-equinox",
    "model_output": {
-    "cost_per_mile_p50": 0.4746,
-    "p75": 0.4976,
-    "p90_badluck": 0.525,
-    "band_p05": 0.4258,
-    "band_p95": 0.5419,
+    "cost_per_mile_p50": 0.5497,
+    "p75": 0.5815,
+    "p90_badluck": 0.6145,
+    "band_p05": 0.4864,
+    "band_p95": 0.6389,
     "stat_tier": 4,
-    "beats_next_prob": 0.515,
-    "opp_cost_lifetime_usd": 15003,
-    "opp_cost_per_mi": 0.1245
+    "beats_next_prob": 0.51,
+    "opp_cost_lifetime_usd": 9805,
+    "opp_cost_per_mi": 0.1131
    },
    "model_output_prototype": {
     "cost_per_mile_p50": 0.488,
@@ -5869,7 +5869,7 @@
     "co2_g_per_mi": 468,
     "full_coverage_ins_usd_yr": 2150
    },
-   "eol_maintained_miles": 244400,
+   "eol_maintained_miles": 209580,
    "pinned_buy_odo": 65000,
    "pinned_buy_year_est": 2020,
    "price_vs_odometer_usd": {
@@ -5906,15 +5906,15 @@
    },
    "verify_slug_carscom": "toyota-sienna",
    "model_output": {
-    "cost_per_mile_p50": 0.4679,
-    "p75": 0.4893,
-    "p90_badluck": 0.5078,
-    "band_p05": 0.431,
-    "band_p95": 0.5228,
+    "cost_per_mile_p50": 0.5234,
+    "p75": 0.5456,
+    "p90_badluck": 0.57,
+    "band_p05": 0.4766,
+    "band_p95": 0.5812,
     "stat_tier": 4,
-    "beats_next_prob": 0.487,
-    "opp_cost_lifetime_usd": 34480,
-    "opp_cost_per_mi": 0.1922
+    "beats_next_prob": 0.558,
+    "opp_cost_lifetime_usd": 25063,
+    "opp_cost_per_mi": 0.1734
    },
    "maintenance_curve_shared_with": [
     "Toyota Sienna Hybrid"
@@ -6012,7 +6012,7 @@
     "co2_g_per_mi": 296,
     "full_coverage_ins_usd_yr": 2150
    },
-   "eol_maintained_miles": 175500,
+   "eol_maintained_miles": 128906,
    "pinned_buy_odo": 45000,
    "pinned_buy_year_est": 2023,
    "price_vs_odometer_usd": {
@@ -6050,15 +6050,15 @@
    },
    "verify_slug_carscom": "mini-hardtop",
    "model_output": {
-    "cost_per_mile_p50": 0.4645,
-    "p75": 0.4863,
-    "p90_badluck": 0.5129,
-    "band_p05": 0.4197,
-    "band_p95": 0.5261,
+    "cost_per_mile_p50": 0.5661,
+    "p75": 0.5953,
+    "p90_badluck": 0.6267,
+    "band_p05": 0.5046,
+    "band_p95": 0.6484,
     "stat_tier": 4,
-    "beats_next_prob": 0.485,
-    "opp_cost_lifetime_usd": 17695,
-    "opp_cost_per_mi": 0.1356
+    "beats_next_prob": 0.486,
+    "opp_cost_lifetime_usd": 9966,
+    "opp_cost_per_mi": 0.1188
    },
    "maintenance_curve_shared_with": [
     "Mini Countryman"
@@ -6174,7 +6174,7 @@
     "co2_g_per_mi": 423,
     "full_coverage_ins_usd_yr": 2290
    },
-   "eol_maintained_miles": 214500,
+   "eol_maintained_miles": 160195,
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2011,
    "price_vs_odometer_usd": {
@@ -6220,15 +6220,15 @@
    },
    "verify_slug_carscom": "ford-ranger",
    "model_output": {
-    "cost_per_mile_p50": 0.4219,
-    "p75": 0.4353,
-    "p90_badluck": 0.4522,
-    "band_p05": 0.396,
-    "band_p95": 0.4633,
+    "cost_per_mile_p50": 0.4877,
+    "p75": 0.5026,
+    "p90_badluck": 0.5218,
+    "band_p05": 0.4572,
+    "band_p95": 0.5343,
     "stat_tier": 3,
-    "beats_next_prob": 0.536,
-    "opp_cost_lifetime_usd": 14876,
-    "opp_cost_per_mi": 0.0933
+    "beats_next_prob": 0.528,
+    "opp_cost_lifetime_usd": 8382,
+    "opp_cost_per_mi": 0.0797
    },
    "model_output_prototype": {
     "cost_per_mile_p50": 0.4943,
@@ -6329,7 +6329,7 @@
     "co2_g_per_mi": 342,
     "full_coverage_ins_usd_yr": 2050
    },
-   "eol_maintained_miles": 149500,
+   "eol_maintained_miles": 141063,
    "pinned_buy_odo": 40000,
    "pinned_buy_year_est": 2023,
    "price_vs_odometer_usd": {
@@ -6367,15 +6367,15 @@
    },
    "verify_slug_carscom": "fiat-500x",
    "model_output": {
-    "cost_per_mile_p50": 0.484,
-    "p75": 0.5089,
-    "p90_badluck": 0.5315,
-    "band_p05": 0.4353,
-    "band_p95": 0.5468,
-    "stat_tier": 4,
-    "beats_next_prob": 0.551,
-    "opp_cost_lifetime_usd": 11368,
-    "opp_cost_per_mi": 0.1038
+    "cost_per_mile_p50": 0.5002,
+    "p75": 0.5255,
+    "p90_badluck": 0.5497,
+    "band_p05": 0.4496,
+    "band_p95": 0.5677,
+    "stat_tier": 3,
+    "beats_next_prob": 0.541,
+    "opp_cost_lifetime_usd": 10243,
+    "opp_cost_per_mi": 0.1014
    },
    "maintenance_curve_shared_with": [
     "Fiat 500"
@@ -6461,7 +6461,7 @@
     "co2_g_per_mi": 329,
     "full_coverage_ins_usd_yr": 2150
    },
-   "eol_maintained_miles": 195000,
+   "eol_maintained_miles": 152639,
    "pinned_buy_odo": 60000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -6504,15 +6504,15 @@
    },
    "verify_slug_carscom": "volkswagen-golf_gti",
    "model_output": {
-    "cost_per_mile_p50": 0.4759,
-    "p75": 0.5039,
-    "p90_badluck": 0.5289,
-    "band_p05": 0.4275,
-    "band_p95": 0.5419,
+    "cost_per_mile_p50": 0.565,
+    "p75": 0.6026,
+    "p90_badluck": 0.6374,
+    "band_p05": 0.4967,
+    "band_p95": 0.6597,
     "stat_tier": 4,
-    "beats_next_prob": 0.519,
-    "opp_cost_lifetime_usd": 19361,
-    "opp_cost_per_mi": 0.1434
+    "beats_next_prob": 0.494,
+    "opp_cost_lifetime_usd": 11771,
+    "opp_cost_per_mi": 0.1271
    },
    "maintenance_curve_shared_with": [
     "VW Passat",
@@ -6624,7 +6624,7 @@
     "co2_g_per_mi": 342,
     "full_coverage_ins_usd_yr": 2100
    },
-   "eol_maintained_miles": 184600,
+   "eol_maintained_miles": 155811,
    "pinned_buy_odo": 75000,
    "pinned_buy_year_est": 2020,
    "price_vs_odometer_usd": {
@@ -6667,15 +6667,15 @@
    },
    "verify_slug_carscom": "kia-sportage",
    "model_output": {
-    "cost_per_mile_p50": 0.5056,
-    "p75": 0.5407,
-    "p90_badluck": 0.5796,
-    "band_p05": 0.4349,
-    "band_p95": 0.6108,
+    "cost_per_mile_p50": 0.5733,
+    "p75": 0.6202,
+    "p90_badluck": 0.6789,
+    "band_p05": 0.482,
+    "band_p95": 0.7175,
     "stat_tier": 4,
-    "beats_next_prob": 0.517,
-    "opp_cost_lifetime_usd": 12048,
-    "opp_cost_per_mi": 0.1099
+    "beats_next_prob": 0.506,
+    "opp_cost_lifetime_usd": 8191,
+    "opp_cost_per_mi": 0.1014
    },
    "maintenance_curve_shared_with": [
     "Hyundai Elantra",
@@ -6816,7 +6816,7 @@
     "co2_g_per_mi": 342,
     "full_coverage_ins_usd_yr": 2150
    },
-   "eol_maintained_miles": 170300,
+   "eol_maintained_miles": 160519,
    "pinned_buy_odo": 65000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -6860,15 +6860,15 @@
    },
    "verify_slug_carscom": "ford-escape",
    "model_output": {
-    "cost_per_mile_p50": 0.4979,
-    "p75": 0.5291,
-    "p90_badluck": 0.5652,
-    "band_p05": 0.4345,
-    "band_p95": 0.5897,
+    "cost_per_mile_p50": 0.5177,
+    "p75": 0.5525,
+    "p90_badluck": 0.5903,
+    "band_p05": 0.4499,
+    "band_p95": 0.6137,
     "stat_tier": 4,
-    "beats_next_prob": 0.525,
-    "opp_cost_lifetime_usd": 10948,
-    "opp_cost_per_mi": 0.104
+    "beats_next_prob": 0.509,
+    "opp_cost_lifetime_usd": 9660,
+    "opp_cost_per_mi": 0.1011
    },
    "model_output_prototype": {
     "cost_per_mile_p50": 0.5061,
@@ -7011,7 +7011,7 @@
     "co2_g_per_mi": 386,
     "full_coverage_ins_usd_yr": 2200
    },
-   "eol_maintained_miles": 244400,
+   "eol_maintained_miles": 259496,
    "pinned_buy_odo": 85000,
    "pinned_buy_year_est": 2019,
    "price_vs_odometer_usd": {
@@ -7056,15 +7056,15 @@
    },
    "verify_slug_carscom": "toyota-highlander",
    "model_output": {
-    "cost_per_mile_p50": 0.5164,
-    "p75": 0.5464,
-    "p90_badluck": 0.5795,
-    "band_p05": 0.4547,
-    "band_p95": 0.6021,
-    "stat_tier": 5,
-    "beats_next_prob": 0.538,
-    "opp_cost_lifetime_usd": 32310,
-    "opp_cost_per_mi": 0.2027
+    "cost_per_mile_p50": 0.4941,
+    "p75": 0.5215,
+    "p90_badluck": 0.5536,
+    "band_p05": 0.4358,
+    "band_p95": 0.5688,
+    "stat_tier": 3,
+    "beats_next_prob": 0.52,
+    "opp_cost_lifetime_usd": 36994,
+    "opp_cost_per_mi": 0.212
    },
    "maintenance_curve_shared_with": [
     "Toyota Highlander Hybrid",
@@ -7218,7 +7218,7 @@
     "co2_g_per_mi": 355,
     "full_coverage_ins_usd_yr": 2100
    },
-   "eol_maintained_miles": 170300,
+   "eol_maintained_miles": 160080,
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
@@ -7262,15 +7262,15 @@
    },
    "verify_slug_carscom": "hyundai-tucson",
    "model_output": {
-    "cost_per_mile_p50": 0.5212,
-    "p75": 0.5549,
-    "p90_badluck": 0.5879,
-    "band_p05": 0.4616,
-    "band_p95": 0.6078,
-    "stat_tier": 5,
-    "beats_next_prob": 0.508,
-    "opp_cost_lifetime_usd": 16068,
-    "opp_cost_per_mi": 0.1394
+    "cost_per_mile_p50": 0.5435,
+    "p75": 0.5807,
+    "p90_badluck": 0.6169,
+    "band_p05": 0.4742,
+    "band_p95": 0.6427,
+    "stat_tier": 4,
+    "beats_next_prob": 0.547,
+    "opp_cost_lifetime_usd": 14223,
+    "opp_cost_per_mi": 0.1354
    },
    "model_output_prototype": {
     "cost_per_mile_p50": 0.5194,
@@ -7407,7 +7407,7 @@
     "co2_g_per_mi": 523,
     "full_coverage_ins_usd_yr": 2250
    },
-   "eol_maintained_miles": 289900,
+   "eol_maintained_miles": 229570,
    "pinned_buy_odo": 60000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -7455,15 +7455,15 @@
    },
    "verify_slug_carscom": "toyota-4runner",
    "model_output": {
-    "cost_per_mile_p50": 0.5211,
-    "p75": 0.5402,
-    "p90_badluck": 0.56,
-    "band_p05": 0.4779,
-    "band_p95": 0.5729,
+    "cost_per_mile_p50": 0.621,
+    "p75": 0.6434,
+    "p90_badluck": 0.6709,
+    "band_p05": 0.5636,
+    "band_p95": 0.6886,
     "stat_tier": 5,
-    "beats_next_prob": 0.495,
-    "opp_cost_lifetime_usd": 83878,
-    "opp_cost_per_mi": 0.3648
+    "beats_next_prob": 0.545,
+    "opp_cost_lifetime_usd": 51485,
+    "opp_cost_per_mi": 0.3036
    },
    "maintenance_curve_shared_with": [
     "Toyota Highlander Hybrid",
@@ -7605,7 +7605,7 @@
     "co2_g_per_mi": 404,
     "full_coverage_ins_usd_yr": 2100
    },
-   "eol_maintained_miles": 224900,
+   "eol_maintained_miles": 191661,
    "pinned_buy_odo": 80000,
    "pinned_buy_year_est": 2020,
    "price_vs_odometer_usd": {
@@ -7654,15 +7654,15 @@
    },
    "verify_slug_carscom": "honda-odyssey",
    "model_output": {
-    "cost_per_mile_p50": 0.5028,
-    "p75": 0.5307,
-    "p90_badluck": 0.5599,
-    "band_p05": 0.4469,
-    "band_p95": 0.5827,
+    "cost_per_mile_p50": 0.5654,
+    "p75": 0.6036,
+    "p90_badluck": 0.6404,
+    "band_p05": 0.4966,
+    "band_p95": 0.6676,
     "stat_tier": 4,
-    "beats_next_prob": 0.519,
-    "opp_cost_lifetime_usd": 22891,
-    "opp_cost_per_mi": 0.158
+    "beats_next_prob": 0.493,
+    "opp_cost_lifetime_usd": 16024,
+    "opp_cost_per_mi": 0.1435
    },
    "maintenance_curve_shared_with": [
     "Honda Pilot"
@@ -7796,7 +7796,7 @@
     "co2_g_per_mi": 370,
     "full_coverage_ins_usd_yr": 2150
    },
-   "eol_maintained_miles": 200200,
+   "eol_maintained_miles": 173503,
    "pinned_buy_odo": 75000,
    "pinned_buy_year_est": 2020,
    "price_vs_odometer_usd": {
@@ -7839,15 +7839,15 @@
    },
    "verify_slug_carscom": "kia-sorento",
    "model_output": {
-    "cost_per_mile_p50": 0.5081,
-    "p75": 0.5383,
-    "p90_badluck": 0.5705,
-    "band_p05": 0.4486,
-    "band_p95": 0.5934,
+    "cost_per_mile_p50": 0.5661,
+    "p75": 0.6038,
+    "p90_badluck": 0.6415,
+    "band_p05": 0.4943,
+    "band_p95": 0.665,
     "stat_tier": 4,
-    "beats_next_prob": 0.535,
-    "opp_cost_lifetime_usd": 16841,
-    "opp_cost_per_mi": 0.1345
+    "beats_next_prob": 0.524,
+    "opp_cost_lifetime_usd": 12278,
+    "opp_cost_per_mi": 0.1246
    },
    "maintenance_curve_shared_with": [
     "Hyundai Elantra",
@@ -7988,7 +7988,7 @@
     "co2_g_per_mi": 355,
     "full_coverage_ins_usd_yr": 2150
    },
-   "eol_maintained_miles": 189800,
+   "eol_maintained_miles": 174620,
    "pinned_buy_odo": 80000,
    "pinned_buy_year_est": 2020,
    "price_vs_odometer_usd": {
@@ -8029,15 +8029,15 @@
    },
    "verify_slug_carscom": "hyundai-santa_fe",
    "model_output": {
-    "cost_per_mile_p50": 0.5247,
-    "p75": 0.5627,
-    "p90_badluck": 0.608,
-    "band_p05": 0.4528,
-    "band_p95": 0.6444,
-    "stat_tier": 5,
-    "beats_next_prob": 0.555,
-    "opp_cost_lifetime_usd": 12847,
-    "opp_cost_per_mi": 0.117
+    "cost_per_mile_p50": 0.5578,
+    "p75": 0.6038,
+    "p90_badluck": 0.657,
+    "band_p05": 0.4768,
+    "band_p95": 0.6964,
+    "stat_tier": 4,
+    "beats_next_prob": 0.537,
+    "opp_cost_lifetime_usd": 10605,
+    "opp_cost_per_mi": 0.1121
    },
    "maintenance_curve_shared_with": [
     "Hyundai Elantra",
@@ -8166,7 +8166,7 @@
     "co2_g_per_mi": 370,
     "full_coverage_ins_usd_yr": 2100
    },
-   "eol_maintained_miles": 184600,
+   "eol_maintained_miles": 155877,
    "pinned_buy_odo": 60000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -8208,15 +8208,15 @@
    },
    "verify_slug_carscom": "volkswagen-tiguan",
    "model_output": {
-    "cost_per_mile_p50": 0.4936,
-    "p75": 0.5191,
-    "p90_badluck": 0.5447,
-    "band_p05": 0.4446,
-    "band_p95": 0.5648,
+    "cost_per_mile_p50": 0.5524,
+    "p75": 0.5833,
+    "p90_badluck": 0.6155,
+    "band_p05": 0.493,
+    "band_p95": 0.6408,
     "stat_tier": 4,
-    "beats_next_prob": 0.516,
-    "opp_cost_lifetime_usd": 15332,
-    "opp_cost_per_mi": 0.1231
+    "beats_next_prob": 0.528,
+    "opp_cost_lifetime_usd": 10871,
+    "opp_cost_per_mi": 0.1134
    },
    "maintenance_curve_shared_with": [
     "VW Passat",
@@ -8311,7 +8311,7 @@
     "co2_g_per_mi": 210,
     "full_coverage_ins_usd_yr": 2200
    },
-   "eol_maintained_miles": 175500,
+   "eol_maintained_miles": 177862,
    "pinned_buy_odo": 65000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -8347,15 +8347,15 @@
    },
    "verify_slug_carscom": "chrysler-pacifica_hybrid",
    "model_output": {
-    "cost_per_mile_p50": 0.5399,
-    "p75": 0.5771,
-    "p90_badluck": 0.6096,
-    "band_p05": 0.4616,
-    "band_p95": 0.6406,
-    "stat_tier": 5,
-    "beats_next_prob": 0.532,
-    "opp_cost_lifetime_usd": 17101,
-    "opp_cost_per_mi": 0.1548
+    "cost_per_mile_p50": 0.5321,
+    "p75": 0.5719,
+    "p90_badluck": 0.607,
+    "band_p05": 0.4563,
+    "band_p95": 0.6336,
+    "stat_tier": 4,
+    "beats_next_prob": 0.526,
+    "opp_cost_lifetime_usd": 17584,
+    "opp_cost_per_mi": 0.1558
    },
    "battery": {
     "failure_prob": 0.22,
@@ -8462,7 +8462,7 @@
     "co2_g_per_mi": 404,
     "full_coverage_ins_usd_yr": 2100
    },
-   "eol_maintained_miles": 184600,
+   "eol_maintained_miles": 175258,
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
@@ -8502,15 +8502,15 @@
    },
    "verify_slug_carscom": "subaru-ascent",
    "model_output": {
-    "cost_per_mile_p50": 0.5533,
-    "p75": 0.5834,
-    "p90_badluck": 0.6141,
-    "band_p05": 0.4952,
-    "band_p95": 0.6356,
+    "cost_per_mile_p50": 0.5735,
+    "p75": 0.6034,
+    "p90_badluck": 0.6394,
+    "band_p05": 0.5132,
+    "band_p95": 0.6568,
     "stat_tier": 5,
-    "beats_next_prob": 0.505,
-    "opp_cost_lifetime_usd": 22536,
-    "opp_cost_per_mi": 0.1739
+    "beats_next_prob": 0.557,
+    "opp_cost_lifetime_usd": 20356,
+    "opp_cost_per_mi": 0.1693
    },
    "maintenance_curve_shared_with": [
     "Hyundai Palisade",
@@ -8600,7 +8600,7 @@
     "co2_g_per_mi": 423,
     "full_coverage_ins_usd_yr": 2290
    },
-   "eol_maintained_miles": 200200,
+   "eol_maintained_miles": 160195,
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
@@ -8640,15 +8640,15 @@
    },
    "verify_slug_carscom": "ford-ranger",
    "model_output": {
-    "cost_per_mile_p50": 0.5529,
-    "p75": 0.5792,
-    "p90_badluck": 0.6064,
-    "band_p05": 0.4989,
-    "band_p95": 0.6229,
-    "stat_tier": 5,
-    "beats_next_prob": 0.492,
-    "opp_cost_lifetime_usd": 25969,
-    "opp_cost_per_mi": 0.1789
+    "cost_per_mile_p50": 0.639,
+    "p75": 0.6739,
+    "p90_badluck": 0.7091,
+    "band_p05": 0.5691,
+    "band_p95": 0.7335,
+    "stat_tier": 6,
+    "beats_next_prob": 0.486,
+    "opp_cost_lifetime_usd": 16765,
+    "opp_cost_per_mi": 0.1594
    },
    "model_output_prototype": {
     "cost_per_mile_p50": 0.5489,
@@ -8731,7 +8731,7 @@
     "co2_g_per_mi": 444,
     "full_coverage_ins_usd_yr": 2100
    },
-   "eol_maintained_miles": 224900,
+   "eol_maintained_miles": 213222,
    "pinned_buy_odo": 85000,
    "pinned_buy_year_est": 2019,
    "price_vs_odometer_usd": {
@@ -8776,15 +8776,15 @@
    },
    "verify_slug_carscom": "honda-pilot",
    "model_output": {
-    "cost_per_mile_p50": 0.5565,
-    "p75": 0.5896,
-    "p90_badluck": 0.6262,
-    "band_p05": 0.4916,
-    "band_p95": 0.6534,
+    "cost_per_mile_p50": 0.58,
+    "p75": 0.6166,
+    "p90_badluck": 0.6548,
+    "band_p05": 0.5094,
+    "band_p95": 0.6829,
     "stat_tier": 5,
-    "beats_next_prob": 0.501,
-    "opp_cost_lifetime_usd": 24101,
-    "opp_cost_per_mi": 0.1723
+    "beats_next_prob": 0.526,
+    "opp_cost_lifetime_usd": 21353,
+    "opp_cost_per_mi": 0.1665
    },
    "maintenance_curve_shared_with": [
     "Honda Odyssey"
@@ -8930,7 +8930,7 @@
     "co2_g_per_mi": 342,
     "full_coverage_ins_usd_yr": 2200
    },
-   "eol_maintained_miles": 175500,
+   "eol_maintained_miles": 156450,
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
@@ -8971,15 +8971,15 @@
    },
    "verify_slug_carscom": "mini-countryman",
    "model_output": {
-    "cost_per_mile_p50": 0.5246,
-    "p75": 0.5497,
-    "p90_badluck": 0.5783,
-    "band_p05": 0.4718,
-    "band_p95": 0.5949,
-    "stat_tier": 5,
-    "beats_next_prob": 0.5,
-    "opp_cost_lifetime_usd": 16573,
-    "opp_cost_per_mi": 0.1375
+    "cost_per_mile_p50": 0.5659,
+    "p75": 0.5938,
+    "p90_badluck": 0.6224,
+    "band_p05": 0.5027,
+    "band_p95": 0.6513,
+    "stat_tier": 4,
+    "beats_next_prob": 0.476,
+    "opp_cost_lifetime_usd": 13215,
+    "opp_cost_per_mi": 0.1303
    },
    "maintenance_curve_shared_with": [
     "Mini Cooper"
@@ -9113,7 +9113,7 @@
     "co2_g_per_mi": 592,
     "full_coverage_ins_usd_yr": 2450
    },
-   "eol_maintained_miles": 300300,
+   "eol_maintained_miles": 264491,
    "pinned_buy_odo": 80000,
    "pinned_buy_year_est": 2020,
    "price_vs_odometer_usd": {
@@ -9161,15 +9161,15 @@
    },
    "verify_slug_carscom": "toyota-sequoia",
    "model_output": {
-    "cost_per_mile_p50": 0.5441,
-    "p75": 0.5632,
-    "p90_badluck": 0.5826,
-    "band_p05": 0.4972,
-    "band_p95": 0.5984,
+    "cost_per_mile_p50": 0.5996,
+    "p75": 0.6229,
+    "p90_badluck": 0.6465,
+    "band_p05": 0.5443,
+    "band_p95": 0.6657,
     "stat_tier": 5,
-    "beats_next_prob": 0.595,
-    "opp_cost_lifetime_usd": 69251,
-    "opp_cost_per_mi": 0.3144
+    "beats_next_prob": 0.547,
+    "opp_cost_lifetime_usd": 51993,
+    "opp_cost_per_mi": 0.2818
    },
    "maintenance_curve_shared_with": [
     "Toyota Highlander Hybrid",
@@ -9323,7 +9323,7 @@
     "co2_g_per_mi": 423,
     "full_coverage_ins_usd_yr": 2150
    },
-   "eol_maintained_miles": 200200,
+   "eol_maintained_miles": 166978,
    "pinned_buy_odo": 45000,
    "pinned_buy_year_est": 2023,
    "price_vs_odometer_usd": {
@@ -9361,15 +9361,15 @@
    },
    "verify_slug_carscom": "hyundai-palisade",
    "model_output": {
-    "cost_per_mile_p50": 0.5583,
-    "p75": 0.5848,
-    "p90_badluck": 0.608,
-    "band_p05": 0.5116,
-    "band_p95": 0.6275,
-    "stat_tier": 5,
-    "beats_next_prob": 0.5,
-    "opp_cost_lifetime_usd": 38528,
-    "opp_cost_per_mi": 0.2482
+    "cost_per_mile_p50": 0.6393,
+    "p75": 0.6701,
+    "p90_badluck": 0.7004,
+    "band_p05": 0.5801,
+    "band_p95": 0.723,
+    "stat_tier": 6,
+    "beats_next_prob": 0.502,
+    "opp_cost_lifetime_usd": 27488,
+    "opp_cost_per_mi": 0.2254
    },
    "maintenance_curve_shared_with": [
     "Subaru Ascent",
@@ -9453,7 +9453,7 @@
     "co2_g_per_mi": 404,
     "full_coverage_ins_usd_yr": 2100
    },
-   "eol_maintained_miles": 175500,
+   "eol_maintained_miles": 167488,
    "pinned_buy_odo": 75000,
    "pinned_buy_year_est": 2020,
    "price_vs_odometer_usd": {
@@ -9491,15 +9491,15 @@
    },
    "verify_slug_carscom": "chrysler-pacifica",
    "model_output": {
-    "cost_per_mile_p50": 0.564,
-    "p75": 0.6039,
-    "p90_badluck": 0.6508,
-    "band_p05": 0.4891,
-    "band_p95": 0.6895,
+    "cost_per_mile_p50": 0.581,
+    "p75": 0.6277,
+    "p90_badluck": 0.6782,
+    "band_p05": 0.5054,
+    "band_p95": 0.7248,
     "stat_tier": 5,
-    "beats_next_prob": 0.584,
-    "opp_cost_lifetime_usd": 11224,
-    "opp_cost_per_mi": 0.1117
+    "beats_next_prob": 0.523,
+    "opp_cost_lifetime_usd": 10098,
+    "opp_cost_per_mi": 0.1092
    },
    "maintenance_curve_shared_with": [
     "Chrysler Pacifica PHEV",
@@ -9600,7 +9600,7 @@
     "co2_g_per_mi": 468,
     "full_coverage_ins_usd_yr": 2150
    },
-   "eol_maintained_miles": 205400,
+   "eol_maintained_miles": 153117,
    "pinned_buy_odo": 60000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -9642,15 +9642,15 @@
    },
    "verify_slug_carscom": "chevrolet-colorado",
    "model_output": {
-    "cost_per_mile_p50": 0.583,
-    "p75": 0.6156,
-    "p90_badluck": 0.651,
-    "band_p05": 0.519,
-    "band_p95": 0.6792,
+    "cost_per_mile_p50": 0.7078,
+    "p75": 0.7569,
+    "p90_badluck": 0.8146,
+    "band_p05": 0.6117,
+    "band_p95": 0.8488,
     "stat_tier": 6,
-    "beats_next_prob": 0.527,
-    "opp_cost_lifetime_usd": 26586,
-    "opp_cost_per_mi": 0.1828
+    "beats_next_prob": 0.555,
+    "opp_cost_lifetime_usd": 14654,
+    "opp_cost_per_mi": 0.1574
    },
    "model_output_prototype": {
     "cost_per_mile_p50": 0.5696,
@@ -9757,7 +9757,7 @@
     "co2_g_per_mi": 423,
     "full_coverage_ins_usd_yr": 2150
    },
-   "eol_maintained_miles": 200200,
+   "eol_maintained_miles": 164128,
    "pinned_buy_odo": 45000,
    "pinned_buy_year_est": 2023,
    "price_vs_odometer_usd": {
@@ -9796,15 +9796,15 @@
    },
    "verify_slug_carscom": "kia-telluride",
    "model_output": {
-    "cost_per_mile_p50": 0.5797,
-    "p75": 0.6048,
-    "p90_badluck": 0.6309,
-    "band_p05": 0.5261,
-    "band_p95": 0.6464,
+    "cost_per_mile_p50": 0.6696,
+    "p75": 0.7057,
+    "p90_badluck": 0.7355,
+    "band_p05": 0.6056,
+    "band_p95": 0.7578,
     "stat_tier": 6,
-    "beats_next_prob": 0.519,
-    "opp_cost_lifetime_usd": 41014,
-    "opp_cost_per_mi": 0.2643
+    "beats_next_prob": 0.527,
+    "opp_cost_lifetime_usd": 28345,
+    "opp_cost_per_mi": 0.2379
    },
    "maintenance_curve_shared_with": [
     "Subaru Ascent",
@@ -9888,7 +9888,7 @@
     "co2_g_per_mi": 370,
     "full_coverage_ins_usd_yr": 2150
    },
-   "eol_maintained_miles": 200200,
+   "eol_maintained_miles": 172469,
    "pinned_buy_odo": 30000,
    "pinned_buy_year_est": 2024,
    "price_vs_odometer_usd": {
@@ -9921,15 +9921,15 @@
    },
    "verify_slug_carscom": "mazda-cx_90",
    "model_output": {
-    "cost_per_mile_p50": 0.5614,
-    "p75": 0.5867,
-    "p90_badluck": 0.6097,
-    "band_p05": 0.5117,
-    "band_p95": 0.6243,
+    "cost_per_mile_p50": 0.6262,
+    "p75": 0.6517,
+    "p90_badluck": 0.6813,
+    "band_p05": 0.5689,
+    "band_p95": 0.7002,
     "stat_tier": 5,
-    "beats_next_prob": 0.511,
-    "opp_cost_lifetime_usd": 55217,
-    "opp_cost_per_mi": 0.3244
+    "beats_next_prob": 0.519,
+    "opp_cost_lifetime_usd": 42588,
+    "opp_cost_per_mi": 0.2989
    },
    "maintenance_curve_shared_with": [
     "Subaru Ascent",
@@ -9989,7 +9989,7 @@
     "co2_g_per_mi": 423,
     "full_coverage_ins_usd_yr": 2100
    },
-   "eol_maintained_miles": 184600,
+   "eol_maintained_miles": 166196,
    "pinned_buy_odo": 70000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -10035,15 +10035,15 @@
    },
    "verify_slug_carscom": "chevrolet-traverse",
    "model_output": {
-    "cost_per_mile_p50": 0.5826,
-    "p75": 0.6265,
-    "p90_badluck": 0.6696,
-    "band_p05": 0.5116,
-    "band_p95": 0.6985,
-    "stat_tier": 6,
-    "beats_next_prob": 0.485,
-    "opp_cost_lifetime_usd": 16313,
-    "opp_cost_per_mi": 0.1423
+    "cost_per_mile_p50": 0.6304,
+    "p75": 0.6742,
+    "p90_badluck": 0.725,
+    "band_p05": 0.5412,
+    "band_p95": 0.773,
+    "stat_tier": 5,
+    "beats_next_prob": 0.555,
+    "opp_cost_lifetime_usd": 12996,
+    "opp_cost_per_mi": 0.1351
    },
    "maintenance_curve_shared_with": [
     "Chrysler Pacifica PHEV",
@@ -10138,7 +10138,7 @@
     "co2_g_per_mi": 423,
     "full_coverage_ins_usd_yr": 2200
    },
-   "eol_maintained_miles": 189800,
+   "eol_maintained_miles": 162635,
    "pinned_buy_odo": 65000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -10176,15 +10176,15 @@
    },
    "verify_slug_carscom": "volkswagen-atlas",
    "model_output": {
-    "cost_per_mile_p50": 0.5547,
-    "p75": 0.5808,
-    "p90_badluck": 0.6031,
-    "band_p05": 0.5085,
-    "band_p95": 0.6174,
+    "cost_per_mile_p50": 0.6237,
+    "p75": 0.6563,
+    "p90_badluck": 0.6882,
+    "band_p05": 0.5631,
+    "band_p95": 0.7088,
     "stat_tier": 5,
-    "beats_next_prob": 0.499,
-    "opp_cost_lifetime_usd": 19207,
-    "opp_cost_per_mi": 0.1539
+    "beats_next_prob": 0.496,
+    "opp_cost_lifetime_usd": 13906,
+    "opp_cost_per_mi": 0.1424
    },
    "maintenance_curve_shared_with": [
     "VW Passat",
@@ -10278,7 +10278,7 @@
     "co2_g_per_mi": 423,
     "full_coverage_ins_usd_yr": 2150
    },
-   "eol_maintained_miles": 184600,
+   "eol_maintained_miles": 183370,
    "pinned_buy_odo": 70000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -10321,15 +10321,15 @@
    },
    "verify_slug_carscom": "ford-explorer",
    "model_output": {
-    "cost_per_mile_p50": 0.5823,
-    "p75": 0.6178,
-    "p90_badluck": 0.6544,
-    "band_p05": 0.521,
-    "band_p95": 0.6765,
-    "stat_tier": 6,
-    "beats_next_prob": 0.497,
-    "opp_cost_lifetime_usd": 17128,
-    "opp_cost_per_mi": 0.1495
+    "cost_per_mile_p50": 0.5857,
+    "p75": 0.6209,
+    "p90_badluck": 0.6585,
+    "band_p05": 0.5241,
+    "band_p95": 0.6818,
+    "stat_tier": 5,
+    "beats_next_prob": 0.535,
+    "opp_cost_lifetime_usd": 16885,
+    "opp_cost_per_mi": 0.1489
    },
    "maintenance_curve_shared_with": [
     "Chrysler Pacifica PHEV",
@@ -10466,7 +10466,7 @@
     "co2_g_per_mi": 423,
     "full_coverage_ins_usd_yr": 2250
    },
-   "eol_maintained_miles": 184600,
+   "eol_maintained_miles": 168448,
    "pinned_buy_odo": 90000,
    "pinned_buy_year_est": 2019,
    "price_vs_odometer_usd": {
@@ -10510,15 +10510,15 @@
    },
    "verify_slug_carscom": "buick-enclave",
    "model_output": {
-    "cost_per_mile_p50": 0.5939,
-    "p75": 0.6356,
-    "p90_badluck": 0.6849,
-    "band_p05": 0.5218,
-    "band_p95": 0.718,
+    "cost_per_mile_p50": 0.6414,
+    "p75": 0.6967,
+    "p90_badluck": 0.7614,
+    "band_p05": 0.5549,
+    "band_p95": 0.798,
     "stat_tier": 6,
-    "beats_next_prob": 0.581,
-    "opp_cost_lifetime_usd": 10603,
-    "opp_cost_per_mi": 0.1121
+    "beats_next_prob": 0.541,
+    "opp_cost_lifetime_usd": 8404,
+    "opp_cost_per_mi": 0.1071
    },
    "maintenance_curve_shared_with": [
     "Buick Encore"
@@ -10670,7 +10670,7 @@
     "co2_g_per_mi": 386,
     "full_coverage_ins_usd_yr": 2350
    },
-   "eol_maintained_miles": 200200,
+   "eol_maintained_miles": 190995,
    "pinned_buy_odo": 65000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -10707,15 +10707,15 @@
    },
    "verify_slug_carscom": "volvo-xc60",
    "model_output": {
-    "cost_per_mile_p50": 0.5853,
-    "p75": 0.612,
-    "p90_badluck": 0.6374,
-    "band_p05": 0.5328,
-    "band_p95": 0.6524,
-    "stat_tier": 6,
-    "beats_next_prob": 0.542,
-    "opp_cost_lifetime_usd": 25732,
-    "opp_cost_per_mi": 0.1903
+    "cost_per_mile_p50": 0.6066,
+    "p75": 0.6353,
+    "p90_badluck": 0.6641,
+    "band_p05": 0.5489,
+    "band_p95": 0.6822,
+    "stat_tier": 5,
+    "beats_next_prob": 0.586,
+    "opp_cost_lifetime_usd": 23350,
+    "opp_cost_per_mi": 0.1853
    },
    "maintenance_curve_shared_with": [
     "Volvo V90 Cross Country",
@@ -10808,7 +10808,7 @@
     "co2_g_per_mi": 555,
     "full_coverage_ins_usd_yr": 2350
    },
-   "eol_maintained_miles": 240500,
+   "eol_maintained_miles": 248911,
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
@@ -10849,15 +10849,15 @@
    },
    "verify_slug_carscom": "chevrolet-tahoe",
    "model_output": {
-    "cost_per_mile_p50": 0.6365,
-    "p75": 0.6694,
-    "p90_badluck": 0.7019,
-    "band_p05": 0.5701,
-    "band_p95": 0.7204,
-    "stat_tier": 6,
-    "beats_next_prob": 0.652,
-    "opp_cost_lifetime_usd": 64021,
-    "opp_cost_per_mi": 0.3451
+    "cost_per_mile_p50": 0.6209,
+    "p75": 0.6509,
+    "p90_badluck": 0.6806,
+    "band_p05": 0.5589,
+    "band_p95": 0.7011,
+    "stat_tier": 5,
+    "beats_next_prob": 0.503,
+    "opp_cost_lifetime_usd": 68648,
+    "opp_cost_per_mi": 0.354
    },
    "maintenance_curve_shared_with": [
     "Subaru Ascent",
@@ -10971,7 +10971,7 @@
     "co2_g_per_mi": 468,
     "full_coverage_ins_usd_yr": 2200
    },
-   "eol_maintained_miles": 184600,
+   "eol_maintained_miles": 176889,
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
@@ -11006,15 +11006,15 @@
    },
    "verify_slug_carscom": "jeep-grand_cherokee_l",
    "model_output": {
-    "cost_per_mile_p50": 0.6343,
-    "p75": 0.6672,
-    "p90_badluck": 0.7033,
-    "band_p05": 0.5665,
-    "band_p95": 0.7307,
+    "cost_per_mile_p50": 0.6535,
+    "p75": 0.6909,
+    "p90_badluck": 0.7291,
+    "band_p05": 0.5834,
+    "band_p95": 0.7588,
     "stat_tier": 6,
-    "beats_next_prob": 0.5,
-    "opp_cost_lifetime_usd": 27544,
-    "opp_cost_per_mi": 0.2125
+    "beats_next_prob": 0.591,
+    "opp_cost_lifetime_usd": 25335,
+    "opp_cost_per_mi": 0.2079
    },
    "maintenance_curve_shared_with": [
     "Chrysler Pacifica PHEV",
@@ -11091,7 +11091,7 @@
     "co2_g_per_mi": 355,
     "full_coverage_ins_usd_yr": 2350
    },
-   "eol_maintained_miles": 200200,
+   "eol_maintained_miles": 163625,
    "pinned_buy_odo": 65000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -11128,15 +11128,15 @@
    },
    "verify_slug_carscom": "volvo-v90_cross_country",
    "model_output": {
-    "cost_per_mile_p50": 0.6129,
-    "p75": 0.6453,
-    "p90_badluck": 0.6729,
-    "band_p05": 0.5451,
-    "band_p95": 0.6907,
-    "stat_tier": 6,
-    "beats_next_prob": 0.632,
-    "opp_cost_lifetime_usd": 30429,
-    "opp_cost_per_mi": 0.2251
+    "cost_per_mile_p50": 0.7263,
+    "p75": 0.768,
+    "p90_badluck": 0.8124,
+    "band_p05": 0.634,
+    "band_p95": 0.8379,
+    "stat_tier": 7,
+    "beats_next_prob": 0.969,
+    "opp_cost_lifetime_usd": 19989,
+    "opp_cost_per_mi": 0.2027
    },
    "maintenance_curve_shared_with": [
     "Volvo XC60",
@@ -11235,7 +11235,7 @@
     "co2_g_per_mi": 555,
     "full_coverage_ins_usd_yr": 2400
    },
-   "eol_maintained_miles": 244400,
+   "eol_maintained_miles": 238637,
    "pinned_buy_odo": 55000,
    "pinned_buy_year_est": 2022,
    "price_vs_odometer_usd": {
@@ -11276,15 +11276,15 @@
    },
    "verify_slug_carscom": "chevrolet-suburban",
    "model_output": {
-    "cost_per_mile_p50": 0.6616,
-    "p75": 0.7048,
-    "p90_badluck": 0.7544,
-    "band_p05": 0.5797,
-    "band_p95": 0.7813,
-    "stat_tier": 7,
-    "beats_next_prob": 0.56,
-    "opp_cost_lifetime_usd": 71181,
-    "opp_cost_per_mi": 0.3758
+    "cost_per_mile_p50": 0.6746,
+    "p75": 0.719,
+    "p90_badluck": 0.765,
+    "band_p05": 0.5886,
+    "band_p95": 0.8018,
+    "stat_tier": 6,
+    "beats_next_prob": 0.641,
+    "opp_cost_lifetime_usd": 67825,
+    "opp_cost_per_mi": 0.3693
    },
    "maintenance_curve_shared_with": [
     "Subaru Ascent",
@@ -11398,7 +11398,7 @@
     "co2_g_per_mi": 404,
     "full_coverage_ins_usd_yr": 2400
    },
-   "eol_maintained_miles": 195000,
+   "eol_maintained_miles": 179680,
    "pinned_buy_odo": 70000,
    "pinned_buy_year_est": 2021,
    "price_vs_odometer_usd": {
@@ -11438,15 +11438,15 @@
    },
    "verify_slug_carscom": "volvo-xc90",
    "model_output": {
-    "cost_per_mile_p50": 0.6766,
-    "p75": 0.7193,
-    "p90_badluck": 0.7637,
-    "band_p05": 0.5925,
-    "band_p95": 0.7915,
+    "cost_per_mile_p50": 0.7227,
+    "p75": 0.7679,
+    "p90_badluck": 0.8196,
+    "band_p05": 0.6328,
+    "band_p95": 0.8507,
     "stat_tier": 7,
-    "beats_next_prob": 0.991,
-    "opp_cost_lifetime_usd": 27499,
-    "opp_cost_per_mi": 0.22
+    "beats_next_prob": 0.53,
+    "opp_cost_lifetime_usd": 23092,
+    "opp_cost_per_mi": 0.2105
    },
    "maintenance_curve_shared_with": [
     "Volvo XC60",

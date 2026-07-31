@@ -98,9 +98,14 @@ async function main(): Promise<void> {
       "  " +
       "basis".padEnd(10) +
       "r2".padStart(7) +
-      "pts".padStart(5),
+      "pts".padStart(5) +
+      "c".padStart(8) +
+      "±se%".padStart(7) +
+      "leak".padStart(8) +
+      "relRate".padStart(9) +
+      "nOdo".padStart(5),
   );
-  console.log("-".repeat(90));
+  console.log("-".repeat(126));
 
   const rows: Array<{ name: string; seed: number; derived: number; delta: number; deltaPct: number }> = [];
   for (const d of derivations) {
@@ -119,10 +124,21 @@ async function main(): Promise<void> {
         d.basis.padEnd(10) +
         (d.r2 !== null ? d.r2.toFixed(3) : "  n/a").padStart(7) +
         String(d.evidence.usableSurvivalPoints).padStart(5) +
+        (d.ratioToFleet !== null && d.medianAge !== null
+          ? Math.pow(d.ratioToFleet, -fleetContext.fleetMechanicalK).toFixed(3)
+          : "  n/a"
+        ).padStart(8) +
+        (d.evidence.relativeSlopeSe !== null
+          ? `${(d.evidence.relativeSlopeSe * 100).toFixed(0)}%`
+          : "n/a"
+        ).padStart(7) +
+        (d.evidence.leakHazard !== null ? d.evidence.leakHazard.toFixed(4) : " n/a").padStart(8) +
+        d.relativeRate.toFixed(3).padStart(9) +
+        String(d.evidence.rateAges).padStart(5) +
         (d.provisional ? "  [provisional]" : ""),
     );
   }
-  console.log("-".repeat(90));
+  console.log("-".repeat(126));
 
   console.log(`\nSkipped (${skipped.length}, sport carve-out, not derivable from NY DMV): ${skipped.join(", ")}`);
 
@@ -133,7 +149,14 @@ async function main(): Promise<void> {
     `\nBasis breakdown (${derivations.length} resolved): nameplate=${basisCounts.nameplate}  ` +
       `make=${basisCounts.make}  fleet=${basisCounts.fleet}`,
   );
-  console.log(`Provisional (${provisionalCount}): basis != nameplate, or winning fit's R^2 < 0.85.`);
+  console.log(
+    `Provisional (${provisionalCount}): basis != nameplate, winning fit's R^2 < 0.85, ` +
+      `or no measurable mileage-accumulation rate.`,
+  );
+  console.log(
+    `Class mean rate ratio (Step 7 normaliser): car=${fleetContext.classMeanRateRatio.car.toFixed(4)}  ` +
+      `light-truck=${fleetContext.classMeanRateRatio["light-truck"].toFixed(4)}`,
+  );
 
   const absDeltas = rows.map((r) => Math.abs(r.delta));
   const maxRow = rows.reduce((a, b) => (Math.abs(b.delta) > Math.abs(a.delta) ? b : a));

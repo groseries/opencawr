@@ -51,7 +51,19 @@
  *     up here since the brief calls for a keyless adapter.
  *   - A zero/no-match `$where` doesn't error — it's a clean HTTP 200 with an
  *     aggregate of 0 (`count`) or an absent key (`median`), same as a real
- *     answer; no NHTSA-style `acceptNonOkJson` trick is needed here. */
+ *     answer; no NHTSA-style `acceptNonOkJson` trick is needed here.
+ *   - `registration_class` separates privately-registered cars from
+ *     commercial/livery ones, and it MATTERS for odometer medians: measured
+ *     live, Toyota Camry Hybrid accumulates 15,685 mi/yr blended against
+ *     11,912 mi/yr on `PASSENGER` alone, because NYC taxi and livery Camry
+ *     Hybrids are driven several times as hard as private ones (Camry MY2015
+ *     is 2,540 `OMNIBUS TAXI` VINs out of ~12,000). About 20% of rows carry a
+ *     BLANK class, so `registration_class='PASSENGER'` is a strict subset,
+ *     not the complement of the commercial classes — treat it as "definitely
+ *     private", never as "all non-commercial". The observed vocabulary
+ *     includes `PASSENGER`, `OMNIBUS TAXI`, `OMNIBUS LIVERY`,
+ *     `OMNIBUS PRIVATE RENTAL`, `SPECIAL REGISTRATION FEE`, `ORGANIZATIONS`,
+ *     `COMMERCIAL`, `REGIONAL` and `SPORTS`. */
 import { fetchCached } from "../fetchCached.js";
 
 const BASE_URL = "https://data.ny.gov/resource/vezn-fmmk.json";
@@ -137,10 +149,12 @@ function medianOdometerUrl(
   modelNames: string[],
   modelYear: number,
   calendarYear: number,
+  registrationClass?: string,
 ): string {
   const where =
     `${sliceWhere(makeCode, modelNames, modelYear, calendarYear)} ` +
-    `AND odometer_reading>0 AND odometer_reading<=${MAX_PLAUSIBLE_ODOMETER}`;
+    `AND odometer_reading>0 AND odometer_reading<=${MAX_PLAUSIBLE_ODOMETER}` +
+    (registrationClass ? ` AND registration_class=${soqlString(registrationClass)}` : "");
   return soqlUrl("median(odometer_reading) as med", where);
 }
 
@@ -168,16 +182,28 @@ export async function distinctVinCount(
  *  no client-side sampling needed). Data-entry noise (0 or >1,000,000 miles)
  *  is excluded before the median is taken. Returns 0 when no rows match the
  *  slice — safe as a sentinel since the `odometer_reading>0` filter means a
- *  real median can never legitimately be 0. */
+ *  real median can never legitimately be 0.
+ *
+ *  `registrationClass`, when supplied, additionally restricts the slice to
+ *  one `registration_class` value — `PASSENGER` is the one this codebase
+ *  uses, to keep NYC taxi/livery mileage out of a nameplate's measured
+ *  mileage-accumulation rate (see module docstring for the measured size of
+ *  that contamination, and `derive-eol.ts` Step 7 for where it's applied). */
 export async function medianOdometer(
   makeCode: string,
   modelNames: string[],
   modelYear: number,
   calendarYear: number,
+  registrationClass?: string,
 ): Promise<number> {
   const res = (await fetchCached(
-    medianOdometerUrl(makeCode, modelNames, modelYear, calendarYear),
+    medianOdometerUrl(makeCode, modelNames, modelYear, calendarYear, registrationClass),
   )) as MedianOdometerResponse[];
   const med = res[0]?.med;
   return med === undefined ? 0 : Number(med);
 }
+
+/** The `registration_class` value for privately-registered passenger cars.
+ *  A strict subset of "not commercial" — ~20% of rows have a blank class and
+ *  are excluded too (module docstring). */
+export const PRIVATE_REGISTRATION_CLASS = "PASSENGER";
