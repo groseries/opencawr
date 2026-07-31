@@ -181,12 +181,17 @@ The owner intends this to be **public eventually**. Two blockers had to be clear
    its ratings, and republishing them (even reworded) is a real takedown/copyright risk. Every non-`sport`
    `reliability_tier` in `opencawr_data.json` is now derived from **NHTSA complaint data only** — public
    domain, keyless, free — per `docs/reliability-methodology.md`.
-   **Two fields still trace to the same CR-derived judgment and this gate is therefore NOT fully cleared:
-   `repair_cost_multiplier_by_make` and `eol_maintained_miles`.** They correlate with the old seed tier at
-   +0.602 and −0.838 respectively — one judgment wearing three hats — so re-deriving only the tier broke the
-   seed's internal consistency deliberately rather than removing the dependency. Do not describe this gate as
-   closed until those two are re-derived or independently sourced; the open rows in `ASSUMPTIONS.md` §D/§E
-   track it. **CarComplaints and RepairPal, which
+   **One field still traces to the same CR-derived judgment and this gate is therefore NOT fully cleared:
+   `eol_maintained_miles`.** It correlates with the old seed tier at −0.838 — one judgment wearing several
+   hats — so re-deriving only the tier broke the seed's internal consistency deliberately rather than
+   removing the dependency. Do not describe this gate as closed until it is re-derived or independently
+   sourced; the open rows in `ASSUMPTIONS.md` §D/§E track it.
+   **`repair_cost_multiplier_by_make` was resolved 2026-07-30 (R14) as a negative result**: no public per-make
+   repair-cost source exists (RepairPal/CarComplaints struck below; IIHS-HLDI permission-gated and declined in
+   R13; NHTSA carries no cost data; BLS CPI `CUUR0000SETD` and PPI `WPU5521` confirmed economy-wide with no
+   make/brand dimension), so the multiplier is **1.0 for every non-`sport` row and make-level repair cost is
+   explicitly not modeled**. That removes its CR dependency without inventing a source — see `ASSUMPTIONS.md`
+   §D/§E for the measured cost in accuracy. **CarComplaints and RepairPal, which
    earlier drafts of this section prescribed, are deliberately NOT used and are struck from it**: both are
    commercial sites with restrictive ToS and no free API, so obtaining their aggregates means extracting a
    compilation — precisely the exposure clause 2 below exists to avoid. Re-deriving reliability with them would
