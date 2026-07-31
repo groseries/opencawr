@@ -121,8 +121,7 @@ export function App() {
           OPEN<span className="wordmark-cawr">CAWR</span>
         </div>
         <p className="thesis">
-          What a used car <em>really</em> costs per mile — with the uncertainty shown, not
-          hidden.
+          The way car costing <em>should</em> be.
         </p>
         <div className="context-line">
           <span>{rows ? rows.length : "…"} vehicles</span>
