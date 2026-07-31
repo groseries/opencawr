@@ -9,6 +9,7 @@
     "assemble": "tsx src/cli.ts",
     "reliability-report": "tsx src/reliability/report.ts",
     "model-year-report": "tsx src/modelyear/report.ts",
+    "eol-report": "tsx src/reliability/report-eol.ts",
     "record-fixtures": "tsx scripts/record-fixtures.ts"
   },
   "dependencies": {

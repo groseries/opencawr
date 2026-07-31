@@ -1,0 +1,9 @@
+{
+  "url": "https://data.ny.gov/resource/vezn-fmmk.json?%24select=median%28odometer_reading%29+as+med&%24where=make_code%3D%27HONDA%27+AND+model_name+in%28%27FIT%27%2C%27FIT+SPORT%27%29+AND+model_year%3D2018+AND+inspection_date+between+%272022-01-01T00%3A00%3A00%27+and+%272022-12-31T23%3A59%3A59%27+AND+odometer_reading%3E0+AND+odometer_reading%3C%3D1000000",
+  "fetchedAt": "2026-07-31T00:40:32.113Z",
+  "body": [
+    {
+      "med": "34424"
+    }
+  ]
+}

@@ -131,7 +131,7 @@
     "8": 500,
     "10": 560
    },
-   "repair_cost_multiplier_by_make": 1.05,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [],
     "caution": [
@@ -152,13 +152,13 @@
    },
    "verify_slug_carscom": "chevrolet-bolt_ev",
    "model_output": {
-    "cost_per_mile_p50": 0.3286,
-    "p75": 0.3549,
-    "p90_badluck": 0.3867,
-    "band_p05": 0.2885,
-    "band_p95": 0.4087,
+    "cost_per_mile_p50": 0.3278,
+    "p75": 0.3542,
+    "p90_badluck": 0.3845,
+    "band_p05": 0.2882,
+    "band_p95": 0.4068,
     "stat_tier": 1,
-    "beats_next_prob": 0.559,
+    "beats_next_prob": 0.564,
     "opp_cost_lifetime_usd": 19441,
     "opp_cost_per_mi": 0.1253
    },
@@ -264,7 +264,7 @@
     "8": 880,
     "10": 950
    },
-   "repair_cost_multiplier_by_make": 1.05,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [],
     "caution": [
@@ -287,13 +287,13 @@
    },
    "verify_slug_carscom": "chevrolet-volt",
    "model_output": {
-    "cost_per_mile_p50": 0.3565,
-    "p75": 0.3856,
-    "p90_badluck": 0.4141,
-    "band_p05": 0.3096,
-    "band_p95": 0.4365,
+    "cost_per_mile_p50": 0.3559,
+    "p75": 0.3844,
+    "p90_badluck": 0.4121,
+    "band_p05": 0.309,
+    "band_p95": 0.4335,
     "stat_tier": 1,
-    "beats_next_prob": 0.511,
+    "beats_next_prob": 0.548,
     "opp_cost_lifetime_usd": 17098,
     "opp_cost_per_mi": 0.1178
    },
@@ -760,7 +760,7 @@
     "band_p05": 0.313,
     "band_p95": 0.3927,
     "stat_tier": 1,
-    "beats_next_prob": 0.589,
+    "beats_next_prob": 0.586,
     "opp_cost_lifetime_usd": 30962,
     "opp_cost_per_mi": 0.1591
    },
@@ -2002,7 +2002,7 @@
     "p90_badluck": 0.4128,
     "band_p05": 0.3428,
     "band_p95": 0.4255,
-    "stat_tier": 1,
+    "stat_tier": 2,
     "beats_next_prob": 0.549,
     "opp_cost_lifetime_usd": 17003,
     "opp_cost_per_mi": 0.1168
@@ -2192,8 +2192,8 @@
     "p90_badluck": 0.4232,
     "band_p05": 0.339,
     "band_p95": 0.4349,
-    "stat_tier": 1,
-    "beats_next_prob": 0.542,
+    "stat_tier": 2,
+    "beats_next_prob": 0.525,
     "opp_cost_lifetime_usd": 40966,
     "opp_cost_per_mi": 0.205
    },
@@ -2675,7 +2675,7 @@
     "8": 720,
     "10": 820
    },
-   "repair_cost_multiplier_by_make": 1.25,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [],
     "caution": [
@@ -2695,13 +2695,13 @@
    },
    "verify_slug_carscom": "tesla-model_3",
    "model_output": {
-    "cost_per_mile_p50": 0.3569,
-    "p75": 0.3828,
-    "p90_badluck": 0.4139,
-    "band_p05": 0.3157,
-    "band_p95": 0.431,
+    "cost_per_mile_p50": 0.3554,
+    "p75": 0.3807,
+    "p90_badluck": 0.408,
+    "band_p05": 0.3144,
+    "band_p95": 0.4288,
     "stat_tier": 1,
-    "beats_next_prob": 0.559,
+    "beats_next_prob": 0.49,
     "opp_cost_lifetime_usd": 30609,
     "opp_cost_per_mi": 0.1799
    },
@@ -2847,7 +2847,7 @@
     "band_p05": 0.3601,
     "band_p95": 0.4864,
     "stat_tier": 2,
-    "beats_next_prob": 0.556,
+    "beats_next_prob": 0.544,
     "opp_cost_lifetime_usd": 15625,
     "opp_cost_per_mi": 0.1157
    },
@@ -3182,7 +3182,7 @@
     "8": 1680,
     "10": 1820
    },
-   "repair_cost_multiplier_by_make": 1.15,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [
      2012,
@@ -3204,13 +3204,13 @@
    },
    "verify_slug_carscom": "fiat-500",
    "model_output": {
-    "cost_per_mile_p50": 0.3845,
-    "p75": 0.4049,
-    "p90_badluck": 0.4297,
-    "band_p05": 0.3468,
-    "band_p95": 0.4494,
+    "cost_per_mile_p50": 0.3832,
+    "p75": 0.4026,
+    "p90_badluck": 0.4242,
+    "band_p05": 0.3463,
+    "band_p95": 0.4398,
     "stat_tier": 2,
-    "beats_next_prob": 0.514,
+    "beats_next_prob": 0.523,
     "opp_cost_lifetime_usd": 8837,
     "opp_cost_per_mi": 0.0737
    },
@@ -3495,7 +3495,7 @@
     "8": 850,
     "10": 950
    },
-   "repair_cost_multiplier_by_make": 1.25,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [],
     "caution": [
@@ -3513,13 +3513,13 @@
    },
    "verify_slug_carscom": "volkswagen-id4",
    "model_output": {
-    "cost_per_mile_p50": 0.4303,
-    "p75": 0.4614,
-    "p90_badluck": 0.4978,
-    "band_p05": 0.373,
-    "band_p95": 0.5248,
-    "stat_tier": 2,
-    "beats_next_prob": 0.508,
+    "cost_per_mile_p50": 0.4269,
+    "p75": 0.458,
+    "p90_badluck": 0.4939,
+    "band_p05": 0.3717,
+    "band_p95": 0.5204,
+    "stat_tier": 3,
+    "beats_next_prob": 0.535,
     "opp_cost_lifetime_usd": 26616,
     "opp_cost_per_mi": 0.1774
    },
@@ -3642,8 +3642,8 @@
     "p90_badluck": 0.5132,
     "band_p05": 0.4176,
     "band_p95": 0.5313,
-    "stat_tier": 3,
-    "beats_next_prob": 0.492,
+    "stat_tier": 4,
+    "beats_next_prob": 0.521,
     "opp_cost_lifetime_usd": 54454,
     "opp_cost_per_mi": 0.302
    },
@@ -3942,7 +3942,7 @@
     "8": 1470,
     "10": 1590
    },
-   "repair_cost_multiplier_by_make": 1.25,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [],
     "caution": [
@@ -3961,13 +3961,13 @@
    },
    "verify_slug_carscom": "volkswagen-passat",
    "model_output": {
-    "cost_per_mile_p50": 0.4153,
-    "p75": 0.4327,
-    "p90_badluck": 0.4531,
+    "cost_per_mile_p50": 0.4145,
+    "p75": 0.4311,
+    "p90_badluck": 0.4492,
     "band_p05": 0.3837,
-    "band_p95": 0.4655,
-    "stat_tier": 2,
-    "beats_next_prob": 0.605,
+    "band_p95": 0.4611,
+    "stat_tier": 3,
+    "beats_next_prob": 0.615,
     "opp_cost_lifetime_usd": 14440,
     "opp_cost_per_mi": 0.1071
    },
@@ -4094,7 +4094,7 @@
     "8": 1290,
     "10": 1400
    },
-   "repair_cost_multiplier_by_make": 1.05,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [],
     "caution": [
@@ -4114,13 +4114,13 @@
    },
    "verify_slug_carscom": "buick-encore",
    "model_output": {
-    "cost_per_mile_p50": 0.4305,
-    "p75": 0.4516,
-    "p90_badluck": 0.4722,
-    "band_p05": 0.3947,
-    "band_p95": 0.4883,
+    "cost_per_mile_p50": 0.4302,
+    "p75": 0.451,
+    "p90_badluck": 0.4718,
+    "band_p05": 0.3945,
+    "band_p95": 0.4859,
     "stat_tier": 3,
-    "beats_next_prob": 0.514,
+    "beats_next_prob": 0.518,
     "opp_cost_lifetime_usd": 13640,
     "opp_cost_per_mi": 0.1087
    },
@@ -4436,7 +4436,7 @@
     "p90_badluck": 0.5192,
     "band_p05": 0.4215,
     "band_p95": 0.5361,
-    "stat_tier": 3,
+    "stat_tier": 4,
     "beats_next_prob": 0.544,
     "opp_cost_lifetime_usd": 24252,
     "opp_cost_per_mi": 0.1622
@@ -4607,8 +4607,8 @@
     "p90_badluck": 0.5348,
     "band_p05": 0.4109,
     "band_p95": 0.5542,
-    "stat_tier": 3,
-    "beats_next_prob": 0.525,
+    "stat_tier": 4,
+    "beats_next_prob": 0.523,
     "opp_cost_lifetime_usd": 49404,
     "opp_cost_per_mi": 0.2754
    },
@@ -4792,7 +4792,7 @@
     "8": 1195,
     "10": 1290
    },
-   "repair_cost_multiplier_by_make": 1.05,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [
      2010,
@@ -4815,13 +4815,13 @@
    },
    "verify_slug_carscom": "subaru-outback",
    "model_output": {
-    "cost_per_mile_p50": 0.4552,
-    "p75": 0.4788,
-    "p90_badluck": 0.5012,
-    "band_p05": 0.4132,
-    "band_p95": 0.5143,
-    "stat_tier": 3,
-    "beats_next_prob": 0.575,
+    "cost_per_mile_p50": 0.4546,
+    "p75": 0.4783,
+    "p90_badluck": 0.5006,
+    "band_p05": 0.4124,
+    "band_p95": 0.513,
+    "stat_tier": 4,
+    "beats_next_prob": 0.57,
     "opp_cost_lifetime_usd": 19276,
     "opp_cost_per_mi": 0.1422
    },
@@ -4982,7 +4982,7 @@
     "10": 1288,
     "12": 1500
    },
-   "repair_cost_multiplier_by_make": 1.05,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [
      2011,
@@ -5006,13 +5006,13 @@
    },
    "verify_slug_carscom": "subaru-forester",
    "model_output": {
-    "cost_per_mile_p50": 0.4657,
-    "p75": 0.4849,
-    "p90_badluck": 0.5045,
-    "band_p05": 0.4257,
-    "band_p95": 0.5171,
-    "stat_tier": 3,
-    "beats_next_prob": 0.505,
+    "cost_per_mile_p50": 0.4656,
+    "p75": 0.4848,
+    "p90_badluck": 0.504,
+    "band_p05": 0.4255,
+    "band_p95": 0.5169,
+    "stat_tier": 4,
+    "beats_next_prob": 0.507,
     "opp_cost_lifetime_usd": 25066,
     "opp_cost_per_mi": 0.1726
    },
@@ -5187,7 +5187,7 @@
     "band_p05": 0.4026,
     "band_p95": 0.518,
     "stat_tier": 3,
-    "beats_next_prob": 0.554,
+    "beats_next_prob": 0.55,
     "opp_cost_lifetime_usd": 58792,
     "opp_cost_per_mi": 0.3104
    },
@@ -5321,7 +5321,7 @@
     "band_p05": 0.4383,
     "band_p95": 0.562,
     "stat_tier": 4,
-    "beats_next_prob": 0.514,
+    "beats_next_prob": 0.498,
     "opp_cost_lifetime_usd": 60430,
     "opp_cost_per_mi": 0.2812
    },
@@ -5543,8 +5543,8 @@
     "p90_badluck": 0.5354,
     "band_p05": 0.4219,
     "band_p95": 0.5517,
-    "stat_tier": 3,
-    "beats_next_prob": 0.552,
+    "stat_tier": 4,
+    "beats_next_prob": 0.542,
     "opp_cost_lifetime_usd": 15459,
     "opp_cost_per_mi": 0.1341
    },
@@ -5698,7 +5698,7 @@
     "8": 1280,
     "10": 1384
    },
-   "repair_cost_multiplier_by_make": 1.05,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [
      2010,
@@ -5724,13 +5724,13 @@
    },
    "verify_slug_carscom": "chevrolet-equinox",
    "model_output": {
-    "cost_per_mile_p50": 0.4749,
-    "p75": 0.4984,
-    "p90_badluck": 0.5266,
-    "band_p05": 0.4264,
-    "band_p95": 0.544,
-    "stat_tier": 3,
-    "beats_next_prob": 0.534,
+    "cost_per_mile_p50": 0.4746,
+    "p75": 0.4976,
+    "p90_badluck": 0.525,
+    "band_p05": 0.4258,
+    "band_p95": 0.5419,
+    "stat_tier": 4,
+    "beats_next_prob": 0.515,
     "opp_cost_lifetime_usd": 15003,
     "opp_cost_per_mi": 0.1245
    },
@@ -5911,7 +5911,7 @@
     "p90_badluck": 0.5078,
     "band_p05": 0.431,
     "band_p95": 0.5228,
-    "stat_tier": 3,
+    "stat_tier": 4,
     "beats_next_prob": 0.487,
     "opp_cost_lifetime_usd": 34480,
     "opp_cost_per_mi": 0.1922
@@ -6031,7 +6031,7 @@
     "8": 1720,
     "10": 1880
    },
-   "repair_cost_multiplier_by_make": 1.35,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [],
     "caution": [
@@ -6050,13 +6050,13 @@
    },
    "verify_slug_carscom": "mini-hardtop",
    "model_output": {
-    "cost_per_mile_p50": 0.4677,
-    "p75": 0.491,
-    "p90_badluck": 0.5204,
-    "band_p05": 0.4203,
-    "band_p95": 0.5362,
-    "stat_tier": 3,
-    "beats_next_prob": 0.52,
+    "cost_per_mile_p50": 0.4645,
+    "p75": 0.4863,
+    "p90_badluck": 0.5129,
+    "band_p05": 0.4197,
+    "band_p95": 0.5261,
+    "stat_tier": 4,
+    "beats_next_prob": 0.485,
     "opp_cost_lifetime_usd": 17695,
     "opp_cost_per_mi": 0.1356
    },
@@ -6195,7 +6195,7 @@
     "8": 1300,
     "10": 1450
    },
-   "repair_cost_multiplier_by_make": 1.05,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [
      1999,
@@ -6220,13 +6220,13 @@
    },
    "verify_slug_carscom": "ford-ranger",
    "model_output": {
-    "cost_per_mile_p50": 0.422,
-    "p75": 0.4359,
-    "p90_badluck": 0.4539,
+    "cost_per_mile_p50": 0.4219,
+    "p75": 0.4353,
+    "p90_badluck": 0.4522,
     "band_p05": 0.396,
-    "band_p95": 0.4654,
-    "stat_tier": 2,
-    "beats_next_prob": 0.562,
+    "band_p95": 0.4633,
+    "stat_tier": 3,
+    "beats_next_prob": 0.536,
     "opp_cost_lifetime_usd": 14876,
     "opp_cost_per_mi": 0.0933
    },
@@ -6347,7 +6347,7 @@
     "8": 1680,
     "10": 1820
    },
-   "repair_cost_multiplier_by_make": 1.15,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [
      2016
@@ -6367,13 +6367,13 @@
    },
    "verify_slug_carscom": "fiat-500x",
    "model_output": {
-    "cost_per_mile_p50": 0.4854,
-    "p75": 0.5102,
-    "p90_badluck": 0.5322,
-    "band_p05": 0.4362,
-    "band_p95": 0.5486,
+    "cost_per_mile_p50": 0.484,
+    "p75": 0.5089,
+    "p90_badluck": 0.5315,
+    "band_p05": 0.4353,
+    "band_p95": 0.5468,
     "stat_tier": 4,
-    "beats_next_prob": 0.539,
+    "beats_next_prob": 0.551,
     "opp_cost_lifetime_usd": 11368,
     "opp_cost_per_mi": 0.1038
    },
@@ -6481,7 +6481,7 @@
     "8": 1470,
     "10": 1590
    },
-   "repair_cost_multiplier_by_make": 1.25,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [
      2010,
@@ -6504,13 +6504,13 @@
    },
    "verify_slug_carscom": "volkswagen-golf_gti",
    "model_output": {
-    "cost_per_mile_p50": 0.4786,
-    "p75": 0.5088,
-    "p90_badluck": 0.536,
-    "band_p05": 0.4282,
-    "band_p95": 0.5504,
-    "stat_tier": 3,
-    "beats_next_prob": 0.491,
+    "cost_per_mile_p50": 0.4759,
+    "p75": 0.5039,
+    "p90_badluck": 0.5289,
+    "band_p05": 0.4275,
+    "band_p95": 0.5419,
+    "stat_tier": 4,
+    "beats_next_prob": 0.519,
     "opp_cost_lifetime_usd": 19361,
     "opp_cost_per_mi": 0.1434
    },
@@ -6837,7 +6837,7 @@
     "8": 1310,
     "10": 1415
    },
-   "repair_cost_multiplier_by_make": 1.05,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [
      2013,
@@ -6860,13 +6860,13 @@
    },
    "verify_slug_carscom": "ford-escape",
    "model_output": {
-    "cost_per_mile_p50": 0.4991,
-    "p75": 0.5298,
-    "p90_badluck": 0.5668,
-    "band_p05": 0.4352,
-    "band_p95": 0.5908,
+    "cost_per_mile_p50": 0.4979,
+    "p75": 0.5291,
+    "p90_badluck": 0.5652,
+    "band_p05": 0.4345,
+    "band_p95": 0.5897,
     "stat_tier": 4,
-    "beats_next_prob": 0.522,
+    "beats_next_prob": 0.525,
     "opp_cost_lifetime_usd": 10948,
     "opp_cost_per_mi": 0.104
    },
@@ -7061,7 +7061,7 @@
     "p90_badluck": 0.5795,
     "band_p05": 0.4547,
     "band_p95": 0.6021,
-    "stat_tier": 4,
+    "stat_tier": 5,
     "beats_next_prob": 0.538,
     "opp_cost_lifetime_usd": 32310,
     "opp_cost_per_mi": 0.2027
@@ -7267,8 +7267,8 @@
     "p90_badluck": 0.5879,
     "band_p05": 0.4616,
     "band_p95": 0.6078,
-    "stat_tier": 4,
-    "beats_next_prob": 0.525,
+    "stat_tier": 5,
+    "beats_next_prob": 0.508,
     "opp_cost_lifetime_usd": 16068,
     "opp_cost_per_mi": 0.1394
    },
@@ -7460,7 +7460,7 @@
     "p90_badluck": 0.56,
     "band_p05": 0.4779,
     "band_p95": 0.5729,
-    "stat_tier": 4,
+    "stat_tier": 5,
     "beats_next_prob": 0.495,
     "opp_cost_lifetime_usd": 83878,
     "opp_cost_per_mi": 0.3648
@@ -8034,8 +8034,8 @@
     "p90_badluck": 0.608,
     "band_p05": 0.4528,
     "band_p95": 0.6444,
-    "stat_tier": 4,
-    "beats_next_prob": 0.516,
+    "stat_tier": 5,
+    "beats_next_prob": 0.555,
     "opp_cost_lifetime_usd": 12847,
     "opp_cost_per_mi": 0.117
    },
@@ -8185,7 +8185,7 @@
     "8": 1470,
     "10": 1590
    },
-   "repair_cost_multiplier_by_make": 1.25,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [
      2009,
@@ -8208,13 +8208,13 @@
    },
    "verify_slug_carscom": "volkswagen-tiguan",
    "model_output": {
-    "cost_per_mile_p50": 0.4963,
-    "p75": 0.5237,
-    "p90_badluck": 0.5509,
-    "band_p05": 0.4454,
-    "band_p95": 0.5745,
+    "cost_per_mile_p50": 0.4936,
+    "p75": 0.5191,
+    "p90_badluck": 0.5447,
+    "band_p05": 0.4446,
+    "band_p95": 0.5648,
     "stat_tier": 4,
-    "beats_next_prob": 0.5,
+    "beats_next_prob": 0.516,
     "opp_cost_lifetime_usd": 15332,
     "opp_cost_per_mi": 0.1231
    },
@@ -8329,7 +8329,7 @@
     "8": 1340,
     "10": 1450
    },
-   "repair_cost_multiplier_by_make": 1.05,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [
      2017,
@@ -8347,13 +8347,13 @@
    },
    "verify_slug_carscom": "chrysler-pacifica_hybrid",
    "model_output": {
-    "cost_per_mile_p50": 0.5405,
-    "p75": 0.578,
-    "p90_badluck": 0.6103,
-    "band_p05": 0.4618,
+    "cost_per_mile_p50": 0.5399,
+    "p75": 0.5771,
+    "p90_badluck": 0.6096,
+    "band_p05": 0.4616,
     "band_p95": 0.6406,
-    "stat_tier": 4,
-    "beats_next_prob": 0.529,
+    "stat_tier": 5,
+    "beats_next_prob": 0.532,
     "opp_cost_lifetime_usd": 17101,
     "opp_cost_per_mi": 0.1548
    },
@@ -8482,7 +8482,7 @@
     "8": 1210,
     "10": 1310
    },
-   "repair_cost_multiplier_by_make": 1.05,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [
      2019
@@ -8502,13 +8502,13 @@
    },
    "verify_slug_carscom": "subaru-ascent",
    "model_output": {
-    "cost_per_mile_p50": 0.5539,
-    "p75": 0.5838,
-    "p90_badluck": 0.6151,
-    "band_p05": 0.4955,
-    "band_p95": 0.6367,
+    "cost_per_mile_p50": 0.5533,
+    "p75": 0.5834,
+    "p90_badluck": 0.6141,
+    "band_p05": 0.4952,
+    "band_p95": 0.6356,
     "stat_tier": 5,
-    "beats_next_prob": 0.515,
+    "beats_next_prob": 0.505,
     "opp_cost_lifetime_usd": 22536,
     "opp_cost_per_mi": 0.1739
    },
@@ -8622,7 +8622,7 @@
     "8": 1518,
     "10": 1639
    },
-   "repair_cost_multiplier_by_make": 1.05,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [],
     "caution": [
@@ -8640,13 +8640,13 @@
    },
    "verify_slug_carscom": "ford-ranger",
    "model_output": {
-    "cost_per_mile_p50": 0.5536,
-    "p75": 0.5798,
-    "p90_badluck": 0.6066,
-    "band_p05": 0.499,
-    "band_p95": 0.6248,
+    "cost_per_mile_p50": 0.5529,
+    "p75": 0.5792,
+    "p90_badluck": 0.6064,
+    "band_p05": 0.4989,
+    "band_p95": 0.6229,
     "stat_tier": 5,
-    "beats_next_prob": 0.493,
+    "beats_next_prob": 0.492,
     "opp_cost_lifetime_usd": 25969,
     "opp_cost_per_mi": 0.1789
    },
@@ -8949,7 +8949,7 @@
     "8": 1720,
     "10": 1880
    },
-   "repair_cost_multiplier_by_make": 1.35,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [
      2011,
@@ -8971,13 +8971,13 @@
    },
    "verify_slug_carscom": "mini-countryman",
    "model_output": {
-    "cost_per_mile_p50": 0.5271,
-    "p75": 0.556,
-    "p90_badluck": 0.5848,
-    "band_p05": 0.4735,
-    "band_p95": 0.605,
-    "stat_tier": 4,
-    "beats_next_prob": 0.552,
+    "cost_per_mile_p50": 0.5246,
+    "p75": 0.5497,
+    "p90_badluck": 0.5783,
+    "band_p05": 0.4718,
+    "band_p95": 0.5949,
+    "stat_tier": 5,
+    "beats_next_prob": 0.5,
     "opp_cost_lifetime_usd": 16573,
     "opp_cost_per_mi": 0.1375
    },
@@ -9167,7 +9167,7 @@
     "band_p05": 0.4972,
     "band_p95": 0.5984,
     "stat_tier": 5,
-    "beats_next_prob": 0.596,
+    "beats_next_prob": 0.595,
     "opp_cost_lifetime_usd": 69251,
     "opp_cost_per_mi": 0.3144
    },
@@ -9472,7 +9472,7 @@
     "8": 1340,
     "10": 1450
    },
-   "repair_cost_multiplier_by_make": 1.05,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [
      2017,
@@ -9491,13 +9491,13 @@
    },
    "verify_slug_carscom": "chrysler-pacifica",
    "model_output": {
-    "cost_per_mile_p50": 0.5651,
-    "p75": 0.6055,
-    "p90_badluck": 0.6527,
-    "band_p05": 0.4897,
-    "band_p95": 0.6921,
+    "cost_per_mile_p50": 0.564,
+    "p75": 0.6039,
+    "p90_badluck": 0.6508,
+    "band_p05": 0.4891,
+    "band_p95": 0.6895,
     "stat_tier": 5,
-    "beats_next_prob": 0.58,
+    "beats_next_prob": 0.584,
     "opp_cost_lifetime_usd": 11224,
     "opp_cost_per_mi": 0.1117
    },
@@ -9622,7 +9622,7 @@
     "8": 1481,
     "10": 1601
    },
-   "repair_cost_multiplier_by_make": 1.05,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [],
     "caution": [
@@ -9642,13 +9642,13 @@
    },
    "verify_slug_carscom": "chevrolet-colorado",
    "model_output": {
-    "cost_per_mile_p50": 0.5843,
-    "p75": 0.6173,
-    "p90_badluck": 0.6519,
-    "band_p05": 0.5196,
-    "band_p95": 0.6803,
-    "stat_tier": 5,
-    "beats_next_prob": 0.532,
+    "cost_per_mile_p50": 0.583,
+    "p75": 0.6156,
+    "p90_badluck": 0.651,
+    "band_p05": 0.519,
+    "band_p95": 0.6792,
+    "stat_tier": 6,
+    "beats_next_prob": 0.527,
     "opp_cost_lifetime_usd": 26586,
     "opp_cost_per_mi": 0.1828
    },
@@ -9801,8 +9801,8 @@
     "p90_badluck": 0.6309,
     "band_p05": 0.5261,
     "band_p95": 0.6464,
-    "stat_tier": 5,
-    "beats_next_prob": 0.527,
+    "stat_tier": 6,
+    "beats_next_prob": 0.519,
     "opp_cost_lifetime_usd": 41014,
     "opp_cost_per_mi": 0.2643
    },
@@ -9927,7 +9927,7 @@
     "band_p05": 0.5117,
     "band_p95": 0.6243,
     "stat_tier": 5,
-    "beats_next_prob": 0.521,
+    "beats_next_prob": 0.511,
     "opp_cost_lifetime_usd": 55217,
     "opp_cost_per_mi": 0.3244
    },
@@ -10008,7 +10008,7 @@
     "8": 1340,
     "10": 1450
    },
-   "repair_cost_multiplier_by_make": 1.05,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [
      2009,
@@ -10035,12 +10035,12 @@
    },
    "verify_slug_carscom": "chevrolet-traverse",
    "model_output": {
-    "cost_per_mile_p50": 0.5841,
-    "p75": 0.6281,
-    "p90_badluck": 0.6713,
-    "band_p05": 0.5122,
-    "band_p95": 0.6998,
-    "stat_tier": 5,
+    "cost_per_mile_p50": 0.5826,
+    "p75": 0.6265,
+    "p90_badluck": 0.6696,
+    "band_p05": 0.5116,
+    "band_p95": 0.6985,
+    "stat_tier": 6,
     "beats_next_prob": 0.485,
     "opp_cost_lifetime_usd": 16313,
     "opp_cost_per_mi": 0.1423
@@ -10157,7 +10157,7 @@
     "8": 1470,
     "10": 1590
    },
-   "repair_cost_multiplier_by_make": 1.25,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [],
     "caution": [
@@ -10176,13 +10176,13 @@
    },
    "verify_slug_carscom": "volkswagen-atlas",
    "model_output": {
-    "cost_per_mile_p50": 0.5559,
-    "p75": 0.582,
-    "p90_badluck": 0.6057,
-    "band_p05": 0.5086,
-    "band_p95": 0.6193,
+    "cost_per_mile_p50": 0.5547,
+    "p75": 0.5808,
+    "p90_badluck": 0.6031,
+    "band_p05": 0.5085,
+    "band_p95": 0.6174,
     "stat_tier": 5,
-    "beats_next_prob": 0.487,
+    "beats_next_prob": 0.499,
     "opp_cost_lifetime_usd": 19207,
     "opp_cost_per_mi": 0.1539
    },
@@ -10297,7 +10297,7 @@
     "8": 1340,
     "10": 1450
    },
-   "repair_cost_multiplier_by_make": 1.05,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [
      2011,
@@ -10321,13 +10321,13 @@
    },
    "verify_slug_carscom": "ford-explorer",
    "model_output": {
-    "cost_per_mile_p50": 0.5828,
-    "p75": 0.6187,
-    "p90_badluck": 0.6569,
+    "cost_per_mile_p50": 0.5823,
+    "p75": 0.6178,
+    "p90_badluck": 0.6544,
     "band_p05": 0.521,
-    "band_p95": 0.6784,
-    "stat_tier": 5,
-    "beats_next_prob": 0.5,
+    "band_p95": 0.6765,
+    "stat_tier": 6,
+    "beats_next_prob": 0.497,
     "opp_cost_lifetime_usd": 17128,
     "opp_cost_per_mi": 0.1495
    },
@@ -10485,7 +10485,7 @@
     "8": 1290,
     "10": 1400
    },
-   "repair_cost_multiplier_by_make": 1.05,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [
      2008,
@@ -10510,13 +10510,13 @@
    },
    "verify_slug_carscom": "buick-enclave",
    "model_output": {
-    "cost_per_mile_p50": 0.5951,
-    "p75": 0.6373,
-    "p90_badluck": 0.6875,
+    "cost_per_mile_p50": 0.5939,
+    "p75": 0.6356,
+    "p90_badluck": 0.6849,
     "band_p05": 0.5218,
-    "band_p95": 0.7198,
-    "stat_tier": 5,
-    "beats_next_prob": 0.586,
+    "band_p95": 0.718,
+    "stat_tier": 6,
+    "beats_next_prob": 0.581,
     "opp_cost_lifetime_usd": 10603,
     "opp_cost_per_mi": 0.1121
    },
@@ -10689,7 +10689,7 @@
     "8": 1900,
     "10": 2050
    },
-   "repair_cost_multiplier_by_make": 1.4,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [],
     "caution": [
@@ -10707,13 +10707,13 @@
    },
    "verify_slug_carscom": "volvo-xc60",
    "model_output": {
-    "cost_per_mile_p50": 0.5874,
-    "p75": 0.6156,
-    "p90_badluck": 0.6433,
-    "band_p05": 0.5333,
-    "band_p95": 0.6584,
-    "stat_tier": 5,
-    "beats_next_prob": 0.539,
+    "cost_per_mile_p50": 0.5853,
+    "p75": 0.612,
+    "p90_badluck": 0.6374,
+    "band_p05": 0.5328,
+    "band_p95": 0.6524,
+    "stat_tier": 6,
+    "beats_next_prob": 0.542,
     "opp_cost_lifetime_usd": 25732,
     "opp_cost_per_mi": 0.1903
    },
@@ -10828,7 +10828,7 @@
     "8": 1210,
     "10": 1310
    },
-   "repair_cost_multiplier_by_make": 1.05,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [],
     "caution": [
@@ -10849,13 +10849,13 @@
    },
    "verify_slug_carscom": "chevrolet-tahoe",
    "model_output": {
-    "cost_per_mile_p50": 0.6374,
-    "p75": 0.6702,
-    "p90_badluck": 0.7036,
-    "band_p05": 0.5707,
-    "band_p95": 0.722,
+    "cost_per_mile_p50": 0.6365,
+    "p75": 0.6694,
+    "p90_badluck": 0.7019,
+    "band_p05": 0.5701,
+    "band_p95": 0.7204,
     "stat_tier": 6,
-    "beats_next_prob": 0.657,
+    "beats_next_prob": 0.652,
     "opp_cost_lifetime_usd": 64021,
     "opp_cost_per_mi": 0.3451
    },
@@ -10989,7 +10989,7 @@
     "8": 1340,
     "10": 1450
    },
-   "repair_cost_multiplier_by_make": 1.05,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [],
     "caution": [
@@ -11006,13 +11006,13 @@
    },
    "verify_slug_carscom": "jeep-grand_cherokee_l",
    "model_output": {
-    "cost_per_mile_p50": 0.6346,
-    "p75": 0.6688,
-    "p90_badluck": 0.7039,
+    "cost_per_mile_p50": 0.6343,
+    "p75": 0.6672,
+    "p90_badluck": 0.7033,
     "band_p05": 0.5665,
-    "band_p95": 0.7312,
+    "band_p95": 0.7307,
     "stat_tier": 6,
-    "beats_next_prob": 0.501,
+    "beats_next_prob": 0.5,
     "opp_cost_lifetime_usd": 27544,
     "opp_cost_per_mi": 0.2125
    },
@@ -11109,7 +11109,7 @@
     "8": 1900,
     "10": 2050
    },
-   "repair_cost_multiplier_by_make": 1.4,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [],
     "caution": [
@@ -11128,13 +11128,13 @@
    },
    "verify_slug_carscom": "volvo-v90_cross_country",
    "model_output": {
-    "cost_per_mile_p50": 0.6163,
-    "p75": 0.6495,
-    "p90_badluck": 0.6767,
-    "band_p05": 0.5457,
-    "band_p95": 0.6961,
+    "cost_per_mile_p50": 0.6129,
+    "p75": 0.6453,
+    "p90_badluck": 0.6729,
+    "band_p05": 0.5451,
+    "band_p95": 0.6907,
     "stat_tier": 6,
-    "beats_next_prob": 0.61,
+    "beats_next_prob": 0.632,
     "opp_cost_lifetime_usd": 30429,
     "opp_cost_per_mi": 0.2251
    },
@@ -11255,7 +11255,7 @@
     "8": 1210,
     "10": 1310
    },
-   "repair_cost_multiplier_by_make": 1.05,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [],
     "caution": [
@@ -11276,13 +11276,13 @@
    },
    "verify_slug_carscom": "chevrolet-suburban",
    "model_output": {
-    "cost_per_mile_p50": 0.6631,
-    "p75": 0.7067,
-    "p90_badluck": 0.7563,
-    "band_p05": 0.5808,
-    "band_p95": 0.7822,
-    "stat_tier": 6,
-    "beats_next_prob": 0.575,
+    "cost_per_mile_p50": 0.6616,
+    "p75": 0.7048,
+    "p90_badluck": 0.7544,
+    "band_p05": 0.5797,
+    "band_p95": 0.7813,
+    "stat_tier": 7,
+    "beats_next_prob": 0.56,
     "opp_cost_lifetime_usd": 71181,
     "opp_cost_per_mi": 0.3758
    },
@@ -11417,7 +11417,7 @@
     "8": 1900,
     "10": 2050
    },
-   "repair_cost_multiplier_by_make": 1.4,
+   "repair_cost_multiplier_by_make": 1,
    "model_year_reliability": {
     "bad": [
      2016
@@ -11438,13 +11438,13 @@
    },
    "verify_slug_carscom": "volvo-xc90",
    "model_output": {
-    "cost_per_mile_p50": 0.6826,
-    "p75": 0.726,
-    "p90_badluck": 0.7726,
-    "band_p05": 0.5955,
-    "band_p95": 0.8047,
-    "stat_tier": 6,
-    "beats_next_prob": 0.99,
+    "cost_per_mile_p50": 0.6766,
+    "p75": 0.7193,
+    "p90_badluck": 0.7637,
+    "band_p05": 0.5925,
+    "band_p95": 0.7915,
+    "stat_tier": 7,
+    "beats_next_prob": 0.991,
     "opp_cost_lifetime_usd": 27499,
     "opp_cost_per_mi": 0.22
    },
@@ -11595,7 +11595,7 @@
     "p90_badluck": 1.0002,
     "band_p05": 0.7993,
     "band_p95": 1.0397,
-    "stat_tier": 7,
+    "stat_tier": 8,
     "beats_next_prob": 0.955,
     "opp_cost_lifetime_usd": 47272,
     "opp_cost_per_mi": 0.309
@@ -11710,7 +11710,7 @@
     "p90_badluck": 1.243,
     "band_p05": 0.9669,
     "band_p95": 1.2826,
-    "stat_tier": 8,
+    "stat_tier": 9,
     "beats_next_prob": 1,
     "opp_cost_lifetime_usd": 82808,
     "opp_cost_per_mi": 0.4988

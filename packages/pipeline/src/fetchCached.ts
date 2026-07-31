@@ -94,6 +94,38 @@ async function fetchWithRetry(
   }
 }
 
+/** Bounds simultaneous LIVE network requests across every caller of
+ *  `fetchCached` (cache hits and offline reads never reach this: they resolve
+ *  before any network I/O). Needed because some callers fan out `Promise.all`
+ *  across dozens of queries at once (e.g. `reliability/derive-eol.ts`'s
+ *  fleet-wide aggregation over the full 71-vehicle corpus) — without a shared
+ *  gate that fan-out reaches an endpoint at 100+ concurrent connections and
+ *  gets rate-limited (observed live: HTTP 429 from NY DMV), even though
+ *  sequential traffic to the same endpoints is fine (see ny-inspections.ts's
+ *  module docstring: "no rate-limiting... across 40 rapid sequential
+ *  unauthenticated requests"). Matches the concurrency already used for
+ *  NHTSA traffic (`NHTSA_CONCURRENCY` in reliability/derive.ts). */
+const LIVE_FETCH_CONCURRENCY = 2;
+let activeLiveFetches = 0;
+const liveFetchQueue: Array<() => void> = [];
+
+async function withLiveFetchGate<T>(fn: () => Promise<T>): Promise<T> {
+  // `while`, not `if`: releasing a slot resolves a waiter, but that waiter
+  // only resumes on a later microtask. A caller arriving in between would see
+  // the already-decremented count, pass the check, and take the slot — so both
+  // proceed and the limit is breached. Re-checking on wake closes that race.
+  while (activeLiveFetches >= LIVE_FETCH_CONCURRENCY) {
+    await new Promise<void>((resolve) => liveFetchQueue.push(resolve));
+  }
+  activeLiveFetches++;
+  try {
+    return await fn();
+  } finally {
+    activeLiveFetches--;
+    liveFetchQueue.shift()?.();
+  }
+}
+
 /** Fetch JSON from `url`, honoring the cache/fixture/offline rules above.
  *
  *  `acceptNonOkJson` opts into "a non-2xx response carrying a parseable JSON
@@ -126,7 +158,7 @@ export async function fetchCached(
   if (cached) return cached.body;
 
   try {
-    const body = await fetchWithRetry(url, headers, acceptNonOkJson);
+    const body = await withLiveFetchGate(() => fetchWithRetry(url, headers, acceptNonOkJson));
     writeEntry(url, body);
     return body;
   } catch (err) {
