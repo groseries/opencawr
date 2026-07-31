@@ -5,14 +5,19 @@ import {
   MIN_WEIBULL_POINTS,
   RATIO_AGES,
   SURVIVAL_AGES,
+  MAX_RELATIVE_SLOPE_SE,
+  MIN_ODOMETER_RATE_AGES,
   NATIONAL_ANCHOR_MILES,
-  aggregateHazardRatio,
+  ODOMETER_RATE_AGES,
   bodyClassFor,
   chooseBasis,
-  computeHazardRatioPoints,
   computeLeakageCeiling,
+  computeRateRatio,
   cumulativeSurvival,
+  fitLeakSeparatedHazard,
   fitWeibull,
+  fleetExitHazardByAge,
+  isHazardFitUsable,
   isLevelUsable,
   leakageCorrect,
   medianAgeFromWeibull,
@@ -276,110 +281,205 @@ describe("bodyClassFor (Step 7 body -> national anchor mapping)", () => {
   });
 });
 
-describe("Step 6.5 ratio-based hazard scaling (the per-model fix)", () => {
+describe("Step 6.5 leak-separating hazard regression (the per-model fix)", () => {
   // Real fleet fit from the full-corpus run this fix was validated against:
-  // k~4.2, and a representative mid-life fleet 2-year retention ~0.86
-  // (h_fleet = -ln(0.86) ~= 0.1508). Reference per-model retention ratios
-  // measured directly against fleet at matched ages (model retention /
-  // fleet retention): Toyota Corolla 1.039 (most durable end of the
-  // spread), Chevy Malibu 0.859 (least durable end).
+  // k~4.2, fleet median age ~18. The reference hazard ratios are the fitted
+  // slopes measured on the real corpus: Toyota Highlander 0.424 (most
+  // durable), Chevy Equinox 3.292 (least durable).
   const FLEET_K = 4.2;
-  const FLEET_RETENTION_MID_LIFE = 0.86;
   const FLEET_MEDIAN_AGE = 18;
 
-  describe("computeHazardRatioPoints", () => {
-    const fleetRetentionByAge = new Map<number, number>([
-      [6, 0.9],
-      [10, 0.86],
-      [14, 0.8],
-    ]);
+  /** Real measured fleet retention at a spread of ages, and the measured
+   *  crash-consistent ceiling. `m_fleet` at age 4 is crash-only. */
+  const FLEET_RETENTION = new Map<number, number>([
+    [4, 0.9016],
+    [8, 0.8869],
+    [12, 0.8276],
+    [16, 0.7804],
+    [20, 0.7618],
+  ]);
+  const L = 0.9293;
 
-    it("keeps an age when the model clears MIN_VINS_PER_AGE and both sides are positive", () => {
-      const modelRetentions: AgeRetention[] = [{ age: 10, n2023: 500, retention: 0.9 }];
-      const points = computeHazardRatioPoints(modelRetentions, fleetRetentionByAge, MIN_VINS_PER_AGE);
-      expect(points).toEqual([{ age: 10, rho: 0.9 / 0.86, weight: 500 }]);
+  describe("fleetExitHazardByAge", () => {
+    it("subtracts the fleet's own leak hazard from the total measured hazard", () => {
+      const m = fleetExitHazardByAge(FLEET_RETENTION, L);
+      // -ln(0.8276) - -ln(0.9293) = 0.18921 - 0.07333
+      expect(m.get(12)!).toBeCloseTo(0.1159, 4);
     });
 
-    it("drops an age when the model's 2023-cohort VIN count is below the threshold", () => {
-      const modelRetentions: AgeRetention[] = [{ age: 10, n2023: 199, retention: 0.9 }];
-      expect(computeHazardRatioPoints(modelRetentions, fleetRetentionByAge, 200)).toEqual([]);
+    it("is the same decomposition Step 2's leakageCorrect performs", () => {
+      // Dividing retention by L is subtracting -ln(L) in hazard terms, so
+      // the exit hazard must equal -ln(leakage-corrected retention).
+      const m = fleetExitHazardByAge(FLEET_RETENTION, L);
+      for (const [age, retention] of FLEET_RETENTION) {
+        if (!m.has(age)) continue;
+        expect(m.get(age)!).toBeCloseTo(-Math.log(leakageCorrect(retention, L)), 10);
+      }
     });
 
-    it("drops an age when the model's retention is non-positive (a collapsed/degenerate age)", () => {
-      const modelRetentions: AgeRetention[] = [{ age: 10, n2023: 500, retention: 0 }];
-      expect(computeHazardRatioPoints(modelRetentions, fleetRetentionByAge, MIN_VINS_PER_AGE)).toEqual([]);
+    it("rises steeply with age — the leak is 70.8% of measured hazard at age 4 and 27.0% at age 20", () => {
+      const m = fleetExitHazardByAge(FLEET_RETENTION, L);
+      const leakShare = (age: number) =>
+        -Math.log(L) / -Math.log(FLEET_RETENTION.get(age)!);
+      expect(leakShare(4)).toBeCloseTo(0.708, 3);
+      expect(leakShare(20)).toBeCloseTo(0.27, 2);
+      // This is exactly why the rejected ratio estimator misranked: at age 4
+      // its c is a ratio of two numbers that are ~71% leakage.
+      expect(m.get(20)!).toBeGreaterThan(m.get(4)! * 5);
     });
 
-    it("drops an age the fleet map has no entry for", () => {
-      const modelRetentions: AgeRetention[] = [{ age: 99, n2023: 500, retention: 0.9 }];
-      expect(computeHazardRatioPoints(modelRetentions, fleetRetentionByAge, MIN_VINS_PER_AGE)).toEqual([]);
-    });
-
-    it("keeps only the ages that pass, from a mixed batch", () => {
-      const modelRetentions: AgeRetention[] = [
-        { age: 6, n2023: 500, retention: 0.92 },
-        { age: 10, n2023: 50, retention: 0.9 }, // too thin
-        { age: 14, n2023: 500, retention: 0.7 },
-      ];
-      const points = computeHazardRatioPoints(modelRetentions, fleetRetentionByAge, MIN_VINS_PER_AGE);
-      expect(points.map((p) => p.age)).toEqual([6, 14]);
+    it("drops an age with no measurable exit at all (corrected retention at/above 1)", () => {
+      expect(fleetExitHazardByAge(new Map([[4, 0.99]]), L).has(4)).toBe(false);
     });
   });
 
-  describe("aggregateHazardRatio", () => {
-    it("Corolla worked example: rho~1.039 -> c~0.746 (below-fleet hazard, longer life)", () => {
-      const fleetRetentionByAge = new Map([[10, FLEET_RETENTION_MID_LIFE]]);
-      const points = [{ age: 10, rho: 1.039, weight: 1000 }];
-      const c = aggregateHazardRatio(points, fleetRetentionByAge);
-      expect(c).not.toBeNull();
-      expect(c!).toBeCloseTo(0.7463, 3);
+  describe("fitLeakSeparatedHazard", () => {
+    const fleetExit = fleetExitHazardByAge(FLEET_RETENTION, L);
+    const ages = [...fleetExit.keys()];
+
+    /** Builds a model whose hazard is exactly `leak + c * m_fleet(age)`. */
+    function synthetic(c: number, leak: number, n = 1000): AgeRetention[] {
+      return ages.map((age) => ({
+        age,
+        n2023: n,
+        retention: Math.exp(-(leak + c * fleetExit.get(age)!)),
+      }));
+    }
+
+    it("recovers a known slope and intercept exactly from a synthetic model", () => {
+      const fit = fitLeakSeparatedHazard(synthetic(0.424, 0.0918), fleetExit, MIN_VINS_PER_AGE);
+      expect(fit).not.toBeNull();
+      expect(fit!.c).toBeCloseTo(0.424, 6);
+      expect(fit!.leak).toBeCloseTo(0.0918, 6);
+      expect(fit!.r2).toBeCloseTo(1, 6);
     });
 
-    it("Malibu worked example: rho~0.859 -> c~2.007 (above-fleet hazard, shorter life)", () => {
-      const fleetRetentionByAge = new Map([[10, FLEET_RETENTION_MID_LIFE]]);
-      const points = [{ age: 10, rho: 0.859, weight: 1000 }];
-      const c = aggregateHazardRatio(points, fleetRetentionByAge);
-      expect(c).not.toBeNull();
-      expect(c!).toBeCloseTo(2.0077, 3);
+    it("separates durability from leak: two models with the SAME slope and different leaks both recover c", () => {
+      // This is the whole point of the fix. The rejected estimator divided
+      // total hazard by total hazard, so a model that merely LEAKS more
+      // (Camry at 2.02x the fleet leak) read as less durable. Here the leak
+      // lands in the intercept and leaves the slope alone.
+      const lowLeak = fitLeakSeparatedHazard(synthetic(0.7, 0.006), fleetExit, MIN_VINS_PER_AGE);
+      const highLeak = fitLeakSeparatedHazard(synthetic(0.7, 0.172), fleetExit, MIN_VINS_PER_AGE);
+      expect(lowLeak!.c).toBeCloseTo(0.7, 6);
+      expect(highLeak!.c).toBeCloseTo(0.7, 6);
+      expect(highLeak!.leak - lowLeak!.leak).toBeCloseTo(0.166, 6);
     });
 
-    it("weights the aggregate by each age's sample size", () => {
-      const fleetRetentionByAge = new Map([
-        [6, FLEET_RETENTION_MID_LIFE],
-        [10, FLEET_RETENTION_MID_LIFE],
+    it("drops ages below MIN_VINS_PER_AGE, and returns null once too few remain", () => {
+      const thin = synthetic(0.7, 0.05).map((r, i) =>
+        i < 2 ? { ...r, n2023: MIN_VINS_PER_AGE - 1 } : r,
+      );
+      expect(fitLeakSeparatedHazard(thin, fleetExit, MIN_VINS_PER_AGE)).toBeNull();
+      expect(fitLeakSeparatedHazard(synthetic(0.7, 0.05), fleetExit, MIN_VINS_PER_AGE)!.n).toBe(
+        ages.length,
+      );
+    });
+
+    it("returns null when fewer than MIN_WEIBULL_POINTS ages survive", () => {
+      const few = synthetic(0.7, 0.05).slice(0, MIN_WEIBULL_POINTS - 1);
+      expect(fitLeakSeparatedHazard(few, fleetExit, MIN_VINS_PER_AGE)).toBeNull();
+    });
+
+    it("returns null when the fleet regressor never varies (no slope is identified)", () => {
+      const flat = new Map(ages.map((age) => [age, 0.1]));
+      expect(fitLeakSeparatedHazard(synthetic(0.7, 0.05), flat, MIN_VINS_PER_AGE)).toBeNull();
+    });
+  });
+
+  describe("isHazardFitUsable — the guard that refuses to derive an unmeasurable nameplate", () => {
+    const base = { c: 1, leak: 0.07, seC: 0.1, r2: 0.9, n: 9 };
+
+    it("accepts a precisely-fitted slope (Corolla measured 0.725 +/- 0.080, 11%)", () => {
+      expect(isHazardFitUsable({ ...base, c: 0.725, seC: 0.08 })).toBe(true);
+    });
+
+    it("rejects Fiat 500's real fit (c = 1.123 +/- 0.740, 66% relative error)", () => {
+      expect(isHazardFitUsable({ ...base, c: 1.123, seC: 0.74 })).toBe(false);
+    });
+
+    it("rejects a non-positive slope, and null", () => {
+      expect(isHazardFitUsable({ ...base, c: -0.2, seC: 0.01 })).toBe(false);
+      expect(isHazardFitUsable(null)).toBe(false);
+    });
+
+    it("cuts exactly at MAX_RELATIVE_SLOPE_SE", () => {
+      expect(isHazardFitUsable({ ...base, c: 1, seC: MAX_RELATIVE_SLOPE_SE })).toBe(true);
+      expect(isHazardFitUsable({ ...base, c: 1, seC: MAX_RELATIVE_SLOPE_SE + 1e-9 })).toBe(false);
+    });
+  });
+
+  describe("computeRateRatio (Step 7's mileage half)", () => {
+    // Real measured private-registration medians, fleet vs Fiat 500.
+    const fleetOdo = new Map<number, number>([
+      [6, 62300],
+      [8, 84262],
+      [10, 103795],
+      [12, 116917],
+      [14, 130994],
+      [16, 134278],
+    ]);
+
+    it("is 1 for a model matching the fleet at every age", () => {
+      expect(computeRateRatio(fleetOdo, fleetOdo)!.ratio).toBeCloseTo(1, 10);
+    });
+
+    it("measures Fiat 500 well below fleet (6,243 vs 9,420 mi/yr) on the ages it has", () => {
+      const fiat = new Map<number, number>([
+        [6, 28596],
+        [8, 46576],
+        [10, 67472],
+        [12, 79306],
       ]);
-      // Two ages with the same rho -> the aggregate should equal that age's c
-      // regardless of weight split (sanity: weighting doesn't distort an
-      // already-uniform ratio).
-      const points = [
-        { age: 6, rho: 1.039, weight: 100 },
-        { age: 10, rho: 1.039, weight: 9000 },
-      ];
-      const c = aggregateHazardRatio(points, fleetRetentionByAge);
-      expect(c!).toBeCloseTo(0.7463, 3);
+      const rr = computeRateRatio(fiat, fleetOdo)!;
+      expect(rr.ratio).toBeLessThan(0.75);
+      expect(rr.ages).toEqual([6, 8, 10, 12]);
     });
 
-    it("returns null when no points are supplied", () => {
-      expect(aggregateHazardRatio([], new Map())).toBeNull();
+    it("cancels the fleet's own accumulation profile, so a young-only nameplate isn't over-rated", () => {
+      // Cars accumulate faster when young: the fleet's own implied rate falls
+      // from 10,383 mi/yr at age 6 to 8,392 at age 16. A model that tracks
+      // the fleet exactly but is only observed young must still read 1.0 —
+      // which is what taking the ratio age-for-age buys.
+      const youngOnly = new Map([
+        [6, fleetOdo.get(6)!],
+        [8, fleetOdo.get(8)!],
+      ]);
+      expect(computeRateRatio(youngOnly, fleetOdo)!.ratio).toBeCloseTo(1, 10);
     });
 
-    it("returns null when every point's fleet retention is missing", () => {
-      const points = [{ age: 10, rho: 1.0, weight: 500 }];
-      expect(aggregateHazardRatio(points, new Map())).toBeNull();
+    it("returns null below MIN_ODOMETER_RATE_AGES shared ages", () => {
+      expect(computeRateRatio(new Map([[6, 60000]]), fleetOdo)).toBeNull();
+      expect(computeRateRatio(new Map(), fleetOdo)).toBeNull();
+    });
+
+    it("ignores an age either side is missing or reports as 0 (the no-rows sentinel)", () => {
+      const withHole = new Map([
+        [6, 62300],
+        [8, 0],
+        [10, 103795],
+        [99, 999999],
+      ]);
+      expect(computeRateRatio(withHole, fleetOdo)!.ages).toEqual([6, 10]);
+    });
+
+    it("only samples ODOMETER_RATE_AGES, which stop at 16", () => {
+      expect([...ODOMETER_RATE_AGES]).toEqual([6, 8, 10, 12, 14, 16]);
+      expect(MIN_ODOMETER_RATE_AGES).toBeLessThanOrEqual(ODOMETER_RATE_AGES.length);
     });
   });
 
   describe("scaleMedianAgeByHazardRatio", () => {
-    it("Corolla worked example: c~0.746, k~4.2 -> ~1.072x the fleet median age", () => {
-      const medianAge = scaleMedianAgeByHazardRatio(FLEET_MEDIAN_AGE, 0.7463, FLEET_K);
+    it("Highlander worked example: c~0.424, k~4.2 -> ~1.22x the fleet median age", () => {
+      const medianAge = scaleMedianAgeByHazardRatio(FLEET_MEDIAN_AGE, 0.424, FLEET_K);
       expect(medianAge).not.toBeNull();
-      expect(medianAge! / FLEET_MEDIAN_AGE).toBeCloseTo(1.072, 2);
+      expect(medianAge! / FLEET_MEDIAN_AGE).toBeCloseTo(1.226, 2);
     });
 
-    it("Malibu worked example: c~2.007, k~4.2 -> ~0.848x the fleet median age", () => {
-      const medianAge = scaleMedianAgeByHazardRatio(FLEET_MEDIAN_AGE, 2.0077, FLEET_K);
+    it("Equinox worked example: c~3.292, k~4.2 -> ~0.75x the fleet median age", () => {
+      const medianAge = scaleMedianAgeByHazardRatio(FLEET_MEDIAN_AGE, 3.292, FLEET_K);
       expect(medianAge).not.toBeNull();
-      expect(medianAge! / FLEET_MEDIAN_AGE).toBeCloseTo(0.848, 2);
+      expect(medianAge! / FLEET_MEDIAN_AGE).toBeCloseTo(0.754, 2);
     });
 
     it("c=1 (identical hazard to fleet) is a no-op", () => {
@@ -395,26 +495,24 @@ describe("Step 6.5 ratio-based hazard scaling (the per-model fix)", () => {
     });
   });
 
-  it("no capping, no <1 censoring needed: a model at S~1.0 raw retention still yields a finite, usable c", () => {
-    // The defect this fix addresses: the OLD absolute-curve path pinned
-    // leakage-corrected survival to exactly 1.0 for a model retaining better
-    // than the fleet ceiling, and medianAgeFromWeibull's `0 < S < 1` filter
-    // then discarded that point outright. The ratio-based path never
-    // constructs a capped survival value in the first place — a retention
-    // at/above the fleet's is just a rho slightly above 1, not an undefined
-    // boundary case.
-    const fleetRetentionByAge = new Map([[10, 0.86]]);
-    const points = computeHazardRatioPoints(
-      [{ age: 10, n2023: 1000, retention: 0.9 }], // model retention > fleet retention
-      fleetRetentionByAge,
-      MIN_VINS_PER_AGE,
-    );
-    expect(points).toHaveLength(1);
-    const c = aggregateHazardRatio(points, fleetRetentionByAge);
-    expect(c).not.toBeNull();
-    expect(Number.isFinite(c!)).toBe(true);
-    expect(c!).toBeGreaterThan(0);
-    expect(c!).toBeLessThan(1); // better-than-fleet retention -> below-fleet hazard
+  it("no capping, no <1 censoring needed: a model retaining better than the fleet ceiling still fits", () => {
+    // The defect the FIRST rejected path had: it pinned leakage-corrected
+    // survival to exactly 1.0 for a model retaining better than the fleet
+    // ceiling, and medianAgeFromWeibull's `0 < S < 1` filter then discarded
+    // that point outright — biased hardest against the most durable models.
+    // A hazard regression never constructs a capped survival value at all.
+    const fleetExit = fleetExitHazardByAge(FLEET_RETENTION, L);
+    const better: AgeRetention[] = [...fleetExit.keys()].map((age) => ({
+      age,
+      n2023: 1000,
+      // Retention above the leakage ceiling at every age.
+      retention: Math.min(0.99, Math.exp(-0.3 * fleetExit.get(age)!)),
+    }));
+    const fit = fitLeakSeparatedHazard(better, fleetExit, MIN_VINS_PER_AGE);
+    expect(fit).not.toBeNull();
+    expect(isHazardFitUsable(fit)).toBe(true);
+    expect(fit!.c).toBeGreaterThan(0);
+    expect(fit!.c).toBeLessThan(1); // better-than-fleet retention -> below-fleet hazard
   });
 });
 
@@ -423,11 +521,13 @@ describe("Step 8 coverage fallback (chooseBasis / isLevelUsable)", () => {
     medianAge: 18,
     r2: 0.95,
     usablePoints: 9,
+    fit: { c: 0.9, leak: 0.07, seC: 0.05, r2: 0.95, n: 9 },
   };
   const unusable: LevelResult = {
     medianAge: null,
     r2: null,
     usablePoints: 0,
+    fit: null,
   };
 
   it("prefers the nameplate level when it's usable", () => {

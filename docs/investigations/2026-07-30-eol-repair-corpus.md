@@ -8,6 +8,16 @@ result — 1.0 everywhere). `eol_maintained_miles` is **NOT written**; the deriv
 validated and committed, but its corpus output is not shippable and the reason is a real finding
 rather than a bug.
 
+> **PARTLY SUPERSEDED 2026-07-31 — read `2026-07-31-eol-leak-correction.md` alongside this file.**
+> Part 1 (`repair_cost_multiplier_by_make`) and the fleet-half validation below still stand
+> unchanged. **Part 2's diagnosis does not.** The ranking failure was attributed here to
+> left-truncation and declared unfixable short of waiting for a 2027 endpoint; measurement on
+> 2026-07-31 showed the actual cause is that this method's own premise — "the leakage term is
+> model-independent and cancels exactly in the ratio" — is false by a factor of ~27, and is
+> amplified at young ages where 71% of the measured hazard is leak. Fitting each model its own leak
+> fixes the ranking, and `eol_maintained_miles` **has now been written**. Treat Part 2's
+> "Recommendation" and "Why the output is not shipped" sections as historical.
+
 ---
 
 ## Part 1 — `repair_cost_multiplier_by_make`: shipped, 1.0 everywhere
