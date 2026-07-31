@@ -82,10 +82,18 @@ function sliceWhere(
   modelYear: number,
   calendarYear: number,
 ): string {
-  const modelList = modelNames.map((m) => soqlString(m.toUpperCase())).join(",");
+  // An EMPTY `modelNames` means "every model this make sells" — the
+  // `model_name` filter is omitted entirely rather than emitting `in()`,
+  // which is a SoQL syntax error. This is what the derivation's make-level
+  // fallback (Level 2) needs for vehicles whose own nameplate has too little
+  // history to fit a survival curve; see derive-eol.ts's module docstring.
+  const modelFilter =
+    modelNames.length === 0
+      ? ""
+      : ` AND model_name in(${modelNames.map((m) => soqlString(m.toUpperCase())).join(",")})`;
   return (
-    `make_code=${soqlString(makeCode.toUpperCase())} AND model_name in(${modelList}) ` +
-    `AND model_year=${modelYear} AND inspection_date between ` +
+    `make_code=${soqlString(makeCode.toUpperCase())}${modelFilter}` +
+    ` AND model_year=${modelYear} AND inspection_date between ` +
     `'${calendarYear}-01-01T00:00:00' and '${calendarYear}-12-31T23:59:59'`
   );
 }
