@@ -1,0 +1,9 @@
+{
+  "url": "https://data.ny.gov/resource/vezn-fmmk.json?%24select=count%28distinct+vin%29+as+n&%24where=make_code%3D%27TOYOT%27+AND+model_name+in%28%27CAMRY%27%29+AND+model_year%3D2013+AND+inspection_date+between+%272023-01-01T00%3A00%3A00%27+and+%272023-12-31T23%3A59%3A59%27",
+  "fetchedAt": "2026-07-31T00:40:29.919Z",
+  "body": [
+    {
+      "n": "6747"
+    }
+  ]
+}
