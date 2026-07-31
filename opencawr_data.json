@@ -4,10 +4,10 @@
   "generated": "2026-07",
   "seed_vehicles": 71,
   "basis": "drive-to-death lifetime cost per mile; user profile: 13k mi/yr, USAA active-duty, Florida reg, Fresno CA garaging",
-  "provenance_note": "Established vehicles use hand-curated curves anchored to real cars.com/iSeeCars pulls + owner-reported longevity. Reliability tiers were RE-DERIVED 2026-07-29 from NHTSA complaint data alone (public domain, keyless) per docs/reliability-methodology.md — spec §9's Consumer Reports launch gate is cleared for the seed set; no CR, CarComplaints or RepairPal data is used. The 2 'sport' rows are an owner carve-out and are never derived. The derivation is a coarse ordering built on complaint mix, not a measured defect rate — read the methodology's 'Known limitations'. Vehicles in 'proxied' were estimated from segment peers (no used history).",
+  "provenance_note": "Established vehicles use hand-curated price-vs-odometer curves anchored to real cars.com/iSeeCars pulls. Reliability tiers were RE-DERIVED 2026-07-29 from NHTSA complaint data alone (public domain, keyless) per docs/reliability-methodology.md. eol_maintained_miles was RE-DERIVED 2026-07-31 from New York State DMV vehicle-inspection data (public, keyless, no licence conditions) per docs/eol-methodology.md, replacing the lost prototype's 'iSeeCars empirical × 1.30 maintained bonus' longevity judgment — no field here derives from iSeeCars any more. repair_cost_multiplier_by_make is 1.0 for every non-'sport' row, a deliberate negative result: no public per-make repair-cost source exists. With all three re-derived, spec §9 clause 1 (Consumer Reports) is CLOSED for the seed set and no CR, CarComplaints or RepairPal data is used anywhere; clause 2 (scraped listing data) still governs the price curves above and remains OPEN. The 2 'sport' rows are an owner carve-out and are never derived. Both derivations are coarse and carry real limitations — the reliability tier is complaint MIX, not a measured defect rate, and eol_maintained_miles mixes durability with NY owner mileage by design and is a single-state sample; read each methodology's 'Known limitations' before quoting a number. Vehicles in 'proxied' were estimated from segment peers (no used history).",
   "reference_engine": {
    "note": "model_output regenerated from @opencawr/core (v2b model per ASSUMPTIONS.md); prototype's original numbers preserved in model_output_prototype",
-   "generated": "2026-07-27",
+   "generated": "2026-07-31",
    "draws": 1100,
    "seed": 42
   }
