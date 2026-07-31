@@ -121,6 +121,17 @@ body {
   top: 16px;
 }
 
+/* Below 860px the rail stacks above the content in a single column (see
+   .layout above) — sticky there makes it float over the content as the page
+   scrolls instead of sitting above it. This rule must stay after the base
+   .rail rule above: same specificity, so source order decides, and a copy
+   left inside the earlier @media block above would silently lose. */
+@media (max-width: 860px) {
+  .rail {
+    position: static;
+  }
+}
+
 .assumptions {
   background: var(--panel);
   border: 1px solid var(--rule);
@@ -242,6 +253,15 @@ body {
 }
 
 /* ── ranking ──────────────────────────────── */
+.results {
+  /* Grid items default to min-width: auto, which sizes the track to the
+     min-content of all descendants (long unbroken inline-code tokens in the
+     Assumptions tab markdown, wide tables, etc.) unless overridden — that
+     dragged the whole page wider than the viewport on narrow screens even
+     though the individual overflow-x:auto wrappers below were in place. */
+  min-width: 0;
+}
+
 .results-head {
   display: flex;
   align-items: baseline;
@@ -301,14 +321,40 @@ body {
   padding: 8px 14px;
 }
 
+/* The rank-basis labels ("expected cost (P50)", "protects against bad luck
+   (P75)") are long enough that .seg's shared white-space: nowrap keeps this
+   strip ~400px wide unconditionally — wider than a phone viewport. Stack it
+   instead of trying to shrink text that can't shrink. */
+@media (max-width: 720px) {
+  .rank-basis-strip {
+    flex-direction: column;
+  }
+
+  .rank-basis-strip .seg {
+    white-space: normal;
+    text-align: left;
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .rank-basis-strip .seg:last-child {
+    border-bottom: 0;
+  }
+}
+
 .loading {
   padding: 48px 0;
   color: var(--muted);
   font-family: var(--font-mono);
 }
 
+.ranking-wrap {
+  overflow-x: auto;
+}
+
 .ranking {
   width: 100%;
+  min-width: 720px;
   border-collapse: collapse;
 }
 
@@ -770,6 +816,7 @@ th.num {
 .heatmap-svg {
   display: block;
   max-width: 100%;
+  min-width: 420px;
   height: auto;
 }
 
@@ -1095,6 +1142,7 @@ th.num {
 
 .md p {
   margin: 8px 0;
+  overflow-wrap: anywhere;
 }
 
 .md ul,
@@ -1104,6 +1152,7 @@ th.num {
 
 .md li {
   margin: 4px 0;
+  overflow-wrap: anywhere;
 }
 
 .md pre {

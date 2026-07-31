@@ -254,6 +254,7 @@ export function App() {
             ) : view === "ladder" ? (
               <Ladder rows={rows} basis={rankBasis} dimmed={dimmed} onOpenCar={setDrawerCar} />
             ) : (
+            <div className="ranking-wrap">
             <table className="ranking">
               <thead>
                 <tr>
@@ -371,6 +372,7 @@ export function App() {
                 })}
               </tbody>
             </table>
+            </div>
             ))}
           <div style={{ display: tab === "analyze" ? "block" : "none" }}>
             {rows ? (
