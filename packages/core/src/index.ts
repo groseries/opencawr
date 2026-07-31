@@ -8,13 +8,16 @@ export {
   feasibleOdoRange,
 } from "./feasibility.js";
 export { curveAt, maintenanceAt, parseCurve } from "./curves.js";
-export { buyPointSweep } from "./buypoint.js";
+export { buyPointSweep, feasibleSweepOdoRange, priceAtSweetSpot } from "./buypoint.js";
 export type {
   BuyPointSweepPoint,
   BuyPointSweepResult,
   BuyPointSweepOpts,
   SweepInputs,
+  SweetSpotPricing,
 } from "./buypoint.js";
+export { modelYearRank } from "./modelyear.js";
+export type { ModelYearRankPoint, ModelYearRankResult } from "./modelyear.js";
 export type { CurvePoint } from "./curves.js";
 export { CALIBRATION } from "./calibration.js";
 export { Rng, hashString } from "./rng.js";
@@ -29,4 +32,5 @@ export type {
   ReliabilityTierName,
   ReliabilityTier,
   Provenance,
+  ModelYearDetail,
 } from "./types.js";

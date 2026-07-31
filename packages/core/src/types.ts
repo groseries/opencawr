@@ -29,6 +29,25 @@ export interface BatterySpec {
   cost_sigma: number;
 }
 
+/** One model year's descriptive facts (R2) — see `Vehicle.model_year_detail`. */
+export interface ModelYearDetail {
+  /** e.g. "2.5L I4, Automatic (AM-S8), FWD" — EPA fueleconomy.gov-sourced
+   *  displacement/cylinders/transmission/drive, `null` if EPA had no data
+   *  for this make/model/year. */
+  drivetrain: string | null;
+  /** Proxy signal only — a year-over-year change in the EPA drivetrain
+   *  descriptor or VClass. NOT a confirmed styling refresh/facelift; EPA
+   *  data carries no styling signal at all. */
+  specChangeFromPriorYear: boolean;
+  /** Most-reported NHTSA complaint top-level category for this model year
+   *  (e.g. "ENGINE"), pooled the same way as the reliability-tier derivation.
+   *  `null` outside that derivation's query window or with zero complaints. */
+  topComplaintCategory: string | null;
+  /** That category's share of this year's complaints, in [0, 1]. `null` iff
+   *  `topComplaintCategory` is `null`. */
+  topComplaintShare: number | null;
+}
+
 export interface Vehicle {
   name: string;
   make: string;
@@ -46,6 +65,12 @@ export interface Vehicle {
   maintenance_usd_per_yr_by_age: Record<string, number>;
   repair_cost_multiplier_by_make: number;
   model_year_reliability: { bad: number[]; caution: number[]; good: number[] };
+  /** Per-model-year facts (R2), never read by the cost engine — purely
+   *  descriptive, so adding/populating this touches no reference output.
+   *  Keyed by model year; a year with no data (outside the pipeline's query
+   *  window, or an EPA/NHTSA lookup gap) is simply absent. See
+   *  docs/model-year-detail-methodology.md. */
+  model_year_detail?: Record<string, ModelYearDetail>;
   /** Present on ev/phev/hybrid vehicles (data-driven battery risk). */
   battery?: BatterySpec;
   maintenance_curve_shared_with?: string[];
@@ -161,4 +186,30 @@ export interface EngineResult {
   impliedBuyYear: number;
   feasible: boolean;
   medianSellOdo: number;
+  /** Reporting column only — the median TOTAL dollars this car costs over the miles it is
+   *  held, and the median miles that total spans. Nothing downstream of the $/mi depends on
+   *  it; it is the same simulation reported in dollars instead of $/mi.
+   *
+   *  `lifetimeCostUsdP50` is its OWN quantile over the per-draw dollar totals
+   *  (`cpm[i] * miles_i`), NOT `p50 * lifetimeMilesP50`. Each draw samples its own
+   *  end-of-life, so `miles` varies draw to draw, and the median of a ratio is not the
+   *  ratio of medians — the two agree only when miles are effectively constant (a fixed
+   *  hold well inside every draw's life), and diverge at `holdMiles: "eol"`.
+   *
+   *  The miles are reported alongside because at `"eol"` two cars' totals span different
+   *  lifespans and so are NOT comparable to each other in raw dollars (R10's unequal-lives
+   *  problem, in dollars rather than $/mi). */
+  lifetimeCostUsdP50: number;
+  lifetimeMilesP50: number;
+  /** Fraction of draws in [0,1] whose hold ended early because that draw's sampled
+   *  end-of-life arrived before `buyOdo + holdMiles` — i.e. how often the requested
+   *  holding period is not achievable for this car at this buy point. Always 0 at
+   *  `holdMiles: "eol"`, where selling at end of life is the definition of the hold
+   *  rather than a curtailment of it.
+   *
+   *  This is what makes `lifetimeMilesP50` fall short of the requested hold, and
+   *  (together with the varying miles it implies) what skews `lifetimeCostUsdP50`
+   *  away from `p50 × lifetimeMilesP50` — see that field's note. Reporting only;
+   *  nothing in the cost math reads it. */
+  truncatedDrawFraction: number;
 }

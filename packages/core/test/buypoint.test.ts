@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { buyPointSweep } from "../src/buypoint.js";
+import { buyPointSweep, priceAtSweetSpot } from "../src/buypoint.js";
 import type { SweepInputs } from "../src/buypoint.js";
+import { deriveBuyYear } from "../src/feasibility.js";
 import type { Constants, Vehicle } from "../src/types.js";
+import { loadSeedData } from "./helpers.js";
 
 /**
  * Synthetic fixture with every non-depreciation cost component zeroed out
@@ -150,7 +152,7 @@ describe("buyPointSweep", () => {
 
     const result = buyPointSweep(vehicle, constants, { holdMiles: 1_000_000 }, { step: 10_000 });
 
-    expect(result.grid).toEqual([{ odo: 0, p50: result.idealP50 }]);
+    expect(result.grid).toEqual([{ odo: 0, p50: result.idealP50, year: 2025 }]);
     expect(result.idealOdo).toBe(0);
     expect(result.upperOdo).toBeNull();
   });
@@ -192,7 +194,9 @@ describe("buyPointSweep", () => {
 
     const result = buyPointSweep(vehicle, constants, { holdMiles: 1_000_000 }, { step: 10_000 });
 
-    expect(result.grid).toEqual([{ odo: 20_000, p50: result.idealP50 }]);
+    // 20,000 mi at 10,000 mi/yr implies model year 2023 — the oldest this
+    // (2023-2025) car can be, so deriveBuyYear needs no clamping here.
+    expect(result.grid).toEqual([{ odo: 20_000, p50: result.idealP50, year: 2023 }]);
     expect(result.idealOdo).toBe(20_000);
     expect(result.upperOdo).toBeNull();
   });
@@ -227,7 +231,9 @@ describe("buyPointSweep", () => {
       { step: 10_000 },
     );
 
-    expect(result.grid).toEqual([{ odo: 50_000, p50: result.idealP50 }]);
+    // 50,000 mi at 20,000 mi/yr implies 2022.5 -> 2023, past this car's last
+    // production year, so deriveBuyYear clamps the point's year to 2020.
+    expect(result.grid).toEqual([{ odo: 50_000, p50: result.idealP50, year: 2020 }]);
     expect(result.idealOdo).toBe(50_000);
     expect(result.upperOdo).toBeNull();
   });
@@ -247,6 +253,61 @@ describe("buyPointSweep", () => {
     ).toThrow(/numeric holdMiles/);
   });
 
+  it("every grid point carries its implied model year, and idealYear is the ideal point's own", () => {
+    // The year on each point is what lets modelYearRank be a view of THIS grid
+    // rather than a second optimization — it must be deriveBuyYear's answer for
+    // that point's odometer, not re-derived arithmetic.
+    const vehicle = makeVehicle(); // 2020-2025, am 10,000, now_year 2025
+    const constants = makeConstants();
+
+    const result = buyPointSweep(vehicle, constants, { holdMiles: 1_000_000 }, { step: 10_000 });
+
+    for (const p of result.grid) {
+      expect(p.year).toBe(deriveBuyYear(vehicle, p.odo, 10_000, 2025));
+    }
+    expect(result.grid.map((p) => p.year)).toEqual([2025, 2024, 2023, 2022, 2021, 2020]);
+    const ideal = result.grid.find((p) => p.odo === result.idealOdo)!;
+    expect(result.idealYear).toBe(ideal.year);
+  });
+
+  it("keepRowDraws is off by default and, when on, retains only the model-year view's own points", () => {
+    // The Rankings path must not pay for draws it never reads, and the model-year
+    // path must not hold the whole grid's draws to get tie tiers (R15). The
+    // retained set is the year-band winners plus the grid's two ends — never one
+    // array per grid point.
+    const vehicle = makeVehicle({
+      // 6 model years, an 11-point grid: the two counts are far enough apart that
+      // "one per year" and "one per grid point" cannot be confused.
+      eol_maintained_miles: 1_000_000,
+      price_vs_odometer_usd: { "0": 50_000, "50000": 20_000 },
+    });
+    const constants = makeConstants();
+    const opts = { step: 5_000, draws: 64 };
+
+    const plain = buyPointSweep(vehicle, constants, { holdMiles: 1_000_000 }, opts);
+    expect(plain.rowDraws).toBeUndefined();
+
+    const kept = buyPointSweep(
+      vehicle,
+      constants,
+      { holdMiles: 1_000_000 },
+      { ...opts, keepRowDraws: true },
+    );
+    const years = vehicle.last_year - vehicle.first_year + 1;
+    expect(kept.grid.length).toBe(11);
+    expect(kept.rowDraws!.size).toBeLessThanOrEqual(years + 2);
+    expect(kept.rowDraws!.size).toBeLessThan(kept.grid.length);
+    // The sweet spot is always among them (it is its own band's winner), and each
+    // retained entry is that point's full draw vector.
+    expect(kept.rowDraws!.get(kept.idealOdo)!.length).toBe(64);
+    for (const odo of kept.rowDraws!.keys()) {
+      expect(kept.grid.some((p) => p.odo === odo)).toBe(true);
+    }
+    // Retaining draws must not change the sweep itself.
+    expect(kept.grid.map((p) => p.p50)).toEqual(plain.grid.map((p) => p.p50));
+    expect(kept.idealOdo).toBe(plain.idealOdo);
+  });
+
   it("uses the rail's own numeric holding period, not a fixed default", () => {
     // A price curve with real variation (not the flat single-point fixture
     // above) so a different holdMiles genuinely reprices every grid point —
@@ -262,5 +323,65 @@ describe("buyPointSweep", () => {
     const long = buyPointSweep(vehicle, constants, { holdMiles: 80_000 }, { step: 10_000 });
 
     expect(short.grid.map((p) => p.p50)).not.toEqual(long.grid.map((p) => p.p50));
+  });
+});
+
+/**
+ * THE invariant the Rankings row exists on: at a fixed hold, the buy point a row
+ * DISPLAYS and the buy point its money is PRICED AT are the same point. Until
+ * 2026-07-30 they were not — the row showed the sweep's sweet spot beside money
+ * priced at `vehicle.pinned_buy_odo` (68/71 seed vehicles disagreed on the
+ * odometer at a 100k hold, 52/71 on the model year).
+ */
+describe("priceAtSweetSpot", () => {
+  it("prices at the sweep's own answer: same odometer, same model year", () => {
+    // Interior optimum (dip at 30k) so the sweet spot is neither grid end and a
+    // caller pricing at some default could not land on it by accident.
+    const vehicle = makeVehicle({
+      eol_maintained_miles: 1_000_000,
+      pinned_buy_odo: 12_345, // off every grid step, so the assertion below can't pass by luck
+      price_vs_odometer_usd: {
+        "0": 200_000,
+        "10000": 99_000,
+        "20000": 101_920,
+        "30000": 106_700,
+        "40000": 97_920,
+        "50000": 142_500,
+      },
+    });
+    const constants = makeConstants();
+
+    for (const opts of [{}, { step: 10_000 }, { step: 2_500 }]) {
+      const { sweep, priced } = priceAtSweetSpot(vehicle, constants, { holdMiles: 1_000_000 }, opts);
+      expect(priced.buyOdo).toBe(sweep.idealOdo);
+      expect(priced.impliedBuyYear).toBe(sweep.idealYear);
+      expect(priced.buyOdo).not.toBe(vehicle.pinned_buy_odo); // not the old default
+    }
+  });
+
+  it("refuses an open-ended horizon (R10), same runtime backstop as the sweep", () => {
+    expect(() =>
+      priceAtSweetSpot(makeVehicle(), makeConstants(), {
+        holdMiles: "eol",
+      } as unknown as SweepInputs),
+    ).toThrow(/numeric holdMiles/);
+  });
+
+  it("the whole seed field, at the app's own hold and grid step: every car's displayed buy point IS its priced buy point", () => {
+    // Field-wide, at the real data and the production calibration — the
+    // browser-visible claim ("this model year, at this mileage, costs this
+    // much") reduced to an assertion. A regression here means a Rankings row is
+    // once again describing one buy point while quoting another's price.
+    const { constants, vehicles } = loadSeedData();
+    for (const v of vehicles) {
+      const { sweep, priced } = priceAtSweetSpot(v, constants, {
+        holdMiles: 100_000,
+        annualMiles: 13_000,
+        draws: 200, // the invariant is structural; draws only set the price's precision
+        seed: 42,
+      });
+      expect(priced.buyOdo, v.name).toBe(sweep.idealOdo);
+      expect(priced.impliedBuyYear, v.name).toBe(sweep.idealYear);
+    }
   });
 });
