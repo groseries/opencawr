@@ -52,7 +52,8 @@ buy-point sweep's argmin between adjacent grid points, `upperOdo`'s tolerance wa
 accurate to about one grid step" caveat in `ASSUMPTIONS.md` §B is likely the same root cause),
 and the Rankings tie tiers.
 
-**R20. Resale is a hard cliff at EOL, not a smooth approach to scrap — SHIPPED 2026-07-31.**
+**R20. Resale is a hard cliff at EOL, not a smooth approach to scrap — SHIPPED 2026-07-31,
+`acab1d2`.**
 *(Found diagnosing why "hold to a fixed mileage" reports as cheaper than "drive until it dies" —
 same investigation thread as R16.)* `packages/core/src/engine.ts`:
 `const resale = sell >= eol ? scrap : Math.max(curveAt(priceCurve, sell, scrap), scrap);` was a
