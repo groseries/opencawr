@@ -1,0 +1,10 @@
+{
+  "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2022&make=Honda&model=CR-V+AWD",
+  "fetchedAt": "2026-07-30T14:36:54.952Z",
+  "body": {
+    "menuItem": {
+      "text": "Auto (variable gear ratios), 4 cyl, 1.5 L, Turbo",
+      "value": "44434"
+    }
+  }
+}

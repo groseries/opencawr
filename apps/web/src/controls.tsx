@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { EngineInputs } from "@opencawr/core";
 import opencawrData from "../../../opencawr_data.json";
+import { HORIZONS } from "./horizons.js";
 
 /** The engine's own registration default (engine.ts reads the same constant), rather
  * than a literal that would silently go stale if the data changed. `DEFAULTS` below
@@ -24,12 +25,10 @@ export const DEFAULTS: EngineInputs = {
   seed: 42,
 };
 
-export const HORIZONS: { label: string; value: number | "eol" }[] = [
-  { label: "50k", value: 50_000 },
-  { label: "100k", value: 100_000 },
-  { label: "150k", value: 150_000 },
-  { label: "until it dies", value: "eol" },
-];
+// Moved to its own React-free module so engine.worker.ts can share the same
+// list without bundling React; re-exported here so existing importers of
+// `controls.js`'s HORIZONS keep working unchanged.
+export { HORIZONS };
 
 interface Props {
   inputs: EngineInputs;

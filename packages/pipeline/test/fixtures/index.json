@@ -432,7 +432,7 @@
   {
     "hash": "d75780fceec4bc16",
     "url": "https://api.nhtsa.gov/complaints/complaintsByVehicle?make=VOLVO&model=XC90&modelYear=2017",
-    "note": "NHTSA complaintsByVehicle: bare 'XC90' 2017 \u2014 the single model string the pre-catalogue pipeline used. NHTSA does not list it for that year and answers HTTP 400 with count 0."
+    "note": "NHTSA complaintsByVehicle: bare 'XC90' 2017 — the single model string the pre-catalogue pipeline used. NHTSA does not list it for that year and answers HTTP 400 with count 0."
   },
   {
     "hash": "ea5ccd8ffbd9a382",
@@ -528,5 +528,25 @@
     "hash": "6904b60bd1384325",
     "url": "https://api.nhtsa.gov/products/vehicle/models?modelYear=2022&make=VOLVO&issueType=c",
     "note": "NHTSA model catalogue: Volvo 2022"
+  },
+  {
+    "hash": "8fb2fc0c9c3ac6da",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/model?year=2022&make=Honda",
+    "note": "EPA model catalogue: Honda 2022"
+  },
+  {
+    "hash": "4e186d82c2377782",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2022&make=Honda&model=CR-V",
+    "note": "EPA menu options: bare 'CR-V' 2022 — the single model string the pre-catalogue derivation used. EPA does not list it and answers a bare JSON null."
+  },
+  {
+    "hash": "3c0328e78ad38358",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=2022&make=Honda&model=CR-V+AWD",
+    "note": "EPA menu options: Honda CR-V AWD 2022"
+  },
+  {
+    "hash": "23f5619c51202a47",
+    "url": "https://www.fueleconomy.gov/ws/rest/vehicle/44434",
+    "note": "EPA vehicle detail: Honda CR-V AWD 2022 (1.5L turbo I4, AWD)"
   }
 ]

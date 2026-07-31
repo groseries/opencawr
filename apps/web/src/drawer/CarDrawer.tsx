@@ -1,9 +1,11 @@
 import { useEffect, useRef } from "react";
 import type { EngineInputs } from "@opencawr/core";
 import { useSurveyEngine } from "../useSurveyEngine.js";
+import { useModelYearRank } from "../useModelYearRank.js";
 import { Heatmap } from "../charts/Heatmap.js";
 import { Breakdown } from "../charts/Breakdown.js";
 import { Sensitivity } from "../charts/Sensitivity.js";
+import { ModelYearRanking } from "../charts/ModelYearRanking.js";
 
 const fmt = (x: number) => `$${x.toFixed(3)}`;
 // Restores the powertrain-type token dropped from the Rankings row (R4 review
@@ -34,6 +36,7 @@ export function CarDrawer({
   onClose: () => void;
 }) {
   const { result } = useSurveyEngine(inputs, vehicleName);
+  const { result: myrResult } = useModelYearRank(inputs, vehicleName);
   const panelRef = useRef<HTMLElement | null>(null);
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
   // The element that had focus before the drawer opened (the row that
@@ -131,6 +134,15 @@ export function CarDrawer({
                 buyOdoAxis={result.buyOdoAxis}
                 holdMilesAxis={result.holdMilesAxis}
               />
+            </section>
+
+            <section className="drawer-section">
+              <h3 className="drawer-section-title">Model years: which year is the best buy</h3>
+              {myrResult && myrResult.vehicleName === vehicleName ? (
+                <ModelYearRanking points={myrResult.points} byHold={myrResult.byHold} />
+              ) : (
+                <p className="results-note">Ranking model years…</p>
+              )}
             </section>
 
             <section className="drawer-section">

@@ -51,6 +51,10 @@ function menuUrl(year: number, make: string, model: string): string {
 function detailUrl(id: string): string {
   return `https://www.fueleconomy.gov/ws/rest/vehicle/${id}`;
 }
+function modelMenuUrl(year: number, make: string): string {
+  const params = new URLSearchParams({ year: String(year), make });
+  return `https://www.fueleconomy.gov/ws/rest/vehicle/menu/model?${params.toString()}`;
+}
 function complaintsUrl(make: string, model: string, modelYear: number): string {
   const params = new URLSearchParams({ make, model, modelYear: String(modelYear) });
   return `https://api.nhtsa.gov/complaints/complaintsByVehicle?${params.toString()}`;
@@ -84,6 +88,21 @@ async function main(): Promise<void> {
   await record(detailUrl("42395"), "EPA vehicle detail: Honda Fit 2020 (Automatic AV-S7)");
 
   await record(modelsForMakeUrl("Honda"), "VPIC getmodelsformake: Honda");
+
+  // --- R2 model_year_detail: EPA's model catalogue is drivetrain-fragmented.
+  // Honda MY2022 is the regression case — the catalogue lists `CR-V AWD`,
+  // `CR-V FWD` and `CR-V Hybrid AWD` and NO bare `CR-V`, so the single
+  // exact-string query the pre-catalogue derivation used gets a bare JSON
+  // `null` back (recorded below as the pin) and leaves drivetrain empty for
+  // the whole model year. See modelyear/epaCorpus.ts.
+  await record(modelMenuUrl(2022, "Honda"), "EPA model catalogue: Honda 2022");
+  await record(
+    menuUrl(2022, "Honda", "CR-V"),
+    "EPA menu options: bare 'CR-V' 2022 — the single model string the pre-catalogue " +
+      "derivation used. EPA does not list it and answers a bare JSON null.",
+  );
+  await record(menuUrl(2022, "Honda", "CR-V AWD"), "EPA menu options: Honda CR-V AWD 2022");
+  await record(detailUrl("44434"), "EPA vehicle detail: Honda CR-V AWD 2022 (1.5L turbo I4, AWD)");
 
   for (const year of [2017, 2018, 2019, 2020]) {
     await record(

@@ -38,10 +38,30 @@ export const CALIBRATION = {
    *  for trading Monte Carlo precision for speed on a many-point grid search. */
   sweepDraws: 300,
 
-  /** JUDGMENT: buy-point sweep grid step, in miles. */
-  sweepStepMiles: 10_000,
+  /** JUDGMENT: buy-point sweep grid step, in miles. 2,500 since the buy-point and
+   *  model-year answers were unified (ASSUMPTIONS.md §B): the sweep's grid is now
+   *  also the model-year panel's grid, and a model year's odometer band is only
+   *  `annualMiles` wide (~13,000 mi at the default), so the previous 10,000-mile
+   *  step gave ~1.3 samples per band — too coarse to say where inside a year the
+   *  cheapest mileage sits. 2,500 gives ~5 per band. Costs ~4x the grid points
+   *  (measured: 71-car field sweep 398 ms -> 1,510 ms in node), which is why
+   *  `handleRank`, which absorbed the sweep, yields between chunks of cars. */
+  sweepStepMiles: 2_500,
 
   /** JUDGMENT: "still worth buying" = within this fraction of the sweep's cheapest
    *  feasible P50 — sets the buy-point sweep's upper-mileage-limit tolerance. */
   worthwhileP50Tolerance: 0.05,
+
+  /** JUDGMENT (reporting only — no cost math reads it): a Rankings row states that
+   *  end of life curtails its holding period once this share of draws
+   *  (`EngineResult.truncatedDrawFraction`) sold early. The threshold-free half of
+   *  the rule needs no constant — when the MEDIAN miles fall short of the hold the
+   *  row always says so — but that fires only above 50%, which would leave the
+   *  Chevy Volt's 37%-curtailed 100k hold (median a full 100k, minority truncated,
+   *  7.3% gap between its own two displayed columns) silent. A quarter is the
+   *  smallest round "material minority" that covers it; measured over the seed
+   *  field at the app's defaults it discloses on 10/71 cars at a 50k hold, 10/71 at
+   *  100k and 46/71 at 150k, vs. 48/63/67 if any non-zero share qualified.
+   *  See ASSUMPTIONS.md §I. */
+  truncatedDrawDisclosureFraction: 0.25,
 } as const;

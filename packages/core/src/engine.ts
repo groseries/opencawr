@@ -100,6 +100,7 @@ export function costPerMile(
   const rngBatt = new Rng(base ^ 0x5555);
 
   const cpm = new Float64Array(draws);
+  const lifetimeUsd = new Float64Array(draws);
   const sums: CostBreakdown = {
     depreciation: 0,
     useTax: 0,
@@ -115,11 +116,16 @@ export function costPerMile(
   };
   const sellOdos = new Float64Array(draws);
   const useTax = taxRate * buyPrice;
+  // Draws whose hold ended early because this draw's sampled end-of-life arrived
+  // first (see `truncatedDrawFraction`). Counted from `sell`, which is already
+  // computed below — no extra RNG draw, so the substreams stay aligned.
+  let truncatedDraws = 0;
 
   for (let i = 0; i < draws; i++) {
     let eol = vehicle.eol_maintained_miles * Math.exp(sigmaEol * rngEol.normal());
     if (eol < buyOdo + am) eol = buyOdo + am; // at least a year of life
     const sell = holdMiles === "eol" ? eol : Math.min(buyOdo + holdMiles, eol);
+    if (holdMiles !== "eol" && sell < buyOdo + holdMiles) truncatedDraws++;
     sellOdos[i] = sell;
     const miles = sell - buyOdo;
     const T = miles / am;
@@ -190,6 +196,10 @@ export function costPerMile(
       (dep + useTax + maintPV + insPV + regPV + lossPV + repairPV + battPV + tires) / miles +
       energy;
     cpm[i] = total;
+    // This draw's total in dollars. `energy` is already a $/mi and sits outside the
+    // `/miles` division above, so multiplying the finished $/mi back by this draw's own
+    // miles is both the whole total and, by construction, consistent with the $/mi.
+    lifetimeUsd[i] = total * miles;
 
     sums.depreciation += dep / miles;
     sums.useTax += useTax / miles;
@@ -212,6 +222,8 @@ export function costPerMile(
   // Opportunity-cost reporting columns (deterministic median-EOL path).
   const oppCostLifetimeUsd = buyPrice * (Math.pow(1 + r, detT) - 1);
   const sortedSell = Float64Array.from(sellOdos).sort();
+  const sortedLifetime = Float64Array.from(lifetimeUsd).sort();
+  const medianSellOdo = quantileSorted(sortedSell, 0.5);
 
   return {
     p50: q(0.5),
@@ -227,7 +239,11 @@ export function costPerMile(
     buyOdo,
     impliedBuyYear: buyYear,
     feasible: isFeasibleBuy(vehicle, buyOdo, am, constants.now_year),
-    medianSellOdo: quantileSorted(sortedSell, 0.5),
+    medianSellOdo,
+    lifetimeCostUsdP50: quantileSorted(sortedLifetime, 0.5),
+    // buyOdo is the same for every draw, so this is the median of the per-draw miles.
+    lifetimeMilesP50: medianSellOdo - buyOdo,
+    truncatedDrawFraction: truncatedDraws / draws,
   };
 }
 

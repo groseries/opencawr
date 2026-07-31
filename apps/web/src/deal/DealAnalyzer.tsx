@@ -49,8 +49,8 @@ function validationError(year: number, odo: number, price: number): string | nul
 }
 
 /** Score one real-world listing against the modeled 71-car field: percentile
- * within this car's own default-buy outcomes, rank position against the field,
- * and price vs. the modeled market curve. Estimates only — never "good/bad deal". */
+ * within this car's own outcomes at the deal's odometer, rank position against the
+ * field, and price vs. the modeled market curve. Estimates only — never "good/bad deal". */
 export function DealAnalyzer({ inputs, rows }: { inputs: EngineInputs; rows: RankedRow[] }) {
   const sortedByName = useMemo(
     () => [...rows].sort((a, b) => a.name.localeCompare(b.name)),
@@ -78,6 +78,14 @@ export function DealAnalyzer({ inputs, rows }: { inputs: EngineInputs; rows: Ran
     [vehicleName, year, odo, price, invalidReason],
   );
   const { result, computing } = useDealEngine(inputs, deal);
+
+  // "cheaper than N of the field", counted over the very rows plotted in the
+  // ladder below — not a separate worker-side pass at a different buy-point
+  // basis. Those bases diverged on 2026-07-30 when the Rankings table moved to
+  // sweet-spot pricing, so a count taken anywhere else would silently disagree
+  // with the chart beside it. A comparison of already-computed $/mi, not cost
+  // math (which stays in packages/core).
+  const beats = result ? rows.filter((r) => r.p50 > result.cpm.p50).length : 0;
 
   const extraRow: LadderExtraRow | undefined = result
     ? {
@@ -154,17 +162,25 @@ export function DealAnalyzer({ inputs, rows }: { inputs: EngineInputs; rows: Ran
           <div className="deal-summary">
             <p className="deal-headline">
               <span className="mono">{fmt(result.cpm.p50)}/mi</span> — cheaper than{" "}
-              <strong>{result.beats}</strong> of {result.fieldSize} modeled cars
+              <strong>{beats}</strong> of {rows.length} modeled cars
+              {inputs.holdMiles === "eol"
+                ? " at their default buy points"
+                : " at their own cheapest buy points"}
             </p>
             <p className="deal-line">
               Listed <span className="mono">{fmtUsd(result.priceVsCurveUsd)}</span>{" "}
               {result.priceVsCurveUsd >= 0 ? "above" : "below"} the modeled curve at this
               mileage.
             </p>
+            {/* The percentile is now scored against this car at THE DEAL'S OWN
+                odometer (see handleDeal), so "at this odometer" is literal; the
+                clause names the distribution so the number can't be read as a
+                percentile of the field. */}
             <p className="deal-line">
               {article(Math.round(result.percentile * 100)) === "an" ? "An" : "A"}{" "}
               {ordinal(Math.round(result.percentile * 100))}-percentile outcome for this model
-              at this odometer.
+              at this odometer, against the same car bought at the modeled price for that
+              mileage.
             </p>
             {result.notes.length > 0 && (
               <ul className="deal-notes">
