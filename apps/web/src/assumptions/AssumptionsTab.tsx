@@ -22,9 +22,71 @@ const SPEC_LAUNCH_GATE = sliceSection(SPEC_MD, "\n## 9.", "\n## 10.");
 const OPEN_ITEMS = findOpenRows(ASSUMPTIONS_MD);
 const ENERGY_ROW = findRow(ASSUMPTIONS_MD, "Energy");
 
+/** Glanceable schematic of `costPerMile()` (spec §2, §3, §8 — the one engine),
+ * so a reader grasps the pipeline shape before the dense prose below. Every
+ * number here is read live off the same sources the rest of the tab quotes —
+ * nothing is retyped. */
+function ModelOverview() {
+  return (
+    <section className="at-section">
+      <h3>How the model works</h3>
+      <p className="md-source">Schematic of `costPerMile()` — packages/core/src/engine.ts</p>
+      <div className="model-pipeline">
+        <div className="model-stage">
+          <h4>Inputs</h4>
+          <ul>
+            <li>Miles/yr, discount rate</li>
+            <li>Gas &amp; electricity price</li>
+            <li>Buy odometer, hold horizon</li>
+            <li>Insurance, registration, use-tax</li>
+          </ul>
+        </div>
+        <span className="model-arrow" aria-hidden="true">
+          →
+        </span>
+        <div className="model-stage">
+          <h4>Per-draw simulation</h4>
+          <p className="model-stat mono">{DEFAULTS.draws} Monte Carlo draws / car</p>
+          <ul>
+            <li>End-of-life mileage → depreciation</li>
+            <li>Yearly opex: maintenance, insurance, registration, total-loss</li>
+            <li>Major-repair tail past {CALIBRATION.repairOdoThreshold.toLocaleString()} mi</li>
+            <li>Battery risk (EV / PHEV / hybrid)</li>
+          </ul>
+          <p className="model-footnote">
+            Energy is priced once, deterministically — outside the Monte Carlo (see the Open
+            items callout below).
+          </p>
+        </div>
+        <span className="model-arrow" aria-hidden="true">
+          →
+        </span>
+        <div className="model-stage">
+          <h4>Aggregated outputs</h4>
+          <ul>
+            <li>P50 (headline), P75, P90 bad-luck</li>
+            <li>P05–P95 band (90% range)</li>
+            <li>10-part cost breakdown</li>
+            <li>
+              Statistical tie-tiers ({(CALIBRATION.tieTierBeatProb * 100).toFixed(0)}% beat
+              probability)
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className="model-open-stat">
+        <span className="model-open-count mono">{OPEN_ITEMS.length}</span>
+        <span className="model-open-label">open assumptions, itemized below</span>
+      </div>
+    </section>
+  );
+}
+
 export function AssumptionsTab() {
   return (
     <div className="assumptions-tab">
+      <ModelOverview />
+
       <section className="at-section gate-section">
         <h3>Launch gate — reliability tiers re-derived from NHTSA; two CR-derived fields remain</h3>
         <p className="md-source">Source: OpenCAWR_SPEC.md §9 (also recorded in DECISIONS.md)</p>
