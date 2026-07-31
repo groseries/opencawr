@@ -10,7 +10,8 @@ truth for the model; this file records product-flow and implementation decisions
    input state — "answer a little, refine forever," never a gate before results.
 2. **Assortment** — engine ranks the whole field; user-need filters are SOFT (non-matching cars
    grayed/collapsed, never removed) so the marketplace-wide picture and tie-tiers stay visible.
-3. **Drill-down** — full analysis suite (§6), live re-ranking on every input change.
+3. **Drill-down** — full analysis suite (§6), live re-ranking on every input change. **Amended
+   2026-07-30 (see below): live at `"until it dies"`, ~0.9 s at a fixed holding period.**
 4. **Deal evaluation** — score pasted listings vs the marketplace, vs the user's other deals, and
    vs community-submitted deals for the same car.
 
@@ -47,6 +48,21 @@ truth for the model; this file records product-flow and implementation decisions
   their own inputs (low annual miles, chosen horizon).
 - **Test policy**: the engine must reproduce the stored reference outputs EXACTLY (fixed seed);
   regenerating them is a deliberate, reviewed numbers-change event, never a CI fix.
+- **"Live re-ranking on every input change" — knowingly renegotiated (2026-07-30)**, as the price
+  of the owner's decision to *price the money at the sweet spot*: at a fixed holding period a
+  Rankings row's year/mileage and its $/mi are now one evaluation, which makes the rank response
+  depend on the buy-point sweep it used to run beside. **Measured in-browser** (`vite preview`,
+  71 cars): fixed 100k hold **842 ms** in-worker, **~891 ms** click-to-settled-table; 50k hold
+  **634 ms**; `"until it dies"` — the DEFAULT rail setting — **122 ms and still live**. Total
+  worker cost per input change is *unchanged* (the app already ran both passes; only the
+  presentation was split), and the table is fully current marginally sooner than before, since
+  the old ideal-mileage line landed after its own 300 ms debounce plus a ~1.6 s sweep. What is
+  lost is the intermediate partial update at a fixed hold. A two-stage render was considered and
+  rejected: it would reorder 58/71 rows ~0.9 s after every change and would show, as a transient,
+  the very year-vs-money mismatch this change removes. While a pass is in flight the table says
+  so in words rather than presenting itself as current. If liveness at a fixed hold is wanted
+  back, the lever is parallelism (a worker pool), not a coarser sweep grid — the 2,500-mile step
+  is load-bearing for the model-year panel. Full measurements in `ASSUMPTIONS.md` §I.
 
 ## Launch gate (spec §9 — machine-readable)
 

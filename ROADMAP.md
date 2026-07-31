@@ -12,28 +12,27 @@ assumption, estimates-not-advice copy, Node ≥ 20.
 
 ## P0 — Correctness and honesty (do first)
 
-**R9. Heatmap should be years × miles, not hold-miles × buy-miles** (owner, 2026-07-29:
+**R9. Heatmap should be years × miles, not hold-miles × buy-miles — SHIPPED 2026-07-29,
+folded into R2 (see below), heatmap left untouched.** Original framing (owner, 2026-07-29:
 *"Our heat map was a map of years and miles originally but it morphed into a map of hold vs
-buy miles"*). **Owner is assigning this to a separate agent — do not implement it here; this
-entry exists to give that agent the context.**
-`apps/web/src/charts/Heatmap.tsx`, `engine.worker.ts`'s `handleSurvey`, `SurveyCell`.
-Current axes: buy odometer across (10k–120k in 10k steps), hold miles down (25k–200k in 25k).
-Model year appears nowhere, which is the drift the owner is describing, and it overlaps
-directly with **R2** (year as a designed surface) — read that entry too.
-What the next agent needs to know:
+buy miles"*) was to relabel `Heatmap.tsx`'s axes with model year. This entry was originally
+assigned to a separate agent; the owner overrode that 2026-07-29 mid-session and directed
+combining it with R2, with one clarification that changed the design: **"the optimum buy/hold
+combo will be driven by the model year... though the questions are distinct."** That reframing
+is why the heatmap itself was left alone (see R2's Shipped entry for the reasoning and what
+shipped instead) rather than growing year labels on its columns.
+`apps/web/src/charts/Heatmap.tsx`, `engine.worker.ts`'s `handleSurvey`, `SurveyCell` were all
+investigated but ultimately **not modified** — kept here for the historical context:
 - Odometer and model year are **coupled**, not independent: `impliedModelYear(odo, annualMiles,
-  nowYear) = nowYear − odo/annualMiles` (`packages/core/src/feasibility.ts`). At the default
-  13,000 mi/yr, putting model year on the buy axis is close to a relabel of the axis that is
-  already there. Reuse `impliedModelYear`/`deriveBuyYear`/`isFeasibleBuy`; never re-derive.
-- **The hold axis is load-bearing and should not simply be replaced.** Holding the hold-miles
-  constant per row is exactly what makes this chart trustworthy — see R10 below. A years ×
-  buy-miles grid at a *variable* horizon would reintroduce the artifact R10 describes. If the
-  hold axis goes, replace it with a single fixed hold, not with `"eol"`.
+  nowYear) = nowYear − odo/annualMiles` (`packages/core/src/feasibility.ts`). `handleSurvey`
+  already computes this per cell as `impliedBuyYear` inside `costPerMile` and discards it.
+- **The hold axis is load-bearing and was not touched.** Holding hold-miles constant per row
+  is exactly what makes this chart trustworthy (R10). Confirmed during investigation:
+  `handleSurvey` never called `buyPointSweep` at all — it loops two hardcoded axes
+  (`BUY_ODO_AXIS` 10k–120k, `HOLD_MILES_AXIS` 25k–200k) directly through `costPerMile`, so
+  R10's numeric-`holdMiles` constraint was already structurally satisfied here.
 - `model_year_reliability` (landmine ×1.40 / caution ×1.15 / sweet-spot ×0.95) is the data
-  that makes a year axis worth having — marking those years is the point, per R2.
-- The heatmap's low-odometer columns are currently showing **invented prices** (see R11);
-  fixing or flooring that is a prerequisite for trusting the left edge of any version of
-  this chart.
+  that makes a year axis worth having — it's surfaced instead in R2's new ranking panel.
 
 **R10. The $/mi metric is not comparable across different holding periods —
 SHIPPED 2026-07-29, option 1.**
@@ -144,26 +143,88 @@ Sequencing note: do NOT re-derive these to agree with the current tiers. R12's t
 direction. They need genuinely independent sources or an explicit statement that they are not
 derived.
 
-**R2. Model year as a designed surface, not an axis label** (rewritten and re-queued
-2026-07-28 at the owner's direction; the original framing — "put implied model year on the
-heatmap axis" — was rejected as too small for the problem).
+**R2. Model year as a designed surface, not an axis label — SHIPPED 2026-07-29** (rewritten
+and re-queued 2026-07-28 at the owner's direction; the original framing — "put implied model
+year on the heatmap axis" — was rejected as too small for the problem; combined with R9
+2026-07-29 at the owner's direction).
 A model year is not merely a repair-cost multiplier applied to an odometer. It implies a
-specific **drivetrain** (engine/transmission combination, which can change mid-generation),
-**mid-cycle refreshes** (facelifts that alter parts availability, safety content, and
-resale), and **model-specific known issues** that are year-bounded rather than
-tier-bounded. Today the engine collapses all of that into
-`model_year_reliability` (landmine ×1.40 / caution ×1.15 / sweet-spot ×0.95) on repair costs
-only. What's wanted is a designed year-level surface answering *which years to buy and why,
-and what changed between them* — not a second axis on an existing chart.
-Prerequisites and constraints:
-- `impliedModelYear`, `deriveBuyYear` and `isFeasibleBuy` already exist in
-  `packages/core/src/feasibility.ts` — reuse, never re-derive.
-- **The data layer needs new per-year fields** to carry drivetrain, refresh boundaries, and
-  known-issue detail. None exist today; `model_year_reliability` is three arrays of years.
-  Designing that schema (and where the data comes from) is the first task, not the last.
-- Anything year-level that touches repair cost is gated behind the reliability launch gate
-  (spec §9) exactly as the current multipliers are.
-- Estimates, not advice: "what changed in 2019" is a fact; "buy the 2019" is not.
+specific **drivetrain** (engine/transmission combination, which can change mid-generation) and
+**model-specific known issues** that are year-bounded rather than tier-bounded. What shipped:
+a NEW engine primitive, `packages/core/src/modelyear.ts`'s `modelYearRank`, and a new
+per-model-year data schema, `Vehicle.model_year_detail`, surfaced together in a new drawer
+panel ("Model years: which year is the best buy").
+**Design decision, from mid-session owner feedback**: the first draft of this plan annotated
+the *existing* heatmap's columns with implied model year. The owner pushed back — "the hold vs
+buy odometer is comparing the sweet spot of how long to hold vs when the vehicle was
+purchased... our goal here is to answer the question what model year should be purchased all
+else being equal" — and asked for a rankable list of a car's own model years instead ("the
+2020-2023 model years of the prius are all better than the next model year"), while noting the
+two questions are "intertwined" (odometer implies year) "though distinct." Two consequences:
+- **The heatmap was left completely untouched** (see R9 above) — it keeps answering hold-vs-buy;
+  model year got its own panel instead of a second axis on an existing chart, matching R2's own
+  original text ("not a second axis on an existing chart").
+- **Ranking method — first shipped canonical-odometer, then UNIFIED at the owner's direction.**
+  The first version priced each year once at its own **canonical odometer**
+  (`(nowYear − year) × annualMiles`), deliberately *not* bucketing `buyPointSweep`'s grid by
+  year, on the reasoning that a year's band is `annualMiles` wide so its cheapest grid point
+  often sits at the band edge, borrowing cheapness from the next year. **That shipped and was
+  then corrected**: it made the app compute *two* optima over the same cost curve on *different*
+  grids, which disagreed on the year for **22 of 71** vehicles at a 100k hold (14 under
+  1.2% |Δ$/mi|; Civic 120,000 mi→2017 vs 104,000 mi→2018). The owner caught it in the live app
+  and ruled (2026-07-30): *"We are trying to determine the best year AND mileage to buy at - the
+  true sweetspot. So it should be one. The user should then be able to use our details panel to
+  see the breakdown of each layer and determine a local optimum for themselves."*
+  **Shipped now**: ONE grid search. `buyPointSweep` carries `deriveBuyYear` on every grid point
+  (`BuyPointSweepPoint.year`) and `modelYearRank` **groups that same grid by model year**,
+  reporting per year the cheapest point inside that year's own band *plus its odometer* — which
+  answers the original band-edge objection by disclosing the mileage rather than hiding it. Ties
+  break toward the lowest odometer in both, so the panel's rank-1 row **is** the sweep's
+  `idealOdo`/`idealYear`/`idealP50` by construction. Measured: **71/71 agreement at 50k/100k/150k
+  holds**, up from 49/71. `CALIBRATION.sweepStepMiles` 10,000 → **2,500** (a year band is only
+  ~13,000 mi wide, so the old step gave ~1.3 samples per band); blast radius, ledgered in
+  `ASSUMPTIONS.md` §B: ideal year moved 19/71, ideal odometer 49/71 (mean |Δ| 5,153 mi), **no
+  year moved 2+**, and the P50 at the ideal is **never worse** (mean 0.457% cheaper) — the
+  correctness check for a strict grid refinement. `handleBuyPoints` is now chunked (8 cars per
+  yield, with a supersede check) to hold `DECISIONS.md`'s live-re-ranking requirement against the
+  ~4× grid cost.
+- Both still require a numeric `holdMiles`, same type-level + runtime refusal (R10). At `"eol"`
+  the full ranking is withheld, but the panel still answers via a **per-hold summary** — best
+  (year, mileage) at each preset fixed hold — added at the owner's request 2026-07-30 (*"we
+  should still show and explain the best model year selected for every hold #"*). That sidesteps
+  R10 rather than breaking it: each row is one ranking at one fixed hold, and reading the rows
+  against each other shows whether the best year even depends on the horizon (Bolt EV: 2021 at
+  50k, 2022 at 100k, 2023 at 150k). The summary reuses the rail's own result for the matching
+  hold, after an earlier bug where it ran at 400 draws while the table ran at 1,100 and the two
+  named different years 0.5% apart — noise, not signal.
+- **Degenerate and clamped cases are disclosed, not papered over.** 2/71 vehicles (both Porsche
+  996 rows) clamp every model year to one odometer, so all years price identically and any
+  "best year" is only the tie-break — the panel refuses to name one. 32/71 have *some* clamped
+  year; those rows are marked `*` with a footnote that they aren't a like-for-like comparison.
+- `packages/core/test/modelyear.test.ts` (9 tests) + `buypoint.test.ts` (9), same zeroed-fixture
+  discipline: per-year band optimum, a year's cheapest point landing strictly inside its band,
+  R11-floor clamping, single-year runs, the `"eol"` refusal, hold-reprices-every-year, and **the
+  regression this unification exists to prevent — the panel's rank-1 row and the sweep's sweet
+  spot are the same (year, odometer, P50) at three different grid steps**.
+  `npm test -w @opencawr/core`: **113/113**, `reference.test.ts` 74/74 **byte-identical** — no
+  regeneration; `buyPointSweep`/`modelYearRank`/`model_year_detail` are all outside `costPerMile`.
+**Data**: `Vehicle.model_year_detail` (per-model-year `drivetrain`, `specChangeFromPriorYear`,
+`topComplaintCategory`, `topComplaintShare`) populated for all 71 seed vehicles, reusing
+existing free/keyless infrastructure with **no new licensing exposure** (spec §9 stays clear):
+EPA fueleconomy.gov's `displ`/`cylinders`/`trany` fields (already on the wire in the same
+`epaVehicleDetail` response used for MPG/CO2, just previously undeclared) for `drivetrain`, and
+R12's own NHTSA `complaintComponentsByCatalogue` (same cached fetch, same query window, no
+second NHTSA query path) for `topComplaintCategory`. **`specChangeFromPriorYear` is explicitly
+a spec-discontinuity proxy** (EPA drivetrain/VClass changed year over year) **and is documented,
+in three places (`docs/model-year-detail-methodology.md`, `ASSUMPTIONS.md` §K, and the UI's own
+"possible spec change" badge copy), as NOT a confirmed styling refresh or facelift** — EPA data
+carries no styling signal at all. `packages/pipeline/test/modelyear.test.ts` (10 tests);
+`OPENCAWR_PIPELINE_OFFLINE=1 npm test -w @opencawr/pipeline`: 44/44 (34 pre-existing + 10 new).
+Population is **read-only to cost math** — `model_year_detail` is never read by `costPerMile`,
+so writing it was explicitly NOT a numbers-change event and required no `gen-reference` re-run.
+Verified live at 1400×1600 in headless Chrome against a production build (`vite preview --host
+127.0.0.1`): drawer's new "Model years" panel renders the ranking (rank, year, $/mi, % vs best,
+reliability marker, drivetrain, spec-change badge, dominant-complaint line) at a fixed hold, and
+correctly shows the "needs a fixed holding period" message at `"eol"`.
 
 **R12. Reliability re-derivation — SHIPPED 2026-07-29, launch gate PARTIALLY cleared** (investigation
 2026-07-29, `docs/investigations/2026-07-29-reliability-corpus.md`). Owner released the
@@ -251,6 +312,26 @@ investigation summary, kept for the HLDI revisit path:
 ## P1 — Readability of what we already show
 
 *(R4's line shipped; R8 above tracks the one substantive problem found with it.)*
+
+**R15. The model-year panel declares a winner among statistically tied years.** *(Found
+2026-07-30 while verifying R2's unification; filed, not fixed.)* The panel ranks a car's model
+years 1..N by P50 and names a "cheapest year" even when the separation is pure Monte Carlo
+noise. Live examples at defaults: Toyota Corolla at a 100k hold reports *"2020 · 73k mi — 0.0%
+cheaper than 2022"*, and 4Runner reports 0.1% margins at both 100k and 150k. A 0.0% margin is
+not a finding.
+**The app already refuses to do this elsewhere and has the machinery for it**: the Rankings
+table groups cars into tie tiers via `rankWithTiers`/`beatProb` (`packages/core/src/tiers.ts`)
+under the note *"Cars in the same tie tier are statistically indistinguishable — the model can't
+honestly order them."* The model-year ranking should use that same machinery rather than a
+strict order.
+Why it isn't a trivial swap: `rankWithTiers` needs each candidate's raw `drawsCpm`
+(`Float64Array`), and `buyPointSweep`'s grid keeps only `p50` per point — so the shared grid
+would have to retain draws for the per-year winners, which costs memory on a 2,500-mile grid.
+Cheapest honest interim fix is to suppress the "cheapest year" claim (and the `vs. next-best`
+figure) when the margin falls under a stated threshold, but **a threshold is a new JUDGMENT
+constant and needs a ledger row** — using the existing `beatProb` is the principled route.
+Note this is a *presentation* bug: the underlying (year, mileage) sweet spot is unaffected, and
+`upperOdo`'s own "accurate to about one grid step" caveat (§B) is the same class of issue.
 
 ## P2 — New surface
 
