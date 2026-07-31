@@ -17,12 +17,13 @@ The original build order plus roadmap items R1–R14 are on `master` (merged and
 
 ## Read these first, in this order
 
-1. `ROADMAP.md` — the backlog. **R14 is the next item.** R9/R2 are the other big ones.
+1. `ROADMAP.md` — the backlog. **R14 shipped 2026-07-31; R9 and R2 are the next big ones.**
 2. `ASSUMPTIONS.md` — the written ledger of every assumption. Kept current, non-negotiably.
 3. `DECISIONS.md` — product and engineering decisions already taken.
 4. `OpenCAWR_SPEC.md` — the model's source of truth, especially §2–§5 and §9.
-5. `docs/investigations/` — four deep analyses from the last session. **Read the relevant one
-   before touching its area.** They contain measured numbers you should not re-derive.
+5. `docs/investigations/` — the deep analyses. **Read the relevant one before touching its area.**
+   They contain measured numbers you should not re-derive. Note that `2026-07-30-eol-repair-corpus.md`
+   is **partly superseded** by `2026-07-31-eol-leak-correction.md`, which carries a banner saying so.
 
 ## Hard constraints — not negotiable
 
@@ -35,10 +36,12 @@ The original build order plus roadmap items R1–R14 are on `master` (merged and
   explicitly in the commit body. **Never regenerate to make a failing test pass.**
 - **Estimates, not advice.** No "good deal / bad deal", no recommendations. Percentiles and dollar
   deltas only.
-- **Launch gate (spec §9) is PARTIALLY cleared.** `reliability_tier` is now NHTSA-derived, but
-  `repair_cost_multiplier_by_make` and `eol_maintained_miles` still trace to the same Consumer
-  Reports judgment. **Do not describe the gate as closed** anywhere — spec, ledger, or app copy —
-  until R14 lands. Consumer Reports, CarComplaints and RepairPal are all off the table as sources.
+- **Launch gate (spec §9) clause 1 — Consumer Reports — is CLOSED as of 2026-07-31 (R14).** All
+  three CR-correlated fields are independently sourced now: `reliability_tier` from NHTSA (R12),
+  `eol_maintained_miles` from NY DMV inspections (R14), `repair_cost_multiplier_by_make` as a
+  deliberate 1.0 (R14, negative result). **Clause 2 — scraped listing data — is still open**, and
+  it gates the used-price re-pull below. Consumer Reports, CarComplaints and RepairPal remain off
+  the table as sources.
 - **Ledger row in the same commit** as any new constant, threshold, or data source.
 - **Node ≥ 20**: `export PATH="/opt/homebrew/opt/node@22/bin:$PATH"` before any npm command. The
   default node is v16 and fails; plain `/opt/homebrew/opt/node` is broken too (missing icu4c).
@@ -70,21 +73,34 @@ The original build order plus roadmap items R1–R14 are on `master` (merged and
 
 ## The big items
 
-### R14 — close the Consumer Reports gate (next item)
+### R14 — SHIPPED 2026-07-31; read this before touching `eol_maintained_miles`
 
-Re-derive `eol_maintained_miles` and `repair_cost_multiplier_by_make`. Full entry in `ROADMAP.md`;
-the short version is that these two correlate with the *old* seed tier at −0.838 and +0.602, so
-they are the same judgment R12 just removed from `reliability_tier` — meaning R12 broke the seed's
-internal consistency without removing the CR dependency.
+Both fields are done. `repair_cost_multiplier_by_make` is 1.0 everywhere (negative result, no
+public per-make source exists). `eol_maintained_miles` is derived from NY DMV inspections —
+`docs/eol-methodology.md` for the method, `docs/investigations/2026-07-31-eol-leak-correction.md`
+for the evidence, `ASSUMPTIONS.md` §B/§D/§E for the construction and what it costs.
 
-Two traps specific to this one:
-- **Do not derive them from the new tiers.** That recreates the three-hats problem in the other
-  direction. They need genuinely independent sources, or an explicit statement that they are not
-  derived.
-- **A well-argued negative result is an acceptable outcome.** If no public per-make repair-cost
-  source exists (RepairPal is struck; NHTSA has no cost data), collapsing the multiplier toward 1.0
-  and saying plainly that make-level repair cost is not modeled beats inventing a source. Establish
-  the licence position *before* building on iSeeCars, the way R13 did for IIHS-HLDI.
+**The lesson that cost a session, stated plainly.** The 2026-07-30 attempt produced a ranking with
+Fiat 500 at rank 2, diagnosed it as **left-truncation**, and concluded nothing could fix it short of
+waiting for a 2027 endpoint. That diagnosis was wrong, and the record has been corrected in place.
+The actual cause was that the estimator rested on a premise written in its own docstring — "the
+leakage term is model-independent by assumption and cancels exactly in the ratio" — which had never
+been tested and is false by ~27×. **When a derivation states a load-bearing assumption "by
+assumption", measure it before concluding the data is inadequate.** That is the single most
+transferable thing in this round.
+
+Three things a future session should know about the shipped field:
+- **It mixes durability with NY owner mileage, deliberately.** That was an owner decision taken on
+  measured blast radius against the alternative, not an oversight. Mini Cooper and Buick Encore are
+  derived low partly because they are second cars. Do not "fix" this without reading Step 7's
+  rejected alternative first — it was worse.
+- **Camry Hybrid is the least reliable row in the corpus** (rideshare mileage survives the
+  `PASSENGER` filter, and it is on the `make` durability basis). The fix is specified: VIN-level
+  cohort following, fixing the cohort on the *earlier* year's `registration_class`. A same-year
+  filter on both ends gives a false answer.
+- **Three rows are not durability measurements at all** (Tesla Model 3, Fiat 500, Fiat 500X) — no
+  cohort old enough to identify a slope. No public source can measure the longevity of a nameplate
+  that has never been old; that is a property of the question, not of NY DMV.
 
 ### R9 + R2 — the heatmap and model year
 
