@@ -1150,3 +1150,84 @@ th.num {
   margin-top: 14px;
   font-size: 13px;
 }
+
+/* model overview: schematic of costPerMile(), the first thing on the tab */
+.model-pipeline {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+}
+
+@media (max-width: 720px) {
+  .model-pipeline {
+    flex-direction: column;
+  }
+
+  .model-arrow {
+    transform: rotate(90deg);
+  }
+}
+
+.model-stage {
+  flex: 1 1 0;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  padding: 12px 14px;
+}
+
+.model-stage h4 {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.model-stage ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+}
+
+.model-stage li {
+  margin: 4px 0;
+}
+
+.model-stat {
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.model-footnote {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.model-arrow {
+  align-self: center;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.model-open-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  background: var(--panel);
+  border-left: 3px solid var(--needle);
+  padding: 10px 14px;
+  margin-top: 14px;
+}
+
+.model-open-count {
+  font-size: 22px;
+  color: var(--needle);
+  font-weight: 600;
+}
+
+.model-open-label {
+  font-size: 13px;
+  color: var(--muted);
+}
