@@ -113,6 +113,40 @@ Two things follow, and they pull against each other:
 So the ranking failure is not the compression alone — it is the compression combined with a
 fallback that flatters unmeasured cheap cars.
 
+### Why filling the coverage gaps did not fix it — and the limitation underneath
+
+The first diagnosis ("those cars are data-starved") was **wrong for most of them**, and the fix
+changed the coverage numbers dramatically without changing the conclusion.
+
+A live probe of the dataset established: Tesla Model 3 (MY2018-2023, 1,900-8,000 distinct VINs
+each), Kia Telluride (MY2020-2024, 2,500-6,200), Hyundai Palisade (2,000-5,200), Jeep Grand Cherokee
+L (3,600-8,500) and Toyota Camry Hybrid (MY2007-2024, 900-2,200) all have ample NY data. They were
+being starved by **our own age sampling**, not by the source: with a 2023 base year, age maps to
+`model_year = 2023 - age`, so sampling even ages only gave a MY2018+ nameplate at most one usable
+cohort. Sampling every age for the per-model ratio moved the basis breakdown from
+nameplate 45 / make 21 / fleet 3 to **nameplate 51 / make 18 / fleet 0** — no vehicle falls back to
+a body-class constant any more. Only Fiat 500/500X are genuinely thin in NY; Mazda CX-90 (MY2024
+only) and Kia K4 (MY2025+) are simply too new to have a 2-year retention at all.
+
+**And the ranking still fails.** With Fiat 500 now carrying a real 5-point nameplate measurement
+rather than a fallback, it derives to 173,279 mi against Toyota Corolla's 175,702 — and rises from
+rank 14 to **rank 2**, with Fiat 500X at rank 5. Applying all 69 values: $/mi P50 mean absolute
+shift 11.4%, rank movement mean 9.4 (max 34, 3/71 unmoved), 52/71 `stat_tier` changes.
+
+The reason is **left-truncation, and it is a fundamental property of the method rather than a bug**.
+The dataset begins 2020-12-29, so every retention measurement is conditional on the vehicle having
+already survived to the base year. For a model with heavy early attrition, the cars still present in
+2023 are a selected, robust tail — the ones that died are invisible — so its measured retention
+looks unremarkable. The selection is **differential**: the worse the model, the more flattering the
+selection applied to it. This plausibly accounts for a meaningful share of the 1.156x compression
+itself, not merely for the Fiat result.
+
+Nothing available fixes this. Reaching back for a longer window is ruled out empirically: calendar
+2021 is distorted (cohort counts hump — 2021 low, 2022 high — from deferred pandemic-era
+inspections), which contaminates 2022 as a baseline too, and widening the gap produces ratios above
+1.0 (Fiat 500X at a 4-year gap: 3.467). More signal has to come from a *later* endpoint (2023 vs
+2027), not an earlier one — i.e. from waiting.
+
 ### Recommendation
 
 Do **not** write these values wholesale. The measured compression is a real and reportable finding,
@@ -120,16 +154,26 @@ but shipping it would trade a Consumer-Reports-derived judgment for a ranking th
 reject on sight — and spec §9 exists to remove a legal dependency, not to buy it with an
 indefensible product outcome.
 
-Options for whoever picks this up, in rough order of preference:
+Options, revised after the coverage work — **option 2 is now the recommendation**, because option 1
+no longer helps: with `fleet` basis eliminated entirely, the cars that produce the bad ranking are
+the ones we *did* measure, so restricting to measured rows does not avoid the problem.
 
-1. **Ship the derived value only where it is actually measured** (`basis: "nameplate"`, 45 of 69)
-   and leave the rest at seed, flagged. Avoids asserting "average" for cars we never measured.
-   Needs a decision on the resulting mixed provenance.
-2. **Keep the seed's spread and re-centre only the level**, using the derived `maintainedBonus`
-   (1.1072) against the legacy 1.30 — a smaller, defensible change that removes the un-derived
-   bonus without flattening the field.
+1. ~~Ship the derived value only where it is actually measured~~ — **superseded.** Coverage is now
+   nameplate 51 / make 18 / fleet 0, and Fiat 500 reaches rank 2 on a genuine nameplate measurement.
+   The failure is left-truncation, not missing data, so this option no longer separates good rows
+   from bad ones.
+2. **Keep the seed's spread and re-centre only the level** — replace the legacy un-derived 1.30
+   "maintained" bonus with the derived **1.1072**, a uniform ×0.8517 (−14.8%) on every non-`sport`
+   row. Measured: **top-10 membership unchanged**, rank movement mean **1.10** (max 5, 25/71
+   unmoved), $/mi P50 mean absolute 11.7%, Fiat 500 moves only 14 → 11. This removes a real
+   un-sourced judgment — the 1.30 was never measured — without importing the left-truncation bias
+   into per-model values. It does **not** close spec §9, because per-model values still trace to the
+   CR judgment; it narrows the gate rather than clearing it.
 3. Ship nothing and record the negative result; `eol_maintained_miles` stays the last open item on
    the spec §9 gate.
+4. **Wait and re-run.** The one clean fix for left-truncation is a later endpoint: re-running
+   2023 vs 2027 doubles the observation window without touching the contaminated 2021/2022 data.
+   The pipeline is built and committed, so this is a re-run rather than a rebuild.
 
 ### Known limitations, whichever option is taken
 
