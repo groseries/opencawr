@@ -121,7 +121,7 @@ export function App() {
           OPEN<span className="wordmark-cawr">CAWR</span>
         </div>
         <p className="thesis">
-          The way car costing <em>should</em> be.
+          The way car <em>costing</em> should be.
         </p>
         <div className="context-line">
           <span>{rows ? rows.length : "…"} vehicles</span>
