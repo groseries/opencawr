@@ -815,6 +815,7 @@ th.num {
 
 .heatmap-svg {
   display: block;
+  width: 100%;
   max-width: 100%;
   min-width: 420px;
   height: auto;
@@ -1255,29 +1256,6 @@ th.num {
 .status-owner-decision {
   border-color: var(--ink);
   background: var(--ink);
-  color: var(--paper);
-}
-
-/* launch gate: stated plainly, high-contrast, impossible to skim past */
-.gate-banner {
-  background: var(--ink);
-  color: var(--paper);
-  padding: 14px 16px;
-}
-
-.gate-banner .md h3,
-.gate-banner .md h4,
-.gate-banner .md p,
-.gate-banner .md li {
-  color: var(--paper);
-}
-
-.gate-banner .md code {
-  background: rgba(232, 234, 236, 0.15);
-  color: var(--paper);
-}
-
-.gate-banner .md a {
   color: var(--paper);
 }
 

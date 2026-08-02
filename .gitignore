@@ -6,3 +6,11 @@ dist/
 .claude/worktrees/
 .superpowers/
 .env
+
+# prelaunch scratch/investigation working directories — kept locally for
+# provenance/audit trail, not shipped in the public repo
+.tmpprice/
+.tmpinsurance/
+.tmpreliability/
+.tmpcse/
+.tmpr13/

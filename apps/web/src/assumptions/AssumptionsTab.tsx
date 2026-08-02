@@ -19,7 +19,6 @@ import opencawrData from "../../../../opencawr_data.json";
 const CONSTANTS = (opencawrData as unknown as { constants: Constants }).constants;
 
 const SPEC_COST_MODEL = sliceSection(SPEC_MD, "\n## 2.", "\n## 6.");
-const SPEC_LAUNCH_GATE = sliceSection(SPEC_MD, "\n## 9.", "\n## 10.");
 const OPEN_ITEMS = findOpenRows(ASSUMPTIONS_MD);
 const ENERGY_ROW = findRow(ASSUMPTIONS_MD, "Energy");
 
@@ -87,14 +86,6 @@ export function AssumptionsTab() {
   return (
     <div className="assumptions-tab">
       <ModelOverview />
-
-      <section className="at-section gate-section">
-        <h3>Launch gate — reliability tiers re-derived from NHTSA; two CR-derived fields remain</h3>
-        <p className="md-source">Source: OpenCAWR_SPEC.md §9 (also recorded in DECISIONS.md)</p>
-        <div className="gate-banner">
-          <Markdown source={SPEC_LAUNCH_GATE} />
-        </div>
-      </section>
 
       <section className="at-section">
         <h3>Open items &amp; deferred limitations</h3>
