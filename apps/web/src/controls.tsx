@@ -86,6 +86,13 @@ export function Inputs({ inputs, onChange }: Props) {
             <span className="unit">miles held</span>
           </label>
         )}
+        {/* R21: the engine charges nobody for the car they buy next when a hold ends,
+         * so $/mi at one holding period is not comparable to $/mi at another. Said at
+         * the point of choice, where the number changes under the user. */}
+        <span className="control-hint">
+          Each choice is a separate estimate. $/mi at one holding period can't be compared
+          to another — neither one is charged for the car you'd buy next.
+        </span>
       </fieldset>
 
       <NumberControl
