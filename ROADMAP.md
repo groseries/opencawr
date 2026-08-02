@@ -232,28 +232,96 @@ derived.
 *(R20 was filed here as an open item — see the P0 section above, right after R16: SHIPPED
 2026-07-31, `acab1d2`.)*
 
-**R21. No replacement-vehicle cost is charged when a fixed hold ends — unequal-lives gap on
-hold-length choice** (found 2026-07-30, same investigation as R20; filed as R16 originally,
-renumbered — R16 was already taken on master by the common-random-numbers finding). Distinct
-from R10: R10 fixed the *buy-point* sweep so different buy odometers are compared at the
-same fixed hold. This is the *hold-length* axis for a single vehicle — comparing a fixed
-hold (e.g. 150k mi, which cashes out resale and stops) against `"eol"` (which cashes out
-scrap and stops) never charges either side for the car the owner has to buy next. The
-fixed-hold owner is credited full resale as if their need for a vehicle ends there, which
-understates its true cost relative to a full-life hold. Same unequal-lives problem R10 named
-for buy-point comparisons, unaddressed on this axis.
-Fix candidates, cheapest first:
-1. When comparing a fixed hold against a longer hold (or `"eol"`), annuitize each option to a
-   common horizon (equivalent-annual-cost style, same construction R10 option 2 proposed and
-   declined for the denominator) so a short hold's cost includes its share of the next
-   vehicle's depreciation. Requires picking a common comparison horizon and a stand-in cost
-   for "the next car," which is a real design decision, not just an engine change.
-2. Restrict "compare hold lengths" UI/copy to same-horizon comparisons only (mirrors R10's
-   shipped fix: refuse to run the comparison rather than silently answer a different
-   question), and document that a 150k-mile hold and a drive-to-death hold are not
-   comparable on raw $/mi without a replacement-cost adjustment.
-Not taken: silently comparing raw $/mi across different implied horizons, which is the
-status quo this entry exists to flag.
+**R21. No replacement-vehicle cost is charged when a fixed hold ends — option 2 SHIPPED
+2026-07-31; option 1 is an OWNER DECISION, not a piece of work.** *(Found 2026-07-30, same
+investigation as R20; filed as R16 originally, renumbered — R16 was already taken on master by
+the common-random-numbers finding. Investigated 2026-07-31:
+`docs/investigations/2026-07-31-hold-length-replacement.md`.)*
+Distinct from R10: R10 fixed the *buy-point* sweep so different buy odometers are compared at the
+same fixed hold. This is the *hold-length* axis for a single vehicle — comparing a fixed hold
+(e.g. 150k mi, which cashes out resale and stops) against `"eol"` (which cashes out scrap and
+stops) never charges either side for the car the owner has to buy next.
+**The defect is confirmed and large.** All 71 vehicles at their own `pinned_buy_odo`, 1,100 draws,
+% change from a fixed hold to `"eol"` (negative = `"eol"` reads cheaper): **50k −11.3% today vs
++3.8% levelized**, 100k −4.3% vs +0.9%, 150k −1.0% vs −0.0%. The sign flips. Today's metric
+prefers a long hold for **63/71** vehicles; charged for a replacement it prefers ≤100k for
+**64/71**.
+**Caveat that must travel with those counts**: today's per-vehicle *best hold* is not an
+identified quantity — stable across 12 seeds for only **5/71**, best-vs-runner-up under 1 SE for
+**63/71**, and **58/71** price 200k and `"eol"` within 0.1% because a nominal hold truncates at
+each draw's sampled EOL. Only the coarse long-vs-short split is stable (58–63 of 71 prefer long
+across 8 seeds). Re-measure after R16.
+**Why option 1 is not a fix that can just be built.** Its answer is set by the stand-in for "the
+next car," which R21 named in passing and never resolved. Corolla, 50k vs `"eol"`, three
+defensible stand-ins: **+11.9%** (same hold repeated forever), **+2.6%** (continuation: this car
+driven to death), **+0.7%** (continuation: a 100k-mi example held 50k). An 18× spread — larger
+than the defect. Self-replication is the cheapest *and* the most flattering to short holds: it is
+the unique continuation whose weight cancels, which is why it collapses algebraically to R10's
+declined option 2 (PV dollars ÷ PV miles) — plus a tires correction R10 never specified (R22).
+It is also not expressible in the engine (`deriveBuyYear` pins `now_year`, so cycle 2 buys a
+different model year; discontinued cars cannot be rebought) and implies a frictionless resale
+chain — same curve for buy and sell, no spread, no dealer margin.
+**And it re-creates R21's own defect on a second axis**: corr(price inflation, `eol_maintained_miles`)
+= **+0.912**. A short-lived car delivers its miles sooner, is discounted less, and is still never
+charged for the replacement its early death forces. Fiat 500 (worst reliability tier) moves rank
+**15 → 4**; Highlander Hybrid **11 → 40**; Prius (hybrid) 6 → 12. Spec §9 wants the Fiat demoted,
+not promoted.
+**Blast radius, measured, if the metric changed anyway** (at the reference basis `"eol"`): mean
+headline **0.5438 → 0.7422 (+36.5%)**, mean rank shift **5.94**, max **29** (Highlander Hybrid),
+tie tiers **9 → 12**, `stat_tier` moves for **55/71**, all 71 `model_output` rows change.
+Regeneration alone is NOT sufficient: **`reference.test.ts:58-62` goes red** (hand-written
+top-6 guardrail; Prius (hybrid) drops out) and greening it means weakening a guardrail, which
+`DECISIONS.md:50` forbids; spec §2's normative formula and §5's "top ~13 cars are 2 tie-tiers"
+both need amending first; and `engine.ts:210` (`lifetimeUsd`), `:212-221` (breakdown denominators)
+and `:244` (`oppCostPerMi`) stay on the old denominator unless fixed in the same commit.
+**SHIPPED (option 2)**: refusal mirroring R10's, in `Heatmap.tsx`'s legend caption, `controls.tsx`
+under the horizon presets, and `App.tsx`'s `"eol"` results note — reading *down* the hold axis is
+not like-for-like; reading *across* a row (buy points at one hold) is what the chart supports.
+**Plus the heatmap's color scale is now normalized per row** (owner-directed 2026-08-01): the copy
+alone was contradicted by the picture, since one grid-wide ramp painted long-hold rows uniformly
+light. Measured on the Camry Hybrid grid, the old scale collapsed **4 of 8 rows** to a single ramp
+bucket; per row, **0/8** collapse and every row spans the full ramp, so the within-row buy-point
+comparison is legible for the first time. Axes and `HOLD_MILES_AXIS` untouched (R9/R10 — the hold
+axis is load-bearing); every cell still prints and announces its own $/mi. No engine, worker,
+calibration or reference change; `reference.test.ts` 74/74 byte-identical. Verified in-browser at
+1440×1000 and 390×844.
+**OWNER DECISION REQUIRED** — not "should we annuitize" but **which stand-in**: self-replication
+(collapses to R10 option 2, flatters short holds and short-lived cars), a shared continuation
+(smaller correction, needs a named continuation vehicle), or an explicit transaction-friction term
+(sell-side haircut / acquisition cost). Sequencing if taken: **R22 first**, then spec §2/§5
+amendment, then the metric with §6's three arithmetic consequences in the same commit, then
+regeneration in an isolated commit — and coordinated against R16, a second declared
+numbers-change event on the same 639 `model_output` value lines.
+
+**R22. Tires are charged as nominal dollars inside a present-value numerator.** *(Found
+2026-07-31 in R21's investigation; independent of R21's direction.)*
+`packages/core/src/engine.ts:202` — `const tires = tiresPerMi * miles;` — is nominal dollars added
+to a PV numerator. Under any horizon-consistent metric this term should contribute a flat
+`tiresPerMi`; as written it contributes `tiresPerMi / avgDf`, which **grows with the horizon**:
+Corolla 0.34% at a 25k hold, 1.04% at 100k, 1.28% at `"eol"`; field-wide at `"eol"` mean 0.94
+¢/mi, max 2.79 ¢/mi.
+Invisible in today's $/mi (nominal over nominal), so this is not urgent on its own — but it is a
+plain defect, and **part of R10 option 2's declined "+48% headline" was this bug being unmasked,
+not levelization**. It must be fixed BEFORE any levelization or the new metric inherits a
+horizon-growing artifact. Small, standalone **numbers-change event** (moves the reference set;
+own sign-off). Discounting it changes `sums.tires` from a flat `tiresPerMi` to a discounted
+figure, so the breakdown's tires row moves too.
+
+**R23. `resaleBlendWindowFraction` (0.25), not the metric, drives most of today's hold-length
+gradient.** *(Found 2026-07-31 in R21's investigation. Measurement, not a defect claim.)*
+R20's blend penalizes only holds ending inside the last quarter of a draw's own life — never a
+short hold, never `"eol"` (where `sell == eol` and resale is scrap either way). That is a U-shaped
+penalty across the hold grid, and it pushes the argmin to the extremes. Re-running R21's
+measurement with the pre-R20 hard cliff restored: vehicles preferring a long hold **25/71
+(pre-R20) vs 63/71 (post)**; 100k → `"eol"` gap **−1.36% vs −4.31%**. `"eol"` mode is
+**bit-identical pre/post for 71/71**, exactly as R20's entry claims — so this touches no reference
+output and is not a correction to R20, which fixed a real cliff.
+What it means: the premise "the model prefers driving to death" is roughly two-thirds a judgment
+constant shipped 2026-07-31 and one-third the PV/nominal mismatch. R20's own entry already lists
+the quadratic repair ramp past 120k and the age escalator past year 8 as unfixed compounding
+causes; `resaleBlendWindowFraction` belongs on that list. Sensitivity-test it (0.10 / 0.25 / 0.40
+against `constants.eol_sigma_by_tier`) and ledger the result before anyone reads the hold axis as
+a finding about cars.
 
 **R2. Model year as a designed surface, not an axis label — SHIPPED 2026-07-29** (rewritten
 and re-queued 2026-07-28 at the owner's direction; the original framing — "put implied model
@@ -554,6 +622,12 @@ flatness is artifact versus this genuine data ceiling.
   levelize the denominator and accept a +48% headline shift.~~ **Decided and shipped
   2026-07-29**: option 1 (fix the sweep's horizon; the sweep refuses to run at `"eol"` at all).
   See `ASSUMPTIONS.md` §B/§E.
+- **Which stand-in for "the next car" (R21)** — the same hold repeated forever, a shared
+  continuation vehicle, or an explicit transaction-friction term. The measured answer to
+  "how much does a short hold really cost" spans 0.7%–11.9% across those three on one car, so
+  this is the decision, not the arithmetic. The UI now refuses the cross-horizon comparison
+  (R21 option 2, shipped); changing `costPerMile` is blocked on this choice.
+  See `docs/investigations/2026-07-31-hold-length-replacement.md` §2.
 - ~~**Reliability method replacement** (R12) — the shipped derivation has no measurable signal.~~
   **Decided and shipped 2026-07-29**: powertrain complaint share on a single global distribution,
   EVs on their own reference, tiers written and reference outputs regenerated.
