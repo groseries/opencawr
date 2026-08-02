@@ -191,7 +191,12 @@ export function App() {
                       not a separate recommendation. "up to" marks how far the mileage can rise
                       before that cost climbs more than 5%.
                     </>
-                  )}
+                  )}{" "}
+                  {/* R21: the buy-point half of this note is R10's; this is the
+                   * hold-length half, and it holds at either setting. */}
+                  Changing the holding period on the left changes the question, not just the
+                  number — costs at different holding periods aren't comparable, because
+                  neither one is charged for the car you'd buy next.
                 </p>
                 {computing && rows && (
                   <p className="results-note results-stale" role="status">
