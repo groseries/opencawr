@@ -12,9 +12,46 @@ assumption, estimates-not-advice copy, Node ≥ 20.
 
 ## P0 — Correctness and honesty (do first)
 
-**R16. Common random numbers are broken — every paired comparison is far noisier than it should
-be.** *(Found 2026-07-31 diagnosing why R15's tie tiers are so wide. Measured, not inferred.
-Next item.)*
+**R16. Common random numbers are broken — SHIPPED 2026-08-16, reference set regenerated with owner
+sign-off.** *(Found 2026-07-31 diagnosing why R15's tie tiers are so wide. Measured, not inferred.)*
+> **Fix landed:** per-draw substream re-seeding (`Rng.reseedDraw` + `mixInt`,
+> `packages/core/src/rng.ts`; each `Rng` re-derives from its own seed and the draw index at the top
+> of every draw in `costPerMile`, and a local `substream()` factory registers each stream as it is
+> created so a sixth component cannot be added and silently miss the alignment). This deviates from the mechanism sketched below — a constant-consumption Poisson
+> plus a capped pre-draw of insurance normals — and was chosen because it needs no cap: re-seeding
+> per draw contains variable consumption *within* the draw that produced it, so a differing Poisson
+> count or year count can no longer shift any later draw. The prescribed mechanism would have had to
+> truncate the Poisson tail and bound the year count (at the intake's 1,000 mi/yr floor against a
+> 275k-mile EOL, that bound is ~275 normals per draw), i.e. it would have changed the model to fix
+> the sampler. This does not.
+>
+> **Measured, same diagnostic case (100k hold, 1,100 paired draws), noise cancelled by pairing:**
+> | pair | before | after |
+> |---|---|---|
+> | Corolla 78k vs 52k (the R16 case) | −2% | **35%** |
+> | Camry Hybrid 80k vs 60k | −24% | **29%** |
+> | Bolt EV 45k vs 60k | 62% | **71%** |
+> | Elantra 45k vs 70k | 10% | **42%** |
+> | Corolla 55k vs 57.5k (one sweep grid step) | 12% | **85%** |
+>
+> The last row is the one the buy-point sweep's argmin and `upperOdo`'s tolerance walk actually
+> depend on. Model-year panel, as R16 asked: mean distinct tiers per car 4.01 → 4.63 at a 100k hold
+> and 4.85 → 6.35 at 150k; all-years-tied cars 8/71 → 7/71 (100k) and 9/71 → 8/71 (150k). The panel
+> can now separate years it previously could not — the predicted direction.
+>
+> **Levels barely move** (field-wide P50 vs the stored snapshot: mean −$0.0005/mi, MAE $0.0023,
+> max $0.0072, mean relative 0.42%; max rank movement 4). But `stat_tier` changes for 34/71 and
+> tier 2 grows 12 → 21 cars, because Rankings tie tiers are cut on *cross-vehicle* draws that this
+> fix does not pair — see **R24**. Guarded by a new test in `packages/core/test/determinism.test.ts`
+> ("adjacent buy points cancel most of the level noise when paired"), verified to fail without the fix.
+>
+> **Regeneration:** the declared NUMBERS-CHANGE EVENT was signed off by the owner on 2026-08-16 and
+> `npm run gen-reference -w @opencawr/core` re-ran all 71 `model_output` blocks. Core 134/134 and
+> pipeline 131/131 green. One sanity guard was widened rather than deleted — "top tier is
+> EV/hybrid/efficient sedans" checked a top-6 window and the Prius (hybrid) moved 6 → 7, so the
+> window is now top-8, with the reason recorded at the test.
+
+*Original diagnosis, kept for the record:*
 Two buy points of the SAME vehicle at the SAME seed should share nearly all their randomness, so
 the *difference* between them is far tighter than either level — that is the whole point of
 common random numbers, and it is what the tie test, the buy-point sweep and the model-year panel
@@ -322,6 +359,84 @@ the quadratic repair ramp past 120k and the age escalator past year 8 as unfixed
 causes; `resaleBlendWindowFraction` belongs on that list. Sensitivity-test it (0.10 / 0.25 / 0.40
 against `constants.eol_sigma_by_tier`) and ledger the result before anyone reads the hold axis as
 a finding about cars.
+
+**R24. Common random numbers still do not span VEHICLES — the Rankings tie tiers are unpaired.**
+*(Found 2026-08-16 while measuring R16. Measurement, not a defect claim.)*
+R16 paired draws within a vehicle. Across vehicles nothing is paired at all: `costPerMile` seeds
+every substream off `hashString(vehicle.name) ^ seed` (`packages/core/src/engine.ts`), so draw `i`
+of the Camry and draw `i` of the Corolla share no randomness by construction. `rankWithTiers`
+(`packages/core/src/tiers.ts`) nevertheless cuts tie tiers on `beatProb` over those draws, which is
+therefore an unpaired estimate of `P(X < Y)` — unbiased, but far noisier than it needs to be, and
+the reason R16's fix moved `stat_tier` for 34/71 cars while moving P50 by 0.42%. This is why ranks
+3–10 sit in one tie tier: the model genuinely cannot separate them, but part of "cannot" is sampler
+noise the standard technique removes.
+Fix: seed the shared components off `(seed, drawIndex)` and reserve the per-vehicle hash for
+components with no cross-vehicle counterpart (battery presence differs, so alignment is partial by
+nature — say which components are paired and which are not). Then re-measure the tie-tier widths
+before touching `CALIBRATION.tieTierBeatProb`. Another **numbers-change event**; sequence it with
+R16's regeneration rather than paying for two.
+
+**R25. A proxied vehicle's uncertainty band is as narrow as a curated one's — disclosure SHIPPED
+2026-08-16, the math half is open.** *(Found 2026-08-16 auditing the top of the leaderboard.)*
+`provenance: "proxied"` means every cost-relevant field — price curve, maintenance curve, EOL,
+reliability tier, insurance, battery — was copied from a segment peer (`ASSUMPTIONS.md` §F). Until
+now it was a pure data label: nothing in `packages/core` read it, and nothing in the app showed it.
+The one proxied seed vehicle, **Kia K4, ranks 8th with band $0.3815–$0.4657 — narrower than the
+curated Bolt EV's $0.3539–$0.5527.** The proxy reads as *more* certain than real data, because its
+dispersion is the peer's dispersion and carries no penalty for the borrowing itself.
+Shipped: one `PROXY_NOTE` string in `apps/web/src/engine.worker.ts` ("estimated from a similar car,
+not this model's own history"), surfaced as a per-row `proxyNote` on the Rankings table (reusing the
+existing `feasNote`/`truncNote` mechanism), in the Ladder chart's row label — the surface that
+actually *draws* the too-narrow band — and in the Deal Analyzer's `notes`. No cost math changed.
+Still undisclosed in the car drawer: `SurveyResponse`/`DealResponse` do not carry `provenance`, so
+that one needs plumbing rather than a render change.
+Open: whether a proxied row should carry an explicit dispersion penalty, and what value could be
+defended. This needs a number nobody has yet — the honest candidates are a measured curated-vs-peer
+disagreement (refit each curated vehicle from its own best peer and measure the error distribution,
+which the existing `proxy.ts` peer selection already makes computable) or nothing at all. Do not
+invent a sigma; measure one or leave the disclosure to carry it.
+
+**R26. `eol_maintained_miles` is a single-state sample that conflates low usage with durability,
+and EVs inherit their maker's GAS-car longevity.** *(Standing limitation, promoted to a roadmap
+item 2026-08-16 because it moves the ranking, not just the estimates.)*
+Already disclosed in `docs/eol-methodology.md` "Known limitations" and three OPEN rows in
+`ASSUMPTIONS.md` §E; filed here so it is queued rather than only confessed. Two distinct defects:
+(a) the per-model relative mileage rate cannot tell "second car, driven less" from "short-lived
+car" — it penalizes the Mini Cooper and Buick Encore and hands the Camry Hybrid a rideshare-inflated
+1.331, making a Toyota the least reliable row in the set; (b) EVs mostly land on the *make* basis,
+which measures that manufacturer's gas-car durability, with no EV-specific adjustment invented.
+Blast radius is known and large: R14's derivation alone shifted mean P50 11.86%, moved ranks by a
+mean of 6.37 (max 23) and changed `stat_tier` for 35/71. Both halves are data-blocked, not
+code-blocked — (a) wants VIN-level cohort following, (b) wants a second state or an EV-specific
+durability source, and the obvious second state (Washington) was evaluated and declined on licence
+and missing-odometer grounds. Nothing to implement until a source exists; the actionable step is
+sourcing, not coding.
+
+**R27. The reliability tier's `make` skew is evidence-blocked, not unfixed.** *(Audited 2026-08-16;
+filed to stop it being re-opened as if it were a bug.)*
+`docs/reliability-methodology.md` limitation 4 is frequently read as "the derivation forgot to
+normalize by make." It did not. Make-normalization was tested and is **worse by the doc's own
+benchmark** — agreement 34/69 → 32/69 and two-tier inversions 1 → **11** — and empirical-Bayes
+shrinkage toward the corpus mean is also tested and rejected (agreement 32 → 25). The metric is
+complaint *mix*, deliberately undenominated so volume cancels; `make` is treated as signal, not
+confound. The real residual is asymmetric and should be stated that way: Hyundai/Kia's downward
+push is arguably the derivation *correcting* the seed (Theta II GDI), while Toyota/Honda's upward
+compression is a genuine blind spot — complaint mix cannot see the long-run owner-survey reputation
+the seed's `low` tiers came from. **Do not re-litigate without new evidence**; the only open path
+the methodology leaves is a larger corpus or a new source. Note also that re-deriving at all needs
+560 live NHTSA requests — `packages/pipeline/.cache/` is absent and the committed fixtures cover a
+partial subset, so this is not runnable offline.
+
+**R28. Insurance is one flat national USAA multiplier and an uncited value-scaling reference.**
+*(Standing `ASSUMPTIONS.md` §A judgment, promoted 2026-08-16.)*
+`insurance_multiplier_USAA` (×0.80) is applied to every vehicle regardless of model, and
+`insurance_ref_book_usd` ($20,500) — the book value at which the modeled collision + comprehensive
+premium equals the NAIC state average — is a calibration, not a sourced figure. Insurance is a
+top-three line item for cheap cars, so a flat multiplier that is wrong by model shifts exactly the
+rows at the top of the leaderboard, where the spread between ranks 3–10 is under 2 ¢/mi. The
+existing insurance investigation (`docs/investigations/2026-07-29-insurance-source.md`) already
+proposes a per-model provenance flag; sourcing a per-model relativity is the R13/IIHS-HLDI thread,
+still licence-blocked.
 
 **R2. Model year as a designed surface, not an axis label — SHIPPED 2026-07-29** (rewritten
 and re-queued 2026-07-28 at the owner's direction; the original framing — "put implied model
