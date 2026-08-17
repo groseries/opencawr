@@ -5,6 +5,7 @@ import { useEngine } from "./useEngine.js";
 import { Ladder } from "./charts/Ladder.js";
 import { tierColor, tierTextColor } from "./charts/tierColors.js";
 import { DealAnalyzer } from "./deal/DealAnalyzer.js";
+import { FinancingCosts } from "./deal/FinancingCosts.js";
 import { IntakeCard } from "./intake.js";
 import { CarDrawer } from "./drawer/CarDrawer.js";
 
@@ -39,6 +40,8 @@ function safeLocalSet(key: string, value: string): void {
 
 export function App() {
   const [inputs, setInputs] = useState<EngineInputs>(DEFAULTS);
+  const [dealPrice, setDealPrice] = useState<number | null>(null);
+  const [lifetimeMiles, setLifetimeMiles] = useState<number | null>(null);
   const [rankBasis, setRankBasis] = useState<RankBasis>("p50");
   const [view, setView] = useState<"table" | "ladder">("table");
   const [tab, setTab] = useState<"rankings" | "analyze" | "assumptions">("rankings");
@@ -159,6 +162,9 @@ export function App() {
       <div className="layout">
         <aside className="rail">
           <Inputs inputs={inputs} onChange={setInputs} />
+          {tab === "analyze" && (
+            <FinancingCosts inputs={inputs} dealPrice={dealPrice} lifetimeMiles={lifetimeMiles} />
+          )}
           <p className="disclaimer">
             Estimates from a simulation, not advice. Every input above is editable — see the
             Assumptions tab for what backs each one.
@@ -375,7 +381,12 @@ export function App() {
             ))}
           <div style={{ display: tab === "analyze" ? "block" : "none" }}>
             {rows ? (
-              <DealAnalyzer inputs={inputs} rows={rows} />
+              <DealAnalyzer
+                inputs={inputs}
+                rows={rows}
+                onPriceChange={setDealPrice}
+                onLifetimeMiles={setLifetimeMiles}
+              />
             ) : (
               <div className="loading">
                 Running {DEFAULTS.draws ?? 1100} simulations per car…
