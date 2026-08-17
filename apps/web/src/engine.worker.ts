@@ -125,6 +125,10 @@ export interface DealResponse {
   cpm: DealSummary;
   priceVsCurveUsd: number;
   notes: string[];
+  /** The deal's own median holding-period miles (same quantity as
+   *  `RankedRow.lifetimeMilesP50`), so the Financing Costs section can share
+   *  this car's own miles basis — see `resolveMilesBasis` in deal/financing.ts. */
+  lifetimeMilesP50: number;
 }
 
 /** Survey drawer request (Task F): one car's cost-vs-buy-point grid, its default
@@ -553,6 +557,7 @@ function handleDeal(req: DealRequest) {
     },
     priceVsCurveUsd,
     notes,
+    lifetimeMilesP50: dealRes.lifetimeMilesP50,
   };
   self.postMessage(msg);
 }

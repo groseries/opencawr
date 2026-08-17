@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { EngineInputs } from "@opencawr/core";
 import type { RankedRow } from "../engine.worker.js";
 import { useDealEngine } from "../useDealEngine.js";
@@ -51,7 +51,23 @@ function validationError(year: number, odo: number, price: number): string | nul
 /** Score one real-world listing against the modeled 71-car field: percentile
  * within this car's own outcomes at the deal's odometer, rank position against the
  * field, and price vs. the modeled market curve. Estimates only — never "good/bad deal". */
-export function DealAnalyzer({ inputs, rows }: { inputs: EngineInputs; rows: RankedRow[] }) {
+export function DealAnalyzer({
+  inputs,
+  rows,
+  onLifetimeMiles,
+  onPriceChange,
+}: {
+  inputs: EngineInputs;
+  rows: RankedRow[];
+  /** Fired whenever the scored deal's holding-period miles changes — null
+   *  when there's no valid scored deal. Lets the Financing Costs section
+   *  (rendered elsewhere) opportunistically share this car's own miles
+   *  basis instead of falling back to a generic one. */
+  onLifetimeMiles?: (miles: number | null) => void;
+  /** Fired whenever the price-paid field changes, so Financing Costs can
+   *  prefill/sync to it without the two sections being tightly coupled. */
+  onPriceChange?: (price: number) => void;
+}) {
   const sortedByName = useMemo(
     () => [...rows].sort((a, b) => a.name.localeCompare(b.name)),
     [rows],
@@ -78,6 +94,14 @@ export function DealAnalyzer({ inputs, rows }: { inputs: EngineInputs; rows: Ran
     [vehicleName, year, odo, price, invalidReason],
   );
   const { result, computing } = useDealEngine(inputs, deal);
+
+  useEffect(() => {
+    onPriceChange?.(price);
+  }, [price, onPriceChange]);
+
+  useEffect(() => {
+    onLifetimeMiles?.(deal ? (result?.lifetimeMilesP50 ?? null) : null);
+  }, [deal, result, onLifetimeMiles]);
 
   // "cheaper than N of the field", counted over the very rows plotted in the
   // ladder below — not a separate worker-side pass at a different buy-point
