@@ -348,6 +348,9 @@ export function App() {
                               the hold on the rail — the row's own end of life, stated
                               as fact. */}
                           {r.truncNote ? ` · ${r.truncNote}` : ""}
+                          {/* Borrowed inputs — the band beside it is the peer's, not
+                              this model's, and nothing else on the row says so. */}
+                          {r.proxyNote ? ` · ${r.proxyNote}` : ""}
                           {isDimmed ? " · misses 1 filter" : ""}
                         </span>
                       </td>

@@ -76,6 +76,11 @@ export interface RankedRow {
    *  `CALIBRATION.truncatedDrawDisclosureFraction` when the median hold still
    *  completes. */
   truncNote: string | null;
+  /** Human note when this row's cost inputs were copied from a segment peer
+   *  (`vehicle.provenance === "proxied"`) rather than curated from this model's
+   *  own used-market history. Its band is as narrow as any curated row's, so
+   *  nothing else on the row reveals that the numbers are borrowed. */
+  proxyNote: string | null;
 }
 
 export interface EngineResponse {
@@ -348,6 +353,15 @@ let latestRankId = -1;
  * see ASSUMPTIONS.md. At `"eol"` no sweep runs (R10) and the pass stays
  * synchronous and live at ~0.12 s.
  */
+/**
+ * Provenance, stated as fact and never suppressed by rank: a `provenance: "proxied"`
+ * vehicle's price curve, maintenance curve, EOL and tier all come from a segment peer,
+ * so its band reflects the peer's data rather than evidence about this car — and the
+ * band alone is no clue, since it comes out no wider than a curated row's (R25).
+ * One string so the Rankings row and the Deal Analyzer cannot drift apart.
+ */
+const PROXY_NOTE = "estimated from a similar car, not this model's own history";
+
 async function handleRank(req: EngineRequest) {
   const { id, inputs } = req;
   latestRankId = id;
@@ -425,6 +439,7 @@ async function handleRank(req: EngineRequest) {
             : res.truncatedDrawFraction >= CALIBRATION.truncatedDrawDisclosureFraction
               ? `${Math.round(res.truncatedDrawFraction * 100)}% of outcomes end before ${holdK}k mi`
               : null;
+      const proxyNote = vehicle.provenance === "proxied" ? PROXY_NOTE : null;
       return {
         name: vehicle.name,
         etype: vehicle.etype,
@@ -447,6 +462,7 @@ async function handleRank(req: EngineRequest) {
         atSweetSpot,
         feasNote,
         truncNote,
+        proxyNote,
       };
     });
   };
@@ -517,6 +533,8 @@ function handleDeal(req: DealRequest) {
   } else if (Math.round(rawYear) < vehicle.first_year) {
     notes.push("more miles than plausible for this model's age");
   }
+
+  if (vehicle.provenance === "proxied") notes.push(PROXY_NOTE);
 
   notes.push(
     "reliability tier is derived from NHTSA complaint mix, not a measured defect rate — treat repair and tail-risk estimates with caution",

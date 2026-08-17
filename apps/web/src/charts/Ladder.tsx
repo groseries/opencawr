@@ -182,6 +182,10 @@ export function Ladder({
           const emphasized = emphasizedOf(r);
           const isDimmed = dimmed?.has(r.name) ?? false;
           const missesNote = isDimmed ? " — misses 1 filter" : "";
+          // This chart DRAWS the 90% range as a bar, so a proxied row's band — no wider
+          // than a curated one's despite being the peer's — is at its most misleading
+          // here (R25). Same string as the table's note, via the row.
+          const proxyNote = r.proxyNote ? ` — ${r.proxyNote}` : "";
           return (
             <g key={r.name} style={isDimmed ? { opacity: 0.35 } : undefined}>
               {entry.newTier && (
@@ -233,14 +237,14 @@ export function Ladder({
                   r.p95,
                 )}, ${basis === "p75" ? "typical P50" : "P75"} ${fmtExact(
                   basis === "p75" ? r.p50 : r.p75,
-                )}, tier ${r.statTier}${missesNote}`}
+                )}, tier ${r.statTier}${missesNote}${proxyNote}`}
               >
                 <title>
                   {`${r.name} — ${basis === "p75" ? "bad-luck cost P75" : "median"} ${fmtExact(
                     emphasized,
                   )}/mi · 90% range ${fmtExact(r.p05)}–${fmtExact(r.p95)} · ${
                     basis === "p75" ? "typical P50" : "P75"
-                  } ${fmtExact(basis === "p75" ? r.p50 : r.p75)} · tier ${r.statTier}${missesNote}`}
+                  } ${fmtExact(basis === "p75" ? r.p50 : r.p75)} · tier ${r.statTier}${missesNote}${proxyNote}`}
                 </title>
               </rect>
             </g>

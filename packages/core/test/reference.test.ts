@@ -55,10 +55,14 @@ describe("reference-set sanity", () => {
     }
   });
 
+  // Window widened 6 → 8 for R16 (2026-08-16): fixing common random numbers moved the
+  // Prius (hybrid) from rank 6 to 7 on a P50 change below 0.01 ¢/mi. It sits in a tie
+  // tier with five cars inside 2 ¢/mi, so which of them prints 6th is not a claim this
+  // reference set should be pinning.
   it("ranking stays in the prototype's ballpark (top tier is EV/hybrid/efficient sedans)", () => {
-    const top6 = ranked.slice(0, 6).map((r) => r.id);
-    expect(top6).toContain("Chevy Bolt EV");
-    expect(top6).toContain("Toyota Prius (hybrid)");
+    const top8 = ranked.slice(0, 8).map((r) => r.id);
+    expect(top8).toContain("Chevy Bolt EV");
+    expect(top8).toContain("Toyota Prius (hybrid)");
   });
 
   it("every electrified car carries data-driven battery risk", () => {
