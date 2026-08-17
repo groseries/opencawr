@@ -218,3 +218,77 @@ function modelYearViewOf(
   const best = byRank[0]!;
   return { points, bestYear: best.year, bestOdo: best.point.odo, bestP50: best.point.p50 };
 }
+
+/**
+ * The newest model year's own local optimum, measured against the sweet spot —
+ * the "what does buying new cost me?" question, answered from the ranking that
+ * has already been computed.
+ *
+ * A pure view over an existing `ModelYearRankResult`: it prices nothing, calls
+ * no engine function, and is safe to run on a result the caller already holds.
+ * That is deliberate — `handleModelYearRank` already runs one `modelYearRank`
+ * per holding-period preset, so the newest year and the sweet spot are both
+ * points it has in hand, and reporting the gap between them must not cost a
+ * second pass over the grid.
+ *
+ * "New" here means **the vehicle's newest model year priced at ITS OWN cheapest
+ * odometer**, not odometer zero. That follows the panel's existing rule (every
+ * model-year row is that year's own local optimum, `ModelYearRankPoint.odo`)
+ * rather than inventing a second definition, and it keeps the comparison
+ * like-for-like: both sides of the premium are a cheapest-point-in-a-band
+ * figure off the same grid. It also stays inside R11's floor — the sweep grid
+ * never runs below the price curve's first observed odometer, so this never
+ * quotes a price the curve did not observe.
+ *
+ * Requires the same fixed holding period everything upstream of it does (R10):
+ * the caller's `ModelYearRankResult` cannot exist at `"eol"`, because
+ * `modelYearRank` refuses that horizon outright.
+ */
+export interface NewestYearPremium {
+  /** The vehicle's newest model year (`vehicle.last_year`) — for a
+   *  discontinued car this is the last year it was SOLD, which is not the same
+   *  as a car you can buy new today. Callers close to the user must say so. */
+  year: number;
+  /** That year's own cheapest odometer on the sweep grid — the same
+   *  `ModelYearRankPoint.odo` the model-year table shows for this row. */
+  odo: number;
+  p50: number;
+  /** No odometer of this year's own band was feasible, so the figures come from
+   *  the nearest usable grid point instead (`ModelYearRankPoint.clamped`). Not
+   *  a like-for-like comparison against the sweet spot; the UI marks it. */
+  clamped: boolean;
+  /** `(p50 - bestP50) / bestP50` — what the newest year costs over the sweet
+   *  spot, as a fraction of the sweet spot. `0` when the newest year IS the
+   *  sweet spot. `null` when `bestP50` is not positive, mirroring the guard
+   *  `handleModelYearRank` already applies to `marginVsRunnerUp` (unreachable
+   *  with real prices; a zeroed test fixture can produce it). */
+  premiumVsBest: number | null;
+  /** The newest year shares the cheapest tie tier with the sweet spot, so the
+   *  model cannot separate the two (R15) and `premiumVsBest` must not be
+   *  presented as a finding — it is inside the model's own noise. Always true
+   *  when `isBest` is, since rank 1 is tier 1 by construction. */
+  tiedWithBest: boolean;
+  /** The newest year IS the sweet spot: buying new is the cost-minimizing
+   *  choice for this car at this holding period, not merely indistinguishable
+   *  from it. A stronger and much more useful statement than `tiedWithBest`,
+   *  which is why it is reported separately. */
+  isBest: boolean;
+}
+
+export function newestYearPremium(result: ModelYearRankResult): NewestYearPremium {
+  // Highest year, not the last element: `modelYearRank` emits points
+  // year-ascending today, but nothing about this view should depend on that.
+  let newest = result.points[0]!;
+  for (const p of result.points) if (p.year > newest.year) newest = p;
+
+  return {
+    year: newest.year,
+    odo: newest.odo,
+    p50: newest.p50,
+    clamped: newest.clamped,
+    premiumVsBest:
+      result.bestP50 > 0 ? (newest.p50 - result.bestP50) / result.bestP50 : null,
+    tiedWithBest: newest.tier === 1,
+    isBest: newest.year === result.bestYear,
+  };
+}
