@@ -19,7 +19,11 @@ import type { ModelYearBestAtHold } from "../engine.worker.js";
  * the newest year from the sweet spot, this says so instead of printing a
  * percentage the model can't stand behind (R15); and every row is priced at ONE
  * fixed hold, never at "until it dies", because an open-ended horizon is itself
- * a function of the buy odometer (R10). */
+ * a function of the buy odometer (R10). The cheapest-year cell applies R15 a
+ * second way, matching `ByHoldSummary` in ModelYearRanking.tsx word-for-word:
+ * where more than one year shares the top tie tier there is no single cheapest
+ * year to name, so the cell says so instead of picking one — otherwise this
+ * panel could name a year the table directly beneath it refuses to. */
 
 const fmt = (x: number) => `$${x.toFixed(3)}`;
 const fmtK = (x: number) => `${Math.round(x / 1000)}k`;
@@ -62,10 +66,8 @@ export function NewCarPremium({
         <thead>
           <tr>
             <th>If you hold</th>
-            <th>Cheapest year · mileage</th>
-            <th>Newest year · mileage</th>
-            <th className="num">$/mi cheapest</th>
-            <th className="num">$/mi newest</th>
+            <th>Cheapest year · mileage · $/mi</th>
+            <th>Newest year · mileage · $/mi</th>
             <th className="num">Cost of buying new</th>
           </tr>
         </thead>
@@ -74,10 +76,16 @@ export function NewCarPremium({
             <tr key={h.holdMiles}>
               <td className="mono">{fmtK(h.holdMiles)} mi</td>
               <td className="mono">
-                {h.degenerate ? "—" : `${h.bestYear} · ${fmtK(h.bestOdo)} mi`}
+                {h.degenerate
+                  ? "—"
+                  : h.tiedTopYears.length > 1
+                    ? "no single cheapest year"
+                    : `${h.bestYear} · ${fmtK(h.bestOdo)} mi · ${fmt(h.bestP50)}`}
               </td>
               <td className="mono">
-                {h.degenerate ? "—" : `${h.newYear} · ${fmtK(h.newOdo)} mi`}
+                {h.degenerate
+                  ? "—"
+                  : `${h.newYear} · ${fmtK(h.newOdo)} mi · ${fmt(h.newP50)}`}
                 {!h.degenerate && h.newClamped ? (
                   <abbr
                     className="myr-clamped"
@@ -87,8 +95,6 @@ export function NewCarPremium({
                   </abbr>
                 ) : null}
               </td>
-              <td className="num mono">{h.degenerate ? "—" : fmt(h.bestP50)}</td>
-              <td className="num mono">{h.degenerate ? "—" : fmt(h.newP50)}</td>
               <td className="num mono">
                 {h.degenerate
                   ? "every year prices the same"
