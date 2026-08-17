@@ -16,8 +16,12 @@ export type {
   SweepInputs,
   SweetSpotPricing,
 } from "./buypoint.js";
-export { modelYearRank } from "./modelyear.js";
-export type { ModelYearRankPoint, ModelYearRankResult } from "./modelyear.js";
+export { modelYearRank, newestYearPremium } from "./modelyear.js";
+export type {
+  ModelYearRankPoint,
+  ModelYearRankResult,
+  NewestYearPremium,
+} from "./modelyear.js";
 export type { CurvePoint } from "./curves.js";
 export { CALIBRATION } from "./calibration.js";
 export { Rng, hashString } from "./rng.js";

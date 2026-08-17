@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { modelYearRank } from "../src/modelyear.js";
+import { modelYearRank, newestYearPremium } from "../src/modelyear.js";
 import { buyPointSweep } from "../src/buypoint.js";
 import type { SweepInputs } from "../src/buypoint.js";
 import type { Constants, Vehicle } from "../src/types.js";
+import type { ModelYearRankPoint, ModelYearRankResult } from "../src/modelyear.js";
 
 /** Same zeroed-out fixture discipline as buypoint.test.ts: every non-
  *  depreciation component zeroed so costPerMile collapses to an exact,
@@ -347,5 +348,199 @@ describe("modelYearRank", () => {
     const long = modelYearRank(vehicle, constants, { holdMiles: 80_000 }, { step: 10_000 });
 
     expect(short.points.map((p) => p.p50)).not.toEqual(long.points.map((p) => p.p50));
+  });
+});
+
+/** Builds a `ModelYearRankResult` directly, for the `newestYearPremium`
+ *  branches that are impractical to force through a Monte Carlo fixture
+ *  (a tie with the sweet spot, a clamped newest year, out-of-order points).
+ *  Every field `newestYearPremium` reads is set explicitly. */
+function makeRankResult(
+  points: Array<Partial<ModelYearRankPoint> & { year: number; p50: number }>,
+  best: { bestYear: number; bestOdo: number; bestP50: number },
+): ModelYearRankResult {
+  return {
+    points: points.map((p) => ({
+      year: p.year,
+      odo: p.odo ?? 0,
+      clamped: p.clamped ?? false,
+      p50: p.p50,
+      rank: p.rank ?? 1,
+      tier: p.tier ?? null,
+      beatsNextProb: p.beatsNextProb ?? null,
+    })),
+    ...best,
+  };
+}
+
+/**
+ * The newest model year is what a "buy new" shopper is choosing, and this
+ * reports what that choice costs against the same car's own sweet spot.
+ *
+ * Two of these tests drive the REAL `modelYearRank` so the function is pinned
+ * against what the engine actually produces; the rest hand-build a
+ * `ModelYearRankResult` to reach branches (a tie with the sweet spot, a clamped
+ * newest year, out-of-order points) that are fiddly to force through a Monte
+ * Carlo fixture and would otherwise be pinned by guesswork.
+ */
+describe("newestYearPremium", () => {
+  it("prices the newest model year against the sweet spot, on the real ranking", () => {
+    // Zeroed fixture -> $/mi collapses to price / (eol - buyOdo), exactly.
+    // am=10,000, now_year=2025, step 10,000 -> one grid point per year band:
+    // 2025->0, 2024->10k, 2023->20k, 2022->30k, 2021->40k, 2020->50k.
+    // The dip at 30k makes 2022 the sweet spot at 50,000/970,000 = 5/97,
+    // while the newest year (2025, odo 0) is 100,000/1,000,000 = 1/10.
+    // Premium = (1/10) / (5/97) - 1 = 97/50 - 1 = 0.94 exactly.
+    const vehicle = makeVehicle({
+      eol_maintained_miles: 1_000_000,
+      price_vs_odometer_usd: {
+        "0": 100_000,
+        "10000": 95_000,
+        "20000": 90_000,
+        "30000": 50_000,
+        "40000": 88_000,
+        "50000": 87_000,
+      },
+    });
+    const constants = makeConstants();
+
+    const result = modelYearRank(vehicle, constants, { holdMiles: 1_000_000 }, { step: 10_000 });
+    const premium = newestYearPremium(result);
+
+    expect(result.bestYear).toBe(2022);
+    expect(premium.year).toBe(2025);
+    expect(premium.odo).toBe(0);
+    expect(premium.p50).toBeCloseTo(0.1, 10);
+    expect(premium.clamped).toBe(false);
+    expect(premium.premiumVsBest).toBeCloseTo(0.94, 10);
+    expect(premium.isBest).toBe(false);
+    // No noise in this fixture, so every year separates into its own tier.
+    expect(premium.tiedWithBest).toBe(false);
+  });
+
+  it("reports the newest year AS the sweet spot when buying new is cost-minimizing", () => {
+    // Flat price curve -> $/mi = price / (eol - odo), strictly increasing in
+    // odometer, so the newest year (odo 0) IS the cheapest point on the grid.
+    // This is the case worth naming in the UI: for this car, new wins outright.
+    const vehicle = makeVehicle();
+    const constants = makeConstants();
+
+    const result = modelYearRank(vehicle, constants, { holdMiles: 1_000_000 }, { step: 10_000 });
+    const premium = newestYearPremium(result);
+
+    expect(result.bestYear).toBe(2025);
+    expect(premium.year).toBe(2025);
+    expect(premium.isBest).toBe(true);
+    expect(premium.premiumVsBest).toBe(0);
+    expect(premium.tiedWithBest).toBe(true); // rank 1 is always tier 1
+  });
+
+  it("flags a newest year the tie tiers cannot separate from the sweet spot", () => {
+    // Hand-built: the newest year sits 3.4% above the sweet spot but shares
+    // tier 1, so the model cannot say the two differ (R15). Callers must not
+    // present premiumVsBest as a finding here.
+    const result = makeRankResult(
+      [
+        { year: 2024, odo: 10_000, p50: 0.29, rank: 1, tier: 1 },
+        { year: 2025, odo: 0, p50: 0.3, rank: 2, tier: 1 },
+      ],
+      { bestYear: 2024, bestOdo: 10_000, bestP50: 0.29 },
+    );
+
+    const premium = newestYearPremium(result);
+
+    expect(premium.year).toBe(2025);
+    expect(premium.tiedWithBest).toBe(true);
+    expect(premium.isBest).toBe(false);
+    expect(premium.premiumVsBest).toBeCloseTo(0.0344827586, 8);
+  });
+
+  it("carries the clamped marking through, so the UI can caveat the row", () => {
+    const result = makeRankResult(
+      [
+        { year: 2024, odo: 30_000, p50: 0.29, rank: 1, tier: 1 },
+        { year: 2025, odo: 30_000, p50: 0.29, rank: 2, tier: 1, clamped: true },
+      ],
+      { bestYear: 2024, bestOdo: 30_000, bestP50: 0.29 },
+    );
+
+    const premium = newestYearPremium(result);
+
+    expect(premium.year).toBe(2025);
+    expect(premium.clamped).toBe(true);
+  });
+
+  it("picks the highest model year, not the last array element", () => {
+    // modelYearRank emits points year-ascending, but this function must not
+    // depend on that ordering to name "the newest year".
+    const result = makeRankResult(
+      [
+        { year: 2025, odo: 0, p50: 0.4, rank: 2, tier: 2 },
+        { year: 2023, odo: 20_000, p50: 0.2, rank: 1, tier: 1 },
+      ],
+      { bestYear: 2023, bestOdo: 20_000, bestP50: 0.2 },
+    );
+
+    const premium = newestYearPremium(result);
+
+    expect(premium.year).toBe(2025);
+    expect(premium.p50).toBe(0.4);
+    expect(premium.premiumVsBest).toBeCloseTo(1.0, 10);
+  });
+
+  it("returns a null premium rather than dividing by a zero sweet-spot price", () => {
+    const result = makeRankResult([{ year: 2025, odo: 0, p50: 0, rank: 1, tier: 1 }], {
+      bestYear: 2025,
+      bestOdo: 0,
+      bestP50: 0,
+    });
+
+    expect(newestYearPremium(result).premiumVsBest).toBeNull();
+  });
+
+  it("treats a null tier as tied rather than separated (Finding 4)", () => {
+    // The newest year's draws weren't retained, so its tier is null — "not
+    // known to be separated" must read as tied, not as a false "not tied".
+    const result = makeRankResult(
+      [
+        { year: 2024, odo: 10_000, p50: 0.29, rank: 1, tier: 1 },
+        { year: 2025, odo: 0, p50: 0.3, rank: 2, tier: null },
+      ],
+      { bestYear: 2024, bestOdo: 10_000, bestP50: 0.29 },
+    );
+
+    const premium = newestYearPremium(result);
+
+    expect(premium.year).toBe(2025);
+    expect(premium.tiedWithBest).toBe(true);
+  });
+
+  it("isBest and tiedWithBest are independent signals, not mutually exclusive (core contract, not a UI regression test)", () => {
+    // The Finding-1 bug (NewCarPremium.tsx's cost cell testing `isBest` before
+    // the tie condition) lived entirely in that ternary's branch ORDER — it is
+    // not something this function could get wrong, since `isBest` is purely
+    // rank-based (`newest.year === result.bestYear`) and `tiedWithBest` purely
+    // tier-based, computed independently below. apps/web has no test framework
+    // (no vitest dependency, no test directory), so the UI ternary itself is
+    // untestable here; what IS worth pinning at this layer is the contract the
+    // UI fix depends on — a multi-year tier 1 must keep `tiedWithBest` true
+    // even when `isBest` is also true, i.e. `isBest` must never be folded into
+    // "solo win" at this layer, only reported and left for the caller to
+    // combine with `tiedWithBest` the way the corrected UI now does.
+    const result = makeRankResult(
+      [
+        { year: 2025, odo: 0, p50: 0.29, rank: 1, tier: 1 },
+        { year: 2024, odo: 10_000, p50: 0.291, rank: 2, tier: 1 },
+      ],
+      { bestYear: 2025, bestOdo: 0, bestP50: 0.29 },
+    );
+    // Sanity on the fixture itself: genuinely two years share tier 1, not one.
+    expect(result.points.filter((p) => p.tier === 1)).toHaveLength(2);
+
+    const premium = newestYearPremium(result);
+
+    expect(premium.year).toBe(2025);
+    expect(premium.isBest).toBe(true);
+    expect(premium.tiedWithBest).toBe(true);
   });
 });
