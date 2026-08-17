@@ -515,11 +515,18 @@ describe("newestYearPremium", () => {
     expect(premium.tiedWithBest).toBe(true);
   });
 
-  it("keeps tiedWithBest true even when the newest year's rank-1 is a tie-break (Finding 1)", () => {
-    // The newest year ranks 1 but shares tier 1 with another year — rank 1 is
-    // a tie-break here, not a separated finding, so isBest and tiedWithBest
-    // must both be true. This is exactly the combination NewCarPremium.tsx's
-    // cost cell mishandled by testing isBest before the tie condition.
+  it("isBest and tiedWithBest are independent signals, not mutually exclusive (core contract, not a UI regression test)", () => {
+    // The Finding-1 bug (NewCarPremium.tsx's cost cell testing `isBest` before
+    // the tie condition) lived entirely in that ternary's branch ORDER — it is
+    // not something this function could get wrong, since `isBest` is purely
+    // rank-based (`newest.year === result.bestYear`) and `tiedWithBest` purely
+    // tier-based, computed independently below. apps/web has no test framework
+    // (no vitest dependency, no test directory), so the UI ternary itself is
+    // untestable here; what IS worth pinning at this layer is the contract the
+    // UI fix depends on — a multi-year tier 1 must keep `tiedWithBest` true
+    // even when `isBest` is also true, i.e. `isBest` must never be folded into
+    // "solo win" at this layer, only reported and left for the caller to
+    // combine with `tiedWithBest` the way the corrected UI now does.
     const result = makeRankResult(
       [
         { year: 2025, odo: 0, p50: 0.29, rank: 1, tier: 1 },
@@ -527,6 +534,8 @@ describe("newestYearPremium", () => {
       ],
       { bestYear: 2025, bestOdo: 0, bestP50: 0.29 },
     );
+    // Sanity on the fixture itself: genuinely two years share tier 1, not one.
+    expect(result.points.filter((p) => p.tier === 1)).toHaveLength(2);
 
     const premium = newestYearPremium(result);
 

@@ -55,12 +55,21 @@ export function NewCarPremium({
   const newestYear = byHold[0]!.newYear;
   const anyClamped = byHold.some((h) => !h.degenerate && h.newClamped);
   const usable = byHold.filter((h) => !h.degenerate);
-  // Either signal means the top tier is not a single separable year (Finding 1):
-  // `newTiedWithBest` when the newest year itself shares tier 1 with the sweet
-  // spot, `tiedTopYears.length > 1` when the "cheapest year" it would be
-  // compared against is itself a multi-year tie. Shared by the table cell below
-  // and by newWins/quantified so the caption can't claim more than the table does.
-  const newTied = (h: ModelYearBestAtHold) => h.newTiedWithBest || h.tiedTopYears.length > 1;
+  // True exactly when naming the newest year a winner would report a tie-break
+  // as a finding (Finding 1, corrected 2nd pass — the first pass's
+  // `newTiedWithBest || tiedTopYears.length > 1` was wrong: that OR fires
+  // whenever ANY row's top tier holds more than one year, even a tier the
+  // newest year isn't part of, which mislabeled genuinely separable rows
+  // "tied" — measured on Toyota RAV4 at 50k/100k and Tesla Model 3 at 150k,
+  // where a multi-year tier 1 exists but the newest year sits below it).
+  // `newTiedWithBest` (`newest.tier === null || newest.tier === 1`) is true
+  // whenever the newest year is IN tier 1, or its tier couldn't be
+  // established at all — both cases where the model has not shown the newest
+  // year is separably ahead. The only way to withhold `newTiedWithBest` is a
+  // GENUINE solo win: newest year alone in tier 1, which (since tier 1 always
+  // contains rank 1) is equivalent to `newIsBest && tiedTopYears.length === 1`.
+  const newTied = (h: ModelYearBestAtHold) =>
+    h.newTiedWithBest && !(h.newIsBest && h.tiedTopYears.length === 1);
   const newWins = usable.filter((h) => h.newIsBest && !newTied(h));
   const quantified = usable.filter((h) => !h.newIsBest && !newTied(h) && h.newPremium !== null);
   // Whether the premium actually falls as the hold grows, checked against these
