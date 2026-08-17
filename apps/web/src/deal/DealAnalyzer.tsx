@@ -100,8 +100,8 @@ export function DealAnalyzer({
   }, [price, onPriceChange]);
 
   useEffect(() => {
-    onLifetimeMiles?.(result?.lifetimeMilesP50 ?? null);
-  }, [result, onLifetimeMiles]);
+    onLifetimeMiles?.(deal ? (result?.lifetimeMilesP50 ?? null) : null);
+  }, [deal, result, onLifetimeMiles]);
 
   // "cheaper than N of the field", counted over the very rows plotted in the
   // ladder below — not a separate worker-side pass at a different buy-point
