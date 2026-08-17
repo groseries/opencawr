@@ -497,4 +497,41 @@ describe("newestYearPremium", () => {
 
     expect(newestYearPremium(result).premiumVsBest).toBeNull();
   });
+
+  it("treats a null tier as tied rather than separated (Finding 4)", () => {
+    // The newest year's draws weren't retained, so its tier is null — "not
+    // known to be separated" must read as tied, not as a false "not tied".
+    const result = makeRankResult(
+      [
+        { year: 2024, odo: 10_000, p50: 0.29, rank: 1, tier: 1 },
+        { year: 2025, odo: 0, p50: 0.3, rank: 2, tier: null },
+      ],
+      { bestYear: 2024, bestOdo: 10_000, bestP50: 0.29 },
+    );
+
+    const premium = newestYearPremium(result);
+
+    expect(premium.year).toBe(2025);
+    expect(premium.tiedWithBest).toBe(true);
+  });
+
+  it("keeps tiedWithBest true even when the newest year's rank-1 is a tie-break (Finding 1)", () => {
+    // The newest year ranks 1 but shares tier 1 with another year — rank 1 is
+    // a tie-break here, not a separated finding, so isBest and tiedWithBest
+    // must both be true. This is exactly the combination NewCarPremium.tsx's
+    // cost cell mishandled by testing isBest before the tie condition.
+    const result = makeRankResult(
+      [
+        { year: 2025, odo: 0, p50: 0.29, rank: 1, tier: 1 },
+        { year: 2024, odo: 10_000, p50: 0.291, rank: 2, tier: 1 },
+      ],
+      { bestYear: 2025, bestOdo: 0, bestP50: 0.29 },
+    );
+
+    const premium = newestYearPremium(result);
+
+    expect(premium.year).toBe(2025);
+    expect(premium.isBest).toBe(true);
+    expect(premium.tiedWithBest).toBe(true);
+  });
 });

@@ -238,7 +238,11 @@ export interface ModelYearBestAtHold {
    *  (packages/core). Same hold, same grid, same draws as `bestYear` above, so
    *  the two are directly comparable by construction. */
   newYear: number;
+  /** The odometer that goes with `newYear` — same year-AND-mileage answer
+   *  `bestOdo` gives above, sourced from `newestYearPremium`'s own `odo`. */
   newOdo: number;
+  /** `newYear`'s own $/mi at `newOdo`, from `newestYearPremium`'s `p50` — the
+   *  figure `newPremium` below measures against `bestP50`. */
   newP50: number;
   /** The newest year had no feasible odometer of its own, so its figures come
    *  from the nearest usable grid point — the same `*` caveat the model-year

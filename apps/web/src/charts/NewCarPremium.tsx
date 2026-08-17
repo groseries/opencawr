@@ -55,10 +55,19 @@ export function NewCarPremium({
   const newestYear = byHold[0]!.newYear;
   const anyClamped = byHold.some((h) => !h.degenerate && h.newClamped);
   const usable = byHold.filter((h) => !h.degenerate);
-  const newWins = usable.filter((h) => h.newIsBest);
-  const quantified = usable.filter(
-    (h) => !h.newIsBest && !h.newTiedWithBest && h.newPremium !== null,
-  );
+  // Either signal means the top tier is not a single separable year (Finding 1):
+  // `newTiedWithBest` when the newest year itself shares tier 1 with the sweet
+  // spot, `tiedTopYears.length > 1` when the "cheapest year" it would be
+  // compared against is itself a multi-year tie. Shared by the table cell below
+  // and by newWins/quantified so the caption can't claim more than the table does.
+  const newTied = (h: ModelYearBestAtHold) => h.newTiedWithBest || h.tiedTopYears.length > 1;
+  const newWins = usable.filter((h) => h.newIsBest && !newTied(h));
+  const quantified = usable.filter((h) => !h.newIsBest && !newTied(h) && h.newPremium !== null);
+  // Whether the premium actually falls as the hold grows, checked against these
+  // rows rather than asserted — true for all 71 seed vehicles today, but the
+  // catalogue is growing and this caption must not claim more than it verifies.
+  const premiums = usable.map((h) => h.newPremium).filter((p): p is number => p !== null);
+  const premiumShrinks = premiums.every((p, i) => i === 0 || p <= premiums[i - 1]!);
 
   return (
     <>
@@ -79,7 +88,7 @@ export function NewCarPremium({
                 {h.degenerate
                   ? "—"
                   : h.tiedTopYears.length > 1
-                    ? "no single cheapest year"
+                    ? `no single cheapest year · ${fmt(h.bestP50)}`
                     : `${h.bestYear} · ${fmtK(h.bestOdo)} mi · ${fmt(h.bestP50)}`}
               </td>
               <td className="mono">
@@ -98,10 +107,10 @@ export function NewCarPremium({
               <td className="num mono">
                 {h.degenerate
                   ? "every year prices the same"
-                  : h.newIsBest
-                    ? "none — the newest year IS the cheapest"
-                    : h.newTiedWithBest
-                      ? "tied with the cheapest year"
+                  : newTied(h)
+                    ? "tied with the cheapest year"
+                    : h.newIsBest
+                      ? "none — the newest year IS the cheapest"
                       : h.newPremium === null
                         ? "—"
                         : `+${(h.newPremium * 100).toFixed(1)}%`}
@@ -117,7 +126,9 @@ export function NewCarPremium({
             ? "At some holding periods the newest model year is also the cheapest one outright, and at others it is not — how long you keep the car decides whether buying new costs anything at all."
             : quantified.length === 0
               ? "At no holding period shown can the model separate the newest model year from the cheapest one — the gap is inside its own noise, so there is no new-car premium worth quoting."
-              : "The cost of buying new shrinks as the holding period grows, because a newer car's higher purchase price is spread over more miles."}{" "}
+              : premiumShrinks
+                ? "The cost of buying new shrinks as the holding period grows, because a newer car's higher purchase price is spread over more miles."
+                : "The cost of buying new does not move in one direction for this car as the holding period grows."}{" "}
         Both columns are that model year priced at its OWN cheapest mileage on the same
         grid, at the same fixed holding period — so the gap between them is the cost of
         insisting on the newest year, not an artifact of comparing two different mileages.

@@ -252,6 +252,9 @@ export interface NewestYearPremium {
   /** That year's own cheapest odometer on the sweep grid — the same
    *  `ModelYearRankPoint.odo` the model-year table shows for this row. */
   odo: number;
+  /** That year's own $/mi at `odo` — the same `ModelYearRankPoint.p50` the
+   *  model-year table shows for this row, and the value `premiumVsBest`
+   *  below measures against `bestP50`. */
   p50: number;
   /** No odometer of this year's own band was feasible, so the figures come from
    *  the nearest usable grid point instead (`ModelYearRankPoint.clamped`). Not
@@ -266,7 +269,10 @@ export interface NewestYearPremium {
   /** The newest year shares the cheapest tie tier with the sweet spot, so the
    *  model cannot separate the two (R15) and `premiumVsBest` must not be
    *  presented as a finding — it is inside the model's own noise. Always true
-   *  when `isBest` is, since rank 1 is tier 1 by construction. */
+   *  when `isBest` is, since rank 1 is tier 1 by construction. A `null` tier
+   *  (draws not retained, so no tier could be computed) is deliberately
+   *  treated as tied too: the honest response to "no evidence of separation"
+   *  is to withhold the claim, not to assert one. */
   tiedWithBest: boolean;
   /** The newest year IS the sweet spot: buying new is the cost-minimizing
    *  choice for this car at this holding period, not merely indistinguishable
@@ -288,7 +294,7 @@ export function newestYearPremium(result: ModelYearRankResult): NewestYearPremiu
     clamped: newest.clamped,
     premiumVsBest:
       result.bestP50 > 0 ? (newest.p50 - result.bestP50) / result.bestP50 : null,
-    tiedWithBest: newest.tier === 1,
+    tiedWithBest: newest.tier === null || newest.tier === 1,
     isBest: newest.year === result.bestYear,
   };
 }
