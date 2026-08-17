@@ -722,6 +722,26 @@ flatness is artifact versus this genuine data ceiling.
   CVD ΔE does not clear the dataviz skill's ceiling — ten fixed categorical identities
   exceed what any palette can separate. Mitigated by the always-visible list and tooltips;
   documented in `ASSUMPTIONS.md` §I.
+- **`NewCarPremium.tsx`'s `newTied` conditional has no automated coverage at all, and it has
+  already been wrong twice** (2026-08-16). Both errors were the same class — the newest model
+  year reaching rank 1 via a *tie-break* is not the same as being separably cheapest — and both
+  produced a panel that contradicted `ModelYearRanking.tsx` on the same screen: first calling
+  ties solo wins (14/204 seed rows), then, after an over-correction, swallowing genuine solo
+  wins (10/204). The settled rule is
+  `h.newTiedWithBest && !(h.newIsBest && h.tiedTopYears.length === 1)`, measured over the seed
+  field as 10 solo wins / 70 tied / 124 quantified. **It cannot be unit-tested today: `apps/web`
+  has no test framework — no vitest dependency, no test directory** — so `packages/core` tests
+  reach `newestYearPremium` but never the ternary that consumes it, and a third regression
+  would be caught only by manual browser inspection. Adding a web test setup is a real decision
+  (new dev dependency + config) and was deliberately left outside the feature's scope. Note the
+  three per-task code reviews all passed this defect; only the whole-branch review caught it,
+  because it is a cross-layer property no single task's diff exposes.
+- `packages/core/test/modelyear.test.ts`'s "picks the highest model year, not the last array
+  element" places the newest year at `points[0]`, so a naive `points[0]` implementation would
+  also pass it — it rules out only the last-element bug. The order-independence property IS
+  pinned, twice, by the two tests that drive the real `modelYearRank` (their fixtures emit years
+  ascending, so `points[0]` is the OLDEST year while both assert the newest is returned). The
+  test's name overpromises; the coverage is not actually missing. Left as-is on that basis.
 
 ## Owner decisions still open (from ASSUMPTIONS.md §E)
 
