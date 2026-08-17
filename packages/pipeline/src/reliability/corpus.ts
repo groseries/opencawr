@@ -123,6 +123,38 @@ const NHTSA: Record<string, { make: string; match: Matcher }> = {
     match: re(/^911( CARRERA| CARRERA\/| CARRERA 4S)/, /TURBO|GT2|GT3/),
   },
   "Porsche 996 Turbo": { make: "PORSCHE", match: re(/^911 (TURBO|GT)/) },
+
+  // 71->100 seed expansion (2026-08), researched per-vehicle against live NHTSA
+  // catalogue data — see ROADMAP.md's 100-model rollout entry.
+  "GMC Sierra 1500": { make: "GMC", match: exact("SIERRA 1500", "SIERRA 1500 LIMITED", "SIERRA DENALI") },
+  "Ram 1500": { make: "RAM", match: re(/^(RAM )?1500( (CREW|QUAD|REGULAR) CAB)?$/) },
+  "Dodge Durango": { make: "DODGE", match: exact("DURANGO") },
+  "Cadillac XT5": { make: "CADILLAC", match: exact("XT5") },
+  "Lincoln Corsair": { make: "LINCOLN", match: re(/^CORSAIR/) },
+  "Acura RDX": { make: "ACURA", match: exact("RDX") },
+  "Lexus RX": { make: "LEXUS", match: exact("RX350", "RX 350", "RX 351") },
+  "Infiniti QX60": { make: "INFINITI", match: exact("QX60", "QX60 HYBRID") },
+  "Audi Q5": { make: "AUDI", match: re(/^(AUDI )?Q5$/) },
+  "BMW X3": { make: "BMW", match: re(/^X3\b/, /\bM\b|30E/) },
+  "Mercedes-Benz GLC": { make: "MERCEDES-BENZ", match: re(/^GLC(-CLASS)?( 300)?( 4MATIC)?$/i) },
+  "Genesis GV70": { make: "GENESIS", match: exact("GV70") },
+  "Mitsubishi Outlander": { make: "MITSUBISHI", match: re(/^OUTLANDER( MHEV)?$/) },
+  "Ford F-150": { make: "FORD", match: re(/^F-150\b/, /LIGHTNING/) },
+  "Chevy Silverado 1500": { make: "CHEVROLET", match: re(/^SILVERADO 1500( LTD)?$/) },
+  "Toyota Tundra": { make: "TOYOTA", match: exact("TUNDRA") },
+  "Jeep Wrangler": { make: "JEEP", match: re(/^WRANGLER\b/, /4XE|PHEV/) },
+  "Jeep Grand Cherokee": { make: "JEEP", match: re(/^GRAND CHEROKEE( SRT| TRACKHAWK)?$/) },
+  "Chevy Trax": { make: "CHEVROLET", match: exact("TRAX") },
+  "Nissan Altima": { make: "NISSAN", match: exact("ALTIMA") },
+  "Nissan Sentra": { make: "NISSAN", match: re(/^SENTRA\b/) },
+  "Mazda CX-30": { make: "MAZDA", match: exact("CX-30") },
+  "Subaru Crosstrek": { make: "SUBARU", match: re(/^(XV )?CROSSTREK( HYBRID| WILDERNESS)?$/) },
+  "Kia Seltos": { make: "KIA", match: exact("SELTOS") },
+  "Kia Forte": { make: "KIA", match: re(/^FORTE( KOUP)?$/) },
+  "Toyota Corolla Cross": { make: "TOYOTA", match: exact("COROLLA CROSS") },
+  "Honda HR-V": { make: "HONDA", match: exact("HR-V") },
+  "VW Jetta": { make: "VOLKSWAGEN", match: exact("JETTA") },
+  "Tesla Model Y": { make: "TESLA", match: re(/^MODEL Y\b/) },
 };
 
 /** Seed vehicles whose NHTSA mapping is genuinely ambiguous — disclosed in the

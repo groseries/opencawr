@@ -576,6 +576,17 @@ stored copies of a site's listing tables.
 Do R16 first regardless: it is free, and it determines how much of the current year-to-year
 flatness is artifact versus this genuine data ceiling.
 
+**R24. Split trims/variants per model, not just make/model.** *(Filed 2026-08-02, owner interest
+during the seed-set breadth pass from 71 to 100 models.)* Today's rows are one per make/model/
+etype spanning a year range (Camry gas and Camry Hybrid are already split, since they differ in
+`etype`), but trim-level differences within one etype — e.g. RAV4 LE vs XLE vs Limited — collapse
+into a single row on the base trim's price curve, EOL, maintenance and specs. Splitting means
+multiplying the 5 real-sourced data objects (`OpenCAWR_SPEC.md` §2) per trim, not just per model,
+and a `Vehicle` schema decision on how a trim nests under a model. Not scoped or estimated — check
+against R19's pending used-price re-pull and whether `packages/pipeline/src/assemble.ts`'s source
+pull can carry a trim dimension before committing to it. Sequence after the 100-model breadth pass
+lands, not concurrent with it.
+
 ## P3 — Deferred (previously planned)
 
 - **Community deals layer** — submitted deals become pipeline inputs (VIN-keyed, freshness

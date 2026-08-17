@@ -47,8 +47,8 @@ const shifts: number[] = [];
 for (const v of data.vehicles) {
   const res = results.get(v.name)!;
   const rk = rankByName.get(v.name)!;
-  if (!v.model_output_prototype) v.model_output_prototype = v.model_output;
-  shifts.push(res.p50 - (v.model_output_prototype.cost_per_mile_p50 ?? NaN));
+  if (!v.model_output_prototype && v.model_output) v.model_output_prototype = v.model_output;
+  if (v.model_output_prototype) shifts.push(res.p50 - v.model_output_prototype.cost_per_mile_p50);
   v.model_output = {
     cost_per_mile_p50: round(res.p50, 4),
     p75: round(res.p75, 4),
@@ -83,10 +83,10 @@ console.log(
 console.log("top 12 (new ranking, * = tier boundary):");
 let lastTier = 0;
 for (const r of ranked.slice(0, 12)) {
-  const proto = data.vehicles.find((v) => v.name === r.id)!.model_output_prototype!;
+  const proto = data.vehicles.find((v) => v.name === r.id)!.model_output_prototype;
   console.log(
     `${r.tier !== lastTier ? "*" : " "} T${r.tier} #${r.rank} ${r.id} — ` +
-      `$${r.p50.toFixed(4)}/mi (prototype $${proto.cost_per_mile_p50})`,
+      `$${r.p50.toFixed(4)}/mi (prototype ${proto ? `$${proto.cost_per_mile_p50}` : "n/a"})`,
   );
   lastTier = r.tier;
 }

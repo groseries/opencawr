@@ -183,12 +183,12 @@ describe("deriveReliability — powertrain complaint SHARE (real NHTSA fixtures)
 
   it("routes every seed vehicle to a reference group, with sport never derived", () => {
     const queries = corpusQueries();
-    expect(queries).toHaveLength(71);
+    expect(queries).toHaveLength(100);
     const sport = queries.filter((q) => q.seedTier === "sport");
     expect(sport).toHaveLength(2);
     expect(sport.every((q) => referenceFor(q) === null)).toBe(true);
-    expect(queries.filter((q) => referenceFor(q) === "ev")).toHaveLength(4);
-    expect(queries.filter((q) => referenceFor(q) === "main")).toHaveLength(65);
+    expect(queries.filter((q) => referenceFor(q) === "ev")).toHaveLength(5);
+    expect(queries.filter((q) => referenceFor(q) === "main")).toHaveLength(93);
   });
 
   it("windows queries at <= 6 model years ending no later than MY2022", () => {

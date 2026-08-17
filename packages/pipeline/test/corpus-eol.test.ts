@@ -23,7 +23,7 @@ describe("corpus-eol coverage (see corpus-eol.ts docstring)", () => {
       );
     }
 
-    expect(Object.keys(CORPUS_EOL)).toHaveLength(71);
+    expect(Object.keys(CORPUS_EOL)).toHaveLength(100);
     expect(Object.keys(CORPUS_EOL)).toHaveLength(seedNames.length);
   });
 
@@ -40,7 +40,10 @@ describe("corpus-eol coverage (see corpus-eol.ts docstring)", () => {
   it("gives every derivable entry a non-empty makeCode and modelNames", () => {
     for (const [name, entry] of Object.entries(CORPUS_EOL)) {
       if (!entry.derivable) continue;
-      expect(entry.makeCode, name).toMatch(/^[A-Z]{2,5}$/);
+      // "ME/BE" is Mercedes-Benz's real NY DMV make_code (verified via VIN-volume
+      // tracing, not a typo) — the usual 5-char-truncation convention doesn't hold
+      // for every make, so the pattern must allow a slash.
+      expect(entry.makeCode, name).toMatch(/^[A-Z/]{2,5}$/);
       expect(entry.modelNames.length, name).toBeGreaterThan(0);
       for (const m of entry.modelNames) {
         expect(m, `${name} modelNames entry`).toMatch(/^[A-Z0-9]+$/);
