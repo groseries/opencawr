@@ -700,3 +700,26 @@ Verified live at 1600×1200 in headless Chrome against a production build. Worth
 for the next agent: **`vite preview` binds IPv6 `[::1]` only while Chrome resolves
 `localhost` to IPv4**, so browser automation always got an error page — pass
 `--host 127.0.0.1`. (`vite dev` still hangs in sandboxed sessions.)
+
+- **New-car premium panel (drawer)** — 2026-08-16. `packages/core/src/modelyear.ts`'s new
+  `newestYearPremium` (a pure view over an existing `ModelYearRankResult` — prices nothing,
+  calls no engine function) plus `apps/web/src/charts/NewCarPremium.tsx`, rendered between
+  the survey heatmap and the model-year ranking. States what the newest model year costs
+  over the car's own sweet spot at each fixed hold, reusing the ranking `handleModelYearRank`
+  already computes per hold — **zero additional `costPerMile` calls, no new worker request
+  kind, no new CSS**. A 4-column table (`If you hold | Cheapest year · mileage · $/mi |
+  Newest year · mileage · $/mi | Cost of buying new`) — shipped first at 6 columns, then
+  narrowed to 4 (folding each `$/mi` into its own year·mileage cell) in a fix round
+  (`1759214`) after browser verification at 390×844 found the extra two columns pushed
+  "Cost of buying new" — the panel's whole point — entirely off-screen with no scroll
+  affordance; the owner's ruling was to cut columns rather than add CSS. Honours the
+  existing refusals rather than adding thresholds: "tied with the cheapest year" where
+  R15's tie tiers can't separate the newest year from the sweet spot, "no single cheapest
+  year" in the cheapest-year cell where R15's tiers can't separate a single winner among
+  the cheapest years either (matching `ByHoldSummary` in `ModelYearRanking.tsx`
+  word-for-word — also added in the same fix round, after verification found this panel
+  naming a year its sibling panel refused to), the degenerate refusal where every year
+  clamps to one odometer, and never computed at `"eol"` (R10). 6 new core tests;
+  `npm test -w @opencawr/core` 139/139, `reference.test.ts` 74/74 byte-identical. Reads
+  `data.vehicles` and the selected car's own grid at request time, so it needs no
+  follow-up when the catalogue grows past its current 71 rows. Ledger: `ASSUMPTIONS.md` §I.

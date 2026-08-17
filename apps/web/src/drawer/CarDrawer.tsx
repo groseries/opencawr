@@ -6,6 +6,7 @@ import { Heatmap } from "../charts/Heatmap.js";
 import { Breakdown } from "../charts/Breakdown.js";
 import { Sensitivity } from "../charts/Sensitivity.js";
 import { ModelYearRanking } from "../charts/ModelYearRanking.js";
+import { NewCarPremium } from "../charts/NewCarPremium.js";
 
 const fmt = (x: number) => `$${x.toFixed(3)}`;
 // Restores the powertrain-type token dropped from the Rankings row (R4 review
@@ -134,6 +135,20 @@ export function CarDrawer({
                 buyOdoAxis={result.buyOdoAxis}
                 holdMilesAxis={result.holdMilesAxis}
               />
+            </section>
+
+            <section className="drawer-section">
+              <h3 className="drawer-section-title">
+                Buying new: what the newest model year costs
+              </h3>
+              {myrResult && myrResult.vehicleName === vehicleName ? (
+                <NewCarPremium
+                  byHold={myrResult.byHold}
+                  discontinued={myrResult.newestYearDiscontinued}
+                />
+              ) : (
+                <p className="results-note">Pricing the newest model year…</p>
+              )}
             </section>
 
             <section className="drawer-section">

@@ -6,6 +6,7 @@ import {
   impliedModelYear,
   isFeasibleBuy,
   modelYearRank,
+  newestYearPremium,
   parseCurve,
   priceAtSweetSpot,
   rankWithTiers,
@@ -232,6 +233,34 @@ export interface ModelYearBestAtHold {
    *  feasible range at these assumptions — both Porsche 996 rows at defaults.
    *  Callers must not present `bestYear` as an answer when this is true. */
   degenerate: boolean;
+  /** The newest model year this car offers, priced at ITS OWN cheapest
+   *  odometer on the same grid — the "buy new" choice, from `newestYearPremium`
+   *  (packages/core). Same hold, same grid, same draws as `bestYear` above, so
+   *  the two are directly comparable by construction. */
+  newYear: number;
+  /** The odometer that goes with `newYear` — same year-AND-mileage answer
+   *  `bestOdo` gives above, sourced from `newestYearPremium`'s own `odo`. */
+  newOdo: number;
+  /** `newYear`'s own $/mi at `newOdo`, from `newestYearPremium`'s `p50` — the
+   *  figure `newPremium` below measures against `bestP50`. */
+  newP50: number;
+  /** The newest year had no feasible odometer of its own, so its figures come
+   *  from the nearest usable grid point — the same `*` caveat the model-year
+   *  table already applies to clamped rows. */
+  newClamped: boolean;
+  /** What the newest year costs OVER the sweet spot, as a fraction of the
+   *  sweet spot. `0` when they are the same point. `null` when `degenerate` —
+   *  every year prices identically there, so "new vs sweet spot" is not a real
+   *  comparison, only a tie-break against itself. */
+  newPremium: number | null;
+  /** The newest year shares the cheapest tie tier with the sweet spot, so
+   *  `newPremium` is inside the model's own noise and must not be quoted as a
+   *  finding (R15, same rule `tiedTopYears` enforces above). */
+  newTiedWithBest: boolean;
+  /** The newest year IS the sweet spot at this hold — buying new is the
+   *  cost-minimizing choice for this car, which is a stronger statement than
+   *  being tied with it. */
+  newIsBest: boolean;
 }
 
 export interface ModelYearRankResponse {
@@ -254,6 +283,13 @@ export interface ModelYearRankResponse {
    *  questions. Priced at the sweep's own reduced draws (`CALIBRATION.sweepDraws`),
    *  like every other number in this panel. */
   byHold: ModelYearBestAtHold[];
+  /** This car's newest model year is older than `constants.now_year`, so it is
+   *  no longer sold new: the "new" column is the last model year that WAS
+   *  sold, not a car anyone can buy new today. Resolved here because
+   *  `now_year` lives in the worker's own constants and is never sent to the
+   *  client. ~9 of the 71 seed rows are discontinued (ASSUMPTIONS.md's
+   *  anchor-guard log). */
+  newestYearDiscontinued: boolean;
 }
 
 /** All response kinds share one worker (see sharedWorker.ts) — hooks filter their
@@ -661,6 +697,13 @@ function handleModelYearRank(req: ModelYearRankRequest) {
         : modelYearRank(vehicle, data.constants, { ...inputs, holdMiles: h.value });
     const sorted = [...r.points].sort((a, b) => a.rank - b.rank);
     const runnerUp = sorted[1];
+    // Hoisted out of the object literal below so the new-car fields can read it:
+    // when every year prices identically there is no new-vs-sweet-spot gap to
+    // report, only a tie-break compared against itself.
+    const degenerate = r.points.length > 1 && new Set(r.points.map((p) => p.odo)).size === 1;
+    // Free: `r` is the ranking this loop already computed at this hold, and
+    // `newestYearPremium` prices nothing — it only reads that result.
+    const newest = newestYearPremium(r);
     return {
       holdMiles: h.value,
       bestYear: r.bestYear,
@@ -675,7 +718,14 @@ function handleModelYearRank(req: ModelYearRankRequest) {
       // shows (R15).
       tiedTopYears: sorted.filter((p) => p.tier === 1).map((p) => p.year),
       yearsCompared: r.points.length,
-      degenerate: r.points.length > 1 && new Set(r.points.map((p) => p.odo)).size === 1,
+      degenerate,
+      newYear: newest.year,
+      newOdo: newest.odo,
+      newP50: newest.p50,
+      newClamped: newest.clamped,
+      newPremium: degenerate ? null : newest.premiumVsBest,
+      newTiedWithBest: newest.tiedWithBest,
+      newIsBest: newest.isBest,
     };
   });
 
@@ -687,6 +737,7 @@ function handleModelYearRank(req: ModelYearRankRequest) {
     bestYear: railResult ? railResult.bestYear : null,
     bestOdo: railResult ? railResult.bestOdo : null,
     byHold,
+    newestYearDiscontinued: vehicle.last_year < data.constants.now_year,
   };
   self.postMessage(msg);
 }
