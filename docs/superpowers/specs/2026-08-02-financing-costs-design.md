@@ -26,8 +26,8 @@ existing `<Inputs>` control panel, visible only when `tab === "analyze"`.
 ## Math
 
 NPV of financing vs. paying cash, discounted at the opportunity-cost rate.
-Zero when loan APR equals the opportunity rate; negative (financing beats
-cash) when APR is below the opportunity rate; positive when APR exceeds it.
+Zero at the breakeven APR (see below); negative (financing beats cash) below
+it; positive above it.
 
 ```
 loanAmount   = price - downPayment
@@ -44,17 +44,40 @@ pvPayments   = monthlyOpp === 0 ? payment * termMonths
 financingCostUsd   = (downPayment + pvPayments) - price
 financingCostPerMi = financingCostUsd / milesBasis
 totalInterestUsd   = payment * termMonths - loanAmount   // nominal, undiscounted
+breakevenAPR       = monthlyOpp * 12   // the loan APR (nominal, same quoting convention as
+                                         // the APR input) at which financingCostUsd = 0
 ```
+
+**Rate conventions are deliberately different, not a bug.** `APR` is nominal,
+monthly-compounding — how auto loans are actually quoted. `opportunityRate`
+is effective annual — matches how `inputs.discountRate` is used elsewhere in
+the app (`engine.ts`'s `(1+r)^-T`). Because of this, typing the same headline
+percentage into both fields will **not** net exactly $0 (same reason a 6.5%
+APR loan and a 6.5% APY savings account aren't equivalent) — the calculator
+should carry a short inline note saying so. `breakevenAPR` is provable to be
+independent of price/term/down payment — it reduces to `monthlyOpp * 12`
+regardless of loan size, via the standard annuity-NPV identity (an annuity's
+PV, discounted at its own defining rate, always equals its principal). It
+will read a bit below `opportunityRate` numerically (nominal vs. effective
+conversion) — e.g. a 6.5% effective-annual opportunity rate has a ~6.31%
+breakeven APR.
 
 ## Inputs (local state, own module — not the global `EngineInputs`)
 
 | Field | Default | Notes |
 |---|---|---|
-| Price | prefilled from Deal Analyzer's `price` field | independently editable, not coupled after prefill |
-| Down payment ($) | 20% of price, rounded | clamped `[0, price]` |
-| Loan APR (%) | 6.5 | clamped `≥ 0` |
-| Loan term (months) | 60 | clamped `≥ 1` |
-| Opportunity cost rate (%) | prefilled from `inputs.discountRate` | independently editable, clamped `≥ 0` |
+| Price | prefilled from Deal Analyzer's `price` field | independently editable; a "sync to deal price" button re-copies the current deal price on click (no auto-resync — see below) |
+| Down payment | 20% of price, rounded | `$`/`%` toggle, mirrors how people actually think about it; canonical value stored in $, clamped `[0, price]` |
+| Loan APR (%) | 6.5 | clamped `≥ 0`; nominal, monthly-compounding (standard loan quoting) |
+| Loan term | 60mo | preset strip — 36/48/60/72mo — plus a "custom" toggle + number field, mirroring the holding-horizon control in `controls.tsx` (`HORIZONS` strip); clamped `≥ 1` |
+| Opportunity cost rate (%) | prefilled from `inputs.discountRate` | independently editable, clamped `≥ 0`; effective annual (matches the engine's convention) |
+
+**Price sync:** prefill happens once, on first mount only; after that the two
+fields are fully decoupled (editing one doesn't touch the other, and changing
+the vehicle/price in the Deal Analyzer above does not push into this section),
+per the earlier design decision that financing is independent of any one car.
+The sync button is the escape hatch for "actually I do want this to match the
+deal above right now."
 
 ## Miles basis (for $/mi)
 
@@ -84,13 +107,15 @@ it down to `FinancingCosts` as the priority-1 miles basis.
 - Total interest paid (nominal, undiscounted)
 - Financing cost vs. cash (signed; negative reads as "saves you $X")
 - Financing cost per mile (signed)
+- Breakeven APR — "a loan below N% beats paying cash at your current opportunity rate"
 
 ## Edge cases
 
 - `downPayment >= price` → `loanAmount <= 0` → no loan, `financingCostUsd = 0`
 - `APR = 0` → straight-line payment, no compounding
-- `opportunityRate = 0` → `pvPayments` is a flat sum, no discounting
+- `opportunityRate = 0` → `pvPayments` is a flat sum, no discounting; `breakevenAPR = 0` (any positive-rate loan costs more than $0-opportunity-cost cash)
 - `termMonths` clamped to `≥ 1` to avoid divide-by-zero
+- Down payment `%` mode clamped to `[0, 100]`; converting to $ then re-clamps to `[0, price]`
 
 ## Components / files touched
 
@@ -102,5 +127,5 @@ it down to `FinancingCosts` as the priority-1 miles basis.
 
 ## Testing
 
-- Unit tests for `financing.ts`: zero-cost at APR == opportunity rate, negative at APR < opportunity rate, positive at APR > opportunity rate, `loanAmount <= 0` edge case, `APR = 0` and `opportunityRate = 0` edge cases.
-- Manual verification in browser: Analyze tab shows the section under Inputs, numbers update live, Rankings/Assumptions tabs do not show it.
+- Unit tests for `financing.ts`: zero-cost at `APR == breakevenAPR` (not raw `APR == opportunityRate` — see rate-convention note above), negative below breakeven, positive above it, `loanAmount <= 0` edge case, `APR = 0` and `opportunityRate = 0` edge cases, `breakevenAPR` independent of price/term/down-payment (same result across varied inputs at a fixed `opportunityRate`).
+- Manual verification in browser: Analyze tab shows the section under Inputs, numbers update live, Rankings/Assumptions tabs do not show it, term presets and down-payment %/$ toggle behave, sync-to-deal-price button works and doesn't auto-resync afterward.
