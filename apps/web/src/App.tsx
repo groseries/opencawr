@@ -162,9 +162,9 @@ export function App() {
       <div className="layout">
         <aside className="rail">
           <Inputs inputs={inputs} onChange={setInputs} />
-          {tab === "analyze" && (
+          <div style={{ display: tab === "analyze" ? "block" : "none" }}>
             <FinancingCosts inputs={inputs} dealPrice={dealPrice} lifetimeMiles={lifetimeMiles} />
-          )}
+          </div>
           <p className="disclaimer">
             Estimates from a simulation, not advice. Every input above is editable — see the
             Assumptions tab for what backs each one.

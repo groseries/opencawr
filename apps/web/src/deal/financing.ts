@@ -33,7 +33,8 @@ export interface FinancingResult {
 }
 
 export function calcFinancing(p: FinancingParams): FinancingResult {
-  const loanAmount = Math.max(p.price - p.downPaymentUsd, 0);
+  const effectiveDown = Math.min(Math.max(p.downPaymentUsd, 0), p.price);
+  const loanAmount = Math.max(p.price - effectiveDown, 0);
   const monthlyApr = p.aprPct / 100 / 12;
   const n = p.termMonths;
 
@@ -50,7 +51,7 @@ export function calcFinancing(p: FinancingParams): FinancingResult {
       ? monthlyPayment * n
       : (monthlyPayment * (1 - Math.pow(1 + monthlyOpp, -n))) / monthlyOpp;
 
-  const financingCostUsd = p.downPaymentUsd + pvPayments - p.price;
+  const financingCostUsd = effectiveDown + pvPayments - p.price;
   const totalInterestUsd = monthlyPayment * n - loanAmount;
   const breakevenAprPct = monthlyOpp * 12 * 100;
 
@@ -71,7 +72,7 @@ export function resolveMilesBasis(
   holdMiles: number | "eol" | undefined,
   annualMiles: number | undefined,
 ): number {
-  if (lifetimeMiles != null) return lifetimeMiles;
+  if (lifetimeMiles != null && lifetimeMiles > 0) return lifetimeMiles;
   if (typeof holdMiles === "number") return holdMiles;
   return (annualMiles ?? 13_000) * (termMonths / 12);
 }

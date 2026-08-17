@@ -39,6 +39,12 @@ describe("calcFinancing", () => {
     expect(noLoan.financingCostUsd).toBeCloseTo(0, 9);
   });
 
+  it("clamps downPaymentUsd above price the same as equal to price", () => {
+    const overpaid = calcFinancing({ ...base, downPaymentUsd: base.price + 5_000 });
+    expect(overpaid.monthlyPayment).toBe(0);
+    expect(overpaid.financingCostUsd).toBeCloseTo(0, 9);
+  });
+
   it("APR = 0 is a straight-line payment with no compounding", () => {
     const r = calcFinancing({ ...base, aprPct: 0 });
     const loanAmount = base.price - base.downPaymentUsd;

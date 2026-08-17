@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { EngineInputs } from "@opencawr/core";
 import { calcFinancing, resolveMilesBasis } from "./financing.js";
 
@@ -22,17 +22,29 @@ export function FinancingCosts({
   dealPrice: number | null;
   lifetimeMiles: number | null;
 }) {
-  const [price, setPrice] = useState(() => dealPrice ?? DEFAULT_PRICE);
+  const [price, setPrice] = useState(DEFAULT_PRICE);
   const [downPaymentMode, setDownPaymentMode] = useState<"$" | "%">("$");
-  const [downPaymentUsd, setDownPaymentUsd] = useState(() =>
-    Math.round((dealPrice ?? DEFAULT_PRICE) * 0.2),
-  );
+  const [downPaymentUsd, setDownPaymentUsd] = useState(Math.round(DEFAULT_PRICE * 0.2));
   const [aprPct, setAprPct] = useState(6.5);
   const [termMonths, setTermMonths] = useState(60);
   const [customTerm, setCustomTerm] = useState(false);
   const [opportunityRatePct, setOpportunityRatePct] = useState(
     () => Math.round((inputs.discountRate ?? 0.07) * 1000) / 10,
   );
+
+  // FinancingCosts now stays mounted across tab switches (so its own state
+  // survives leaving Analyze), which means it can mount before the Deal
+  // Analyzer's price has arrived. Prefill from dealPrice exactly once, the
+  // first time it becomes available — never again after, so a later vehicle
+  // change never silently resyncs the user's own price/down-payment edits.
+  const prefilled = useRef(false);
+  useEffect(() => {
+    if (dealPrice != null && !prefilled.current) {
+      prefilled.current = true;
+      setPrice(dealPrice);
+      setDownPaymentUsd(Math.round(dealPrice * 0.2));
+    }
+  }, [dealPrice]);
 
   const clampedDownPayment = clamp(downPaymentUsd, 0, price);
   const termIsPreset = TERM_PRESETS.includes(termMonths);
@@ -114,7 +126,7 @@ export function FinancingCosts({
                 type="number"
                 className="mono"
                 step={1}
-                value={Math.round((clampedDownPayment / price) * 1000) / 10}
+                value={price > 0 ? Math.round((clampedDownPayment / price) * 1000) / 10 : 0}
                 onChange={(e) =>
                   setDownPaymentUsd(clamp((Number(e.target.value) / 100) * price, 0, price))
                 }
@@ -181,7 +193,7 @@ export function FinancingCosts({
 
       <label className="control">
         <span className="control-label">
-          Your money could earn (real)
+          Opportunity cost rate
           <span className="control-hint">nominal loan APR vs. effective-annual opportunity rate — not directly comparable 1:1, see breakeven below</span>
         </span>
         <span className="control-inline">
