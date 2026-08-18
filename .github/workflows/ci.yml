@@ -17,4 +17,5 @@ jobs:
       - run: npm test -w @opencawr/pipeline
         env:
           OPENCAWR_PIPELINE_OFFLINE: "1"
+      - run: npm test -w @opencawr/web
       - run: npm run build -w @opencawr/web

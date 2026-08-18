@@ -1,7 +1,7 @@
 import { CALIBRATION as CAL } from "./calibration.js";
 import { curveAt, maintenanceAt, parseCurve } from "./curves.js";
 import { deriveBuyYear, isFeasibleBuy } from "./feasibility.js";
-import { Rng, hashString } from "./rng.js";
+import { Rng, hashString, mixInt } from "./rng.js";
 import type {
   Constants,
   CostBreakdown,
@@ -92,12 +92,26 @@ export function costPerMile(
   const energy = epm * avgDf;
 
   // Independent substreams per stochastic component, seeded off (seed, vehicle name).
+  // Each is RE-SEEDED per draw below (R16): draw `i` must start from the same state
+  // regardless of what earlier draws consumed, so that two runs of this vehicle at
+  // different buy points share their randomness draw-for-draw instead of drifting
+  // apart the first time a Poisson count or a year count differs.
   const base = hashString(vehicle.name) ^ (seed >>> 0);
-  const rngEol = new Rng(base ^ 0x1111);
-  const rngIns = new Rng(base ^ 0x2222);
-  const rngRepN = new Rng(base ^ 0x3333);
-  const rngRepC = new Rng(base ^ 0x4444);
-  const rngBatt = new Rng(base ^ 0x5555);
+  // Creating a substream also registers it for the per-draw reseed below. Enumerating
+  // the streams twice — once here, once in the loop — is what would let a sixth
+  // component be added and silently miss R16's alignment: nothing goes red, the sweep
+  // and the tie tiers just quietly get noisier again.
+  const streams: Rng[] = [];
+  const substream = (tag: number): Rng => {
+    const r = new Rng(base ^ tag);
+    streams.push(r);
+    return r;
+  };
+  const rngEol = substream(0x1111);
+  const rngIns = substream(0x2222);
+  const rngRepN = substream(0x3333);
+  const rngRepC = substream(0x4444);
+  const rngBatt = substream(0x5555);
 
   const cpm = new Float64Array(draws);
   const lifetimeUsd = new Float64Array(draws);
@@ -122,6 +136,9 @@ export function costPerMile(
   let truncatedDraws = 0;
 
   for (let i = 0; i < draws; i++) {
+    const mixedIndex = mixInt(i);
+    for (const s of streams) s.reseedDraw(mixedIndex);
+
     let eol = vehicle.eol_maintained_miles * Math.exp(sigmaEol * rngEol.normal());
     if (eol < buyOdo + am) eol = buyOdo + am; // at least a year of life
     const sell = holdMiles === "eol" ? eol : Math.min(buyOdo + holdMiles, eol);
@@ -192,7 +209,11 @@ export function costPerMile(
     let battPV = 0;
     if (vehicle.battery) {
       const failed = rngBatt.next() < vehicle.battery.failure_prob;
-      const z = rngBatt.normal(); // always consume — keeps the stream aligned
+      // Drawn unconditionally. This used to be what kept the stream aligned across
+      // draws; since R16 the per-draw reseed does that, and `z` is this substream's
+      // last use in the draw either way — so it is now only keeping the failed and
+      // survived branches on the same footing.
+      const z = rngBatt.normal();
       if (failed) {
         const cost = vehicle.battery.pack_cost_usd * Math.exp(vehicle.battery.cost_sigma * z);
         battPV = cost * Math.pow(1 + r, -(constants.battery_event_frac_of_life * T));
