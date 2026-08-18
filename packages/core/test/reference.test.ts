@@ -49,14 +49,13 @@ describe("engine reproduces the reference outputs exactly", () => {
 });
 
 describe("reference-set sanity", () => {
-  it("prototype numbers are preserved for every car that ever had one", () => {
+  it("prototype numbers are preserved for exactly the original 71, never fabricated for the rest", () => {
     // The 29 vehicles added in the 71→100 seed expansion (2026-08) never existed
-    // in the lost prototype spreadsheet, so they have no prototype to preserve —
-    // only the original 71 are asserted here.
-    for (const v of vehicles) {
-      if (v.model_output_prototype === undefined) continue;
-      expect(v.model_output_prototype, v.name).toBeDefined();
-    }
+    // in the lost prototype spreadsheet, so they must never gain one — a count
+    // check catches both directions: a legacy vehicle silently losing its real
+    // prototype, or a new vehicle silently gaining a fabricated one.
+    const withPrototype = vehicles.filter((v) => v.model_output_prototype !== undefined);
+    expect(withPrototype).toHaveLength(71);
   });
 
   it("ranking stays in the prototype's ballpark (top tier is EV/hybrid/efficient sedans)", () => {

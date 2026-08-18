@@ -47,7 +47,12 @@ const shifts: number[] = [];
 for (const v of data.vehicles) {
   const res = results.get(v.name)!;
   const rk = rankByName.get(v.name)!;
-  if (!v.model_output_prototype && v.model_output) v.model_output_prototype = v.model_output;
+  // The lost-prototype migration is one-time and already done — all 71 original
+  // vehicles have carried a real model_output_prototype since 2026-07-27. Never
+  // auto-populate it from a freshly-computed model_output: on a second run, a
+  // vehicle added after that migration (no real prototype exists) would already
+  // have a model_output from its first run, and this shim would fabricate a fake
+  // "prototype" from the engine's own output instead of leaving it genuinely absent.
   if (v.model_output_prototype) shifts.push(res.p50 - v.model_output_prototype.cost_per_mile_p50);
   v.model_output = {
     cost_per_mile_p50: round(res.p50, 4),
