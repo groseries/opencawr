@@ -361,3 +361,33 @@ describe("resale blends toward scrap near EOL (R20)", () => {
     expect(resaleFromDep(600_000 - 10_000)).toBeCloseTo(1_000, 6); // truncates to eolMiles
   });
 });
+
+/**
+ * R28 guard (2026-09-26). `curveAt` extrapolates past a price curve's last point on the
+ * slope of that curve's FINAL SEGMENT, without bound, floored only at scrap. So a final
+ * segment that RISES means the modeled car gains value as miles accumulate — for every
+ * odometer past its last observation, which the Analyze tab and the survey heatmap both
+ * reach. Three shipped rows were in that state (Ram 1500 +0.0352, Jeep Grand Cherokee
+ * +0.0293, Kia Seltos +0.0673 $/mi) before this test existed.
+ *
+ * Deliberately narrow: non-monotonic curve INTERIORS are real used-market noise and are
+ * allowed (ASSUMPTIONS.md §M). Only the last segment is extrapolated, so only the last
+ * segment is constrained.
+ */
+describe("every seed price curve's final segment is non-increasing (R28)", () => {
+  const { vehicles } = loadSeedData();
+
+  it.each(vehicles.map((v) => [v.name, v] as const))("%s", (_name, v) => {
+    const odos = Object.keys(v.price_vs_odometer_usd)
+      .map(Number)
+      .sort((a, b) => a - b);
+    expect(odos.length).toBeGreaterThanOrEqual(2);
+    const [x1, x2] = [odos[odos.length - 2]!, odos[odos.length - 1]!];
+    const curve = v.price_vs_odometer_usd as unknown as Record<string, number>;
+    const slope = (curve[String(x2)]! - curve[String(x1)]!) / (x2 - x1);
+    expect(
+      slope,
+      `final segment ${x1}->${x2} rises at ${slope.toFixed(4)} $/mi, so curveAt extrapolates this car upward forever`,
+    ).toBeLessThanOrEqual(0);
+  });
+});

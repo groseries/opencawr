@@ -691,18 +691,6 @@ stored copies of a site's listing tables.
 Do R16 first regardless: it is free, and it determines how much of the current year-to-year
 flatness is artifact versus this genuine data ceiling.
 
-**R28. Three shipped price curves rise at their final segment.** *(Found 2026-09-26 by a check
-written for the Genesis pass; pre-existing, NOT introduced by it.)* `curveAt` extrapolates past a
-curve's last point on the slope of its final segment, so a rising final segment means the modeled car
-**gains value as miles accumulate**, without bound, for every odometer past the last observation.
-Measured across all 107 rows, three are affected — **Ram 1500 (+0.0352 $/mi)**, **Jeep Grand
-Cherokee (+0.0293)** and **Kia Seltos (+0.0673)** — all from §M's 71→100 pass, which explicitly
-allowed non-monotonic curves without distinguishing the interior (harmless, real market noise) from
-the final segment (extrapolated forever). Reachable in the Analyze tab and the survey heatmap, not
-just at EOL. Fixing it changes those three rows' `model_output`, so it needs its own sign-off; the
-cheap guard is to assert a non-positive final segment for every row in a test, which is how the
-Genesis rows were checked (`ASSUMPTIONS.md` §N).
-
 **R26. Derive real Genesis maintenance curves instead of borrowing.** *(Filed 2026-09-26 during
 the Genesis line-up completion, `ASSUMPTIONS.md` §N.)* All seven new Genesis rows borrow a
 `maintenance_usd_per_yr_by_age` curve — the four gas rows take Volvo XC60's luxury curve, the three
@@ -834,6 +822,17 @@ lands, not concurrent with it.
 - Total-loss should truncate the holding period, not just charge annually.
 
 ## Shipped
+
+- **R28. Price-curve final segments constrained** — 2026-09-26. `curveAt` extrapolates past a
+  curve's last point on its final segment's slope, so the three rows that rose there (Ram 1500
+  +0.0352, Jeep Grand Cherokee +0.0293, Kia Seltos +0.0673 $/mi) modeled cars that **gain value with
+  mileage** without bound. Fixed by appending one endpoint per row at its own `eol_maintained_miles`,
+  valued from that row's own log-linear fit over all of its real points — **no observation dropped**;
+  point-dropping was rejected because those rows' inverting pairs have near-symmetric residuals.
+  New guard in `packages/core/test/engine.test.ts` asserts a non-positive final segment for all 107
+  rows, and was proven to fail by re-introducing the defect. Cost fields moved on exactly the 3 rows
+  (largest, Kia Seltos, −$0.0042/mi); all three got slightly *cheaper*, because R13's book-value-scaled
+  insurance saves more than the added depreciation costs. Ledger: `ASSUMPTIONS.md` §O.
 
 - Steps 1–6 of the original build order (engine, reference tests, live inputs, rankings +
   ladder, Deal Analyzer, data pipeline) — master as of `972d52a`, 2026-07-28.

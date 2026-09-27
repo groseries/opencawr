@@ -3363,7 +3363,7 @@
     "band_p05": 0.4054,
     "band_p95": 0.5368,
     "stat_tier": 3,
-    "beats_next_prob": 0.499,
+    "beats_next_prob": 0.518,
     "opp_cost_lifetime_usd": 23716,
     "opp_cost_per_mi": 0.1606
    },
@@ -6705,7 +6705,7 @@
     "band_p05": 0.4852,
     "band_p95": 0.7185,
     "stat_tier": 5,
-    "beats_next_prob": 0.549,
+    "beats_next_prob": 0.547,
     "opp_cost_lifetime_usd": 8191,
     "opp_cost_per_mi": 0.1014
    },
@@ -11929,7 +11929,8 @@
     "44707": 20615,
     "94899": 20995,
     "133096": 8995,
-    "188951": 10961
+    "188951": 10961,
+    "209393": 7460
    },
    "maintenance_usd_per_yr_by_age": {
     "1": 447,
@@ -11964,13 +11965,13 @@
     "Ford Ranger (2019+ midsize)"
    ],
    "model_output": {
-    "cost_per_mile_p50": 0.5343,
+    "cost_per_mile_p50": 0.5339,
     "p75": 0.561,
-    "p90_badluck": 0.5887,
-    "band_p05": 0.4804,
+    "p90_badluck": 0.5881,
+    "band_p05": 0.4775,
     "band_p95": 0.602,
     "stat_tier": 4,
-    "beats_next_prob": 0.567,
+    "beats_next_prob": 0.57,
     "opp_cost_lifetime_usd": 23264,
     "opp_cost_per_mi": 0.1611
    }
@@ -12048,7 +12049,7 @@
     "band_p05": 0.4893,
     "band_p95": 0.5947,
     "stat_tier": 4,
-    "beats_next_prob": 0.488,
+    "beats_next_prob": 0.483,
     "opp_cost_lifetime_usd": 11918,
     "opp_cost_per_mi": 0.1084
    }
@@ -12769,7 +12770,7 @@
     "band_p05": 0.4043,
     "band_p95": 0.5174,
     "stat_tier": 2,
-    "beats_next_prob": 0.558,
+    "beats_next_prob": 0.521,
     "opp_cost_lifetime_usd": 18046,
     "opp_cost_per_mi": 0.1363
    }
@@ -13083,7 +13084,8 @@
     "56182": 24998,
     "88063": 18695,
     "141403": 11485,
-    "158957": 11999
+    "158957": 11999,
+    "181377": 9284
    },
    "maintenance_usd_per_yr_by_age": {
     "1": 390,
@@ -13122,13 +13124,13 @@
     "Ford Explorer"
    ],
    "model_output": {
-    "cost_per_mile_p50": 0.5786,
-    "p75": 0.6107,
+    "cost_per_mile_p50": 0.5784,
+    "p75": 0.6106,
     "p90_badluck": 0.6442,
-    "band_p05": 0.5175,
+    "band_p05": 0.5157,
     "band_p95": 0.6649,
     "stat_tier": 5,
-    "beats_next_prob": 0.503,
+    "beats_next_prob": 0.51,
     "opp_cost_lifetime_usd": 23314,
     "opp_cost_per_mi": 0.1845
    }
@@ -13526,7 +13528,8 @@
     "63685": 14766,
     "71087": 16995,
     "74472": 13800,
-    "92268": 14998
+    "92268": 14998,
+    "164128": 9912
    },
    "maintenance_usd_per_yr_by_age": {
     "1": 360,
@@ -13554,13 +13557,13 @@
     "Kia Sportage"
    ],
    "model_output": {
-    "cost_per_mile_p50": 0.4591,
-    "p75": 0.4856,
-    "p90_badluck": 0.5151,
-    "band_p05": 0.4067,
-    "band_p95": 0.5384,
-    "stat_tier": 3,
-    "beats_next_prob": 0.527,
+    "cost_per_mile_p50": 0.4549,
+    "p75": 0.4824,
+    "p90_badluck": 0.5125,
+    "band_p05": 0.3995,
+    "band_p95": 0.5364,
+    "stat_tier": 2,
+    "beats_next_prob": 0.516,
     "opp_cost_lifetime_usd": 13119,
     "opp_cost_per_mi": 0.1149
    }
