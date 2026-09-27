@@ -871,6 +871,67 @@ export const CORPUS_EOL: Record<string, EolCorpusEntry> = {
     sampleSize: 19046,
     lowVolume: false,
   },
+  // Genesis line-up completion (2026-09). Every model_name string and every sample
+  // size below was queried live against the dataset on 2026-09-26 (NY DMV writes
+  // these without spaces: 'ELECTRIFIEDGV70', not 'ELECTRIFIED GV70'). Every row is
+  // flagged lowVolume: the largest Genesis sample in the state, GV80 MY2021 at 527
+  // distinct VINs, is still under the 643 that already earned Chevy Volt the flag.
+  "Genesis G70": {
+    derivable: true,
+    makeCode: "GENES",
+    modelNames: ["G70"],
+    sampleModelYear: 2019,
+    sampleSize: 385,
+    lowVolume: true,
+  },
+  "Genesis G80": {
+    derivable: true,
+    makeCode: "GENES",
+    modelNames: ["G80"],
+    sampleModelYear: 2018,
+    sampleSize: 326,
+    lowVolume: true,
+  },
+  "Genesis G90": {
+    derivable: true,
+    makeCode: "GENES",
+    modelNames: ["G90"],
+    sampleModelYear: 2019,
+    sampleSize: 76,
+    lowVolume: true,
+  },
+  "Genesis GV80": {
+    derivable: true,
+    makeCode: "GENES",
+    modelNames: ["GV80"],
+    sampleModelYear: 2021,
+    sampleSize: 527,
+    lowVolume: true,
+  },
+  "Genesis GV60": {
+    derivable: true,
+    makeCode: "GENES",
+    modelNames: ["GV60"],
+    sampleModelYear: 2023,
+    sampleSize: 212,
+    lowVolume: true,
+  },
+  "Genesis Electrified GV70": {
+    derivable: true,
+    makeCode: "GENES",
+    modelNames: ["ELECTRIFIEDGV70"],
+    sampleModelYear: 2024,
+    sampleSize: 135,
+    lowVolume: true,
+  },
+  "Genesis Electrified G80": {
+    derivable: true,
+    makeCode: "GENES",
+    modelNames: ["ELECTRIFIEDG80"],
+    sampleModelYear: 2023,
+    sampleSize: 71,
+    lowVolume: true,
+  },
 };
 
 /** Seed vehicles whose NY DMV mapping involved a judgment call — disclosed
@@ -948,6 +1009,19 @@ export const MAPPING_NOTES: Record<string, string> = {
   "Chevy Traverse":
     "'TRAVERSELIMITED' (MY2024 only) is the same old-generation continuation pattern GM used for " +
     "Malibu/Impala/Cruze. Excluded for the same reason as Tiguan Limited.",
+  "Genesis G80":
+    "'ELECTRIFIEDG80' is its own DMV model_name and its own seed row, so this row's ['G80'] query " +
+    "excludes it automatically — no model-year discriminator needed, unlike Sienna/Ranger.",
+  "Genesis GV80":
+    "'GV80COUPE' (445 distinct VINs, MY2025+) is excluded. It is the same platform, so pooling it " +
+    "would add durability data in principle — but the fit this row needs runs over ages 4-20 and " +
+    "the Coupe has no model year older than 2, so it can contribute nothing to the hazard fit " +
+    "while still changing what this row claims to measure. The row's price curve is the standard " +
+    "GV80 in any case.",
+  "Genesis Electrified G80":
+    "12 distinct VINs at MY2024 and 71 at MY2023 — the thinnest nameplate in this corpus. It " +
+    "resolves to the `fleet` basis with a make-level mileage rate, i.e. this row's EOL carries no " +
+    "Electrified-G80-specific durability information at all. Disclosed in ASSUMPTIONS.md §N.",
 };
 
 /** Given a seed vehicle's exact `name` (as in opencawr_data.json), returns

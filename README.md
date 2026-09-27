@@ -6,7 +6,7 @@
 
 [![CI](https://github.com/groseries/opencawr/actions/workflows/ci.yml/badge.svg)](https://github.com/groseries/opencawr/actions/workflows/ci.yml)
 
-OpenCAWR runs a Monte Carlo cost-per-mile simulation across a 71-vehicle catalogue —
+OpenCAWR runs a Monte Carlo cost-per-mile simulation across a 107-vehicle catalogue —
 depreciation, fuel/energy, maintenance, repairs, insurance, and end-of-life risk — and reports a
 full uncertainty band (P05–P95) instead of a single point estimate. Three views:
 

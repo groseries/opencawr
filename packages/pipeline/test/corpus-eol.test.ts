@@ -23,7 +23,7 @@ describe("corpus-eol coverage (see corpus-eol.ts docstring)", () => {
       );
     }
 
-    expect(Object.keys(CORPUS_EOL)).toHaveLength(100);
+    expect(Object.keys(CORPUS_EOL)).toHaveLength(107);
     expect(Object.keys(CORPUS_EOL)).toHaveLength(seedNames.length);
   });
 

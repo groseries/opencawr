@@ -691,6 +691,38 @@ stored copies of a site's listing tables.
 Do R16 first regardless: it is free, and it determines how much of the current year-to-year
 flatness is artifact versus this genuine data ceiling.
 
+**R28. Three shipped price curves rise at their final segment.** *(Found 2026-09-26 by a check
+written for the Genesis pass; pre-existing, NOT introduced by it.)* `curveAt` extrapolates past a
+curve's last point on the slope of its final segment, so a rising final segment means the modeled car
+**gains value as miles accumulate**, without bound, for every odometer past the last observation.
+Measured across all 107 rows, three are affected — **Ram 1500 (+0.0352 $/mi)**, **Jeep Grand
+Cherokee (+0.0293)** and **Kia Seltos (+0.0673)** — all from §M's 71→100 pass, which explicitly
+allowed non-monotonic curves without distinguishing the interior (harmless, real market noise) from
+the final segment (extrapolated forever). Reachable in the Analyze tab and the survey heatmap, not
+just at EOL. Fixing it changes those three rows' `model_output`, so it needs its own sign-off; the
+cheap guard is to assert a non-positive final segment for every row in a test, which is how the
+Genesis rows were checked (`ASSUMPTIONS.md` §N).
+
+**R26. Derive real Genesis maintenance curves instead of borrowing.** *(Filed 2026-09-26 during
+the Genesis line-up completion, `ASSUMPTIONS.md` §N.)* All seven new Genesis rows borrow a
+`maintenance_usd_per_yr_by_age` curve — the four gas rows take Volvo XC60's luxury curve, the three
+BEVs take VW ID.4's — and §N flags three known distortions that follow: G90 is a flagship on air
+suspension and 21-inch tires and plainly costs more than an XC60; a Genesis dealer's labour rate is
+above VW's, so the BEV rows are optimistic; and Genesis's 3-year/36,000-mile complimentary
+maintenance makes ages 1-3 on all seven *overstated* in the other direction. Genesis publishes its
+own service schedules, and wear-item pricing is available from non-excluded sources, so this is
+derivable without touching RepairPal/CarComplaints/IIHS-HLDI. Applies to the shipped GV70 row too,
+which has borrowed the same curve since §M.
+
+**R27. Pin the reliability derivation to a data snapshot.** *(Filed 2026-09-26, measured in
+`ASSUMPTIONS.md` §N.)* NHTSA complaints keep accruing against model years the corpus has already
+queried, so `rawScore` is a function of the pull date. Measured this pass: re-deriving today against
+§M's frozen cut points would change `reliability_tier` for **9 of the shipped 100** (all within 0.03
+of a cut). Nothing was re-tiered — that is a shipped-numbers change needing its own sign-off — but
+the derivation is not reproducible over time, and the two honest fixes (record the snapshot date and
+complaint counts alongside the tier, or re-pull deliberately as one event with the cuts re-frozen)
+should be chosen before the next expansion inherits the drift.
+
 **R24. Split trims/variants per model, not just make/model.** *(Filed 2026-08-02, owner interest
 during the seed-set breadth pass from 71 to 100 models.)* Today's rows are one per make/model/
 etype spanning a year range (Camry gas and Camry Hybrid are already split, since they differ in

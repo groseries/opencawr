@@ -2,12 +2,12 @@
  "meta": {
   "name": "OpenCAWR — Car Analysis / What's it Really cost",
   "generated": "2026-07",
-  "seed_vehicles": 100,
+  "seed_vehicles": 107,
   "basis": "drive-to-death lifetime cost per mile; user profile: 13k mi/yr, USAA active-duty, Florida reg, Fresno CA garaging",
   "provenance_note": "Established vehicles use hand-curated price-vs-odometer curves anchored to real cars.com/iSeeCars pulls. Reliability tiers were RE-DERIVED 2026-07-29 from NHTSA complaint data alone (public domain, keyless) per docs/reliability-methodology.md. eol_maintained_miles was RE-DERIVED 2026-07-31 from New York State DMV vehicle-inspection data (public, keyless, no licence conditions) per docs/eol-methodology.md, replacing the lost prototype's 'iSeeCars empirical × 1.30 maintained bonus' longevity judgment — no field here derives from iSeeCars any more. repair_cost_multiplier_by_make is 1.0 for every non-'sport' row, a deliberate negative result: no public per-make repair-cost source exists. With all three re-derived, spec §9 clause 1 (Consumer Reports) is CLOSED for the seed set and no CR, CarComplaints or RepairPal data is used anywhere; clause 2 (scraped listing data) still governs the price curves above and remains OPEN. The 2 'sport' rows are an owner carve-out and are never derived. Both derivations are coarse and carry real limitations — the reliability tier is complaint MIX, not a measured defect rate, and eol_maintained_miles mixes durability with NY owner mileage by design and is a single-state sample; read each methodology's 'Known limitations' before quoting a number. Vehicles in 'proxied' were estimated from segment peers (no used history).",
   "reference_engine": {
    "note": "model_output regenerated from @opencawr/core (v2b model per ASSUMPTIONS.md); prototype's original numbers preserved in model_output_prototype",
-   "generated": "2026-08-18",
+   "generated": "2026-09-27",
    "draws": 1100,
    "seed": 42
   }
@@ -3592,7 +3592,12 @@
      "topComplaintCategory": null,
      "topComplaintShare": null
     }
-   }
+   },
+   "maintenance_curve_shared_with": [
+    "Genesis GV60",
+    "Genesis Electrified GV70",
+    "Genesis Electrified G80"
+   ]
   },
   {
    "name": "Toyota RAV4 Prime",
@@ -8822,7 +8827,7 @@
     "band_p05": 0.5114,
     "band_p95": 0.6809,
     "stat_tier": 5,
-    "beats_next_prob": 0.562,
+    "beats_next_prob": 0.536,
     "opp_cost_lifetime_usd": 21353,
     "opp_cost_per_mi": 0.1665
    },
@@ -10765,7 +10770,7 @@
     "band_p05": 0.5495,
     "band_p95": 0.6825,
     "stat_tier": 5,
-    "beats_next_prob": 0.614,
+    "beats_next_prob": 0.567,
     "opp_cost_lifetime_usd": 23350,
     "opp_cost_per_mi": 0.1853
    },
@@ -10775,7 +10780,11 @@
     "Audi Q5",
     "BMW X3",
     "Mercedes-Benz GLC",
-    "Genesis GV70"
+    "Genesis GV70",
+    "Genesis G70",
+    "Genesis G80",
+    "Genesis G90",
+    "Genesis GV80"
    ],
    "model_output_prototype": {
     "cost_per_mile_p50": 0.6189,
@@ -11193,7 +11202,7 @@
     "band_p05": 0.6348,
     "band_p95": 0.8437,
     "stat_tier": 7,
-    "beats_next_prob": 0.965,
+    "beats_next_prob": 0.686,
     "opp_cost_lifetime_usd": 19989,
     "opp_cost_per_mi": 0.2027
    },
@@ -11887,7 +11896,7 @@
     "band_p05": 0.5916,
     "band_p95": 0.8098,
     "stat_tier": 6,
-    "beats_next_prob": 0.528,
+    "beats_next_prob": 0.505,
     "opp_cost_lifetime_usd": 37871,
     "opp_cost_per_mi": 0.268
    }
@@ -12673,7 +12682,11 @@
     ]
    },
    "maintenance_curve_shared_with": [
-    "Volvo XC60"
+    "Volvo XC60",
+    "Genesis G70",
+    "Genesis G80",
+    "Genesis G90",
+    "Genesis GV80"
    ],
    "model_output": {
     "cost_per_mile_p50": 0.7033,
@@ -13037,7 +13050,7 @@
     "band_p05": 0.5562,
     "band_p95": 0.735,
     "stat_tier": 5,
-    "beats_next_prob": 0.517,
+    "beats_next_prob": 0.482,
     "opp_cost_lifetime_usd": 13022,
     "opp_cost_per_mi": 0.1356
    }
@@ -13914,6 +13927,524 @@
     "beats_next_prob": 0.511,
     "opp_cost_lifetime_usd": 14732,
     "opp_cost_per_mi": 0.193
+   }
+  },
+  {
+   "name": "Genesis GV60",
+   "make": "genesis",
+   "body": "EV SUV",
+   "etype": "ev",
+   "first_year": 2023,
+   "last_year": 2026,
+   "reliability_tier": "high",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": null,
+    "kwh_per_100mi": 35,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 24,
+    "co2_g_per_mi": 95,
+    "full_coverage_ins_usd_yr": 2350
+   },
+   "eol_maintained_miles": 153098,
+   "pinned_buy_odo": 40000,
+   "pinned_buy_year_est": 2023,
+   "maintenance_usd_per_yr_by_age": {
+    "1": 250,
+    "3": 380,
+    "5": 520,
+    "6": 700,
+    "8": 850,
+    "10": 950
+   },
+   "repair_cost_multiplier_by_make": 1,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2023
+    ],
+    "good": [
+     2024,
+     2025,
+     2026
+    ]
+   },
+   "maintenance_curve_shared_with": [
+    "VW ID.4 (AWD avail)"
+   ],
+   "battery": {
+    "failure_prob": 0.3,
+    "pack_cost_usd": 14000,
+    "cost_sigma": 0.35,
+    "provenance": "JUDGMENT 2026-09-26 — no OpenCAWR.xlsx row exists for any Genesis EV. failure_prob/cost_sigma copied from every other non-Leaf seed EV; pack_cost_usd 14000 is the midpoint of the $13-16k full-pack figure reported for E-GMP (77.4 kWh) cars, and matches the shipped Tesla level. No OEM-published pack price exists."
+   },
+   "price_vs_odometer_usd": {
+    "0": 54020,
+    "3210": 41119,
+    "18464": 37563,
+    "23322": 32794,
+    "27733": 36699,
+    "32294": 34998,
+    "34273": 34290,
+    "36053": 35998,
+    "44178": 35699,
+    "59540": 28574
+   },
+   "model_output": {
+    "cost_per_mile_p50": 0.6338,
+    "p75": 0.7004,
+    "p90_badluck": 0.7798,
+    "band_p05": 0.5182,
+    "band_p95": 0.8379,
+    "stat_tier": 5,
+    "beats_next_prob": 0.515,
+    "opp_cost_lifetime_usd": 28736,
+    "opp_cost_per_mi": 0.2541
+   }
+  },
+  {
+   "name": "Genesis Electrified GV70",
+   "make": "genesis",
+   "body": "EV SUV",
+   "etype": "ev",
+   "first_year": 2023,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": null,
+    "kwh_per_100mi": 37,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 28.7,
+    "co2_g_per_mi": 100,
+    "full_coverage_ins_usd_yr": 2350
+   },
+   "eol_maintained_miles": 153098,
+   "pinned_buy_odo": 40000,
+   "pinned_buy_year_est": 2023,
+   "maintenance_usd_per_yr_by_age": {
+    "1": 250,
+    "3": 380,
+    "5": 520,
+    "6": 700,
+    "8": 850,
+    "10": 950
+   },
+   "repair_cost_multiplier_by_make": 1,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2023
+    ],
+    "good": [
+     2024,
+     2025,
+     2026
+    ]
+   },
+   "maintenance_curve_shared_with": [
+    "VW ID.4 (AWD avail)"
+   ],
+   "battery": {
+    "failure_prob": 0.3,
+    "pack_cost_usd": 14000,
+    "cost_sigma": 0.35,
+    "provenance": "JUDGMENT 2026-09-26 — no OpenCAWR.xlsx row exists for any Genesis EV. failure_prob/cost_sigma copied from every other non-Leaf seed EV; pack_cost_usd 14000 is the midpoint of the $13-16k full-pack figure reported for E-GMP (77.4 kWh) cars, and matches the shipped Tesla level. No OEM-published pack price exists."
+   },
+   "price_vs_odometer_usd": {
+    "0": 68445,
+    "10000": 57037,
+    "30000": 39608,
+    "65000": 20924,
+    "110000": 9211,
+    "160000": 3701,
+    "200000": 1785
+   },
+   "model_output": {
+    "cost_per_mile_p50": 0.6195,
+    "p75": 0.6751,
+    "p90_badluck": 0.7328,
+    "band_p05": 0.518,
+    "band_p95": 0.7675,
+    "stat_tier": 5,
+    "beats_next_prob": 0.504,
+    "opp_cost_lifetime_usd": 27467,
+    "opp_cost_per_mi": 0.2429
+   }
+  },
+  {
+   "name": "Genesis Electrified G80",
+   "make": "genesis",
+   "body": "EV",
+   "etype": "ev",
+   "first_year": 2023,
+   "last_year": 2026,
+   "reliability_tier": "low",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": null,
+    "kwh_per_100mi": 35,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 10.8,
+    "co2_g_per_mi": 95,
+    "full_coverage_ins_usd_yr": 2350
+   },
+   "eol_maintained_miles": 141480,
+   "pinned_buy_odo": 39000,
+   "pinned_buy_year_est": 2023,
+   "maintenance_usd_per_yr_by_age": {
+    "1": 250,
+    "3": 380,
+    "5": 520,
+    "6": 700,
+    "8": 850,
+    "10": 950
+   },
+   "repair_cost_multiplier_by_make": 1,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2023
+    ],
+    "good": [
+     2024,
+     2025,
+     2026
+    ]
+   },
+   "maintenance_curve_shared_with": [
+    "VW ID.4 (AWD avail)"
+   ],
+   "battery": {
+    "failure_prob": 0.3,
+    "pack_cost_usd": 14000,
+    "cost_sigma": 0.35,
+    "provenance": "JUDGMENT 2026-09-26 — no OpenCAWR.xlsx row exists for any Genesis EV. failure_prob/cost_sigma copied from every other non-Leaf seed EV; pack_cost_usd 14000 is the midpoint of the $13-16k full-pack figure reported for E-GMP (77.4 kWh) cars, and matches the shipped Tesla level. No OEM-published pack price exists."
+   },
+   "price_vs_odometer_usd": {
+    "0": 75625,
+    "10000": 58574,
+    "30000": 35139,
+    "65000": 14369,
+    "110000": 4551,
+    "160000": 1269,
+    "200000": 457
+   },
+   "model_output": {
+    "cost_per_mile_p50": 0.586,
+    "p75": 0.6401,
+    "p90_badluck": 0.7012,
+    "band_p05": 0.5045,
+    "band_p95": 0.7439,
+    "stat_tier": 5,
+    "beats_next_prob": 0.502,
+    "opp_cost_lifetime_usd": 20997,
+    "opp_cost_per_mi": 0.2049
+   }
+  },
+  {
+   "name": "Genesis G70",
+   "make": "genesis",
+   "body": "Car",
+   "etype": "gas",
+   "first_year": 2019,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 24,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 10.5,
+    "co2_g_per_mi": 373,
+    "full_coverage_ins_usd_yr": 2350
+   },
+   "eol_maintained_miles": 141480,
+   "pinned_buy_odo": 40000,
+   "pinned_buy_year_est": 2023,
+   "maintenance_usd_per_yr_by_age": {
+    "1": 600,
+    "3": 880,
+    "5": 1300,
+    "6": 1650,
+    "8": 1900,
+    "10": 2050
+   },
+   "repair_cost_multiplier_by_make": 1,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2019
+    ],
+    "good": [
+     2020,
+     2021,
+     2022,
+     2023,
+     2024,
+     2025,
+     2026
+    ]
+   },
+   "maintenance_curve_shared_with": [
+    "Volvo XC60",
+    "Genesis GV70"
+   ],
+   "price_vs_odometer_usd": {
+    "0": 44800,
+    "12123": 32198,
+    "14022": 31998,
+    "17648": 31168,
+    "18911": 31098,
+    "35569": 27998,
+    "41746": 28998,
+    "81965": 18079
+   },
+   "model_output": {
+    "cost_per_mile_p50": 0.6805,
+    "p75": 0.7207,
+    "p90_badluck": 0.7579,
+    "band_p05": 0.6032,
+    "band_p95": 0.7858,
+    "stat_tier": 6,
+    "beats_next_prob": 0.53,
+    "opp_cost_lifetime_usd": 19980,
+    "opp_cost_per_mi": 0.1969
+   }
+  },
+  {
+   "name": "Genesis G80",
+   "make": "genesis",
+   "body": "Car",
+   "etype": "gas",
+   "first_year": 2017,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 25,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 13.1,
+    "co2_g_per_mi": 360,
+    "full_coverage_ins_usd_yr": 2350
+   },
+   "eol_maintained_miles": 134708,
+   "pinned_buy_odo": 65000,
+   "pinned_buy_year_est": 2021,
+   "maintenance_usd_per_yr_by_age": {
+    "1": 600,
+    "3": 880,
+    "5": 1300,
+    "6": 1650,
+    "8": 1900,
+    "10": 2050
+   },
+   "repair_cost_multiplier_by_make": 1,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2017
+    ],
+    "good": [
+     2018,
+     2019,
+     2020,
+     2021,
+     2022,
+     2023,
+     2024,
+     2025,
+     2026
+    ]
+   },
+   "maintenance_curve_shared_with": [
+    "Volvo XC60",
+    "Genesis GV70"
+   ],
+   "price_vs_odometer_usd": {
+    "0": 59945,
+    "20973": 35789,
+    "40068": 24267,
+    "42435": 29085,
+    "48591": 25172,
+    "49956": 22080,
+    "52028": 23995,
+    "59374": 24163,
+    "70810": 26434,
+    "81420": 17290,
+    "82442": 19993,
+    "104443": 15498
+   },
+   "model_output": {
+    "cost_per_mile_p50": 0.8012,
+    "p75": 0.8696,
+    "p90_badluck": 0.945,
+    "band_p05": 0.6763,
+    "band_p95": 1.0112,
+    "stat_tier": 7,
+    "beats_next_prob": 0.649,
+    "opp_cost_lifetime_usd": 11056,
+    "opp_cost_per_mi": 0.1586
+   }
+  },
+  {
+   "name": "Genesis G90",
+   "make": "genesis",
+   "body": "Car",
+   "etype": "gas",
+   "first_year": 2017,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 21,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 12,
+    "co2_g_per_mi": 426,
+    "full_coverage_ins_usd_yr": 2350
+   },
+   "eol_maintained_miles": 156879,
+   "pinned_buy_odo": 50000,
+   "pinned_buy_year_est": 2022,
+   "maintenance_usd_per_yr_by_age": {
+    "1": 600,
+    "3": 880,
+    "5": 1300,
+    "6": 1650,
+    "8": 1900,
+    "10": 2050
+   },
+   "repair_cost_multiplier_by_make": 1,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2017,
+     2018
+    ],
+    "good": [
+     2019,
+     2020,
+     2021,
+     2022,
+     2023,
+     2024,
+     2025,
+     2026
+    ]
+   },
+   "maintenance_curve_shared_with": [
+    "Volvo XC60",
+    "Genesis GV70"
+   ],
+   "price_vs_odometer_usd": {
+    "0": 94195,
+    "15978": 58761,
+    "23320": 47975,
+    "26228": 50910,
+    "35781": 61127,
+    "40000": 52998,
+    "46820": 40408,
+    "55056": 50615,
+    "58055": 32998,
+    "61193": 20781,
+    "63290": 30889,
+    "63896": 29158,
+    "72583": 24991,
+    "79638": 21022
+   },
+   "model_output": {
+    "cost_per_mile_p50": 0.8497,
+    "p75": 0.9156,
+    "p90_badluck": 0.9794,
+    "band_p05": 0.7284,
+    "band_p95": 1.0328,
+    "stat_tier": 8,
+    "beats_next_prob": 0.673,
+    "opp_cost_lifetime_usd": 33001,
+    "opp_cost_per_mi": 0.3088
+   }
+  },
+  {
+   "name": "Genesis GV80",
+   "make": "genesis",
+   "body": "SUV AWD",
+   "etype": "gas",
+   "first_year": 2021,
+   "last_year": 2026,
+   "reliability_tier": "mid",
+   "provenance": "curated",
+   "specs": {
+    "mpg_combined": 22,
+    "kwh_per_100mi": null,
+    "phev_gas_mpg": null,
+    "phev_utility_factor": null,
+    "seats": 5,
+    "cargo_cu_ft": 34.9,
+    "co2_g_per_mi": 401,
+    "full_coverage_ins_usd_yr": 2350
+   },
+   "eol_maintained_miles": 153098,
+   "pinned_buy_odo": 50000,
+   "pinned_buy_year_est": 2022,
+   "maintenance_usd_per_yr_by_age": {
+    "1": 600,
+    "3": 880,
+    "5": 1300,
+    "6": 1650,
+    "8": 1900,
+    "10": 2050
+   },
+   "repair_cost_multiplier_by_make": 1,
+   "model_year_reliability": {
+    "bad": [],
+    "caution": [
+     2021
+    ],
+    "good": [
+     2022,
+     2023,
+     2024,
+     2025,
+     2026
+    ]
+   },
+   "maintenance_curve_shared_with": [
+    "Volvo XC60",
+    "Genesis GV70"
+   ],
+   "price_vs_odometer_usd": {
+    "0": 61345,
+    "34332": 36997,
+    "45269": 33571,
+    "46305": 37424,
+    "48469": 34549,
+    "51653": 36690,
+    "67812": 26075
+   },
+   "model_output": {
+    "cost_per_mile_p50": 0.7675,
+    "p75": 0.8201,
+    "p90_badluck": 0.8717,
+    "band_p05": 0.6708,
+    "band_p95": 0.8961,
+    "stat_tier": 7,
+    "beats_next_prob": 0.618,
+    "opp_cost_lifetime_usd": 25266,
+    "opp_cost_per_mi": 0.2451
    }
   }
  ]

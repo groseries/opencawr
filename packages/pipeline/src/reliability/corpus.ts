@@ -155,6 +155,19 @@ const NHTSA: Record<string, { make: string; match: Matcher }> = {
   "Honda HR-V": { make: "HONDA", match: exact("HR-V") },
   "VW Jetta": { make: "VOLKSWAGEN", match: exact("JETTA") },
   "Tesla Model Y": { make: "TESLA", match: re(/^MODEL Y\b/) },
+
+  // Genesis line-up completion (2026-09) — every matcher checked against the live
+  // NHTSA catalogue for each year it queries. NHTSA renames the gas cars to a
+  // "... ICE" suffix from MY2026 to separate them from the electrified variants;
+  // matched here even though the MY2026 strings sit outside the current query
+  // window, so a future WINDOW_END bump can't silently lose them.
+  "Genesis G70": { make: "GENESIS", match: exact("G70", "G70 ICE") },
+  "Genesis G80": { make: "GENESIS", match: re(/^G80( SPORT| ICE)?$/) },
+  "Genesis G90": { make: "GENESIS", match: exact("G90") },
+  "Genesis GV80": { make: "GENESIS", match: exact("GV80", "GV80 ICE") },
+  "Genesis GV60": { make: "GENESIS", match: exact("GV60") },
+  "Genesis Electrified GV70": { make: "GENESIS", match: exact("ELECTRIFIED GV70") },
+  "Genesis Electrified G80": { make: "GENESIS", match: exact("ELECTRIFIED G80") },
 };
 
 /** Seed vehicles whose NHTSA mapping is genuinely ambiguous — disclosed in the
@@ -187,6 +200,13 @@ export const MAPPING_NOTES: Record<string, string> = {
   "Mazda CX-90": "MY2024+ only; NHTSA writes it 'CX-90-MHEV' in 2024 and 'CX-90 MHEV'/'CX-90' later. PHEV excluded (seed etype=gas).",
   "VW GTI": "'GOLF GTI' and 'GTI' both appear in MY2018-2019; both matched, de-duplicated by ODI number.",
   "Chevy Suburban": "'SUBURBAN 1500' MY2016-2021, 'SUBURBAN' MY2021+; both matched.",
+  "Genesis G80":
+    "'ELECTRIFIED G80' is a SEPARATE NHTSA string and belongs to its own seed row, so the anchored /^G80( SPORT| ICE)?$/ matcher deliberately excludes it. 'G80 SPORT' (MY2018-2019) is the same physical car and is matched. MY2020 returns zero complaints for the matched string.",
+  "Genesis GV80": "'GV80 COUPE' / 'GV80 COUPE ICE' (MY2025+) is a different body style with its own NHTSA strings and is excluded; it is outside this row's query window either way.",
+  "Genesis Electrified GV70":
+    "MY2023 is the ONLY model year with any complaint history (5 complaints) — and EPA has no MY2023 certification record for this car at all, so first_year=2023 rests on NHTSA's catalogue while the specs come from MY2024. Its tier is near-noise; see ASSUMPTIONS.md §N.",
+  "Genesis Electrified G80": "4 complaints across MY2023-2024 and nothing after. The thinnest reliability evidence of any row in the corpus — tier reported, not asserted.",
+  "Genesis GV60": "MY2026 lists no GV60 string yet (catalogue lag, not a flawless year) — see KNOWN_EMPTY_MODEL_YEARS.",
 };
 
 /** Model-years NHTSA lists no matching string for at all — handled as missing
@@ -195,6 +215,14 @@ export const KNOWN_EMPTY_MODEL_YEARS = [
   "Fiat 500 MY2019",
   "Fiat 500X MY2021",
   "Volvo V90 Cross Country MY2021",
+  // Genesis EVs are new enough that NHTSA's catalogue has not caught up. Measured
+  // live 2026-09-26; each is a catalogue gap, not a complaint-free model year.
+  "Genesis GV60 MY2026",
+  "Genesis Electrified GV70 MY2024",
+  "Genesis Electrified GV70 MY2025",
+  "Genesis Electrified GV70 MY2026",
+  "Genesis Electrified G80 MY2025",
+  "Genesis Electrified G80 MY2026",
 ];
 
 /** Query window: at most 6 model years ending no later than MY2022, so every

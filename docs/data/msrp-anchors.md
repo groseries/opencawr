@@ -105,3 +105,37 @@ used-price re-pull list. The guard is a free data-quality detector on the seed c
 | Mini Cooper, Mini Countryman | No US MINI media-site pricing release located. |
 | Volvo XC60, Volvo XC90, Volvo V90 Cross Country | media.volvocars.com publishes MSRP but not the destination charge; V90 Cross Country's US production status also needs a check. |
 | Toyota Camry, Toyota RAV4, Kia Soul, Buick Encore, VW ID.4 | see G3 above. |
+
+---
+
+## Genesis line-up completion (retrieved 2026-09-26)
+
+Seven rows added in the 100→107 pass (`ASSUMPTIONS.md` §N). All figures are transcribed from
+Genesis's own newsroom **Model Year Changes** documents, which publish the destination charge and
+every trim's MSRP side by side — so unlike several rows in the G-tables above, no separate
+destination-charge page was needed.
+
+| vehicle | model year | trim | MSRP | destination | anchor at 0 mi | source |
+|---|---|---|---|---|---|---|
+| Genesis G70 | 2026 | G70 2.5T RWD | $43,450 | $1,350 | **$44,800** | https://www.genesisnewsusa.com/assets/documents/original/5645-2026GenesisModelYearChangesanab082825.pdf |
+| Genesis G80 | 2026 | G80 2.5T AWD | $58,450 | $1,495 | **$59,945** | same document |
+| Genesis G90 | 2026 | G90 3.5T AWD | $92,700 | $1,495 | **$94,195** | same document |
+| Genesis GV60 | 2026 | GV60 RWD | $52,525 | $1,495 | **$54,020** | same document |
+| Genesis Electrified GV70 | 2026 | Electrified GV70 Advanced AWD | $66,950 | $1,495 | **$68,445** | same document |
+| Genesis GV80 | 2026 | GV80 2.5T **AWD** | $59,850 | $1,495 | **$61,345** | same document |
+| Genesis Electrified G80 | **2024** | Electrified G80 AWD Advanced | $74,375 | $1,250 | **$75,625** | https://www.genesisnewsusa.com/assets/documents/original/4275-42592024GenesisModelYearChangesab.pdf |
+
+Three deviations from the base-trim rule, each deliberate:
+
+- **GV80** is anchored to the 2.5T **AWD**, not the cheaper RWD. RWD exists only from MY2026; every
+  GV80 in the used market this curve prices is AWD, so anchoring at the RWD price would put the
+  curve's 0-mile point on a car the rest of the curve never contains.
+- **G90** has no non-luxury base trim; the 3.5T AWD *is* the entry car.
+- **Electrified G80** uses MY2024 because Genesis publishes no MY2026 (or MY2025) price for it even
+  though EPA still certifies the car — the "nearest published model year" provision above.
+
+Not added, and why: **Genesis GV90** is MY2027 with no published US pricing, no EPA certification
+and no used market (`ASSUMPTIONS.md` §N). The already-shipped **Genesis GV70** row keeps its
+existing `48,985` anchor, which is MSRP *excluding* destination and therefore does not follow the
+rule at the top of this file; correcting it would change a shipped `model_output`, so it is recorded
+here rather than quietly fixed.
