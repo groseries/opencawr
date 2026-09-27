@@ -54,5 +54,13 @@ npm run build -w @opencawr/web
   catalogue.
 - `apps/web` — the Vite/React frontend, deployed as a Cloudflare Worker.
 
+**Pushing to `master` deploys to [opencawr.com](https://opencawr.com) automatically**, via a
+Cloudflare git integration configured in the Cloudflare dashboard — not by anything in this repo
+(`.github/workflows/ci.yml` stops at `npm run build`). Verified 2026-09-26: the live asset hash
+changed within 30 seconds of a `master` push. The vehicle catalogue is bundled into the worker at
+build time (`apps/web/src/engine.worker.ts` imports `opencawr_data.json`), so a seed-data change
+only reaches the site after that rebuild — merging alone is not enough, and pushing a branch does
+nothing.
+
 Project ledger and roadmap: [`ASSUMPTIONS.md`](ASSUMPTIONS.md), [`ROADMAP.md`](ROADMAP.md),
 [`OpenCAWR_SPEC.md`](OpenCAWR_SPEC.md).
