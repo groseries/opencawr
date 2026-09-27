@@ -363,7 +363,7 @@ describe("resale blends toward scrap near EOL (R20)", () => {
 });
 
 /**
- * R28 guard (2026-09-26). `curveAt` extrapolates past a price curve's last point on the
+ * R31 guard (2026-09-26). `curveAt` extrapolates past a price curve's last point on the
  * slope of that curve's FINAL SEGMENT, without bound, floored only at scrap. So a final
  * segment that RISES means the modeled car gains value as miles accumulate — for every
  * odometer past its last observation, which the Analyze tab and the survey heatmap both
@@ -374,7 +374,7 @@ describe("resale blends toward scrap near EOL (R20)", () => {
  * allowed (ASSUMPTIONS.md §M). Only the last segment is extrapolated, so only the last
  * segment is constrained.
  */
-describe("every seed price curve's final segment is non-increasing (R28)", () => {
+describe("every seed price curve's final segment is non-increasing (R31)", () => {
   const { vehicles } = loadSeedData();
 
   it.each(vehicles.map((v) => [v.name, v] as const))("%s", (_name, v) => {

@@ -10,6 +10,883 @@
    "generated": "2026-09-27",
    "draws": 1100,
    "seed": 42
+  },
+  "reliability_snapshot": {
+   "derived": "2026-09-26",
+   "source": "NHTSA complaints API (api.nhtsa.gov), public domain, keyless — one deliberate pull per docs/reliability-methodology.md",
+   "why": "reliability_tier is a percentile of a complaint SHARE over a live, still-accruing corpus, so it is a function of the pull date. Recording the score, the evidence behind it and the cut points that classified it makes the tier reproducible and makes future drift measurable instead of invisible. See ASSUMPTIONS.md §P (R27).",
+   "tier_cut_percentiles": {
+    "low": 0.32,
+    "high": 0.78
+   },
+   "cuts": {
+    "main": {
+     "low": 0.24091,
+     "high": 0.502343
+    },
+    "ev": {
+     "low": 0.324359,
+     "high": 0.646597
+    }
+   },
+   "rows": {
+    "Chevy Bolt EV": {
+     "reference": "ev",
+     "raw_score": 0.574053,
+     "complaints": 871,
+     "powertrain_complaints": 500,
+     "model_years": 6,
+     "provisional": true
+    },
+    "Chevy Volt": {
+     "reference": "main",
+     "raw_score": 0.532502,
+     "complaints": 1123,
+     "powertrain_complaints": 598,
+     "model_years": 4,
+     "provisional": false
+    },
+    "Toyota Prius (hybrid)": {
+     "reference": "main",
+     "raw_score": 0.189055,
+     "complaints": 201,
+     "powertrain_complaints": 38,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Toyota Prius Prime": {
+     "reference": "main",
+     "raw_score": 0.165,
+     "complaints": 200,
+     "powertrain_complaints": 33,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Toyota Corolla": {
+     "reference": "main",
+     "raw_score": 0.334227,
+     "complaints": 1119,
+     "powertrain_complaints": 374,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Toyota Camry Hybrid": {
+     "reference": "main",
+     "raw_score": 0.095,
+     "complaints": 200,
+     "powertrain_complaints": 19,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Honda Civic": {
+     "reference": "main",
+     "raw_score": 0.090633,
+     "complaints": 2968,
+     "powertrain_complaints": 269,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Nissan Leaf": {
+     "reference": "ev",
+     "raw_score": 0.751174,
+     "complaints": 639,
+     "powertrain_complaints": 480,
+     "model_years": 5,
+     "provisional": true
+    },
+    "Hyundai Elantra": {
+     "reference": "main",
+     "raw_score": 0.4563,
+     "complaints": 1865,
+     "powertrain_complaints": 851,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Honda Accord": {
+     "reference": "main",
+     "raw_score": 0.283181,
+     "complaints": 3948,
+     "powertrain_complaints": 1118,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Kia K4": {
+     "reference": "main",
+     "raw_score": 0.266667,
+     "complaints": 45,
+     "powertrain_complaints": 12,
+     "model_years": 2,
+     "provisional": true
+    },
+    "Mazda3 (SkyActiv)": {
+     "reference": "main",
+     "raw_score": 0.191892,
+     "complaints": 370,
+     "powertrain_complaints": 71,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Toyota Camry": {
+     "reference": "main",
+     "raw_score": 0.339718,
+     "complaints": 1775,
+     "powertrain_complaints": 603,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Toyota RAV4 Hybrid": {
+     "reference": "main",
+     "raw_score": 0.137203,
+     "complaints": 379,
+     "powertrain_complaints": 52,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Kia Niro (hybrid)": {
+     "reference": "main",
+     "raw_score": 0.503106,
+     "complaints": 322,
+     "powertrain_complaints": 162,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Tesla Model 3": {
+     "reference": "ev",
+     "raw_score": 0.145092,
+     "complaints": 3515,
+     "powertrain_complaints": 510,
+     "model_years": 5,
+     "provisional": true
+    },
+    "Hyundai Sonata": {
+     "reference": "main",
+     "raw_score": 0.520564,
+     "complaints": 1702,
+     "powertrain_complaints": 886,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Toyota RAV4": {
+     "reference": "main",
+     "raw_score": 0.256248,
+     "complaints": 2681,
+     "powertrain_complaints": 687,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Fiat 500": {
+     "reference": "main",
+     "raw_score": 0.534137,
+     "complaints": 249,
+     "powertrain_complaints": 133,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Honda CR-V": {
+     "reference": "main",
+     "raw_score": 0.247563,
+     "complaints": 5950,
+     "powertrain_complaints": 1473,
+     "model_years": 6,
+     "provisional": false
+    },
+    "VW ID.4 (AWD avail)": {
+     "reference": "ev",
+     "raw_score": 0.559829,
+     "complaints": 468,
+     "powertrain_complaints": 262,
+     "model_years": 2,
+     "provisional": true
+    },
+    "Toyota RAV4 Prime": {
+     "reference": "main",
+     "raw_score": 0.1,
+     "complaints": 120,
+     "powertrain_complaints": 12,
+     "model_years": 2,
+     "provisional": false
+    },
+    "Kia Soul": {
+     "reference": "main",
+     "raw_score": 0.768825,
+     "complaints": 1328,
+     "powertrain_complaints": 1021,
+     "model_years": 6,
+     "provisional": false
+    },
+    "VW Passat": {
+     "reference": "main",
+     "raw_score": 0.186869,
+     "complaints": 198,
+     "powertrain_complaints": 37,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Buick Encore": {
+     "reference": "main",
+     "raw_score": 0.508772,
+     "complaints": 285,
+     "powertrain_complaints": 145,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Hyundai Kona": {
+     "reference": "main",
+     "raw_score": 0.69279,
+     "complaints": 638,
+     "powertrain_complaints": 442,
+     "model_years": 5,
+     "provisional": false
+    },
+    "Mazda CX-5": {
+     "reference": "main",
+     "raw_score": 0.481786,
+     "complaints": 851,
+     "powertrain_complaints": 410,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Toyota Highlander Hybrid": {
+     "reference": "main",
+     "raw_score": 0.320755,
+     "complaints": 265,
+     "powertrain_complaints": 85,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Subaru Outback": {
+     "reference": "main",
+     "raw_score": 0.076505,
+     "complaints": 4418,
+     "powertrain_complaints": 338,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Subaru Forester": {
+     "reference": "main",
+     "raw_score": 0.153246,
+     "complaints": 2819,
+     "powertrain_complaints": 432,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Toyota Sienna Hybrid": {
+     "reference": "main",
+     "raw_score": 0.086207,
+     "complaints": 58,
+     "powertrain_complaints": 5,
+     "model_years": 2,
+     "provisional": true
+    },
+    "Toyota Tacoma": {
+     "reference": "main",
+     "raw_score": 0.304837,
+     "complaints": 889,
+     "powertrain_complaints": 271,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Nissan Rogue": {
+     "reference": "main",
+     "raw_score": 0.250223,
+     "complaints": 2242,
+     "powertrain_complaints": 561,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Chevy Equinox": {
+     "reference": "main",
+     "raw_score": 0.426641,
+     "complaints": 1554,
+     "powertrain_complaints": 663,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Toyota Sienna (V6)": {
+     "reference": "main",
+     "raw_score": 0.207792,
+     "complaints": 616,
+     "powertrain_complaints": 128,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Mini Cooper": {
+     "reference": "main",
+     "raw_score": 0.253165,
+     "complaints": 79,
+     "powertrain_complaints": 20,
+     "model_years": 6,
+     "provisional": true
+    },
+    "Ford Ranger (old compact)": {
+     "reference": "main",
+     "raw_score": 0.039721,
+     "complaints": 1435,
+     "powertrain_complaints": 57,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Fiat 500X": {
+     "reference": "main",
+     "raw_score": 0.515152,
+     "complaints": 33,
+     "powertrain_complaints": 17,
+     "model_years": 6,
+     "provisional": true
+    },
+    "VW GTI": {
+     "reference": "main",
+     "raw_score": 0.492308,
+     "complaints": 650,
+     "powertrain_complaints": 320,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Kia Sportage": {
+     "reference": "main",
+     "raw_score": 0.588764,
+     "complaints": 890,
+     "powertrain_complaints": 524,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Ford Escape": {
+     "reference": "main",
+     "raw_score": 0.662155,
+     "complaints": 7166,
+     "powertrain_complaints": 4745,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Toyota Highlander": {
+     "reference": "main",
+     "raw_score": 0.43389,
+     "complaints": 2095,
+     "powertrain_complaints": 909,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Hyundai Tucson": {
+     "reference": "main",
+     "raw_score": 0.643572,
+     "complaints": 2497,
+     "powertrain_complaints": 1607,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Toyota 4Runner": {
+     "reference": "main",
+     "raw_score": 0.093633,
+     "complaints": 267,
+     "powertrain_complaints": 25,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Honda Odyssey": {
+     "reference": "main",
+     "raw_score": 0.267421,
+     "complaints": 2741,
+     "powertrain_complaints": 733,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Kia Sorento": {
+     "reference": "main",
+     "raw_score": 0.503562,
+     "complaints": 1825,
+     "powertrain_complaints": 919,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Hyundai Santa Fe": {
+     "reference": "main",
+     "raw_score": 0.630869,
+     "complaints": 1853,
+     "powertrain_complaints": 1169,
+     "model_years": 6,
+     "provisional": false
+    },
+    "VW Tiguan": {
+     "reference": "main",
+     "raw_score": 0.374023,
+     "complaints": 1024,
+     "powertrain_complaints": 383,
+     "model_years": 5,
+     "provisional": false
+    },
+    "Chrysler Pacifica PHEV": {
+     "reference": "main",
+     "raw_score": 0.471349,
+     "complaints": 541,
+     "powertrain_complaints": 255,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Subaru Ascent": {
+     "reference": "main",
+     "raw_score": 0.279348,
+     "complaints": 920,
+     "powertrain_complaints": 257,
+     "model_years": 4,
+     "provisional": false
+    },
+    "Ford Ranger (2019+ midsize)": {
+     "reference": "main",
+     "raw_score": 0.484404,
+     "complaints": 545,
+     "powertrain_complaints": 264,
+     "model_years": 4,
+     "provisional": false
+    },
+    "Honda Pilot": {
+     "reference": "main",
+     "raw_score": 0.41729,
+     "complaints": 3343,
+     "powertrain_complaints": 1395,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Mini Countryman": {
+     "reference": "main",
+     "raw_score": 0.25641,
+     "complaints": 39,
+     "powertrain_complaints": 10,
+     "model_years": 6,
+     "provisional": true
+    },
+    "Toyota Sequoia": {
+     "reference": "main",
+     "raw_score": 0.093023,
+     "complaints": 43,
+     "powertrain_complaints": 4,
+     "model_years": 6,
+     "provisional": true
+    },
+    "Hyundai Palisade": {
+     "reference": "main",
+     "raw_score": 0.220047,
+     "complaints": 1277,
+     "powertrain_complaints": 281,
+     "model_years": 3,
+     "provisional": false
+    },
+    "Chrysler Pacifica": {
+     "reference": "main",
+     "raw_score": 0.535296,
+     "complaints": 3499,
+     "powertrain_complaints": 1873,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Chevy Colorado": {
+     "reference": "main",
+     "raw_score": 0.50983,
+     "complaints": 763,
+     "powertrain_complaints": 389,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Kia Telluride": {
+     "reference": "main",
+     "raw_score": 0.228966,
+     "complaints": 1450,
+     "powertrain_complaints": 332,
+     "model_years": 3,
+     "provisional": false
+    },
+    "Mazda CX-90": {
+     "reference": "main",
+     "raw_score": 0.212598,
+     "complaints": 381,
+     "powertrain_complaints": 81,
+     "model_years": 3,
+     "provisional": false
+    },
+    "Chevy Traverse": {
+     "reference": "main",
+     "raw_score": 0.542545,
+     "complaints": 1281,
+     "powertrain_complaints": 695,
+     "model_years": 5,
+     "provisional": false
+    },
+    "VW Atlas": {
+     "reference": "main",
+     "raw_score": 0.214418,
+     "complaints": 1623,
+     "powertrain_complaints": 348,
+     "model_years": 5,
+     "provisional": false
+    },
+    "Ford Explorer": {
+     "reference": "main",
+     "raw_score": 0.310032,
+     "complaints": 4635,
+     "powertrain_complaints": 1437,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Buick Enclave": {
+     "reference": "main",
+     "raw_score": 0.243455,
+     "complaints": 382,
+     "powertrain_complaints": 93,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Volvo XC60": {
+     "reference": "main",
+     "raw_score": 0.121212,
+     "complaints": 198,
+     "powertrain_complaints": 24,
+     "model_years": 5,
+     "provisional": false
+    },
+    "Chevy Tahoe": {
+     "reference": "main",
+     "raw_score": 0.49675,
+     "complaints": 1077,
+     "powertrain_complaints": 535,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Jeep Grand Cherokee L": {
+     "reference": "main",
+     "raw_score": 0.22408,
+     "complaints": 299,
+     "powertrain_complaints": 67,
+     "model_years": 2,
+     "provisional": false
+    },
+    "Volvo V90 Cross Country": {
+     "reference": "main",
+     "raw_score": 0.05,
+     "complaints": 20,
+     "powertrain_complaints": 1,
+     "model_years": 6,
+     "provisional": true
+    },
+    "Chevy Suburban": {
+     "reference": "main",
+     "raw_score": 0.568421,
+     "complaints": 665,
+     "powertrain_complaints": 378,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Volvo XC90": {
+     "reference": "main",
+     "raw_score": 0.282258,
+     "complaints": 248,
+     "powertrain_complaints": 70,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Porsche 996 Carrera": {
+     "reference": null,
+     "raw_score": 0.508475,
+     "complaints": 59,
+     "powertrain_complaints": 30,
+     "model_years": 6,
+     "provisional": true
+    },
+    "Porsche 996 Turbo": {
+     "reference": null,
+     "raw_score": 0.905983,
+     "complaints": 117,
+     "powertrain_complaints": 106,
+     "model_years": 5,
+     "provisional": false
+    },
+    "GMC Sierra 1500": {
+     "reference": "main",
+     "raw_score": 0.653399,
+     "complaints": 1633,
+     "powertrain_complaints": 1067,
+     "model_years": 3,
+     "provisional": false
+    },
+    "Ram 1500": {
+     "reference": "main",
+     "raw_score": 0.344143,
+     "complaints": 4934,
+     "powertrain_complaints": 1698,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Dodge Durango": {
+     "reference": "main",
+     "raw_score": 0.194196,
+     "complaints": 896,
+     "powertrain_complaints": 174,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Cadillac XT5": {
+     "reference": "main",
+     "raw_score": 0.334572,
+     "complaints": 269,
+     "powertrain_complaints": 90,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Lincoln Corsair": {
+     "reference": "main",
+     "raw_score": 0.232704,
+     "complaints": 159,
+     "powertrain_complaints": 37,
+     "model_years": 3,
+     "provisional": false
+    },
+    "Acura RDX": {
+     "reference": "main",
+     "raw_score": 0.241187,
+     "complaints": 1078,
+     "powertrain_complaints": 260,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Lexus RX": {
+     "reference": "main",
+     "raw_score": 0.15978,
+     "complaints": 363,
+     "powertrain_complaints": 58,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Infiniti QX60": {
+     "reference": "main",
+     "raw_score": 0.436842,
+     "complaints": 190,
+     "powertrain_complaints": 83,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Audi Q5": {
+     "reference": "main",
+     "raw_score": 0.260771,
+     "complaints": 441,
+     "powertrain_complaints": 115,
+     "model_years": 6,
+     "provisional": false
+    },
+    "BMW X3": {
+     "reference": "main",
+     "raw_score": 0.290679,
+     "complaints": 633,
+     "powertrain_complaints": 184,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Mercedes-Benz GLC": {
+     "reference": "main",
+     "raw_score": 0.370672,
+     "complaints": 491,
+     "powertrain_complaints": 182,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Genesis GV70": {
+     "reference": "main",
+     "raw_score": 0.365591,
+     "complaints": 93,
+     "powertrain_complaints": 34,
+     "model_years": 1,
+     "provisional": true
+    },
+    "Mitsubishi Outlander": {
+     "reference": "main",
+     "raw_score": 0.133159,
+     "complaints": 383,
+     "powertrain_complaints": 51,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Ford F-150": {
+     "reference": "main",
+     "raw_score": 0.544034,
+     "complaints": 6654,
+     "powertrain_complaints": 3620,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Chevy Silverado 1500": {
+     "reference": "main",
+     "raw_score": 0.658883,
+     "complaints": 2184,
+     "powertrain_complaints": 1439,
+     "model_years": 3,
+     "provisional": false
+    },
+    "Toyota Tundra": {
+     "reference": "main",
+     "raw_score": 0.386364,
+     "complaints": 748,
+     "powertrain_complaints": 289,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Jeep Wrangler": {
+     "reference": "main",
+     "raw_score": 0.209111,
+     "complaints": 4500,
+     "powertrain_complaints": 941,
+     "model_years": 5,
+     "provisional": false
+    },
+    "Jeep Grand Cherokee": {
+     "reference": "main",
+     "raw_score": 0.295682,
+     "complaints": 2594,
+     "powertrain_complaints": 767,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Chevy Trax": {
+     "reference": "main",
+     "raw_score": 0.387368,
+     "complaints": 475,
+     "powertrain_complaints": 184,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Nissan Altima": {
+     "reference": "main",
+     "raw_score": 0.294539,
+     "complaints": 1117,
+     "powertrain_complaints": 329,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Nissan Sentra": {
+     "reference": "main",
+     "raw_score": 0.266603,
+     "complaints": 1054,
+     "powertrain_complaints": 281,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Mazda CX-30": {
+     "reference": "main",
+     "raw_score": 0.413174,
+     "complaints": 167,
+     "powertrain_complaints": 69,
+     "model_years": 3,
+     "provisional": false
+    },
+    "Subaru Crosstrek": {
+     "reference": "main",
+     "raw_score": 0.197219,
+     "complaints": 791,
+     "powertrain_complaints": 156,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Kia Seltos": {
+     "reference": "main",
+     "raw_score": 0.798186,
+     "complaints": 441,
+     "powertrain_complaints": 352,
+     "model_years": 2,
+     "provisional": false
+    },
+    "Kia Forte": {
+     "reference": "main",
+     "raw_score": 0.505291,
+     "complaints": 756,
+     "powertrain_complaints": 382,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Toyota Corolla Cross": {
+     "reference": "main",
+     "raw_score": 0.434783,
+     "complaints": 46,
+     "powertrain_complaints": 20,
+     "model_years": 1,
+     "provisional": true
+    },
+    "Honda HR-V": {
+     "reference": "main",
+     "raw_score": 0.211513,
+     "complaints": 747,
+     "powertrain_complaints": 158,
+     "model_years": 6,
+     "provisional": false
+    },
+    "VW Jetta": {
+     "reference": "main",
+     "raw_score": 0.405765,
+     "complaints": 902,
+     "powertrain_complaints": 366,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Tesla Model Y": {
+     "reference": "ev",
+     "raw_score": 0.153811,
+     "complaints": 2217,
+     "powertrain_complaints": 341,
+     "model_years": 3,
+     "provisional": true
+    },
+    "Genesis GV60": {
+     "reference": "ev",
+     "raw_score": 0.701299,
+     "complaints": 77,
+     "powertrain_complaints": 54,
+     "model_years": 4,
+     "provisional": true
+    },
+    "Genesis Electrified GV70": {
+     "reference": "ev",
+     "raw_score": 0.6,
+     "complaints": 5,
+     "powertrain_complaints": 3,
+     "model_years": 4,
+     "provisional": true
+    },
+    "Genesis Electrified G80": {
+     "reference": "ev",
+     "raw_score": 0.25,
+     "complaints": 4,
+     "powertrain_complaints": 1,
+     "model_years": 4,
+     "provisional": true
+    },
+    "Genesis G70": {
+     "reference": "main",
+     "raw_score": 0.3125,
+     "complaints": 112,
+     "powertrain_complaints": 35,
+     "model_years": 4,
+     "provisional": false
+    },
+    "Genesis G80": {
+     "reference": "main",
+     "raw_score": 0.240196,
+     "complaints": 204,
+     "powertrain_complaints": 49,
+     "model_years": 6,
+     "provisional": false
+    },
+    "Genesis G90": {
+     "reference": "main",
+     "raw_score": 0.372881,
+     "complaints": 59,
+     "powertrain_complaints": 22,
+     "model_years": 6,
+     "provisional": true
+    },
+    "Genesis GV80": {
+     "reference": "main",
+     "raw_score": 0.22549,
+     "complaints": 102,
+     "powertrain_complaints": 23,
+     "model_years": 2,
+     "provisional": false
+    }
+   }
   }
  },
  "constants": {
@@ -1166,7 +2043,7 @@
     "band_p05": 0.3979,
     "band_p95": 0.4857,
     "stat_tier": 2,
-    "beats_next_prob": 0.583,
+    "beats_next_prob": 0.562,
     "opp_cost_lifetime_usd": 26310,
     "opp_cost_per_mi": 0.1839
    },
@@ -1366,7 +2243,7 @@
     "band_p05": 0.3992,
     "band_p95": 0.8217,
     "stat_tier": 4,
-    "beats_next_prob": 0.525,
+    "beats_next_prob": 0.527,
     "opp_cost_lifetime_usd": 3804,
     "opp_cost_per_mi": 0.0702
    },
@@ -4085,7 +4962,7 @@
    "etype": "gas",
    "first_year": 2013,
    "last_year": 2026,
-   "reliability_tier": "mid",
+   "reliability_tier": "high",
    "provenance": "curated",
    "specs": {
     "mpg_combined": 28,
@@ -4136,13 +5013,13 @@
    },
    "verify_slug_carscom": "buick-encore",
    "model_output": {
-    "cost_per_mile_p50": 0.5314,
-    "p75": 0.5644,
-    "p90_badluck": 0.5993,
-    "band_p05": 0.4721,
-    "band_p95": 0.6273,
+    "cost_per_mile_p50": 0.5325,
+    "p75": 0.5737,
+    "p90_badluck": 0.6214,
+    "band_p05": 0.4637,
+    "band_p95": 0.6587,
     "stat_tier": 4,
-    "beats_next_prob": 0.496,
+    "beats_next_prob": 0.494,
     "opp_cost_lifetime_usd": 7132,
     "opp_cost_per_mi": 0.0944
    },
@@ -6257,7 +7134,7 @@
     "band_p05": 0.4568,
     "band_p95": 0.5374,
     "stat_tier": 3,
-    "beats_next_prob": 0.515,
+    "beats_next_prob": 0.546,
     "opp_cost_lifetime_usd": 8382,
     "opp_cost_per_mi": 0.0797
    },
@@ -6404,7 +7281,7 @@
     "band_p05": 0.4465,
     "band_p95": 0.5693,
     "stat_tier": 3,
-    "beats_next_prob": 0.541,
+    "beats_next_prob": 0.523,
     "opp_cost_lifetime_usd": 10243,
     "opp_cost_per_mi": 0.1014
    },
@@ -6705,7 +7582,7 @@
     "band_p05": 0.4852,
     "band_p95": 0.7185,
     "stat_tier": 5,
-    "beats_next_prob": 0.547,
+    "beats_next_prob": 0.502,
     "opp_cost_lifetime_usd": 8191,
     "opp_cost_per_mi": 0.1014
    },
@@ -7498,7 +8375,7 @@
     "band_p05": 0.5607,
     "band_p95": 0.693,
     "stat_tier": 5,
-    "beats_next_prob": 0.519,
+    "beats_next_prob": 0.543,
     "opp_cost_lifetime_usd": 51485,
     "opp_cost_per_mi": 0.3036
    },
@@ -7822,7 +8699,7 @@
    "etype": "gas",
    "first_year": 2011,
    "last_year": 2026,
-   "reliability_tier": "mid",
+   "reliability_tier": "high",
    "provenance": "curated",
    "specs": {
     "mpg_combined": 24,
@@ -7877,13 +8754,13 @@
    },
    "verify_slug_carscom": "kia-sorento",
    "model_output": {
-    "cost_per_mile_p50": 0.5612,
-    "p75": 0.5994,
-    "p90_badluck": 0.636,
-    "band_p05": 0.4949,
-    "band_p95": 0.6623,
-    "stat_tier": 4,
-    "beats_next_prob": 0.513,
+    "cost_per_mile_p50": 0.5704,
+    "p75": 0.616,
+    "p90_badluck": 0.665,
+    "band_p05": 0.4897,
+    "band_p95": 0.7016,
+    "stat_tier": 5,
+    "beats_next_prob": 0.546,
     "opp_cost_lifetime_usd": 12278,
     "opp_cost_per_mi": 0.1246
    },
@@ -8073,7 +8950,7 @@
     "band_p05": 0.4761,
     "band_p95": 0.7009,
     "stat_tier": 4,
-    "beats_next_prob": 0.519,
+    "beats_next_prob": 0.525,
     "opp_cost_lifetime_usd": 10605,
     "opp_cost_per_mi": 0.1121
    },
@@ -9853,7 +10730,7 @@
     "band_p05": 0.6031,
     "band_p95": 0.7549,
     "stat_tier": 6,
-    "beats_next_prob": 0.535,
+    "beats_next_prob": 0.498,
     "opp_cost_lifetime_usd": 28345,
     "opp_cost_per_mi": 0.2379
    },
@@ -9978,7 +10855,7 @@
     "band_p05": 0.5649,
     "band_p95": 0.6949,
     "stat_tier": 5,
-    "beats_next_prob": 0.538,
+    "beats_next_prob": 0.517,
     "opp_cost_lifetime_usd": 42588,
     "opp_cost_per_mi": 0.2989
    },
@@ -10572,7 +11449,7 @@
     "band_p05": 0.5586,
     "band_p95": 0.7946,
     "stat_tier": 6,
-    "beats_next_prob": 0.535,
+    "beats_next_prob": 0.509,
     "opp_cost_lifetime_usd": 8404,
     "opp_cost_per_mi": 0.1071
    },
@@ -11025,7 +11902,7 @@
    "etype": "gas",
    "first_year": 2021,
    "last_year": 2026,
-   "reliability_tier": "mid",
+   "reliability_tier": "low",
    "provenance": "curated",
    "specs": {
     "mpg_combined": 19,
@@ -11072,13 +11949,13 @@
    },
    "verify_slug_carscom": "jeep-grand_cherokee_l",
    "model_output": {
-    "cost_per_mile_p50": 0.6534,
-    "p75": 0.6938,
-    "p90_badluck": 0.7254,
-    "band_p05": 0.5831,
-    "band_p95": 0.7533,
+    "cost_per_mile_p50": 0.6466,
+    "p75": 0.6777,
+    "p90_badluck": 0.7056,
+    "band_p05": 0.5867,
+    "band_p95": 0.7284,
     "stat_tier": 6,
-    "beats_next_prob": 0.546,
+    "beats_next_prob": 0.625,
     "opp_cost_lifetime_usd": 25335,
     "opp_cost_per_mi": 0.2079
    },
@@ -11202,7 +12079,7 @@
     "band_p05": 0.6348,
     "band_p95": 0.8437,
     "stat_tier": 7,
-    "beats_next_prob": 0.686,
+    "beats_next_prob": 0.684,
     "opp_cost_lifetime_usd": 19989,
     "opp_cost_per_mi": 0.2027
    },
@@ -12199,7 +13076,7 @@
    "etype": "gas",
    "first_year": 2014,
    "last_year": 2026,
-   "reliability_tier": "low",
+   "reliability_tier": "mid",
    "provenance": "curated",
    "specs": {
     "mpg_combined": 23,
@@ -12251,13 +13128,13 @@
     ]
    },
    "model_output": {
-    "cost_per_mile_p50": 0.4903,
-    "p75": 0.5107,
-    "p90_badluck": 0.5307,
-    "band_p05": 0.4499,
-    "band_p95": 0.5431,
+    "cost_per_mile_p50": 0.5011,
+    "p75": 0.5277,
+    "p90_badluck": 0.5503,
+    "band_p05": 0.4502,
+    "band_p95": 0.5702,
     "stat_tier": 3,
-    "beats_next_prob": 0.526,
+    "beats_next_prob": 0.515,
     "opp_cost_lifetime_usd": 18811,
     "opp_cost_per_mi": 0.136
    }
@@ -12708,7 +13585,7 @@
    "etype": "gas",
    "first_year": 2014,
    "last_year": 2026,
-   "reliability_tier": "mid",
+   "reliability_tier": "low",
    "provenance": "curated",
    "specs": {
     "mpg_combined": 27,
@@ -12764,13 +13641,13 @@
     "Nissan Rogue"
    ],
    "model_output": {
-    "cost_per_mile_p50": 0.4527,
-    "p75": 0.4785,
-    "p90_badluck": 0.501,
-    "band_p05": 0.4043,
-    "band_p95": 0.5174,
+    "cost_per_mile_p50": 0.4443,
+    "p75": 0.4643,
+    "p90_badluck": 0.4802,
+    "band_p05": 0.4051,
+    "band_p95": 0.4949,
     "stat_tier": 2,
-    "beats_next_prob": 0.521,
+    "beats_next_prob": 0.514,
     "opp_cost_lifetime_usd": 18046,
     "opp_cost_per_mi": 0.1363
    }
@@ -12782,7 +13659,7 @@
    "etype": "gas",
    "first_year": 2014,
    "last_year": 2026,
-   "reliability_tier": "mid",
+   "reliability_tier": "high",
    "provenance": "curated",
    "specs": {
     "mpg_combined": 19,
@@ -12836,13 +13713,13 @@
     "Ford Ranger (2019+ midsize)"
    ],
    "model_output": {
-    "cost_per_mile_p50": 0.6616,
-    "p75": 0.7026,
-    "p90_badluck": 0.7432,
-    "band_p05": 0.5907,
-    "band_p95": 0.7682,
+    "cost_per_mile_p50": 0.6727,
+    "p75": 0.7215,
+    "p90_badluck": 0.7715,
+    "band_p05": 0.5819,
+    "band_p95": 0.815,
     "stat_tier": 6,
-    "beats_next_prob": 0.525,
+    "beats_next_prob": 0.527,
     "opp_cost_lifetime_usd": 26174,
     "opp_cost_per_mi": 0.2071
    }
@@ -12998,7 +13875,7 @@
    "etype": "gas",
    "first_year": 2018,
    "last_year": 2026,
-   "reliability_tier": "mid",
+   "reliability_tier": "low",
    "provenance": "curated",
    "specs": {
     "mpg_combined": 21,
@@ -13045,13 +13922,13 @@
     ]
    },
    "model_output": {
-    "cost_per_mile_p50": 0.6311,
-    "p75": 0.6698,
-    "p90_badluck": 0.7112,
-    "band_p05": 0.5562,
-    "band_p95": 0.735,
+    "cost_per_mile_p50": 0.6236,
+    "p75": 0.6568,
+    "p90_badluck": 0.6876,
+    "band_p05": 0.56,
+    "band_p95": 0.7078,
     "stat_tier": 5,
-    "beats_next_prob": 0.482,
+    "beats_next_prob": 0.494,
     "opp_cost_lifetime_usd": 13022,
     "opp_cost_per_mi": 0.1356
    }
@@ -13202,7 +14079,7 @@
     "band_p05": 0.399,
     "band_p95": 0.5087,
     "stat_tier": 2,
-    "beats_next_prob": 0.542,
+    "beats_next_prob": 0.567,
     "opp_cost_lifetime_usd": 7198,
     "opp_cost_per_mi": 0.0789
    }
@@ -14230,7 +15107,7 @@
    "etype": "gas",
    "first_year": 2017,
    "last_year": 2026,
-   "reliability_tier": "mid",
+   "reliability_tier": "low",
    "provenance": "curated",
    "specs": {
     "mpg_combined": 25,
@@ -14290,13 +15167,13 @@
     "104443": 15498
    },
    "model_output": {
-    "cost_per_mile_p50": 0.8012,
-    "p75": 0.8696,
-    "p90_badluck": 0.945,
-    "band_p05": 0.6763,
-    "band_p95": 1.0112,
+    "cost_per_mile_p50": 0.7954,
+    "p75": 0.8542,
+    "p90_badluck": 0.9157,
+    "band_p05": 0.688,
+    "band_p95": 0.9627,
     "stat_tier": 7,
-    "beats_next_prob": 0.649,
+    "beats_next_prob": 0.682,
     "opp_cost_lifetime_usd": 11056,
     "opp_cost_per_mi": 0.1586
    }
@@ -14388,7 +15265,7 @@
    "etype": "gas",
    "first_year": 2021,
    "last_year": 2026,
-   "reliability_tier": "mid",
+   "reliability_tier": "low",
    "provenance": "curated",
    "specs": {
     "mpg_combined": 22,
@@ -14439,13 +15316,13 @@
     "67812": 26075
    },
    "model_output": {
-    "cost_per_mile_p50": 0.7675,
-    "p75": 0.8201,
-    "p90_badluck": 0.8717,
-    "band_p05": 0.6708,
-    "band_p95": 0.8961,
+    "cost_per_mile_p50": 0.7622,
+    "p75": 0.8041,
+    "p90_badluck": 0.849,
+    "band_p05": 0.6783,
+    "band_p95": 0.8694,
     "stat_tier": 7,
-    "beats_next_prob": 0.618,
+    "beats_next_prob": 0.632,
     "opp_cost_lifetime_usd": 25266,
     "opp_cost_per_mi": 0.2451
    }
